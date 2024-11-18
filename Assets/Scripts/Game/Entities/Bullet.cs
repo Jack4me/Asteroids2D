@@ -21,7 +21,7 @@ namespace Game.Entities {
                 Destroy(gameObject); // Уничтожаем пулю
             }
 
-            // Если столкнулись с обломком или тарелкой (предполагается, что они имеют тег "Enemy")
+
             if (other.CompareTag("Enemy")) {
                 Destroy(other.gameObject); // Уничтожаем объект
                 Destroy(gameObject); // Уничтожаем пулю
