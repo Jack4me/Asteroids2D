@@ -1,25 +1,53 @@
 using UnityEngine;
 
 namespace Game.Entities.Asteroids {
-    public class Asteroid : MonoBehaviour {
-        public float Speed = 2f;
-        public int Size = 3; // Размер астероида (3 — крупный, 2 — средний, 1 — мелкий) 
-        private Vector2 direction;
-        [SerializeField] private GameObject smallerAsteroidPrefab;
+    public enum AsteroidSize {
+        Small,
+        Medium,
+        Large
+    }
 
- 
-        
+    public class Asteroid : MonoBehaviour, IDamageable {
+        private Vector2 direction;
+        [SerializeField] private AsteroidSize size;
+        [SerializeField] private GameObject smallerAsteroidPrefab;
+        [SerializeField] private int Health = 1;
+
+        public void TakeDamage(int damage) {
+            Health -= damage;
+
+            if (Health >= 0) {
+                BreakApart();
+            }
+            else {
+                Destroy(gameObject);
+            }
+        }
+
         public void BreakApart() {
-            if (Size > 1) {
-                for (int i = 0; i < 2; i++) {
-                    GameObject smallerAsteroid = Instantiate(smallerAsteroidPrefab, transform.position, Quaternion.identity);
-                    AsteroidMovement asteroidScript = smallerAsteroid.GetComponent<AsteroidMovement>();
-                  
-                    asteroidScript.Speed += 5f; // Увеличиваем скорость
-                }
+            if (size != AsteroidSize.Small) {
+                SpawnSmallerAsteroids();
+            }
+            Destroy(gameObject);
+        }
+
+        private void SpawnSmallerAsteroids() {
+            if (smallerAsteroidPrefab == null) {
+                Debug.LogError("Prefab for smaller asteroids is not assigned!");
+                return;
             }
 
-            Destroy(gameObject); // Уничтожаем текущий астероид
+            for (int i = 0; i < 2; i++) {
+                Vector3 spawnPosition = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
+                GameObject smallerAsteroid = Instantiate(smallerAsteroidPrefab, spawnPosition, Quaternion.identity);
+
+                AsteroidMovement asteroidScript = smallerAsteroid.GetComponent<AsteroidMovement>();
+                asteroidScript.Speed += 3f;
+            }
+        }
+
+        public void DestroyAsteroid() {
+            Destroy(gameObject);
         }
     }
 }

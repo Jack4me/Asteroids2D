@@ -171,9 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a65b8c581b857449e85598a9739098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
-  Size: 3
+  size: 0
   smallerAsteroidPrefab: {fileID: 0}
+  Health: 0
 --- !u!114 &1510681689
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,16 +15,9 @@ namespace Game.Entities {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            // Если столкнулись с астероидом
-            if (other.TryGetComponent<Asteroid>(out var asteroid)) {
-                asteroid.BreakApart(); // Разбиваем астероид
-                Destroy(gameObject); // Уничтожаем пулю
-            }
-
-
-            if (other.CompareTag("Enemy")) {
-                Destroy(other.gameObject); // Уничтожаем объект
-                Destroy(gameObject); // Уничтожаем пулю
+            if (other.TryGetComponent<IDamageable>(out var asteroid)) {
+                asteroid.TakeDamage(1);
+                Destroy(gameObject);
             }
         }
     }
