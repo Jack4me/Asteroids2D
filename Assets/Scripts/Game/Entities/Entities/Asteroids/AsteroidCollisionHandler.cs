@@ -1,3 +1,4 @@
+using Game.Entities.Entities.Asteroids;
 using UnityEngine;
 
 namespace Game.Entities.Asteroids {

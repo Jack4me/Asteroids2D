@@ -95,10 +95,9 @@ GameObject:
   - component: {fileID: 2411265989194256813}
   - component: {fileID: 2779985829970843881}
   - component: {fileID: 2884120463310545773}
-  - component: {fileID: 4945136929026595706}
-  - component: {fileID: 4945136929026595705}
+  - component: {fileID: 4388735236404765610}
+  - component: {fileID: 4945617281571227638}
   - component: {fileID: 4945136929026595704}
-  - component: {fileID: 4945136929026595711}
   m_Layer: 0
   m_Name: Alien
   m_TagString: Untagged
@@ -169,7 +168,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.78296375, y: 1.389267}
   m_EdgeRadius: 0
---- !u!114 &4945136929026595706
+--- !u!114 &4388735236404765610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,10 +177,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5911811416346187989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03c853c162b8fb34e8de633132e74b92, type: 3}
+  m_Script: {fileID: 11500000, guid: f5b4318508e949e45ac7a4425ca6d508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4945136929026595705
+  health: 1
+--- !u!114 &4945617281571227638
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,10 +190,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5911811416346187989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cdbf631e0d85174e898950396b499a7, type: 3}
+  m_Script: {fileID: 11500000, guid: d113cd34784f7cc4397ee027116c6baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
 --- !u!114 &4945136929026595704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,18 +205,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef16624f25e1cf64c8ae82f80770c858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4945136929026595711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5911811416346187989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97a65b8c581b857449e85598a9739098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: 2
-  smallerAsteroidPrefab: {fileID: 4767596974026481223, guid: 1fa63b5893789bc4cb38d578856f8cf3, type: 3}
-  Health: 1

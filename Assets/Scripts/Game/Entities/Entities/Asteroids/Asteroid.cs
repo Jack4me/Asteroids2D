@@ -1,34 +1,24 @@
+using Game.Entities.Asteroids;
 using UnityEngine;
 
-namespace Game.Entities.Asteroids {
+namespace Game.Entities.Entities.Asteroids {
     public enum AsteroidSize {
         Small,
         Medium,
         Large
     }
 
-    public class Asteroid : MonoBehaviour, IDamageable {
+    public class Asteroid : Entity {
         private Vector2 direction;
         [SerializeField] private AsteroidSize size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
         [SerializeField] private int Health = 1;
 
-        public void TakeDamage(int damage) {
-            Health -= damage;
-
-            if (Health >= 0) {
-                BreakApart();
-            }
-            else {
-                Destroy(gameObject);
-            }
-        }
-
-        public void BreakApart() {
+        protected override void DestroyEntity() {
             if (size != AsteroidSize.Small) {
                 SpawnSmallerAsteroids();
             }
-            Destroy(gameObject);
+            base.DestroyEntity(); // Вызов базового метода для удаления объекта
         }
 
         private void SpawnSmallerAsteroids() {
@@ -46,8 +36,6 @@ namespace Game.Entities.Asteroids {
             }
         }
 
-        public void DestroyAsteroid() {
-            Destroy(gameObject);
-        }
+       
     }
 }
