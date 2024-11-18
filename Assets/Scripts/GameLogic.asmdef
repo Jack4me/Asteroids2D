@@ -1,0 +1,20 @@
+{
+    "name": "GameLogic",
+    "rootNamespace": "",
+    "references": [
+        "Packages/com.cysharp.unitask/Runtime",
+        "UnityEngine",
+        "UnityEditor",
+        "UniTask",
+        "Zenject"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
