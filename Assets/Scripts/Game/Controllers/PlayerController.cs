@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
+using Game.Entities.Entities.Asteroids;
 using UnityEngine;
 using Zenject;
 
@@ -9,10 +11,10 @@ namespace Game.Controllers {
         private IControlStrategy controlStrategy;
         private Vector2 velocity;
         private float speed = 5f;
+        private const int MaxHealth = 50;
         private float acceleration = 0.1f;
         private float rotationSpeed = 180f;
-        [SerializeField]  private int health;
-        private const int MaxHealth = 3;
+        [SerializeField] private int health;
 
         [Header("Fire Settings")] [SerializeField]
         private GameObject laserPrefab;
@@ -28,6 +30,13 @@ namespace Game.Controllers {
         [SerializeField] private float invincibilityDuration = 3f;
         private bool isInvincible = false;
 
+        [Header("Bounce Settings")] [SerializeField]
+        private float playerBounceForce = 8f;
+
+        [SerializeField] private float asteroidBounceForce = 5f;
+
+        [SerializeField] private float controlLockDuration = 1f;
+
         public int Health
         {
             get { return health; }
@@ -41,11 +50,14 @@ namespace Game.Controllers {
 
         private float lastLaserFireTime;
         private float lastBulletFireTime;
+        private bool canControl = true;
 
 
         private void Update() {
-            HandleInput();
-            HandleMovement();
+            if (canControl) {
+                HandleInput();
+                HandleMovement();
+            }
         }
 
         private void HandleInput() {
@@ -83,24 +95,33 @@ namespace Game.Controllers {
             if (velocity.magnitude > speed) {
                 velocity = velocity.normalized * speed;
             }
-
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
 
-        private void OnCollisionEnter2D(Collision2D collision) {
+        private void OnTriggerEnter2D(Collider2D other) {
+            Debug.Log("BAH");
+
             if (isInvincible) return;
 
-            if (collision.gameObject.CompareTag("Enemy")) {
-                HandleCollision(collision);
+            if (other.TryGetComponent<IDamageable>(out var asteroid)) {
+                HandleCollision(other);
             }
         }
 
-        private void HandleCollision(Collision2D collision) {
+
+        private void HandleCollision(Collider2D asteroidCollider) {
             Health--;
 
-            Vector2 collisionDirection = (Vector2)transform.position - collision.contacts[0].point;
-            velocity = collisionDirection.normalized * speed;
+            AsteroidController asteroid = asteroidCollider.GetComponent<AsteroidController>();
+            if (asteroid == null) return;
 
+            Vector2 collisionDirection = (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
+            collisionDirection.Normalize();
+
+            LockControlForSeconds(controlLockDuration).Forget();
+            velocity = collisionDirection * playerBounceForce;
+
+            asteroid.ApplyBounce(-collisionDirection * asteroidBounceForce);
             EnableInvincibility().Forget();
 
             if (Health <= 0) {
@@ -109,10 +130,16 @@ namespace Game.Controllers {
             }
         }
 
+        private async UniTask LockControlForSeconds(float duration) {
+            canControl = false; 
+            await UniTask.Delay((int)(duration * 1000)); 
+            canControl = true; 
+        }
+
         private async UniTask EnableInvincibility() {
             isInvincible = true;
             ShowInvincibilityEffect();
-           
+
             await UniTask.Delay((int)(invincibilityDuration * 1000));
             isInvincible = false;
             HideInvincibilityEffect();
