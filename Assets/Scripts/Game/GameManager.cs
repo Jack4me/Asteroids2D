@@ -5,81 +5,60 @@ using UnityEngine;
 using Zenject;
 
 namespace Game {
-    public class GameManager : MonoBehaviour
-    {
+    public class GameManager : MonoBehaviour {
         private IControlStrategy controlStrategy;
-        private ShipController shipController;
+        private PlayerController playerController;
         private bool isGameRunning;
         private int score;
 
         [Inject]
-        public void Construct(IControlStrategy controlStrategy, ShipController shipController)
-        {
+        public void Construct(IControlStrategy controlStrategy, PlayerController playerController) {
             this.controlStrategy = controlStrategy;
-            this.shipController = shipController;
+            this.playerController = playerController;
         }
 
-        private void Start()
-        {
+        private void Start() {
             InitializeGame();
         }
 
-        private void InitializeGame()
-        {
-            // Настроим начальные условия
+        private void InitializeGame() {
             isGameRunning = true;
             score = 0;
             SetupControl();
         }
 
-        private void Update()
-        {
-            if (isGameRunning)
-            {
+        private void Update() {
+            if (isGameRunning) {
                 HandleGameLogic();
             }
         }
 
-        private void HandleGameLogic()
-        {
-            // Здесь могут быть проверки на состояние игры, например, если игрок проиграл, то можно переключить состояние на GameOver
-            if (CheckGameOver())
-            {
+        private void HandleGameLogic() {
+            if (CheckGameOver()) {
                 EndGame();
             }
 
-            // Логика игры, например, обновление счёта, проверка столкновений и т.д.
             UpdateScore();
         }
 
-        private bool CheckGameOver()
-        {
-            // Пример проверки, если здоровье корабля или другие параметры упали до 0
-            return shipController.Health <= 0;
+        private bool CheckGameOver() {
+            return playerController.Health <= 0;
         }
 
-        private void EndGame()
-        {
+        private void EndGame() {
             isGameRunning = false;
             Debug.Log("Game Over! Final Score: " + score);
             ShowGameOverScreen();
         }
 
-        private void UpdateScore()
-        {
+        private void UpdateScore() {
             score += 10;
         }
 
-        private void ShowGameOverScreen()
-        {
+        private void ShowGameOverScreen() {
         }
 
-        private void SetupControl()
-        {
-            // Настроим контроллер на определённую платформу
-            // Например, если у нас мобильная версия, можем инжектировать MobileController
-            // Иначе — KeyboardController
+        private void SetupControl() {
         }
     }
-
 }
