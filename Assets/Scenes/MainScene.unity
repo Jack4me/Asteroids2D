@@ -175,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322777637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -0.36, z: -0.17208527}
+  m_LocalPosition: {x: 0.09, y: 8.28, z: -0.17208527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -276,6 +276,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fa63b5893789bc4cb38d578856f8cf3, type: 3}
+--- !u!1 &822407638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7822465019992695988, guid: e7c8453e88f80504c97a748b3676607a, type: 3}
+  m_PrefabInstance: {fileID: 7822465021061567513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &822407644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822407638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7efc381f4d8440d8b9ac81c68fe7334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLasers: 3
+  reloadTime: 2
 --- !u!1 &1342514470
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27e4efb61a119142bbff85aebee963b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserManager: {fileID: 822407644}
 --- !u!114 &1342514472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2411265989194256813, guid: ff29eeb61cd7fec4ea83ef52cd85e516, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.11
       objectReference: {fileID: 0}
     - target: {fileID: 2411265989194256813, guid: ff29eeb61cd7fec4ea83ef52cd85e516, type: 3}
       propertyPath: m_LocalPosition.z
@@ -823,10 +843,6 @@ PrefabInstance:
     - target: {fileID: 2411265989194256813, guid: ff29eeb61cd7fec4ea83ef52cd85e516, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2884120463310545773, guid: ff29eeb61cd7fec4ea83ef52cd85e516, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911811416346187989, guid: ff29eeb61cd7fec4ea83ef52cd85e516, type: 3}
       propertyPath: m_Name
@@ -893,13 +909,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip
       objectReference: {fileID: 0}
+    - target: {fileID: 7822465019992695988, guid: e7c8453e88f80504c97a748b3676607a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7822465019992695990, guid: e7c8453e88f80504c97a748b3676607a, type: 3}
       propertyPath: health
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7822465019992695990, guid: e7c8453e88f80504c97a748b3676607a, type: 3}
       propertyPath: playerBounceForce
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7822465019992695990, guid: e7c8453e88f80504c97a748b3676607a, type: 3}
       propertyPath: asteroidBounceForce

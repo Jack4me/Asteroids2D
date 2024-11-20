@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿
 using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
@@ -9,6 +8,7 @@ using Zenject;
 namespace Game.Controllers {
     public class PlayerController : MonoBehaviour {
         private IControlStrategy controlStrategy;
+        private LaserManager laserManager;
         private Vector2 velocity;
         private float speed = 5f;
         private const int MaxHealth = 50;
@@ -43,8 +43,9 @@ namespace Game.Controllers {
         }
 
         [Inject]
-        public void Construct(IControlStrategy controlStrategy) {
+        public void Construct(IControlStrategy controlStrategy , LaserManager laserManager) {
             this.controlStrategy = controlStrategy;
+            this.laserManager = laserManager;
         }
 
         private float lastLaserFireTime;
@@ -66,8 +67,9 @@ namespace Game.Controllers {
         }
 
         private void HandleInput() {
-            if (controlStrategy.FireLaser()) {
+            if (controlStrategy.FireLaser() && laserManager.CanFireLaser()) {
                 FireLaser();
+                laserManager.UseLaser();
             }
 
             if (controlStrategy.FireBullet()) {
