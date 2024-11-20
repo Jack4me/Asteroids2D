@@ -69,7 +69,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.02286005, y: -0.057150275}
@@ -134,9 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a65b8c581b857449e85598a9739098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  health: 1
   size: 2
   smallerAsteroidPrefab: {fileID: 4767596974026481223, guid: 1fa63b5893789bc4cb38d578856f8cf3, type: 3}
+  Health: 1
 --- !u!1 &3473876829350185246
 GameObject:
   m_ObjectHideFlags: 0

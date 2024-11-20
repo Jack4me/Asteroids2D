@@ -34,7 +34,6 @@ namespace Game.Controllers {
         private float playerBounceForce = 8f;
 
         [SerializeField] private float asteroidBounceForce = 5f;
-
         [SerializeField] private float controlLockDuration = 1f;
 
         public int Health
@@ -57,7 +56,13 @@ namespace Game.Controllers {
             if (canControl) {
                 HandleInput();
                 HandleMovement();
+            }else {
+                ApplyVelocity(); // Продолжаем движение по инерции
             }
+        }
+
+        private void ApplyVelocity() {
+            transform.position += (Vector3)velocity * Time.deltaTime;
         }
 
         private void HandleInput() {
