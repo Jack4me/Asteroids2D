@@ -1,5 +1,6 @@
 using Core.Intrerfaces;
 using Game.InputControllers;
+using Game.MVVM.TestRocketMVVM;
 using UI.Test.TestRocketMVVM;
 using UnityEngine;
 using Zenject;
@@ -13,12 +14,11 @@ namespace Game {
             Container.Bind<LaserManager>().FromInstance(laserManager).AsSingle();
             
             
-            Container.Bind<LaserModel>().AsSingle().WithArguments(10); // 10 - стартовое количество ракет
         
-            // Указываем Zenject, как создавать ViewModel
-            Container.Bind<LaserViewModel>().AsTransient().WithArguments(Container.Resolve<LaserModel>());
-        
-            // Биндим View
+            
+            Container.Bind<LaserViewModel>().AsTransient().WithArguments(laserManager);
+
+            // LaserView: Автоматическое связывание View через Zenject
             Container.Bind<LaserView>().FromComponentInHierarchy().AsSingle();
         }
     }
