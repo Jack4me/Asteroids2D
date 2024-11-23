@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 920424407}
   - component: {fileID: 920424406}
   - component: {fileID: 920424405}
+  - component: {fileID: 920424409}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -396,6 +397,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &920424409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920424404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5800c25c691da9d4eab45e185245429a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rocketCountText: {fileID: 1977037876}
 --- !u!1 &965630648
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,9 +716,8 @@ GameObject:
   - component: {fileID: 1977037874}
   - component: {fileID: 1977037877}
   - component: {fileID: 1977037876}
-  - component: {fileID: 1977037875}
   m_Layer: 5
-  m_Name: CurrencyView
+  m_Name: RocketView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -730,19 +743,6 @@ RectTransform:
   m_AnchoredPosition: {x: -831.4, y: -490}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1977037875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977037873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1c54e9e556bf7c45aab2e0908394618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textMeshP: {fileID: 1977037876}
 --- !u!114 &1977037876
 MonoBehaviour:
   m_ObjectHideFlags: 0
