@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameBootstrap : MonoBehaviour
+namespace Main
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameBootstrap : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

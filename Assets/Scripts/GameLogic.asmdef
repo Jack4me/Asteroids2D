@@ -6,8 +6,7 @@
         "UnityEngine",
         "UnityEditor",
         "UniTask",
-        "Zenject",
-        "UI"
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
