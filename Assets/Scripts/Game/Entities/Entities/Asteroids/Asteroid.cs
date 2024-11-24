@@ -1,33 +1,47 @@
 using Game.Entities.Asteroids;
 using UnityEngine;
 
-namespace Game.Entities.Entities.Asteroids {
-    public enum AsteroidSize {
+namespace Game.Entities.Entities.Asteroids
+{
+    public enum AsteroidSize
+    {
         Small,
         Medium,
         Large
     }
 
-    public class Asteroid : Entity {
+    public class Asteroid : Entity
+    {
         private Vector2 direction;
         [SerializeField] private AsteroidSize size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
-        [SerializeField] private int Health = 1;
 
-        protected override void DestroyEntity() {
-            if (size != AsteroidSize.Small) {
+        // public override void DestroyEntity() {
+        //     if (size != AsteroidSize.Small) {
+        //         SpawnSmallerAsteroids();
+        //     }
+        //     base.DestroyEntity(); // Вызов базового метода для удаления объекта
+        // }
+        public override void TakeDamage(int damage)
+        {
+            if (size != AsteroidSize.Small)
+            {
                 SpawnSmallerAsteroids();
             }
-            base.DestroyEntity(); // Вызов базового метода для удаления объекта
+
+            base.DestroyEntity();
         }
 
-        private void SpawnSmallerAsteroids() {
-            if (smallerAsteroidPrefab == null) {
+        private void SpawnSmallerAsteroids()
+        {
+            if (smallerAsteroidPrefab == null)
+            {
                 Debug.LogError("Prefab for smaller asteroids is not assigned!");
                 return;
             }
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++)
+            {
                 Vector3 spawnPosition = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
                 GameObject smallerAsteroid = Instantiate(smallerAsteroidPrefab, spawnPosition, Quaternion.identity);
 
@@ -35,7 +49,5 @@ namespace Game.Entities.Entities.Asteroids {
                 asteroidScript.Speed += 3f;
             }
         }
-
-       
     }
 }

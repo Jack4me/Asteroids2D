@@ -9,6 +9,8 @@ namespace Game.MVVM.TestRocketMVVM
     public class LaserView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI laserCountText; // UI-элемент для отображения количества лазеров
+        [SerializeField] private TextMeshProUGUI reloadProgressText;
+
 
         private LaserViewModel _viewModel;
 
@@ -20,9 +22,13 @@ namespace Game.MVVM.TestRocketMVVM
 
         private void Start()
         {
-            // Подписка на изменения количества лазеров
             _viewModel.LaserCount.Subscribe(count => { laserCountText.text = $"Lasers: {count}"; })
-                .AddTo(this); // Отписка при уничтожении объекта
+                .AddTo(this);
+
+            _viewModel.ReloadProgress.Subscribe(progress =>
+            {
+                reloadProgressText.text = $"Reload: {progress * 100:0}%";
+            }).AddTo(this);
         }
     }
 }

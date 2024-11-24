@@ -1,12 +1,13 @@
-﻿
-using Core.Intrerfaces;
+﻿using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Controllers {
-    public class PlayerController : MonoBehaviour {
+namespace Game.Controllers
+{
+    public class PlayerController : MonoBehaviour
+    {
         private IControlStrategy controlStrategy;
         private LaserManager laserManager;
         private Vector2 velocity;
@@ -43,7 +44,8 @@ namespace Game.Controllers {
         }
 
         [Inject]
-        public void Construct(IControlStrategy controlStrategy , LaserManager laserManager) {
+        public void Construct(IControlStrategy controlStrategy, LaserManager laserManager)
+        {
             this.controlStrategy = controlStrategy;
             this.laserManager = laserManager;
         }
@@ -53,45 +55,56 @@ namespace Game.Controllers {
         private bool canControl = true;
 
 
-        private void Update() {
-            if (canControl) {
+        private void Update()
+        {
+            if (canControl)
+            {
                 HandleInput();
                 HandleMovement();
-            }else {
+            }
+            else
+            {
                 ApplyVelocity(); // Продолжаем движение по инерции
             }
         }
 
-        private void ApplyVelocity() {
+        private void ApplyVelocity()
+        {
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
 
-        private void HandleInput() {
-            if (controlStrategy.FireLaser() && laserManager.CanFireLaser()) {
+        private void HandleInput()
+        {
+            if (controlStrategy.FireLaser() && laserManager.CanFireLaser())
+            {
                 FireLaser();
                 laserManager.UseLaser();
             }
 
-            if (controlStrategy.FireBullet()) {
+            if (controlStrategy.FireBullet())
+            {
                 FireBullet();
             }
         }
 
-        public void FireLaser() {
+        public void FireLaser()
+        {
             if (Time.time - lastLaserFireTime < laserCooldown) return;
 
             Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
             lastLaserFireTime = Time.time;
         }
 
-        public void FireBullet() {
+        public void FireBullet()
+        {
             if (Time.time - lastBulletFireTime < bulletCooldown) return;
 
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             lastBulletFireTime = Time.time;
         }
 
-        public void HandleMovement() {
+        public void HandleMovement()
+        {
             Vector2 input = controlStrategy.GetInput();
 
             float rotation = -input.x * rotationSpeed * Time.deltaTime;
@@ -99,24 +112,29 @@ namespace Game.Controllers {
 
             velocity += (Vector2)transform.up * input.y * acceleration;
 
-            if (velocity.magnitude > speed) {
+            if (velocity.magnitude > speed)
+            {
                 velocity = velocity.normalized * speed;
             }
+
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
 
-        private void OnTriggerEnter2D(Collider2D other) {
+        private void OnTriggerEnter2D(Collider2D other)
+        {
             Debug.Log("BAH");
 
             if (isInvincible) return;
 
-            if (other.TryGetComponent<IDamageable>(out var asteroid)) {
+            if (other.TryGetComponent<IDamageable>(out var asteroid))
+            {
                 HandleCollision(other);
             }
         }
 
 
-        private void HandleCollision(Collider2D asteroidCollider) {
+        private void HandleCollision(Collider2D asteroidCollider)
+        {
             Health--;
 
             AsteroidController asteroid = asteroidCollider.GetComponent<AsteroidController>();
@@ -131,19 +149,22 @@ namespace Game.Controllers {
             asteroid.ApplyBounce(-collisionDirection * asteroidBounceForce);
             EnableInvincibility().Forget();
 
-            if (Health <= 0) {
+            if (Health <= 0)
+            {
                 Debug.Log("Player is dead!");
                 Destroy(gameObject);
             }
         }
 
-        private async UniTask LockControlForSeconds(float duration) {
-            canControl = false; 
-            await UniTask.Delay((int)(duration * 1000)); 
-            canControl = true; 
+        private async UniTask LockControlForSeconds(float duration)
+        {
+            canControl = false;
+            await UniTask.Delay((int)(duration * 1000));
+            canControl = true;
         }
 
-        private async UniTask EnableInvincibility() {
+        private async UniTask EnableInvincibility()
+        {
             isInvincible = true;
             ShowInvincibilityEffect();
 
@@ -152,11 +173,13 @@ namespace Game.Controllers {
             HideInvincibilityEffect();
         }
 
-        private void ShowInvincibilityEffect() {
+        private void ShowInvincibilityEffect()
+        {
             if (invincibilityEffect != null) invincibilityEffect.Play();
         }
 
-        private void HideInvincibilityEffect() {
+        private void HideInvincibilityEffect()
+        {
             if (invincibilityEffect != null) invincibilityEffect.Stop();
         }
     }
