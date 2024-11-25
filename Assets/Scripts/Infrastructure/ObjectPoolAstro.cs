@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core.Intrerfaces;
 using UnityEngine;
 
 namespace Infrastructure
@@ -7,10 +8,12 @@ namespace Infrastructure
     {
         private List<GameObject> _pool = new List<GameObject>();
         private Transform poolParent;
+        private readonly IObjectFactory factory;
 
-        public ObjectPoolAstro(Transform poolParent)
+        public ObjectPoolAstro(Transform poolParent, IObjectFactory factory)
         {
             this.poolParent = poolParent;
+            this.factory = factory;
         }
 
         public GameObject GetFromPool(GameObject prefab)
@@ -25,7 +28,20 @@ namespace Infrastructure
             }
 
             // Если нет доступных объектов, создаем новый.
-            var newObj = Object.Instantiate(prefab, poolParent);
+            // GameObject newObj = Object.Instantiate(prefab, poolParent);
+            // _pool.Add(newObj);
+            // return newObj;
+            
+            GameObject newObj = null;
+            if (prefab == factory.GetAsteroidPrefab())
+            {
+                newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f);
+            }
+            else if (prefab == factory.GetUfoPrefab())
+            {
+                newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f);
+            }
+
             _pool.Add(newObj);
             return newObj;
         }
@@ -33,6 +49,8 @@ namespace Infrastructure
         public void ReturnToPool(GameObject obj)
         {
             obj.SetActive(false);
+            obj.transform.SetParent(poolParent);
+            _pool.Add(obj);
         }
     }
 }

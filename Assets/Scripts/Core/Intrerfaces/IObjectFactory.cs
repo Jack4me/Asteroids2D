@@ -6,5 +6,8 @@ namespace Core.Intrerfaces
     {
         GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed);
         GameObject CreateUFO(Vector2 position, Vector2 direction, float speed);
+        
+        GameObject GetAsteroidPrefab();
+        GameObject GetUfoPrefab();
     }
 }
