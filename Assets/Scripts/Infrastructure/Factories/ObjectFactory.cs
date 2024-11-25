@@ -16,16 +16,16 @@ namespace Infrastructure.Factories
             _ufoPrefab = ufoPrefab;
         }
 
-        public GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed)
+        public GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent)
         {
-            var asteroid = Object.Instantiate(_asteroidPrefab, position, Quaternion.identity);
+            var asteroid = Object.Instantiate(_asteroidPrefab, position, Quaternion.identity,  parent);
            
             return asteroid;
         }
 
-        public GameObject CreateUFO(Vector2 position, Vector2 direction, float speed)
+        public GameObject CreateUFO(Vector2 position, Vector2 direction, float speed, Transform poolParent)
         {
-            var ufo = Object.Instantiate(_ufoPrefab, position, Quaternion.identity);
+            var ufo = Object.Instantiate(_ufoPrefab, position, Quaternion.identity, poolParent);
             
             return ufo;
         }

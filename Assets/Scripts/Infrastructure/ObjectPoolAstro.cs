@@ -35,11 +35,11 @@ namespace Infrastructure
             GameObject newObj = null;
             if (prefab == factory.GetAsteroidPrefab())
             {
-                newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f);
+                newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
             }
             else if (prefab == factory.GetUfoPrefab())
             {
-                newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f);
+                newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
             }
 
             _pool.Add(newObj);

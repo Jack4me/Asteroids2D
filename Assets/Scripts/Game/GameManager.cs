@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-       
-        
         _factory = new ObjectFactory(asteroidPrefab, ufoPrefab);
 
         // Создаём пул с фабрикой
@@ -29,23 +27,18 @@ public class GameManager : MonoBehaviour
             SpawnAsteroid();
             SpawnUFO();
         }
-       
     }
 
     private void SpawnAsteroid()
     {
         GameObject asteroid = poolAstro.GetFromPool(asteroidPrefab);
-     
-        // Mover mover = asteroid.GetComponent<Mover>();
-       // mover.Initialize(new Vector2(1, 0), 5f);
     }
+
     private void SpawnUFO()
     {
         GameObject asteroid = poolAstro.GetFromPool(ufoPrefab);
-     
-        // Mover mover = asteroid.GetComponent<Mover>();
-        // mover.Initialize(new Vector2(1, 0), 5f);
     }
+
     private void DestroyAsteroid(GameObject asteroid)
     {
         poolAstro.ReturnToPool(asteroid);
