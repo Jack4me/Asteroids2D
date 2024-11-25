@@ -14,10 +14,12 @@ namespace Game.Entities {
             transform.Translate(Vector2.up * speed * Time.deltaTime);
         }
 
-        private void OnTriggerEnter2D(Collider2D other) {
-            if (other.TryGetComponent<IDamageable>(out var asteroid)) {
-                asteroid.TakeDamage(1);
-                Destroy(gameObject);
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent<IDamageable>(out var target))
+            {
+                target.TakeDamage(1);
+                Destroy(gameObject); 
             }
         }
     }

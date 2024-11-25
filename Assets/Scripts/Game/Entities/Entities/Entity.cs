@@ -1,4 +1,5 @@
 using Core.Intrerfaces;
+using Infrastructure;
 using UnityEngine;
 
 namespace Game.Entities.Entities
@@ -6,25 +7,38 @@ namespace Game.Entities.Entities
     public class Entity : MonoBehaviour, IDamageable
     {
         [SerializeField] protected int health = 1;
+        internal ObjectPoolAstro _pool; 
 
+        public void Initialize(ObjectPoolAstro pool)
+        {
+            _pool = pool;
+        }
         public virtual void TakeDamage(int damage)
         {
             health -= damage;
 
             if (health <= 0)
             {
-                DestroyEntity();
+                 DestroyEntity();
             }
         }
 
         public virtual void DestroyEntity()
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
 
         public virtual void ReturnToPool()
         {
-            
+            if (_pool != null)
+            {
+                _pool.ReturnToPool(gameObject);
+            }
+            else
+            {
+                Debug.LogError("Object pool is not assigned for this entity!");
+                Destroy(gameObject); // Если пула нет, удаляем объект
+            }
         }
     }
 }

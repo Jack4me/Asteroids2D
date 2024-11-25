@@ -27,15 +27,18 @@ namespace Infrastructure
                 }
             }
 
-            // Если нет доступных объектов, создаем новый.
-            // GameObject newObj = Object.Instantiate(prefab, poolParent);
-            // _pool.Add(newObj);
-            // return newObj;
-
+         
             GameObject newObj = null;
             if (prefab == factory.GetAsteroidPrefab())
             {
                 newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
+
+                Debug.Log("CREATE ASTEROID BIG");
+            }
+
+            if (prefab == factory.GetMediumAsteroidPrefab())
+            {
+                newObj = factory.CreateMediumAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
             }
             else if (prefab == factory.GetUfoPrefab())
             {
