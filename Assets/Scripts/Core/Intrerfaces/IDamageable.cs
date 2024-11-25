@@ -1,6 +1,9 @@
-﻿namespace Game {
-    public interface IDamageable {
-        public void TakeDamage(int dmg);
-        public void DestroyEntity();
+﻿namespace Core.Intrerfaces
+{
+    public interface IDamageable
+    {
+        void TakeDamage(int damage); // Получение урона
+        void DestroyEntity(); // Полное уничтожение
+        void ReturnToPool(); // Возвращение объекта в пул
     }
 }

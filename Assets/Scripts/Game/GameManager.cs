@@ -1,4 +1,5 @@
 using Core.Intrerfaces;
+using Game.Entities.Entities.Asteroids;
 using Infrastructure;
 using UnityEngine;
 using ObjectFactory = Infrastructure.Factories.ObjectFactory;
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
     private void SpawnAsteroid()
     {
         GameObject asteroid = poolAstro.GetFromPool(asteroidPrefab);
+        
+        var asteroidScript = asteroid.GetComponent<Asteroid>();
+        asteroidScript.Initialize(poolAstro); // Передаём пул астероидов
     }
 
     private void SpawnUFO()

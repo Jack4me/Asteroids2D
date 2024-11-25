@@ -1,3 +1,4 @@
+using Core.Intrerfaces;
 using UnityEngine;
 
 namespace Game.Entities.Entities
@@ -19,6 +20,11 @@ namespace Game.Entities.Entities
         public virtual void DestroyEntity()
         {
             Destroy(gameObject);
+        }
+
+        public virtual void ReturnToPool()
+        {
+            
         }
     }
 }

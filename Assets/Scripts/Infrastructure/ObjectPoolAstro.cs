@@ -31,7 +31,7 @@ namespace Infrastructure
             // GameObject newObj = Object.Instantiate(prefab, poolParent);
             // _pool.Add(newObj);
             // return newObj;
-            
+
             GameObject newObj = null;
             if (prefab == factory.GetAsteroidPrefab())
             {

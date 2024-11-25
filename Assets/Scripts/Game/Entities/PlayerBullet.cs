@@ -1,3 +1,4 @@
+using Core.Intrerfaces;
 using UnityEngine;
 
 namespace Game.Entities {

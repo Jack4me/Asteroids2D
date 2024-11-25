@@ -1,3 +1,4 @@
+using Core.Intrerfaces;
 using UnityEngine;
 
 namespace Game.Entities
@@ -20,9 +21,10 @@ namespace Game.Entities
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<IDamageable>(out var asteroid))
+            if (other.TryGetComponent<IDamageable>(out var target))
             {
-                asteroid.DestroyEntity();
+                target.DestroyEntity(); // Возвращаем объект в пул через DestroyEntity
+                
             }
         }
     }

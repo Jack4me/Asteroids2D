@@ -1,3 +1,4 @@
+using Infrastructure;
 using UnityEngine;
 
 namespace Game.Entities.Entities.Asteroids
@@ -14,13 +15,12 @@ namespace Game.Entities.Entities.Asteroids
         private Vector2 direction;
         [SerializeField] private AsteroidSize size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
+        private ObjectPoolAstro _pool;
+        public void Initialize(ObjectPoolAstro pool)
+        {
+            _pool = pool;
+        }
 
-        // public override void DestroyEntity() {
-        //     if (size != AsteroidSize.Small) {
-        //         SpawnSmallerAsteroids();
-        //     }
-        //     base.DestroyEntity(); // Вызов базового метода для удаления объекта
-        // }
         public override void TakeDamage(int damage)
         {
             if (size != AsteroidSize.Small)
@@ -28,25 +28,30 @@ namespace Game.Entities.Entities.Asteroids
                 SpawnSmallerAsteroids();
             }
 
-            base.DestroyEntity();
+            ReturnToPool();
+        }
+
+        public override void DestroyEntity()
+        {
+            ReturnToPool();
+        }
+
+        public override void ReturnToPool()
+        {
+            _pool.ReturnToPool(gameObject);
         }
 
         private void SpawnSmallerAsteroids()
         {
-            if (smallerAsteroidPrefab == null)
-            {
-                Debug.LogError("Prefab for smaller asteroids is not assigned!");
-                return;
-            }
-
             for (int i = 0; i < 2; i++)
             {
-                Vector3 spawnPosition = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
-                GameObject smallerAsteroid = Instantiate(smallerAsteroidPrefab, spawnPosition, Quaternion.identity);
+                GameObject smallerAsteroid = _pool.GetFromPool(smallerAsteroidPrefab);
+                smallerAsteroid.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
 
-                AsteroidMovement asteroidScript = smallerAsteroid.GetComponent<AsteroidMovement>();
-                asteroidScript.Speed += 3f;
+                // var mover = smallerAsteroid.GetComponent<Mover>();
+                // mover.Initialize(Random.insideUnitCircle.normalized, mover.Speed + 3f);
             }
         }
     }
+    
 }
