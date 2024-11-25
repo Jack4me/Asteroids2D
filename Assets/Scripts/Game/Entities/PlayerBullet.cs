@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Game.Entities {
     public class PlayerBullet : MonoBehaviour {
-        public float Speed = 15f;
-        public float LifeTime = 3f;
+        private readonly float speed = 15f;
+        private readonly float lifeTime = 3f;
 
         private void Start() {
-            Destroy(gameObject, LifeTime);
+            Destroy(gameObject, lifeTime);
         }
 
         private void Update() {
-            transform.Translate(Vector2.up * Speed * Time.deltaTime);
+            transform.Translate(Vector2.up * speed * Time.deltaTime);
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
