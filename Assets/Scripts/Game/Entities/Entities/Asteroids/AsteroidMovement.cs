@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Entities.Asteroids {
+namespace Game.Entities.Entities.Asteroids {
     public class AsteroidMovement : MonoBehaviour {
         public float Speed = 2f;
         private Vector2 direction;

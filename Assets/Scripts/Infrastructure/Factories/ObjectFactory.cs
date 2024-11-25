@@ -1,18 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using IObjectFactory = Core.Intrerfaces.IObjectFactory;
+using Object = UnityEngine.Object;
 
-public class ObjectFactory : MonoBehaviour
+namespace Infrastructure.Factories
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ObjectFactory : IObjectFactory
     {
-        
-    }
+        private GameObject _asteroidPrefab;
+        private GameObject _ufoPrefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public ObjectFactory(GameObject asteroidPrefab, GameObject ufoPrefab)
+        {
+            _asteroidPrefab = asteroidPrefab;
+            _ufoPrefab = ufoPrefab;
+        }
+
+        public GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed)
+        {
+            var asteroid = Object.Instantiate(_asteroidPrefab, position, Quaternion.identity);
+         
+            return asteroid;
+        }
+
+        public GameObject CreateUFO(Vector2 position, Vector2 direction, float speed)
+        {
+            var ufo = Object.Instantiate(_ufoPrefab, position, Quaternion.identity);
+          
+            return ufo;
+
+        }
+
+        public object Create(Type type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

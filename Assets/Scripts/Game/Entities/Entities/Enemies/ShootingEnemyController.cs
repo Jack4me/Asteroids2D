@@ -18,7 +18,9 @@ namespace Game.Entities.Entities.Enemies {
         private float lastShootTime; // Время последнего выстрела
 
         private void Start() {
-            // Находим игрока по тегу
+            // 
+            // ПРОКИНУТЬ ИГРОКА ЧЕРЕЗ ЗЕНЖЕКТ
+            // 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null) {
                 playerTransform = player.transform;

@@ -1,78 +1,44 @@
+using System;
 using Core.Intrerfaces;
-using Game.Controllers;
-using Game.Handlers;
+using Game;
+using Infrastructure;
 using UnityEngine;
-using Zenject;
+using ObjectFactory = Infrastructure.Factories.ObjectFactory;
 
-namespace Game
+public class GameManager : MonoBehaviour
 {
-    public class GameManager : MonoBehaviour
+    [SerializeField] private GameObject asteroidPrefab;
+    [SerializeField] private GameObject ufoPrefab;
+    [SerializeField] private Transform poolParent;
+
+    private IObjectFactory _factory;
+    private ObjectPoolAstro poolAstro;
+
+    private void Awake()
     {
-        private IControlStrategy controlStrategy;
-        private PlayerController playerController;
-        private bool isGameRunning;
-        private int score;
+        _factory = new ObjectFactory(asteroidPrefab, ufoPrefab);
+        poolAstro = new ObjectPoolAstro(poolParent);
+    }
 
-        [Inject]
-        public void Construct(IControlStrategy controlStrategy, PlayerController playerController)
+    private void Start()
+    {
+        for (int i = 0; i < 5; i++)
         {
-            this.controlStrategy = controlStrategy;
-            this.playerController = playerController;
+            SpawnAsteroid();
+           
         }
+       
+    }
 
-        private void Start()
-        {
-            InitializeGame();
-        }
+    private void SpawnAsteroid()
+    {
+        var asteroid = poolAstro.GetFromPool(asteroidPrefab);
+       var mover = asteroid.GetComponent<Mover>();
+       mover.Initialize(new Vector2(1, 0), 5f);
+    }
 
-        private void InitializeGame()
-        {
-            isGameRunning = true;
-            score = 0;
-            SetupControl();
-        }
-
-        private void Update()
-        {
-            if (isGameRunning)
-            {
-                HandleGameLogic();
-            }
-        }
-
-        private void HandleGameLogic()
-        {
-            if (CheckGameOver())
-            {
-                EndGame();
-            }
-
-            UpdateScore();
-        }
-
-        private bool CheckGameOver()
-        {
-            return playerController.Health <= 0;
-        }
-
-        private void EndGame()
-        {
-            isGameRunning = false;
-            Debug.Log("Game Over! Final Score: " + score);
-            ShowGameOverScreen();
-        }
-
-        private void UpdateScore()
-        {
-            score += 10;
-        }
-
-        private void ShowGameOverScreen()
-        {
-        }
-
-        private void SetupControl()
-        {
-        }
+    private void DestroyAsteroid(GameObject asteroid)
+    {
+        poolAstro.ReturnToPool(asteroid);
     }
 }

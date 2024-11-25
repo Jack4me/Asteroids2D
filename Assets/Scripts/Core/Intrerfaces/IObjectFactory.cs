@@ -1,18 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class IObjectFactory : MonoBehaviour
+namespace Core.Intrerfaces
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface IObjectFactory
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed);
+        GameObject CreateUFO(Vector2 position, Vector2 direction, float speed);
     }
 }
