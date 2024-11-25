@@ -1,16 +1,15 @@
 using Core.Intrerfaces;
+using Game;
 using Game.InputControllers;
-using Game.MVVM.TestRocketMVVM;
-using UI.Test.TestRocketMVVM;
+using UI.MVVM.TestRocketMVVM;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace Main
 {
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private LaserManager laserManager;
-        [SerializeField] private LaserModel laserModel;
 
         public override void InstallBindings()
         {

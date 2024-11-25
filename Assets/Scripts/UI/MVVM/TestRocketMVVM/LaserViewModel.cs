@@ -1,6 +1,7 @@
+using Game;
 using UniRx;
 
-namespace Game.MVVM.TestRocketMVVM
+namespace UI.MVVM.TestRocketMVVM
 {
     public class LaserViewModel
     {

@@ -2,7 +2,7 @@ using Game.Entities.Asteroids;
 using UnityEngine;
 
 namespace Game.Entities {
-    public class Bullet : MonoBehaviour {
+    public class PlayerBullet : MonoBehaviour {
         public float Speed = 15f;
         public float LifeTime = 3f;
 

@@ -1,10 +1,9 @@
 using TMPro;
-using UI.Test.TestRocketMVVM;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace Game.MVVM.TestRocketMVVM
+namespace UI.MVVM.TestRocketMVVM
 {
     public class LaserView : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Game.Entities.Entities.Enemies {
-    public class EnemyController : MonoBehaviour {
+    public class ShootingEnemyController : MonoBehaviour {
         [Header("Movement Settings")] [SerializeField]
         private float speed = 3f; // Скорость передвижения врага
 

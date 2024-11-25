@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Game.Entities.Entities.Asteroids {
-    public class AsteroidController : MonoBehaviour {
+    public class BounceController : MonoBehaviour {
         
         private Asteroid asteroid;
         private Vector2 velocity;

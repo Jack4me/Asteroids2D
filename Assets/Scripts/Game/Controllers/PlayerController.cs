@@ -137,8 +137,8 @@ namespace Game.Controllers
         {
             Health--;
 
-            AsteroidController asteroid = asteroidCollider.GetComponent<AsteroidController>();
-            if (asteroid == null) return;
+            BounceController bounce = asteroidCollider.GetComponent<BounceController>();
+            if (bounce == null) return;
 
             Vector2 collisionDirection = (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
             collisionDirection.Normalize();
@@ -146,7 +146,7 @@ namespace Game.Controllers
             LockControlForSeconds(controlLockDuration).Forget();
             velocity = collisionDirection * playerBounceForce;
 
-            asteroid.ApplyBounce(-collisionDirection * asteroidBounceForce);
+            bounce.ApplyBounce(-collisionDirection * asteroidBounceForce);
             EnableInvincibility().Forget();
 
             if (Health <= 0)
