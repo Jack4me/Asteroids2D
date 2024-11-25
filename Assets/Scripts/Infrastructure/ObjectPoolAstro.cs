@@ -18,7 +18,7 @@ namespace Infrastructure
 
         public GameObject GetFromPool(GameObject prefab)
         {
-            foreach (var obj in _pool)
+            foreach (GameObject obj in _pool)
             {
                 if (!obj.activeInHierarchy)
                 {

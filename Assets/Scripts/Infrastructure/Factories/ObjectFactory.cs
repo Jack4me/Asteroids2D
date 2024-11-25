@@ -30,10 +30,7 @@ namespace Infrastructure.Factories
             return ufo;
         }
 
-        public object Create(Type type)
-        {
-            throw new NotImplementedException();
-        }
+       
         
         public GameObject GetAsteroidPrefab()
         {
