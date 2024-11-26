@@ -37,9 +37,9 @@ namespace Game.Entities.Entities.Asteroids
 
         private void SpawnSmallerAsteroids()
         {
-            if (smallerAsteroidPrefab == null)
+            if (_pool == null)
             {
-                Debug.LogError("Smaller Asteroid Prefab is not assigned!", this);
+                Debug.LogError("_pool is not assigned!", this);
                 return; // Прерывает выполнение метода, если префаб не назначен
             }
             for (int i = 0; i < 2; i++)

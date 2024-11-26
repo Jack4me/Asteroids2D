@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ufoPrefab;
     [SerializeField] private Transform poolParent;
 
+    
+    
     private IObjectFactory _factory;
     private ObjectPoolAstro poolAstro;
 

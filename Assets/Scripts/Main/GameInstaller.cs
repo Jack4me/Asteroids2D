@@ -13,6 +13,8 @@ namespace Main
     {
         [SerializeField] private LaserManager laserManager;
         [SerializeField] private GameObject asteroidPrefab;
+        [SerializeField] private GameObject mediumAsteroid;
+        [SerializeField] private GameObject smallAsteroid;
         [SerializeField] private GameObject ufoPrefab;
         [SerializeField] private Transform poolParent;
         public override void InstallBindings()
@@ -29,6 +31,8 @@ namespace Main
             Container.Bind<IObjectFactory>().To<ObjectFactory>().AsSingle()
                 .WithArguments(asteroidPrefab, ufoPrefab);
             Container.Bind<ObjectPoolAstro>().AsSingle().WithArguments(poolParent);
+            
+         
         }
     }
 }
