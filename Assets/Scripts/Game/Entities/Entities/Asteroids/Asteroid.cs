@@ -22,20 +22,33 @@ namespace Game.Entities.Entities.Asteroids
             if (size != AsteroidSize.Small)
             {
                 SpawnSmallerAsteroids();
+                ReturnToPool();
+                Debug.Log("1");
+            }
+            else
+            {
+                Debug.Log("2");
+
+                ReturnToPool();
             }
 
-            base.TakeDamage(damage); // Вызываем базовую логику получения урона
+          base.TakeDamage(damage); // Вызываем базовую логику получения урона
         }
 
         private void SpawnSmallerAsteroids()
         {
+            if (smallerAsteroidPrefab == null)
+            {
+                Debug.LogError("Smaller Asteroid Prefab is not assigned!", this);
+                return; // Прерывает выполнение метода, если префаб не назначен
+            }
             for (int i = 0; i < 2; i++)
             {
-                var smallerAsteroid = _pool.GetFromPool(smallerAsteroidPrefab); // Берём объект из пула
+                if (smallerAsteroidPrefab == null) return;
+                var smallerAsteroid = _pool.GetFromPool(smallerAsteroidPrefab);
+                
+                smallerAsteroid.SetActive(true);
                 smallerAsteroid.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
-
-                // var mover = smallerAsteroid.GetComponent<Mover>();
-                // mover.Initialize(Random.insideUnitCircle.normalized, mover.Speed + 3f);
             }
         }
     }
