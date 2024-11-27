@@ -28,11 +28,13 @@ namespace Main
             // LaserView: Автоматическое связывание View через Zenject
             Container.Bind<LaserView>().FromComponentInHierarchy().AsSingle();
             
-            Container.Bind<IObjectFactory>().To<ObjectFactory>().AsSingle()
-                .WithArguments(asteroidPrefab, ufoPrefab);
-            Container.Bind<ObjectPoolAstro>().AsSingle().WithArguments(poolParent);
+            Container.Bind<Transform>().FromInstance(poolParent);
             
-         
+            Container.Bind<IObjectFactory>().To<ObjectFactory>().AsSingle()
+                .WithArguments(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
+            Container.Bind<ObjectPoolAstro>().AsSingle().WithArguments(poolParent, Container.Resolve<IObjectFactory>());
+            
+            Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

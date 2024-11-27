@@ -1,18 +1,21 @@
 using Core.Intrerfaces;
 using Infrastructure;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Entities.Entities
 {
     public class Entity : MonoBehaviour, IDamageable
     {
         [SerializeField] protected int health = 1;
-        internal ObjectPoolAstro _pool; 
+        [Inject] internal ObjectPoolAstro _pool;
 
-        public void Initialize(ObjectPoolAstro pool)
-        {
-            _pool = pool;
-        }
+        //internal ObjectPoolAstro _pool; 
+
+        // public void Initialize(ObjectPoolAstro pool)
+        // {
+        //     _pool = pool;
+        // }
         public virtual void TakeDamage(int damage)
         {
             health -= damage;

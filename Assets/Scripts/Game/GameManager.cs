@@ -2,6 +2,7 @@ using Core.Intrerfaces;
 using Game.Entities.Entities;
 using Infrastructure;
 using UnityEngine;
+using Zenject;
 using ObjectFactory = Infrastructure.Factories.ObjectFactory;
 
 public class GameManager : MonoBehaviour
@@ -12,15 +13,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ufoPrefab;
     [SerializeField] private Transform poolParent;
 
-    
+    [Inject] private ObjectPoolAstro poolAstro;
     
     private IObjectFactory _factory;
-    private ObjectPoolAstro poolAstro;
+    // private ObjectPoolAstro poolAstro;
 
     private void Awake()
     {
-        _factory = new ObjectFactory(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
-        poolAstro = new ObjectPoolAstro(poolParent, _factory);
+        // _factory = new ObjectFactory(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
+        // poolAstro = new ObjectPoolAstro(poolParent, _factory);
     }
 
     private void Start()
@@ -33,10 +34,14 @@ public class GameManager : MonoBehaviour
 
     private void SpawnAsteroid()
     {
+        if (poolAstro == null)
+        {
+            Debug.Log("Pool is null");
+        }
         GameObject asteroid = poolAstro.GetFromPool(asteroidPrefab);
 
         var asteroidScript = asteroid.GetComponent<Entity>();
-        asteroidScript.Initialize(poolAstro); 
+       // asteroidScript.Initialize(poolAstro); 
     }
 
     private void SpawnUFO()
