@@ -1,3 +1,5 @@
+using Core;
+using Core.Intrerfaces;
 using Infrastructure;
 using UnityEngine;
 using Zenject;
@@ -16,6 +18,9 @@ namespace Game.Entities.Entities.Asteroids
         private Vector2 direction;
         [SerializeField] private AsteroidSize size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
+        public Asteroid(IObjectPool objectPool) : base(objectPool)
+        {
+        }
 
         public override void TakeDamage(int damage)
         {
@@ -51,5 +56,8 @@ namespace Game.Entities.Entities.Asteroids
                 smallerAsteroid.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
             }
         }
+
+
+       
     }
 }

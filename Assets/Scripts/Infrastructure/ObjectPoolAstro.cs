@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using Core;
 using Core.Intrerfaces;
 using UnityEngine;
 
 namespace Infrastructure
 {
-    public class ObjectPoolAstro
+    public class ObjectPoolAstro : IObjectPool
     {
         private List<GameObject> _pool = new List<GameObject>();
         private Transform poolParent;
@@ -27,10 +28,6 @@ namespace Infrastructure
                 }
             }
 
-            if (prefab == null)
-            {
-                Debug.Log("NULL HERE");
-            }
 
             GameObject newObj = Create(prefab);
 
@@ -38,10 +35,10 @@ namespace Infrastructure
             if (prefab == null)
             {
                 Debug.Log("NULL PREFAB in GetFromPool");
-                return null; // Если префаб равен null, возвращаем null
+                return null;
             }
 
-            _pool.Add(newObj); // Добавляем новый объект в пул
+            _pool.Add(newObj);
             return newObj;
         }
 
@@ -51,21 +48,21 @@ namespace Infrastructure
 
             if (prefab == factory.GetAsteroidPrefab())
             {
-                newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
+                newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
             }
 
             if (prefab == factory.GetMediumAsteroidPrefab())
             {
-                newObj = factory.CreateMediumAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
+                newObj = factory.CreateMediumAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
             }
 
             if (prefab == factory.GetSmallAsteroidPrefab())
             {
-                newObj = factory.CreateSmallAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
+                newObj = factory.CreateSmallAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
             }
             else if (prefab == factory.GetUfoPrefab())
             {
-                newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f, poolParent);
+                newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
             }
 
             if (newObj == null)
@@ -80,9 +77,10 @@ namespace Infrastructure
             return newObj;
         }
 
-        public void ReturnToPool(GameObject obj)
+
+        public void ReturnToPool(Entity obj)
         {
-            obj.SetActive(false);
+            obj.gameObject.SetActive(false);
             obj.transform.SetParent(poolParent);
         }
     }

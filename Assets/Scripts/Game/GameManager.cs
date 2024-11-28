@@ -1,3 +1,4 @@
+using Core;
 using Core.Intrerfaces;
 using Game.Entities.Entities;
 using Infrastructure;
@@ -49,8 +50,5 @@ public class GameManager : MonoBehaviour
         GameObject asteroid = poolAstro.GetFromPool(ufoPrefab);
     }
 
-    private void DestroyAsteroid(GameObject asteroid)
-    {
-        poolAstro.ReturnToPool(asteroid);
-    }
+   
 }

@@ -1,4 +1,6 @@
 using System;
+using Core;
+using Core.Intrerfaces;
 using UnityEngine;
 using IObjectFactory = Core.Intrerfaces.IObjectFactory;
 using Object = UnityEngine.Object;
@@ -16,35 +18,52 @@ namespace Infrastructure.Factories
         public ObjectFactory(GameObject asteroidPrefab, GameObject ufoPrefab, GameObject mediumAsteroid, GameObject smallAsteroid )
         {
             this.asteroidPrefab = asteroidPrefab;
-            this.ufoPrefab = ufoPrefab;
             this.mediumAsteroid = mediumAsteroid;
             this.smallAsteroid = smallAsteroid;
+            this.ufoPrefab = ufoPrefab;
         }
 
-        public GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent)
+        public GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
             var asteroid = Object.Instantiate(asteroidPrefab, position, Quaternion.identity, parent);
-
+            var entity = asteroid.GetComponent<Entity>();
+            if (entity != null)
+            {
+                entity._pool = pool; // Передаём пул в сущность
+            }
             return asteroid;
         }
-        public GameObject CreateMediumAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent)
+
+        public GameObject CreateMediumAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
             var asteroid = Object.Instantiate(mediumAsteroid, position, Quaternion.identity, parent);
-
+            var entity = asteroid.GetComponent<Entity>();
+            if (entity != null)
+            {
+                entity._pool = pool; // Передаём пул в сущность
+            }
             return asteroid;
         }
 
-        public GameObject CreateSmallAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent)
+        public GameObject CreateSmallAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
             var asteroid = Object.Instantiate(smallAsteroid, position, Quaternion.identity, parent);
-
+            var entity = asteroid.GetComponent<Entity>();
+            if (entity != null)
+            {
+                entity._pool = pool; // Передаём пул в сущность
+            }
             return asteroid;
         }
 
-        public GameObject CreateUFO(Vector2 position, Vector2 direction, float speed, Transform poolParent)
+        public GameObject CreateUFO(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
-            var ufo = Object.Instantiate(ufoPrefab, position, Quaternion.identity, poolParent);
-
+            var ufo = Object.Instantiate(ufoPrefab, position, Quaternion.identity, parent);
+            var entity = ufo.GetComponent<Entity>();
+            if (entity != null)
+            {
+                entity._pool = pool; // Передаём пул в сущность
+            }
             return ufo;
         }
 

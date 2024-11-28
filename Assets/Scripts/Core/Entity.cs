@@ -1,30 +1,48 @@
 using Core.Intrerfaces;
-using Infrastructure;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Entities.Entities
+namespace Core
 {
     public class Entity : MonoBehaviour, IDamageable
     {
         [SerializeField] protected int health = 1;
-        [Inject] internal ObjectPoolAstro _pool;
+        public IObjectPool _pool;
 
+        public Entity(IObjectPool objectPool)
+        {
+            _pool = objectPool;
+        }
         //internal ObjectPoolAstro _pool; 
 
         // public void Initialize(ObjectPoolAstro pool)
         // {
         //     _pool = pool;
         // }
+
+        private void Start()
+        {
+            if (_pool == null)
+            {
+                Debug.Log("POOL IS NULL");
+            }
+            else
+            {
+                Debug.Log("POOL IS ACTIVE");
+
+            }
+        }
+
         public virtual void TakeDamage(int damage)
         {
             health -= damage;
 
             if (health <= 0)
             {
-                 DestroyEntity();
+                DestroyEntity();
             }
         }
+
 
         public virtual void DestroyEntity()
         {
@@ -35,7 +53,7 @@ namespace Game.Entities.Entities
         {
             if (_pool != null)
             {
-                _pool.ReturnToPool(gameObject);
+                _pool.ReturnToPool(this);
             }
             else
             {
