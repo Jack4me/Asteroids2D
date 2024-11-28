@@ -13,42 +13,45 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject smallAsteroid;
     [SerializeField] private GameObject ufoPrefab;
     [SerializeField] private Transform poolParent;
-
+    [SerializeField] private int initialAsteroidCount = 5;
+    [SerializeField] private Vector2 spawnAreaMin = new Vector2(-10, -10);
+    [SerializeField] private Vector2 spawnAreaMax = new Vector2(10, 10);
     [Inject] private ObjectPoolAstro poolAstro;
     
-    private IObjectFactory _factory;
-    // private ObjectPoolAstro poolAstro;
-
-    private void Awake()
-    {
-        // _factory = new ObjectFactory(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
-        // poolAstro = new ObjectPoolAstro(poolParent, _factory);
-    }
+    
 
     private void Start()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < initialAsteroidCount; i++)
         {
             SpawnAsteroid();
         }
+        SpawnUfo();
     }
 
     private void SpawnAsteroid()
     {
-        if (poolAstro == null)
-        {
-            Debug.Log("Pool is null");
-        }
+        Vector2 spawnPosition = GetRandomSpawnPosition();
         GameObject asteroid = poolAstro.GetFromPool(asteroidPrefab);
+        asteroid.transform.position = spawnPosition;
 
-        var asteroidScript = asteroid.GetComponent<Entity>();
-       // asteroidScript.Initialize(poolAstro); 
+       
     }
-
-    private void SpawnUFO()
+    
+    private void SpawnUfo()
     {
+        Vector2 spawnPosition = GetRandomSpawnPosition();
         GameObject asteroid = poolAstro.GetFromPool(ufoPrefab);
+        asteroid.transform.position = spawnPosition;
+
+       
     }
 
+    private Vector2 GetRandomSpawnPosition()
+    {
+        float x = Random.Range(spawnAreaMin.x, spawnAreaMax.x);
+        float y = Random.Range(spawnAreaMin.y, spawnAreaMax.y);
+        return new Vector2(x, y);
+    }
    
 }
