@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
 
         activeAsteroids.Add(asteroid);
 
-        // Подписываемся на событие уничтожения
         asteroid.GetComponent<Entity>().OnDestroyed += HandleAsteroidDestroyed;
     }
     
@@ -73,20 +72,17 @@ public class GameManager : MonoBehaviour
 
         activeUFOs.Add(ufo);
 
-        // Подписываемся на событие уничтожения
         ufo.GetComponent<Entity>().OnDestroyed += HandleUFODestroyed;
        
     }
 
     private void HandleAsteroidDestroyed(GameObject asteroid)
     {
-        // Удаляем из списка и возвращаем в пул
         activeAsteroids.Remove(asteroid);
     }
 
     private void HandleUFODestroyed(GameObject ufo)
     {
-        // Удаляем из списка и возвращаем в пул
         activeUFOs.Remove(ufo);
     }
     private Transform GetRandomSpawnPoint()

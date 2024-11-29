@@ -15,7 +15,13 @@ namespace Game.Controllers
         private const int MaxHealth = 50;
         private float acceleration = 0.1f;
         private float rotationSpeed = 180f;
+        private PlayerMovementController movementController;
+        private float lastLaserFireTime;
+        private float lastBulletFireTime;
+        private bool canControl = true;
         [SerializeField] private int health;
+        [SerializeField] private float asteroidBounceForce = 5f;
+        [SerializeField] private float controlLockDuration = 1f;
 
         [Header("Fire Settings")] [SerializeField]
         private GameObject laserPrefab;
@@ -34,8 +40,6 @@ namespace Game.Controllers
         [Header("Bounce Settings")] [SerializeField]
         private float playerBounceForce = 8f;
 
-        [SerializeField] private float asteroidBounceForce = 5f;
-        [SerializeField] private float controlLockDuration = 1f;
 
         public int Health
         {
@@ -50,10 +54,11 @@ namespace Game.Controllers
             this.laserManager = laserManager;
         }
 
-        private float lastLaserFireTime;
-        private float lastBulletFireTime;
-        private bool canControl = true;
 
+        private void Start()
+        {
+            movementController = new PlayerMovementController(transform, speed, acceleration, rotationSpeed);
+        }
 
         private void Update()
         {
@@ -64,7 +69,8 @@ namespace Game.Controllers
             }
             else
             {
-                ApplyVelocity(); // Продолжаем движение по инерции
+                
+                    movementController.ApplyVelocity(); // Продолжаем движение по инерции
             }
         }
 
@@ -106,18 +112,7 @@ namespace Game.Controllers
         public void HandleMovement()
         {
             Vector2 input = controlStrategy.GetInput();
-
-            float rotation = -input.x * rotationSpeed * Time.deltaTime;
-            transform.Rotate(0f, 0f, rotation);
-
-            velocity += (Vector2)transform.up * input.y * acceleration;
-
-            if (velocity.magnitude > speed)
-            {
-                velocity = velocity.normalized * speed;
-            }
-
-            transform.position += (Vector3)velocity * Time.deltaTime;
+            movementController.HandleMovement(input);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
