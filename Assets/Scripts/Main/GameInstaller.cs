@@ -2,9 +2,11 @@ using Core;
 using Core.Intrerfaces;
 using Game;
 using Game.InputControllers;
+using Game.Models;
 using Infrastructure;
 using Infrastructure.Factories;
 using UI.MVVM.TestRocketMVVM;
+using UI.MVVM.View;
 using UnityEngine;
 using Zenject;
 
@@ -20,30 +22,7 @@ namespace Main
         [SerializeField] private Transform poolParent;
         public override void InstallBindings()
         {
-            // Container.Bind<IControlStrategy>().To<KeyboardController>().AsSingle();
-            // Container.Bind<LaserManager>().FromInstance(laserManager).AsSingle();
-            //
-            //
-            // Container.Bind<LaserViewModel>().AsTransient().WithArguments(laserManager);
-            //
-            // // LaserView: Автоматическое связывание View через Zenject
-            // Container.Bind<LaserView>().FromComponentInHierarchy().AsSingle();
-            //
-            // Container.Bind<Transform>().FromInstance(poolParent);
-            //
-            // Container.Bind<IObjectFactory>().To<ObjectFactory>().AsSingle()
-            //     .WithArguments(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
-            // Container.Bind<ObjectPoolAstro>().AsSingle().WithArguments(poolParent, Container.Resolve<IObjectFactory>());
-            //
-            // Container.Bind<GameManager>().FromNewComponentOnNewGameObject().AsSingle();
-            //
-            // Container.Bind<IObjectPool>().To<ObjectPoolAstro>().AsSingle();
-            //
-            // // Пример связывания Entity
-            // Container.Bind<Entity>().AsTransient();
-            
-            
-            // Связываем необходимые зависимости
+           
             Container.Bind<IControlStrategy>().To<KeyboardController>().AsSingle();
             Container.Bind<LaserManager>().FromInstance(laserManager).AsSingle();
 
@@ -65,6 +44,11 @@ namespace Main
             Container.Bind<GameManager>().FromNewComponentOnNewGameObject().AsSingle();
 
             
+            
+            Container.Bind<PlayerDataModel>().AsSingle();
+
+            // Создание ViewModel с привязкой к модели
+            Container.Bind<PlayerViewModel>().AsSingle().WithArguments(Container.Resolve<PlayerDataModel>());
         }
     }
 }

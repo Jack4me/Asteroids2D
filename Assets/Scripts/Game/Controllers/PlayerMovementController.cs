@@ -6,7 +6,7 @@ namespace Game.Controllers
     {
         private Transform playerTransform;
         private float acceleration;
-        private float speed;
+        public float speed { get; private set; }
         private float rotationSpeed;
         private Vector2 velocity;
 
@@ -46,12 +46,18 @@ namespace Game.Controllers
         {
             playerTransform.position += (Vector3)velocity * Time.deltaTime;
         }
-
+        public float GetSpeed()
+        {
+            return velocity.magnitude;
+        }
         public void ApplyVelocity()
         {
             playerTransform.position += (Vector3)velocity * Time.deltaTime;
         }
-
+        public void AddVelocity(Vector2 direction, float force)
+        {
+            velocity += direction * force;
+        }
         public void SetVelocity(Vector2 newVelocity)
         {
             velocity = newVelocity;

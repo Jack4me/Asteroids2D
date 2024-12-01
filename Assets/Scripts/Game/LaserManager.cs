@@ -2,42 +2,50 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Game {
-    public class LaserManager : MonoBehaviour {
-        [SerializeField] private int maxLasers = 3; 
-        [SerializeField] private float reloadTime = 2f; 
-        private float reloadStartTime; 
-        private int currentLasers; 
+namespace Game
+{
+    public class LaserManager : MonoBehaviour
+    {
+        [SerializeField] private int maxLasers = 3;
+        [SerializeField] private float reloadTime = 2f;
+        private float reloadStartTime;
+        private int currentLasers;
         private bool isReloading = false;
 
         public int CurrentLasers => currentLasers;
         public bool IsReloading => isReloading;
 
         public event Action<float> OnReloadProgress;
-        private void Start() {
+
+        private void Start()
+        {
             currentLasers = maxLasers;
         }
 
-        public bool CanFireLaser() {
+        public bool CanFireLaser()
+        {
             return currentLasers > 0 && !isReloading;
         }
 
-        public void UseLaser() {
-            Debug.Log("currentLasers" + currentLasers);
-            if (currentLasers > 0) {
+        public void UseLaser()
+        {
+            if (currentLasers > 0)
+            {
                 currentLasers--;
-                if (currentLasers == 0) {
-            Debug.Log("reload" );
+                if (currentLasers == 0)
+                {
                     ReloadLasers().Forget();
                 }
             }
         }
 
-        private async UniTask ReloadLasers() {
+        private async UniTask ReloadLasers()
+        {
             isReloading = true;
             reloadStartTime = Time.time;
 
-            while (Time.time - reloadStartTime < reloadTime) {
+            while (Time.time - reloadStartTime < reloadTime)
+            {
                 float progress = (Time.time - reloadStartTime) / reloadTime;
                 OnReloadProgress?.Invoke(progress); // Передаем прогресс перезарядки
                 await UniTask.Yield();

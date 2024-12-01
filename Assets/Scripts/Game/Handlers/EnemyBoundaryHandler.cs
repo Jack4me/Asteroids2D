@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AsteroidBoundaryHandler : MonoBehaviour {
+public class EnemyBoundaryHandler : MonoBehaviour {
     private const float BoundarySizeX = 17f;
     private const float BoundarySizeY = 11f;
 
