@@ -5,16 +5,18 @@ using Zenject;
 
 namespace Core
 {
-    public class Entity : MonoBehaviour, IDamageable
+    public class Entity : MonoBehaviour, IDamageable, IHit
     {
         [SerializeField] protected int health = 1;
         public IObjectPool _pool;
+        [field: SerializeField] public int Damage { get; set; }
         public event Action<GameObject> OnDestroyed;
         public Entity(IObjectPool objectPool)
         {
             _pool = objectPool;
         }
-        
+
+
 
         public virtual void TakeDamage(int damage)
         {

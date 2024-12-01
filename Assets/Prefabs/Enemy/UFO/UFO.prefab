@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  <Damage>k__BackingField: 1
 --- !u!114 &4945617281571227638
 MonoBehaviour:
   m_ObjectHideFlags: 0

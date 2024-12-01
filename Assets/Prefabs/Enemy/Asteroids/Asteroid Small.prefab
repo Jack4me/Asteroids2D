@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  <Damage>k__BackingField: 1
   size: 0
   smallerAsteroidPrefab: {fileID: 7694535948184488637}
 --- !u!114 &1151192817693000822

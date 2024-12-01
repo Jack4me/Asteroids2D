@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Code.Infrastructure {
+namespace Infrastructure {
     public class BootstrapInstaller : MonoInstaller {
         public override void InstallBindings() 
         {

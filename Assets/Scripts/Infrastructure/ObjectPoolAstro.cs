@@ -65,14 +65,7 @@ namespace Infrastructure
                 newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
             }
 
-            if (newObj == null)
-            {
-                Debug.LogError("Failed to create object, prefab not found.");
-            }
-            else
-            {
-                Debug.Log($"Object created successfully: {newObj.name}");
-            }
+            
 
             return newObj;
         }
