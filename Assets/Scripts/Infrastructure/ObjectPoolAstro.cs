@@ -71,7 +71,7 @@ namespace Infrastructure
         }
 
 
-        public void ReturnToPool(Entity obj)
+        public void ReturnToPool(Enemy obj)
         {
             obj.gameObject.SetActive(false);
             obj.transform.SetParent(poolParent);

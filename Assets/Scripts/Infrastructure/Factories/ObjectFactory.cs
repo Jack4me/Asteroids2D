@@ -26,7 +26,7 @@ namespace Infrastructure.Factories
         public GameObject CreateAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
             var asteroid = Object.Instantiate(asteroidPrefab, position, Quaternion.identity, parent);
-            var entity = asteroid.GetComponent<Entity>();
+            var entity = asteroid.GetComponent<Enemy>();
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность
@@ -37,7 +37,7 @@ namespace Infrastructure.Factories
         public GameObject CreateMediumAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
             var asteroid = Object.Instantiate(mediumAsteroid, position, Quaternion.identity, parent);
-            var entity = asteroid.GetComponent<Entity>();
+            var entity = asteroid.GetComponent<Enemy>();
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность
@@ -48,7 +48,7 @@ namespace Infrastructure.Factories
         public GameObject CreateSmallAsteroid(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
             var asteroid = Object.Instantiate(smallAsteroid, position, Quaternion.identity, parent);
-            var entity = asteroid.GetComponent<Entity>();
+            var entity = asteroid.GetComponent<Enemy>();
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность
@@ -59,7 +59,7 @@ namespace Infrastructure.Factories
         public GameObject CreateUFO(Vector2 position, Vector2 direction, float speed, Transform parent, IObjectPool pool)
         {
             var ufo = Object.Instantiate(ufoPrefab, position, Quaternion.identity, parent);
-            var entity = ufo.GetComponent<Entity>();
+            var entity = ufo.GetComponent<Enemy>();
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность

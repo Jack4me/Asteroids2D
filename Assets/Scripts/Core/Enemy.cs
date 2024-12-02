@@ -5,13 +5,20 @@ using Zenject;
 
 namespace Core
 {
-    public class Entity : MonoBehaviour, IDamageable, IHit
+    public enum AsteroidSize
     {
+        Small,
+        Medium,
+        Large, 
+        Ufo
+    }
+    public class Enemy : MonoBehaviour, IDamageable, IHit
+    {
+        [field: SerializeField] public int Damage { get; set; }
         [SerializeField] protected int health = 1;
         public IObjectPool _pool;
-        [field: SerializeField] public int Damage { get; set; }
         public event Action<GameObject> OnDestroyed;
-        public Entity(IObjectPool objectPool)
+        public Enemy(IObjectPool objectPool)
         {
             _pool = objectPool;
         }
@@ -25,14 +32,16 @@ namespace Core
             if (health <= 0)
             {
                 DestroyEntity();
-                OnDestroyed?.Invoke(gameObject);
             }
         }
 
 
         public virtual void DestroyEntity()
         {
+            
             ReturnToPool();
+            OnDestroyed?.Invoke(gameObject);
+
         }
 
         public virtual void ReturnToPool()
@@ -47,5 +56,11 @@ namespace Core
                 Destroy(gameObject); // Если пула нет, удаляем объект
             }
         }
+
+        [SerializeField] private int score = 10;
+
+        public int GetScore() => score;
+
+        
     }
 }

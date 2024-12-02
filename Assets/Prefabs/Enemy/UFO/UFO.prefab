@@ -213,8 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b4318508e949e45ac7a4425ca6d508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
   <Damage>k__BackingField: 1
+  health: 1
+  size: 3
 --- !u!114 &4945617281571227638
 MonoBehaviour:
   m_ObjectHideFlags: 0

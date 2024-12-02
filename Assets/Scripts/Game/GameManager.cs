@@ -19,7 +19,7 @@ namespace Game
         [SerializeField] private int maxAsteroids = 10;
         [SerializeField] private int maxUFOs = 3;
         [Inject] private ObjectPoolAstro poolAstro;
-    
+
         private List<GameObject> activeAsteroids = new List<GameObject>();
         private List<GameObject> activeUFOs = new List<GameObject>();
 
@@ -28,6 +28,7 @@ namespace Game
             StartAsteroidSpawning().Forget();
             StartUFOSpawning().Forget();
         }
+
         private async UniTaskVoid StartAsteroidSpawning()
         {
             while (true)
@@ -36,6 +37,7 @@ namespace Game
                 {
                     SpawnAsteroid();
                 }
+
                 await UniTask.Delay(15000); // Ждём 15 секунд
             }
         }
@@ -48,9 +50,11 @@ namespace Game
                 {
                     SpawnUfo();
                 }
+
                 await UniTask.Delay(10000); // Ждём 10 секунд
             }
         }
+
         private void SpawnAsteroid()
         {
             GameObject asteroid = poolAstro.GetFromPool(asteroidPrefab);
@@ -59,9 +63,9 @@ namespace Game
 
             activeAsteroids.Add(asteroid);
 
-            asteroid.GetComponent<Entity>().OnDestroyed += HandleAsteroidDestroyed;
+            asteroid.GetComponent<Enemy>().OnDestroyed += HandleAsteroidDestroyed;
         }
-    
+
         private void SpawnUfo()
         {
             GameObject ufo = poolAstro.GetFromPool(ufoPrefab);
@@ -71,8 +75,7 @@ namespace Game
 
             activeUFOs.Add(ufo);
 
-            ufo.GetComponent<Entity>().OnDestroyed += HandleUFODestroyed;
-       
+            ufo.GetComponent<Enemy>().OnDestroyed += HandleUFODestroyed;
         }
 
         private void HandleAsteroidDestroyed(GameObject asteroid)
@@ -84,11 +87,11 @@ namespace Game
         {
             activeUFOs.Remove(ufo);
         }
+
         private Transform GetRandomSpawnPoint()
         {
-            int randomIndex = Random.Range(0, spawnPoints.Length); 
-            return spawnPoints[randomIndex]; 
+            int randomIndex = Random.Range(0, spawnPoints.Length);
+            return spawnPoints[randomIndex];
         }
-   
     }
 }

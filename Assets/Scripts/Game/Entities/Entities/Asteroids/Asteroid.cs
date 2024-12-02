@@ -6,14 +6,9 @@ using Zenject;
 
 namespace Game.Entities.Entities.Asteroids
 {
-    public enum AsteroidSize
-    {
-        Small,
-        Medium,
-        Large
-    }
+    
 
-    public class Asteroid : Entity
+    public class Asteroid : Enemy
     {
         private Vector2 direction;
         [SerializeField] private AsteroidSize size;

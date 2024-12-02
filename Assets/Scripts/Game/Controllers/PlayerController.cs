@@ -63,7 +63,7 @@ namespace Game.Controllers
             this.controlStrategy = controlStrategy;
             this.laserManager = laserManager;
             this.playerDataModel = playerDataModel;
-            damageHandler = new DamageHandler(20, playerDataModel);
+            damageHandler = new DamageHandler(5, playerDataModel);
         }
 
        
@@ -77,7 +77,7 @@ namespace Game.Controllers
                 new PlayerCollisionHandler(transform, health, MaxHealth, playerBounceForce, asteroidBounceForce,
                     invincibilityEffect, invincibilityDuration, damageHandler);
             collisionHandler.OnControlLockRequested += LockControlDuration;
-//           damageHandler.OnDeath += HandleDeath;
+            damageHandler.OnDeath += HandleDeath;
         }
 
         private void HandleDeath()

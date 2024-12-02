@@ -1,9 +1,9 @@
 using Core.Intrerfaces;
 using UnityEngine;
 
-namespace Game.Entities
+namespace Game.Entities.Entities
 {
-    public class Laser : MonoBehaviour
+    public class PlayerLaser : MonoBehaviour
     {
         public float Speed = 20f;
         public float LifeTime = 3f;
