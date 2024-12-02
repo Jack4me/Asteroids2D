@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Core;
 using Core.Intrerfaces;
+using Game.Entities.Entities;
 using UnityEngine;
+using Zenject;
 
 namespace Infrastructure
 {
@@ -10,13 +12,17 @@ namespace Infrastructure
         private List<GameObject> _pool = new List<GameObject>();
         private Transform poolParent;
         private readonly IObjectFactory factory;
-
+        private ScoreManager scoreManager;
         public ObjectPoolAstro(Transform poolParent, IObjectFactory factory)
         {
             this.poolParent = poolParent;
             this.factory = factory;
         }
-
+        [Inject]
+        public void Construct(ScoreManager scoreManager)
+        {
+            this.scoreManager = scoreManager;
+        }
         public GameObject GetFromPool(GameObject prefab)
         {
             foreach (GameObject obj in _pool)
@@ -48,21 +54,21 @@ namespace Infrastructure
 
             if (prefab == factory.GetAsteroidPrefab())
             {
-                newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
+                newObj = factory.CreateAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this, scoreManager);
             }
 
             if (prefab == factory.GetMediumAsteroidPrefab())
             {
-                newObj = factory.CreateMediumAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
+                newObj = factory.CreateMediumAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this, scoreManager);
             }
 
             if (prefab == factory.GetSmallAsteroidPrefab())
             {
-                newObj = factory.CreateSmallAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
+                newObj = factory.CreateSmallAsteroid(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this, scoreManager);
             }
             else if (prefab == factory.GetUfoPrefab())
             {
-                newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this);
+                newObj = factory.CreateUFO(Vector2.zero, new Vector2(1, 0), 5f, poolParent, this, scoreManager);
             }
 
             

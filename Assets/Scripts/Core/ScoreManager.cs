@@ -1,33 +1,31 @@
+using System;
 using System.Collections.Generic;
+using Game.Entities.Entities;
 using UnityEngine;
 
-namespace Game
+namespace Core
 {
-    public enum EnemyType
-    {
-        Small,
-        Medium,
-        Large,
-        Ufo
-    }
+  
     public class ScoreManager : MonoBehaviour
     {
+        public event Action<int> OnScoreUpdated;
         private Dictionary<EnemyType, int> scoreTable = new Dictionary<EnemyType, int>
         {
-            { EnemyType.Small, 10 },
+            { EnemyType.Small, 50 },
             { EnemyType.Medium, 20 },
-            { EnemyType.Large, 50 },
+            { EnemyType.Large, 10 },
             { EnemyType.Ufo, 100 }
         };
 
         private int totalScore;
 
-        public void AddScore(EnemyType enemyType)
+        public void NotifyEnemyDestroyed(EnemyType enemyType)
         {
             if (scoreTable.TryGetValue(enemyType, out int score))
             {
                 totalScore += score;
-                Debug.Log($"Added {score} points for {enemyType}. Total Score: {totalScore}");
+                OnScoreUpdated?.Invoke(totalScore);
+                Debug.Log($"Enemy of type {enemyType} destroyed. Added {score} points. Total Score: {totalScore}");
             }
             else
             {

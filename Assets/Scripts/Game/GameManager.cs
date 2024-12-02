@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Infrastructure;
 using UnityEngine;
 using Zenject;
+using Enemy = Core.Enemy;
 
 namespace Game
 {

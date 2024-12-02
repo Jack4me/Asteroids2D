@@ -1,29 +1,26 @@
 using System;
 using Core.Intrerfaces;
+using Game.Entities.Entities;
 using UnityEngine;
 using Zenject;
 
 namespace Core
 {
-    public enum AsteroidSize
-    {
-        Small,
-        Medium,
-        Large, 
-        Ufo
-    }
-    public class Enemy : MonoBehaviour, IDamageable, IHit
+    public class Enemy : MonoBehaviour, IDamageable
     {
         [field: SerializeField] public int Damage { get; set; }
         [SerializeField] protected int health = 1;
         public IObjectPool _pool;
+        public EnemyType enemyType;
         public event Action<GameObject> OnDestroyed;
         public Enemy(IObjectPool objectPool)
         {
             _pool = objectPool;
         }
 
+        public ScoreManager scoreManager;
 
+        
 
         public virtual void TakeDamage(int damage)
         {
@@ -40,6 +37,7 @@ namespace Core
         {
             
             ReturnToPool();
+            scoreManager.NotifyEnemyDestroyed(enemyType);
             OnDestroyed?.Invoke(gameObject);
 
         }

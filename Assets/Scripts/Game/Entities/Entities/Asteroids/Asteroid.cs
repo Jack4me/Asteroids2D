@@ -11,7 +11,7 @@ namespace Game.Entities.Entities.Asteroids
     public class Asteroid : Enemy
     {
         private Vector2 direction;
-        [SerializeField] private AsteroidSize size;
+        [SerializeField] private EnemyType size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
         public Asteroid(IObjectPool objectPool) : base(objectPool)
         {
@@ -19,7 +19,7 @@ namespace Game.Entities.Entities.Asteroids
 
         public override void TakeDamage(int damage)
         {
-            if (size != AsteroidSize.Small)
+            if (size != EnemyType.Small)
             {
                 SpawnSmallerAsteroids();
                 ReturnToPool();

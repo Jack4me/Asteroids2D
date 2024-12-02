@@ -215,6 +215,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 1
   health: 1
+  enemyType: 3
+  scoreManager: {fileID: 0}
+  score: 0
   size: 3
 --- !u!114 &4945617281571227638
 MonoBehaviour:

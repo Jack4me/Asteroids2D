@@ -123,8 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a65b8c581b857449e85598a9739098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
   <Damage>k__BackingField: 1
+  health: 1
+  enemyType: 2
+  scoreManager: {fileID: 0}
+  score: 0
   size: 2
   smallerAsteroidPrefab: {fileID: 4767596974026481223, guid: 1fa63b5893789bc4cb38d578856f8cf3, type: 3}
 --- !u!114 &3196102925295320691

@@ -50,7 +50,10 @@ namespace Main
             // Создание ViewModel с привязкой к модели
             Container.Bind<PlayerViewModel>().AsSingle().WithArguments(Container.Resolve<PlayerDataModel>());
             
-           
+            Container.Bind<ScoreManager>()
+                .FromComponentInHierarchy() // Находит ScoreManager в сцене
+                .AsSingle();
+
         }
     }
 }
