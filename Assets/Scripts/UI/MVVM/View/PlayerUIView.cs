@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Models;
 using TMPro;
 using UniRx;
@@ -13,8 +14,11 @@ namespace UI.MVVM.View
         [SerializeField] private TextMeshProUGUI speedText;
         [SerializeField] private TextMeshProUGUI rotationText;
         [SerializeField] private TextMeshProUGUI health;
+        [SerializeField] private Transform heartsContainer; // Контейнер для сердечек
+        [SerializeField] private GameObject heartPrefab; // Префаб сердечка
 
         private PlayerViewModel viewModel;
+        private List<GameObject> hearts = new List<GameObject>();
 
         [Inject]
         public void Construct(PlayerViewModel viewModel)
@@ -24,12 +28,32 @@ namespace UI.MVVM.View
 
         private void Start()
         {
-            Debug.Log("viewModel.Health" + viewModel.Health);
-            // Подписываем UI элементы на обновления данных
+
             viewModel.PositionText.Subscribe(text => positionText.text = text).AddTo(this);
             viewModel.SpeedText.Subscribe(text => speedText.text = text).AddTo(this);
             viewModel.RotationText.Subscribe(text => rotationText.text = text).AddTo(this);
             viewModel.Health.Subscribe(text => health.text = text).AddTo(this);
+          
+            viewModel.HealthInt.Subscribe(UpdateHearts).AddTo(this);
+         
+        }
+
+        private void UpdateHearts(int health)
+        {
+            while (hearts.Count > health)
+            {
+                Destroy(hearts[0]); 
+                hearts.RemoveAt(0);
+            }
+
+            // Добавляем недостающие сердечки (справа налево)
+            while (hearts.Count < health)
+            {
+                GameObject newHeart = Instantiate(heartPrefab, heartsContainer);
+                hearts.Add(newHeart);
+            }
+
+            
         }
     }
 }

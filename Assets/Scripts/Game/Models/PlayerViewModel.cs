@@ -1,4 +1,5 @@
 using UniRx;
+using UnityEngine;
 
 namespace Game.Models
 {
@@ -8,6 +9,7 @@ namespace Game.Models
         public IReadOnlyReactiveProperty<string> SpeedText { get; }
         public IReadOnlyReactiveProperty<string> RotationText { get; }
         public IReadOnlyReactiveProperty<string> Health { get; }
+        public IReadOnlyReactiveProperty<int> HealthInt { get; }
 
         public PlayerViewModel(PlayerDataModel model)
         {
@@ -16,6 +18,7 @@ namespace Game.Models
             SpeedText = model.Speed.Select(speed => $"Speed: {speed:F2}").ToReactiveProperty();
             RotationText = model.RotationAngle.Select(angle => $"Rotation: {angle:F0}°").ToReactiveProperty();
             Health = model.Health.Select(health => $"Health: {health:F0}").ToReactiveProperty();
+            HealthInt = model.Health.ToReactiveProperty();
         }
     }
 }
