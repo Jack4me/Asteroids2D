@@ -10,6 +10,7 @@ namespace Game.Models
         public IReadOnlyReactiveProperty<string> RotationText { get; }
         public IReadOnlyReactiveProperty<string> Health { get; }
         public IReadOnlyReactiveProperty<int> HealthInt { get; }
+        public IReadOnlyReactiveProperty<string> Score { get; }
 
         public PlayerViewModel(PlayerDataModel model)
         {
@@ -19,6 +20,7 @@ namespace Game.Models
             RotationText = model.RotationAngle.Select(angle => $"Rotation: {angle:F0}°").ToReactiveProperty();
             Health = model.Health.Select(health => $"Health: {health:F0}").ToReactiveProperty();
             HealthInt = model.Health.ToReactiveProperty();
+            Score = model.Score.Select(score => $"Score: {score:F0}").ToReactiveProperty();
         }
     }
 }

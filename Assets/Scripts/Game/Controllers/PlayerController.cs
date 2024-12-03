@@ -1,4 +1,5 @@
 ﻿using System;
+using Core;
 using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
@@ -48,25 +49,27 @@ namespace Game.Controllers
         private PlayerDataModel playerDataModel;
 
         [SerializeField] private int health;
+
         public int Health
         {
             get { return health; }
             private set { health = Mathf.Clamp(value, 0, MaxHealth); }
         }
 
+        private ScoreManager scoreManager;
         private DamageHandler damageHandler;
 
         [Inject]
         public void Construct(IControlStrategy controlStrategy, LaserManager laserManager,
-            PlayerDataModel playerDataModel)
+            PlayerDataModel playerDataModel, ScoreManager scoreManager)
         {
+            this.scoreManager = scoreManager;
             this.controlStrategy = controlStrategy;
             this.laserManager = laserManager;
             this.playerDataModel = playerDataModel;
             damageHandler = new DamageHandler(5, playerDataModel);
         }
 
-       
 
         private void Awake()
         {
@@ -101,7 +104,7 @@ namespace Game.Controllers
             playerDataModel.Position.Value = transform.position;
             playerDataModel.Speed.Value = movementController.GetSpeed();
             playerDataModel.RotationAngle.Value = transform.eulerAngles.z;
-           // playerDataModel.Health.Value = health ;
+            playerDataModel.Score.Value =  scoreManager.totalScore;
         }
 
         private void HandleInput()
@@ -129,11 +132,9 @@ namespace Game.Controllers
         {
             var (direction, force) = collisionHandler.CalculateBounce(other);
             movementController.AddVelocity(direction, force);
-            
-                collisionHandler.HandleCollision(other, controlLockDuration).Forget();
-        }
 
-        
+            collisionHandler.HandleCollision(other, controlLockDuration).Forget();
+        }
 
 
         public void LockControlDuration(float duration)

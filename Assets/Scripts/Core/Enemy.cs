@@ -9,16 +9,17 @@ namespace Core
     public class Enemy : MonoBehaviour, IDamageable, IHit
     {
         [field: SerializeField] public int Damage { get; set; }
+        [SerializeField] private int score = 10;
         [SerializeField] protected int health = 1;
         public IObjectPool _pool;
         public EnemyType enemyType;
+        public ScoreManager scoreManager;
         public event Action<GameObject> OnDestroyed;
         public Enemy(IObjectPool objectPool)
         {
             _pool = objectPool;
         }
 
-        public ScoreManager scoreManager;
 
         
 
@@ -55,7 +56,6 @@ namespace Core
             }
         }
 
-        [SerializeField] private int score = 10;
 
         public int GetScore() => score;
 

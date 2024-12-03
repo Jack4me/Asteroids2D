@@ -17,8 +17,9 @@ namespace Core
             { EnemyType.Ufo, 100 }
         };
 
-        private int totalScore;
-
+        public int totalScore { get; set; }
+        
+        
         public void NotifyEnemyDestroyed(EnemyType enemyType)
         {
             if (scoreTable.TryGetValue(enemyType, out int score))

@@ -14,6 +14,7 @@ namespace UI.MVVM.View
         [SerializeField] private TextMeshProUGUI speedText;
         [SerializeField] private TextMeshProUGUI rotationText;
         [SerializeField] private TextMeshProUGUI health;
+        [SerializeField] private TextMeshProUGUI score;
         [SerializeField] private Transform heartsContainer; // Контейнер для сердечек
         [SerializeField] private GameObject heartPrefab; // Префаб сердечка
 
@@ -35,6 +36,7 @@ namespace UI.MVVM.View
             viewModel.Health.Subscribe(text => health.text = text).AddTo(this);
           
             viewModel.HealthInt.Subscribe(UpdateHearts).AddTo(this);
+            viewModel.Score.Subscribe(text => score.text = text).AddTo(this);
          
         }
 

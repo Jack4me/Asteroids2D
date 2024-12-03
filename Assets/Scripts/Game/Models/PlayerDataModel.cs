@@ -10,6 +10,8 @@ namespace Game.Models
         public ReactiveProperty<float> Speed { get; } = new ReactiveProperty<float>();
         public ReactiveProperty<float> RotationAngle { get; } = new ReactiveProperty<float>();
         public ReactiveProperty<int> Health { get; } = new ReactiveProperty<int>();
+        
+        public ReactiveProperty<int> Score { get; } = new ReactiveProperty<int>();
        }
 
 }
