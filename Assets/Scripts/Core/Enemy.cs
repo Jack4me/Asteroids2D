@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Core
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour, IDamageable, IHit
     {
         [field: SerializeField] public int Damage { get; set; }
         [SerializeField] protected int health = 1;

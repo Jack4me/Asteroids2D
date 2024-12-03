@@ -1,8 +1,7 @@
-using System;
 using Core;
 using UnityEngine;
 
-namespace Game.Entities.Entities.Enemies
+namespace Game.Entities.Entities.UFO
 {
     public class EnemyBullet : MonoBehaviour, IHit
     {
