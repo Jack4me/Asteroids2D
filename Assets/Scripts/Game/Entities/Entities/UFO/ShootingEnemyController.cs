@@ -1,6 +1,7 @@
+using Game.Entities.Entities.Enemies;
 using UnityEngine;
 
-namespace Game.Entities.Entities.Enemies
+namespace Game.Entities.Entities.UFO
 {
     public class ShootingEnemyController : MonoBehaviour
     {
@@ -17,7 +18,7 @@ namespace Game.Entities.Entities.Enemies
         private Vector2 velocity; 
         private float lastShootTime; 
 
-        private void Start()
+        private void Awake()
         {
             // 
             // ПРОКИНУТЬ ИГРОКА ЧЕРЕЗ ЗЕНЖЕКТ

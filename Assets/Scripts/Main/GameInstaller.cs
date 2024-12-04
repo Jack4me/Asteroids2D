@@ -1,6 +1,7 @@
 using Core;
 using Core.Intrerfaces;
 using Game;
+using Game.Controllers;
 using Game.InputControllers;
 using Game.Models;
 using Infrastructure;
@@ -15,6 +16,7 @@ namespace Main
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private LaserManager laserManager;
+        [SerializeField] private PlayerController player; 
         [SerializeField] private GameObject asteroidPrefab;
         [SerializeField] private GameObject mediumAsteroid;
         [SerializeField] private GameObject smallAsteroid;
@@ -54,6 +56,7 @@ namespace Main
                 .FromComponentInHierarchy() // Находит ScoreManager в сцене
                 .AsSingle();
 
+            
         }
     }
 }
