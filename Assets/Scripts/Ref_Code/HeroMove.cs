@@ -27,7 +27,7 @@ namespace Ref_Code
             }
             else
             {
-                ApplyVelocity();
+                transform.position += (Vector3)velocity  *Time.deltaTime;
             }
            
         }
