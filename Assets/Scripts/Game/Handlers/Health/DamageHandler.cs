@@ -19,11 +19,12 @@ namespace Game.Handlers.Health
         public DamageHandler(int maxHealth, PlayerDataModel playerDataModel)
         {
             this.playerDataModel = playerDataModel;
-            playerDataModel.Health.Value = maxHealth;
         }
 
         public void TakeDamage(int damage)
         {
+            playerDataModel.Health.Value = maxHealth;
+
             if (damage <= 0) return;
 
             playerDataModel.Health.Value -= damage;

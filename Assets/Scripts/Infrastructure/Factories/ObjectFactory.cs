@@ -33,6 +33,7 @@ namespace Infrastructure.Factories
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность
+                
             }
             return asteroid;
         }

@@ -37,8 +37,8 @@ namespace CodeBase.Infrastructure.States {
 
         private void InitGameWorld(){
             InitSpawners();
-            _gameFactory.CreateUnit();
-            // GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
+            //_gameFactory.CreateUnit();
+            GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
         }
 
         private void InitSpawners(){
