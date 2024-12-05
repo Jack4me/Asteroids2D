@@ -1,7 +1,9 @@
-﻿using CodeBase.Infrastructure.AssetsManagement;
+﻿using System.ComponentModel;
+using CodeBase.Infrastructure.AssetsManagement;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.StaticData;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Infrastructure.Factory {
     public class GameFactory : IGameFactory {
@@ -25,6 +27,7 @@ namespace CodeBase.Infrastructure.Factory {
         public GameObject CreateHero(GameObject at){
             HeroGameObject = InstantiateRegister(AssetPath.HERO_PATH, at.transform.position);
             return HeroGameObject;
+            
         }
 
         public GameObject CreateHud(){

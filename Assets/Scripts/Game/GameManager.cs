@@ -45,6 +45,7 @@ namespace Game
 
         private async UniTaskVoid StartUFOSpawning()
         {
+                await UniTask.Delay(10000); // Ждём 10 секунд
             while (true)
             {
                 if (activeUFOs.Count < maxUFOs)

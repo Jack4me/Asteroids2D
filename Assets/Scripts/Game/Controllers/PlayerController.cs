@@ -60,16 +60,18 @@ namespace Game.Controllers
         private DamageHandler damageHandler;
 
         [Inject]
-        public void Construct(IControlStrategy controlStrategy, LaserManager laserManager,
+        public void Construct( LaserManager laserManager,
             PlayerDataModel playerDataModel, ScoreManager scoreManager)
         {
             this.scoreManager = scoreManager;
             this.controlStrategy = controlStrategy;
             this.laserManager = laserManager;
             this.playerDataModel = playerDataModel;
+
         }
 
 
+        
         private void Awake()
         {
             movementController = new PlayerMovementController(transform, speed, acceleration, rotationSpeed);
@@ -94,8 +96,8 @@ namespace Game.Controllers
         {
             if (canControl)
             {
-                HandleInput();
-                HandleMovement();
+               // HandleInput();
+              //  HandleMovement();
             }
             else
             {

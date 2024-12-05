@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 7822465019992695979}
   - component: {fileID: 7822465019992695977}
   - component: {fileID: 7822465019992695991}
+  - component: {fileID: 7822465019992695990}
   - component: {fileID: 1088319667}
-  - component: {fileID: -1038808343223610342}
+  - component: {fileID: 822407644}
   m_Layer: 0
-  m_Name: Hero
+  m_Name: Hero 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +51,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.007375121, y: -0.1948064}
+  m_Offset: {x: -0.023207992, y: -0.1948064}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.28866667}
@@ -61,7 +62,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0355308, y: 0.79112804}
+  m_Size: {x: 1.1856639, y: 0.79112804}
   m_EdgeRadius: 0
 --- !u!50 &7822465019992695991
 Rigidbody2D:
@@ -84,6 +85,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7822465019992695990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822465019992695988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0eb5b5376840b4bbe56d6e08464e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidBounceForce: 20
+  controlLockDuration: 1
+  laserPrefab: {fileID: 5462292197805791010, guid: fa8e1ca7aa36c0948ade8c2f2fc8ce26, type: 3}
+  bulletPrefab: {fileID: 8961894113111443705, guid: ef3c225efc576c84e93c0738717e2283, type: 3}
+  firePoint: {fileID: 5075289586232242357}
+  laserCooldown: 0.5
+  bulletCooldown: 0.25
+  invincibilityEffect: {fileID: 0}
+  invincibilityDuration: 3
+  playerBounceForce: 9
+  health: 9
 --- !u!114 &1088319667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef16624f25e1cf64c8ae82f80770c858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1038808343223610342
+--- !u!114 &822407644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,11 +129,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7822465019992695988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391d06ee5eb025f48978ee8472dd7508, type: 3}
+  m_Script: {fileID: 11500000, guid: c7efc381f4d8440d8b9ac81c68fe7334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
-  movementSpeed: 4
+  maxLasers: 3
+  reloadTime: 2
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0
