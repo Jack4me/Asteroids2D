@@ -2,6 +2,7 @@ using Core;
 using Core.Intrerfaces;
 using Game;
 using Game.Controllers;
+using Game.Controllers.InputControllers;
 using Game.InputControllers;
 using Game.Models;
 using Infrastructure;
