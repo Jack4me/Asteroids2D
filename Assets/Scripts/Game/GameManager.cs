@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core;
+using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
 using Infrastructure;
 using UnityEngine;
@@ -11,15 +12,13 @@ namespace Game
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private GameObject asteroidPrefab;
-        [SerializeField] private GameObject mediumAsteroid;
-        [SerializeField] private GameObject smallAsteroid;
+       
         [SerializeField] private GameObject ufoPrefab;
-        [SerializeField] private Transform poolParent;
-        [SerializeField] private int initialAsteroidCount = 5;
+      
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private int maxAsteroids = 10;
         [SerializeField] private int maxUFOs = 3;
-        [Inject] private ObjectPoolAstro poolAstro;
+        [Inject] private IObjectPool poolAstro;
 
         private List<GameObject> activeAsteroids = new List<GameObject>();
         private List<GameObject> activeUFOs = new List<GameObject>();

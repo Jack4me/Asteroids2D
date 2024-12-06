@@ -74,7 +74,7 @@ namespace Game.Controllers
         
         private void Awake()
         {
-            movementController = new PlayerMovementController(transform, speed, acceleration, rotationSpeed);
+             movementController = new PlayerMovementController(transform, speed, acceleration, rotationSpeed);
             shootingController =
                 new PlayerShootingController(laserPrefab, bulletPrefab, firePoint, laserCooldown, bulletCooldown);
             collisionHandler =

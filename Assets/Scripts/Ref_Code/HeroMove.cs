@@ -22,7 +22,6 @@ namespace Ref_Code
         }
         private void Update(){
             if (_inputService.Axis.sqrMagnitude > 0.01f){
-                Debug.Log("_inputService.Axis" + _inputService.Axis);
                 HandleMovement(_inputService.Axis);
             }
             else

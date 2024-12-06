@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Game.Controllers
 {
-    public class PlayerCollisionHandler
+    public class PlayerCollisionHandler : MonoBehaviour
     {
-        private readonly Transform playerTransform;
+       // private readonly Transform playerTransform;
         private readonly float playerBounceForce;
         private readonly float asteroidBounceForce;
         private readonly int maxHealth;
@@ -39,7 +39,7 @@ namespace Game.Controllers
             ParticleSystem invincibilityEffect,
             float invincibilityDuration, DamageHandler damageHandler)
         {
-            this.playerTransform = playerTransform;
+           // this.playerTransform = playerTransform;
             this.health = initialHealth;
             this.maxHealth = maxHealth;
             this.playerBounceForce = playerBounceForce;
@@ -53,7 +53,7 @@ namespace Game.Controllers
         public (Vector2 direction, float force) CalculateBounce(Collider2D asteroidCollider)
         {
             Vector2 collisionDirection =
-                (Vector2)playerTransform.position - (Vector2)asteroidCollider.transform.position;
+                (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
             collisionDirection.Normalize();
 
             return (collisionDirection, playerBounceForce);
@@ -70,7 +70,7 @@ namespace Game.Controllers
             }
 
             Vector2 collisionDirection =
-                (Vector2)playerTransform.position - (Vector2)asteroidCollider.transform.position;
+                (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
             collisionDirection.Normalize();
 
             velocity += collisionDirection * playerBounceForce;

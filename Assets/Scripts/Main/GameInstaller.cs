@@ -16,7 +16,6 @@ namespace Main
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private LaserManager laserManager;
-        [SerializeField] private PlayerController player; 
         [SerializeField] private GameObject asteroidPrefab;
         [SerializeField] private GameObject mediumAsteroid;
         [SerializeField] private GameObject smallAsteroid;
@@ -40,7 +39,7 @@ namespace Main
                 .WithArguments(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
 
             // Пул объектов
-            Container.Bind<ObjectPoolAstro>().AsSingle().WithArguments(poolParent, Container.Resolve<IObjectFactory>());
+            Container.Bind<IObjectPool>().To<ObjectPoolAstro>().AsSingle().WithArguments(poolParent, Container.Resolve<IObjectFactory>());
 
             // Создание GameManager через Zenject
             Container.Bind<GameManager>().FromNewComponentOnNewGameObject().AsSingle();
