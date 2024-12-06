@@ -140,16 +140,6 @@ namespace Game.Controllers
         // }
 
 
-        public void LockControlDuration(float duration)
-        {
-            LockControlForSeconds(duration);
-        }
-
-        private async UniTask LockControlForSeconds(float duration)
-        {
-            canControl = false;
-            await UniTask.Delay((int)(duration * 1000));
-            canControl = true;
-        }
+       
     }
 }

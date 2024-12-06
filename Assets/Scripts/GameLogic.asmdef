@@ -7,7 +7,8 @@
         "UnityEditor",
         "UniTask",
         "Zenject",
-        "SimpleInput.Runtime"
+        "SimpleInput.Runtime",
+        "Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

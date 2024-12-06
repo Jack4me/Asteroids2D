@@ -1,9 +1,10 @@
 using CodeBase.Infrastructure.Services;
-using CodeBase.Services.Input;
 using Cysharp.Threading.Tasks;
+using Infrastructure.Ref.Services;
+using Services.Input;
 using UnityEngine;
 
-namespace Ref_Code
+namespace Game.Controllers
 {
     public class HeroMove : MonoBehaviour
     {
@@ -11,9 +12,10 @@ namespace Ref_Code
         private IInputService _inputService;
         private Camera _camera;
         private Vector2 velocity;
-        private bool canControl;
+        private bool canControl = true;
         [SerializeField] private float rotationSpeed = 20f;
         [SerializeField] private float acceleration;
+        private PlayerCollisionHandler playerCollision;
 
         public HeroMove Construct()
         {
@@ -23,17 +25,23 @@ namespace Ref_Code
         private void Awake()
         {
             _inputService = AllServices.Container.GetService<IInputService>();
+            playerCollision = GetComponent<PlayerCollisionHandler>();
+
+            playerCollision.OnControlLockRequested += LockControlDuration;
         }
 
         private void Update()
         {
-            if (_inputService.Axis.sqrMagnitude > 0.01f)
+            if (canControl)
             {
-                HandleMovement(_inputService.Axis);
+               
+                    HandleMovement(_inputService.Axis);
+                
             }
+
             else
             {
-                transform.position += (Vector3)velocity * Time.deltaTime;
+                ApplyVelocity();
             }
         }
 

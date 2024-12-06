@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.StaticData;
+using Infrastructure.Ref.Services;
+using Infrastructure.Ref.States;
 
 namespace CodeBase.Infrastructure.States {
     public class GameStateMachine {

@@ -1,12 +1,16 @@
-﻿using CodeBase.Infrastructure.AssetsManagement;
+﻿using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.AssetsManagement;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Randomizer;
+using CodeBase.Infrastructure.States;
 using CodeBase.Infrastructure.StaticData;
 using CodeBase.Services.Input;
+using Infrastructure.Ref.Services;
+using Services.Input;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.States {
+namespace Infrastructure.Ref.States {
     internal class BootStrapState : IState {
         private const string INITIAL = "Initial";
         private readonly SceneLoader _sceneLoader;

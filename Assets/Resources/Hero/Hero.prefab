@@ -137,6 +137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32078c5366ea11478dd3496cac966ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBounceForce: 10
+  asteroidBounceForce: 15
+  maxHealth: 5
+  invincibilityEffect: {fileID: 0}
+  invincibilityDuration: 3
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0

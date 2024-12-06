@@ -1,8 +1,8 @@
-using CodeBase.Infrastructure.Services;
-using CodeBase.Services.Input;
+using Infrastructure.Ref.Services;
+using Services.Input;
 using UnityEngine;
 
-namespace Ref_Code
+namespace Infrastructure
 {
     public class HeroAttack : MonoBehaviour
     {
@@ -11,11 +11,11 @@ namespace Ref_Code
         private void Awake(){
             _inputService = AllServices.Container.GetService<IInputService>();
             
-               Debug.Log("_inputService"  + _inputService);
+         
         }
         private void Update(){
             if (_inputService.IsAttackButtonUp()){
-               Debug.Log("FIRE");
+                Debug.Log("FIRE");
             }
             
         }

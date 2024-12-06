@@ -3,20 +3,18 @@ using Core;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
 using Game.Handlers.Health;
-using Ref_Code;
 using UnityEngine;
 
 namespace Game.Controllers
 {
     public class PlayerCollisionHandler : MonoBehaviour
     {
-       // private readonly Transform playerTransform;
-        private readonly float playerBounceForce = 30;
-        private readonly float asteroidBounceForce = 30;
-        private readonly int maxHealth = 5;
-        private readonly ParticleSystem invincibilityEffect;
-        private readonly float invincibilityDuration = 3;
-        private readonly DamageHandler damageHandler;
+        [SerializeField] private float playerBounceForce = 30;
+        [SerializeField] private float asteroidBounceForce = 30;
+        [SerializeField] private int maxHealth = 5;
+        [SerializeField] private ParticleSystem invincibilityEffect;
+        [SerializeField] private float invincibilityDuration = 3;
+        [SerializeField] private DamageHandler damageHandler;
 
         private bool isInvincible;
         private int health = 5;
@@ -33,12 +31,8 @@ namespace Game.Controllers
 
         public Vector2 Velocity => velocity;
 
-        public PlayerCollisionHandler(
-           
-            DamageHandler damageHandler)
+        public PlayerCollisionHandler()
         {
-            
-            
             this.damageHandler = damageHandler;
             isInvincible = false;
         }
@@ -50,12 +44,12 @@ namespace Game.Controllers
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("BAH HUYAH");
             var (direction, force) = CalculateBounce(other);
             movementController.AddVelocity(direction, force);
-        
+
             HandleCollision(other, 1).Forget();
         }
+
         public (Vector2 direction, float force) CalculateBounce(Collider2D asteroidCollider)
         {
             Vector2 collisionDirection =

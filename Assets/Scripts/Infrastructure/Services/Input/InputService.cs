@@ -1,7 +1,7 @@
-using CodeBase.Services.Input;
+using Services.Input;
 using UnityEngine;
 
-namespace Ref_Code.Services.Input {
+namespace Infrastructure.Services.Input {
     public abstract class InputService : IInputService {
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
