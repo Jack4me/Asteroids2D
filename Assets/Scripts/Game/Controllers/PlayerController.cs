@@ -27,7 +27,7 @@ namespace Game.Controllers
         private float lastBulletFireTime;
         private bool canControl = true;
         [SerializeField] private float asteroidBounceForce = 5f;
-        [SerializeField] private float controlLockDuration = 1f;
+     //   [SerializeField] private float controlLockDuration = 1f;
 
         [Header("Fire Settings")] [SerializeField]
         private GameObject laserPrefab;
@@ -74,16 +74,16 @@ namespace Game.Controllers
         
         private void Awake()
         {
-             movementController = new PlayerMovementController(transform, speed, acceleration, rotationSpeed);
-            shootingController =
-                new PlayerShootingController(laserPrefab, bulletPrefab, firePoint, laserCooldown, bulletCooldown);
-            collisionHandler =
-                new PlayerCollisionHandler(transform, health, MaxHealth, playerBounceForce, asteroidBounceForce,
-                    invincibilityEffect, invincibilityDuration, damageHandler);
-            collisionHandler.OnControlLockRequested += LockControlDuration;
-            damageHandler = new DamageHandler(5, playerDataModel);
+            //  movementController = new PlayerMovementController(transform, speed, acceleration, rotationSpeed);
+            // shootingController =
+            //     new PlayerShootingController(laserPrefab, bulletPrefab, firePoint, laserCooldown, bulletCooldown);
+            // collisionHandler =
+                // new PlayerCollisionHandler(transform, health, MaxHealth, playerBounceForce, asteroidBounceForce,
+                //     invincibilityEffect, invincibilityDuration, damageHandler);
+           // collisionHandler.OnControlLockRequested += LockControlDuration;
+           // damageHandler = new DamageHandler(5, playerDataModel);
 
-            damageHandler.OnDeath += HandleDeath;
+           // damageHandler.OnDeath += HandleDeath;
         }
 
         private void HandleDeath()
@@ -131,13 +131,13 @@ namespace Game.Controllers
             movementController.HandleMovement(input);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            var (direction, force) = collisionHandler.CalculateBounce(other);
-            movementController.AddVelocity(direction, force);
-
-            collisionHandler.HandleCollision(other, controlLockDuration).Forget();
-        }
+        // private void OnTriggerEnter2D(Collider2D other)
+        // {
+        //     var (direction, force) = collisionHandler.CalculateBounce(other);
+        //     movementController.AddVelocity(direction, force);
+        //
+        //     collisionHandler.HandleCollision(other, controlLockDuration).Forget();
+        // }
 
 
         public void LockControlDuration(float duration)

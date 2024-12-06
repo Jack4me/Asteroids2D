@@ -1,5 +1,6 @@
 using CodeBase.Infrastructure.Services;
 using CodeBase.Services.Input;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Ref_Code
@@ -10,26 +11,32 @@ namespace Ref_Code
         private IInputService _inputService;
         private Camera _camera;
         private Vector2 velocity;
+        private bool canControl;
         [SerializeField] private float rotationSpeed = 20f;
         [SerializeField] private float acceleration;
 
-        public HeroMove Construct(){
+        public HeroMove Construct()
+        {
             return this;
         }
 
-        private void Awake(){
+        private void Awake()
+        {
             _inputService = AllServices.Container.GetService<IInputService>();
         }
-        private void Update(){
-            if (_inputService.Axis.sqrMagnitude > 0.01f){
+
+        private void Update()
+        {
+            if (_inputService.Axis.sqrMagnitude > 0.01f)
+            {
                 HandleMovement(_inputService.Axis);
             }
             else
             {
-                transform.position += (Vector3)velocity  *Time.deltaTime;
+                transform.position += (Vector3)velocity * Time.deltaTime;
             }
-           
         }
+
         public void HandleMovement(Vector2 _inputService)
         {
             Rotate(_inputService.x);
@@ -42,14 +49,17 @@ namespace Ref_Code
             float rotation = -rotationInput * rotationSpeed * Time.deltaTime;
             transform.Rotate(0f, 0f, rotation);
         }
+
         public void ApplyVelocity()
         {
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
+
         public void AddVelocity(Vector2 direction, float force)
         {
             velocity += direction * force;
         }
+
         private void Accelerate(float accelerationInput)
         {
             velocity += (Vector2)transform.up * accelerationInput * acceleration;
@@ -64,6 +74,17 @@ namespace Ref_Code
         {
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
-       
+
+        public void LockControlDuration(float duration)
+        {
+            LockControlForSeconds(duration);
+        }
+
+        private async UniTask LockControlForSeconds(float duration)
+        {
+            canControl = false;
+            await UniTask.Delay((int)(duration * 1000));
+            canControl = true;
+        }
     }
 }
