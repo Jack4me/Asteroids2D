@@ -11,7 +11,7 @@ using Zenject;
 
 namespace UI.MVVM.View
 {
-    public class PlayerUIUIView : MonoBehaviour, IPlayerUIView
+    public class PlayerUIView : MonoBehaviour, IPlayerUIView
     {
         [SerializeField] private TextMeshProUGUI positionText;
         [SerializeField] private TextMeshProUGUI speedText;
