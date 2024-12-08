@@ -41,7 +41,6 @@ namespace Game.Controllers
             }
 
             ApplyFriction();
-            Debug.Log(velocity.magnitude );
             CurrentSpeed =  velocity.magnitude; 
         }
 

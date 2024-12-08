@@ -20,7 +20,6 @@ namespace Game.Controllers
         {
             playerDataModel.Position.Value = transform.position;
             playerDataModel.RotationAngle.Value = transform.eulerAngles.z;
-            Debug.Log("PlayerController"+_heroMove.velocity.magnitude);
             playerDataModel.Speed.Value = _heroMove.velocity.magnitude;
             
         }

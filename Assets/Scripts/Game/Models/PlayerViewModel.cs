@@ -27,7 +27,7 @@ namespace Game.Models
             RotationText = model.RotationAngle.Select(angle => $"Rotation: {angle:F0}°").ToReactiveProperty();
             Health = model.Health.Select(health => $"Health: {health:F0}").ToReactiveProperty();
             HealthInt = model.Health.ToReactiveProperty();
-            Score = model.Score.Select(score => $"Score: {score:F0}").ToReactiveProperty();
+            Score = model.Score.Select(score => $"{score:F0}").ToReactiveProperty();
         }
     }
 }
