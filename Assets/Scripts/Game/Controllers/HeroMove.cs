@@ -2,7 +2,6 @@ using CodeBase.Infrastructure.Services;
 using Core.Intrerfaces.Services.Input;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Ref.Services;
-using Infrastructure.Services.Input;
 using UnityEngine;
 
 namespace Game.Controllers

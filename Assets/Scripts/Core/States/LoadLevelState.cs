@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.StaticData;
+using Core;
 using Core.States;
 using UnityEngine;
 using UnityEngine.SceneManagement;

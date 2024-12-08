@@ -1,4 +1,4 @@
-using Infrastructure.Services.Input;
+using Core.Intrerfaces.Services.Input;
 using UnityEngine;
 
 namespace CodeBase.Services.Input {
