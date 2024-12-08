@@ -1,7 +1,8 @@
-﻿using CodeBase.Infrastructure.Factory;
-using CodeBase.Infrastructure.StaticData;
+﻿using CodeBase.Infrastructure.StaticData;
 using Core;
+using Core.Factory;
 using Core.States;
+using Core.StaticData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,6 +42,7 @@ namespace CodeBase.Infrastructure.States {
             InitSpawners();
             //_gameFactory.CreateUnit();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
+            InitHud(hero);
         }
 
         private void InitSpawners(){
@@ -55,6 +57,7 @@ namespace CodeBase.Infrastructure.States {
         }
 
         private void InitHud(GameObject hero){
+            Debug.Log("ALLO");
             var hud = _gameFactory.CreateHud();
         }
     }

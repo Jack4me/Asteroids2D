@@ -1,7 +1,7 @@
 ﻿using CodeBase.Infrastructure.Services;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factory {
+namespace Core.Factory {
     public interface IGameFactory : IService {
         GameObject CreateHero(GameObject at);
 

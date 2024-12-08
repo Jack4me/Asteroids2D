@@ -1,20 +1,20 @@
-﻿using CodeBase.Infrastructure;
-using CodeBase.Infrastructure.AssetsManagement;
-using CodeBase.Infrastructure.Factory;
+﻿using CodeBase.Infrastructure.AssetsManagement;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.States;
-using CodeBase.Infrastructure.StaticData;
 using CodeBase.Services.Input;
+using Core;
 using Core.Factory;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
+using Core.Models;
 using Core.Services.Randomizer;
+using Core.States;
 using Core.StaticData;
+using Infrastructure.Factories;
 using Infrastructure.Ref.Services;
 using UnityEngine;
-using Zenject;
 
-namespace Core.States
+namespace Infrastructure.States
 {
     internal class BootStrapState : IState
     {
@@ -45,7 +45,7 @@ namespace Core.States
         {
             _stateMachine.EnterGeneric<LoadProgressState>();
         }
-
+       
         private void RegisterServices()
         {
             RegisterStaticData();
@@ -53,10 +53,13 @@ namespace Core.States
             _services.RegisterService<IRandomService>(new RandomService());
             _services.RegisterService(RegisterInputServices());
             _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
+            _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
+            _services.RegisterService<IPlayerViewModel>(new PlayerViewModel());
 
             _services.RegisterService<IGameFactory>(new GameFactory
             (_services.GetService<IInstantiateProvider>(), _services.GetService<IStaticDataService>(),
-                _services.GetService<IRandomService>(), _services.GetService<IPlayerDataModel>()));
+                _services.GetService<IRandomService>(), _services.GetService<IPlayerDataModel>(),
+                _services.GetService<IPlayerViewModel>()));
         }
 
         private void RegisterStaticData()

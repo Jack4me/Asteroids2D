@@ -1,7 +1,6 @@
 using System;
 using Core;
 using Core.Intrerfaces;
-using Game.Models;
 using Infrastructure.Ref.Services;
 using UniRx;
 using UnityEngine;

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Infrastructure;
-using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.States;
 using CodeBase.Infrastructure.StaticData;
+using Core.Factory;
+using Core.StaticData;
 using Infrastructure.Ref.Services;
+using Infrastructure.States;
 
 namespace Core.States {
     public class GameStateMachine {

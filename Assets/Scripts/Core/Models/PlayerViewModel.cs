@@ -1,13 +1,10 @@
-using Core;
 using Core.Intrerfaces;
 using Infrastructure.Ref.Services;
 using UniRx;
-using UnityEngine;
-using Zenject;
 
-namespace Game.Models
+namespace Core.Models
 {
-    public class PlayerViewModel
+    public class PlayerViewModel : IPlayerViewModel
     {
         public IReadOnlyReactiveProperty<string> PositionText { get; }
         public IReadOnlyReactiveProperty<string> SpeedText { get; }
