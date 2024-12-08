@@ -14,7 +14,7 @@ namespace Game.Controllers
         [SerializeField] private int maxHealth = 5;
         [SerializeField] private ParticleSystem invincibilityEffect;
         [SerializeField] private float invincibilityDuration = 3;
-        private DamageHandler damageHandler;
+        [SerializeField] private DamageHandler damageHandler;
 
         private bool isInvincible;
         private int health = 5;
@@ -22,6 +22,7 @@ namespace Game.Controllers
         private bool canControl;
         private HeroMove movementController;
         [SerializeField] private bool isHandlingCollision;
+        public event Action<float> OnControlLockRequested;
 
         public int Health
         {
@@ -38,7 +39,8 @@ namespace Game.Controllers
 
         private void Awake()
         {
-            damageHandler = GetComponent<DamageHandler>();
+            this.damageHandler = GetComponent<DamageHandler>();
+
             movementController = GetComponent<HeroMove>();
         }
 
@@ -68,7 +70,7 @@ namespace Game.Controllers
                 int damage = enemy.Damage;
                 Debug.Log("Take dmg COUNT");
 
-                damageHandler.TakeDamage(damage);
+               damageHandler.TakeDamage(damage);
             }
 
             Vector2 collisionDirection =
@@ -84,7 +86,6 @@ namespace Game.Controllers
 
                 bounce.ApplyBounce(-collisionDirection * asteroidBounceForce);
             }
-
             EnableInvincibility().Forget();
             ShowInvincibilityEffect();
         }
