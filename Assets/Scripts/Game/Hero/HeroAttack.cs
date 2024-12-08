@@ -1,12 +1,13 @@
 using Core.Intrerfaces.Services.Input;
 using Infrastructure.Ref.Services;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Hero
 {
     public class HeroAttack : MonoBehaviour
     {
-         private LaserManager laserManager;
+        private LaserManager laserManager;
         [SerializeField] private GameObject laserPrefab;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform firePoint;
@@ -17,10 +18,20 @@ namespace Game.Hero
         [SerializeField] private float lastBulletFireTime;
         private IInputService _inputService;
 
+         private LaserManager _laserManager;
+
+        private void Start()
+        {
+        }
+
         private void Awake()
         {
             _inputService = AllServices.Container.GetService<IInputService>();
-            laserManager = GetComponent<LaserManager>();
+            laserManager = FindObjectOfType<LaserManager>();
+            if (_laserManager != null)
+            {
+                Debug.Log("LaserManager успешно инжектирован!");
+            }
         }
 
         private void Update()
@@ -30,7 +41,7 @@ namespace Game.Hero
                 FireBullet();
             }
 
-            if (_inputService.IsAttackLaserButton())
+            if (_inputService.IsAttackLaserButton() && laserManager.CanFireLaser())
             {
                 FireLaser();
                 laserManager.UseLaser();

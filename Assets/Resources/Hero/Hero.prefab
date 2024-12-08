@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -1038808343223610342}
   - component: {fileID: 7340978737006129551}
   - component: {fileID: 731178172648077588}
+  - component: {fileID: -8315362413760857782}
+  - component: {fileID: -5590438673617938453}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -125,6 +127,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9652fb6d06cbec4458cf4aeef2d9418b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 5462292197805791010, guid: fa8e1ca7aa36c0948ade8c2f2fc8ce26, type: 3}
+  bulletPrefab: {fileID: 8961894113111443705, guid: ef3c225efc576c84e93c0738717e2283, type: 3}
+  firePoint: {fileID: 5075289586232242357}
+  laserCooldown: 0.3
+  bulletCooldown: 0.1
+  lastLaserFireTime: 0
+  lastBulletFireTime: 0
 --- !u!114 &731178172648077588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +151,42 @@ MonoBehaviour:
   maxHealth: 5
   invincibilityEffect: {fileID: 0}
   invincibilityDuration: 3
+  damageHandler: {fileID: 0}
+--- !u!114 &-8315362413760857782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822465019992695988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0eb5b5376840b4bbe56d6e08464e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidBounceForce: 5
+  laserPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  laserCooldown: 0.5
+  bulletCooldown: 0.25
+  invincibilityEffect: {fileID: 0}
+  invincibilityDuration: 3
+  playerBounceForce: 20
+  health: 0
+--- !u!114 &-5590438673617938453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822465019992695988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cd1ddf0f331a84ba8906128c7e469f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ using Game.InputControllers;
 using Game.Models;
 using Infrastructure;
 using Infrastructure.Factories;
-using UI.MVVM.TestRocketMVVM;
 using UI.MVVM.View;
 using UnityEngine;
 using Zenject;
@@ -25,7 +24,7 @@ namespace Main
         public override void InstallBindings()
         {
            
-            Container.Bind<IControlStrategy>().To<KeyboardController>().AsSingle();
+          //  Container.Bind<IControlStrategy>().To<KeyboardController>().AsSingle();
             Container.Bind<LaserManager>().FromInstance(laserManager).AsSingle();
 
             // Привязываем лазеры
@@ -45,13 +44,14 @@ namespace Main
             // Создание GameManager через Zenject
             Container.Bind<GameManager>().FromNewComponentOnNewGameObject().AsSingle();
 
-            
-            
-            Container.Bind<PlayerDataModel>().AsSingle();
 
-            // Создание ViewModel с привязкой к модели
-            Container.Bind<PlayerViewModel>().AsSingle().WithArguments(Container.Resolve<PlayerDataModel>());
+
             
+            // Container.Bind<IPlayerDataModel>().To<PlayerDataModel>().AsSingle();
+            // Container.Bind<PlayerViewModel>().AsSingle().WithArguments(Container.Resolve<IPlayerDataModel>());
+            
+            Container.Bind<PlayerViewModel>().AsSingle();
+
             Container.Bind<ScoreManager>()
                 .FromComponentInHierarchy() // Находит ScoreManager в сцене
                 .AsSingle();

@@ -23,11 +23,9 @@ namespace Game.Entities.Entities.Asteroids
             {
                 SpawnSmallerAsteroids();
                 ReturnToPool();
-                Debug.Log("1");
             }
             else
             {
-                Debug.Log("2");
 
                 ReturnToPool();
             }

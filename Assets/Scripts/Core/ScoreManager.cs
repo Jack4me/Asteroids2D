@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Core.Intrerfaces;
 using Game.Entities.Entities;
+using Infrastructure.Ref.Services;
 using UnityEngine;
 
 namespace Core
@@ -8,6 +10,8 @@ namespace Core
   
     public class ScoreManager : MonoBehaviour
     {
+       
+
         public event Action<int> OnScoreUpdated;
         private Dictionary<EnemyType, int> scoreTable = new Dictionary<EnemyType, int>
         {
@@ -17,6 +21,11 @@ namespace Core
             { EnemyType.Ufo, 100 }
         };
 
+        private IPlayerDataModel playerDataModel;
+        private void Awake()
+        {
+            playerDataModel = AllServices.Container.GetService<IPlayerDataModel>();
+        }
         public int totalScore { get; set; }
         
         
@@ -32,6 +41,12 @@ namespace Core
             {
                 Debug.LogWarning($"No score defined for enemy type: {enemyType}");
             }
+        }
+
+        private void Update()
+        {
+            playerDataModel.Score.Value = GetTotalScore();
+
         }
 
         public int GetTotalScore()

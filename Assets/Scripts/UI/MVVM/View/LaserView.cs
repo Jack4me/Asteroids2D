@@ -1,5 +1,5 @@
+using Game.Models;
 using TMPro;
-using UI.MVVM.TestRocketMVVM;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -22,6 +22,7 @@ namespace UI.MVVM.View
 
         private void Start()
         {
+            
             _viewModel.LaserCount.Subscribe(count => { laserCountText.text = $"Lasers: {count}"; })
                 .AddTo(this);
 

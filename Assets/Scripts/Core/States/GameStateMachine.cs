@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Factory;
-using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.States;
 using CodeBase.Infrastructure.StaticData;
-using Core.States;
 using Infrastructure.Ref.Services;
 
-namespace CodeBase.Infrastructure.States {
+namespace Core.States {
     public class GameStateMachine {
         private readonly Dictionary<Type, IExitableState> _state;
         private IExitableState _activeState;

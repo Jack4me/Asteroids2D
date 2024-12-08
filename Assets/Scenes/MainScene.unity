@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &55541824
 GameObject:
@@ -245,7 +245,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &536225385
 GameObject:
@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 546331978}
   - component: {fileID: 546331980}
   - component: {fileID: 546331981}
+  - component: {fileID: 546331982}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -310,11 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 1633222264296180790, guid: 08a4ba295b3ee7d40a2b748a5d946fe8, type: 3}
-  mediumAsteroid: {fileID: 4767596974026481223, guid: 1fa63b5893789bc4cb38d578856f8cf3, type: 3}
-  smallAsteroid: {fileID: 7694535948184488637, guid: 723cc74e5ff53c7449961a8e2c1ac8ae, type: 3}
   ufoPrefab: {fileID: 5911811416346187989, guid: ff29eeb61cd7fec4ea83ef52cd85e516, type: 3}
-  poolParent: {fileID: 268311403}
-  initialAsteroidCount: 5
   spawnPoints:
   - {fileID: 1025919996}
   - {fileID: 536225386}
@@ -339,7 +336,7 @@ Transform:
   - {fileID: 55541825}
   - {fileID: 96353447}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &546331980
 MonoBehaviour:
@@ -365,6 +362,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f02941c472915a4ea71e2253237f39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &546331982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546331977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7efc381f4d8440d8b9ac81c68fe7334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLasers: 3
+  reloadTime: 2
 --- !u!1 &574409785
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,17 +511,6 @@ RectTransform:
   m_AnchoredPosition: {x: -783, y: -270}
   m_SizeDelta: {x: 214.36, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &822407644 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 822407644, guid: e7c8453e88f80504c97a748b3676607a, type: 3}
-  m_PrefabInstance: {fileID: 7822465021061567513}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7efc381f4d8440d8b9ac81c68fe7334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &920424404
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,8 +955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27e4efb61a119142bbff85aebee963b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserManager: {fileID: 822407644}
-  player: {fileID: 0}
+  laserManager: {fileID: 546331982}
   asteroidPrefab: {fileID: 1633222264296180790, guid: 08a4ba295b3ee7d40a2b748a5d946fe8, type: 3}
   mediumAsteroid: {fileID: 4767596974026481223, guid: 1fa63b5893789bc4cb38d578856f8cf3, type: 3}
   smallAsteroid: {fileID: 7694535948184488637, guid: 723cc74e5ff53c7449961a8e2c1ac8ae, type: 3}

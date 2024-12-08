@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Core.Services.Randomizer;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Randomizer {
     internal class RandomService : IRandomService {

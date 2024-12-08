@@ -182,7 +182,8 @@ PrefabInstance:
       propertyPath: bootstrapper
       value: 
       objectReference: {fileID: 3071180872568122370, guid: 1880ac4ca6794ec183c325e6314c70dc, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5779088457456591528, guid: dabea32a9c8e27645bf95e2f5a488522, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dabea32a9c8e27645bf95e2f5a488522, type: 3}
 --- !u!1 &1771153322
 GameObject:

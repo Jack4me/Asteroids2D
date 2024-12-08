@@ -1,39 +1,45 @@
 using System;
+using Core;
+using Core.Intrerfaces;
 using Game.Models;
+using Infrastructure.Ref.Services;
 using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Handlers.Health
 {
-    public class DamageHandler
+    public class DamageHandler : MonoBehaviour
     {
-        private readonly int maxHealth;
+      [SerializeField]  private  int maxHealth;
         private readonly int health;
         private readonly ReactiveProperty<int> currentHealth;
-        private readonly PlayerDataModel playerDataModel;
+        private  IPlayerDataModel playerDataModel;
 
 
         public event Action OnDeath; // Событие смерти
 
-      
-        public DamageHandler(int maxHealth, PlayerDataModel playerDataModel)
+
+        private void Awake()
         {
-            this.playerDataModel = playerDataModel;
+            playerDataModel = AllServices.Container.GetService<IPlayerDataModel>();
+            playerDataModel.Health.Value = maxHealth;
         }
 
         public void TakeDamage(int damage)
         {
-            playerDataModel.Health.Value = maxHealth;
-
-            if (damage <= 0) return;
-
-            playerDataModel.Health.Value -= damage;
+            playerDataModel.Health.Value = Mathf.Max(0, playerDataModel.Health.Value - damage);
 
             if (playerDataModel.Health.Value <= 0)
             {
-                playerDataModel.Health.Value = 0;
+                DeathPlayer();
                 OnDeath?.Invoke();
             }
+        }
+
+        private void DeathPlayer()
+        {
+            Destroy(gameObject);
         }
 
         public void Heal(int amount)

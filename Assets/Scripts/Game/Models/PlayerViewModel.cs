@@ -1,5 +1,9 @@
+using Core;
+using Core.Intrerfaces;
+using Infrastructure.Ref.Services;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Models
 {
@@ -11,10 +15,13 @@ namespace Game.Models
         public IReadOnlyReactiveProperty<string> Health { get; }
         public IReadOnlyReactiveProperty<int> HealthInt { get; }
         public IReadOnlyReactiveProperty<string> Score { get; }
-
-        public PlayerViewModel(PlayerDataModel model)
+        private IPlayerDataModel model;
+        public PlayerViewModel()
         {
-            // Преобразуем данные модели в строки для UI
+          
+           model = AllServices.Container.GetService<IPlayerDataModel>();
+            
+           
             PositionText = model.Position.Select(pos => $"Position: {pos.x:F2}, {pos.y:F2}").ToReactiveProperty();
             SpeedText = model.Speed.Select(speed => $"Speed: {speed:F2}").ToReactiveProperty();
             RotationText = model.RotationAngle.Select(angle => $"Rotation: {angle:F0}°").ToReactiveProperty();

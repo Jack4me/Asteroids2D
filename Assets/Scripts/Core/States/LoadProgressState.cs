@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Infrastructure.States {
+﻿using Core.States;
+
+namespace CodeBase.Infrastructure.States {
     public class LoadProgressState : IState {
         private readonly GameStateMachine _gameStateMachine;
 

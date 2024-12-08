@@ -5,10 +5,14 @@ using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.States;
 using CodeBase.Infrastructure.StaticData;
 using CodeBase.Services.Input;
+using Core.Factory;
+using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
+using Core.Services.Randomizer;
 using Core.StaticData;
 using Infrastructure.Ref.Services;
 using UnityEngine;
+using Zenject;
 
 namespace Core.States {
     internal class BootStrapState : IState {
@@ -21,9 +25,11 @@ namespace Core.States {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _services = services;
+         
             RegisterServices();
         }
-
+        
+        
         public void Enter(){
             _sceneLoader.Load(INITIAL, EnterLoadLevel);
         }
@@ -40,9 +46,12 @@ namespace Core.States {
             _services.RegisterService<IInstantiateProvider>(new InstantiateProvider());
             _services.RegisterService<IRandomService>(new RandomService());
             _services.RegisterService(RegisterInputServices());
+            _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
+         
             _services.RegisterService<IGameFactory>(new GameFactory
             (_services.GetService<IInstantiateProvider>(), _services.GetService<IStaticDataService>(),
-                _services.GetService<IRandomService>()));
+                _services.GetService<IRandomService>(), _services.GetService<IPlayerDataModel>()));
+          
         }
 
         private void RegisterStaticData(){
