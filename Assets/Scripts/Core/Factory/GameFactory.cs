@@ -39,7 +39,7 @@ namespace Core.Factory
             {
                 Debug.Log("_playerDataModel is NULL");
             }
-            HeroGameObject.GetComponent<PlayerController>().Construct(_playerDataModel);
+            HeroGameObject.GetComponent<IPlayerController>().Construct(_playerDataModel);
             _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
             
             Debug.Log(" _playerDataModel.Position.Value" +  _playerDataModel.Position.Value);

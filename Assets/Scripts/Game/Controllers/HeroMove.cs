@@ -11,17 +11,13 @@ namespace Game.Controllers
     {
         public float speed = 5f;
         private IInputService _inputService;
-        private Camera _camera;
-        private Vector2 velocity;
+        public Vector2 velocity;
         private bool canControl = true;
         [SerializeField] private float rotationSpeed = 20f;
         [SerializeField] private float acceleration;
         private PlayerCollisionHandler playerCollision;
 
-        public HeroMove Construct()
-        {
-            return this;
-        }
+        public float CurrentSpeed;
 
         private void Awake()
         {
@@ -33,17 +29,20 @@ namespace Game.Controllers
 
         private void Update()
         {
+          
             if (canControl)
             {
-               
-                    HandleMovement(_inputService.Axis);
-                
+                HandleMovement(_inputService.Axis);
             }
 
             else
             {
-                ApplyVelocity();
+                Move();
             }
+
+            ApplyFriction();
+            Debug.Log(velocity.magnitude );
+            CurrentSpeed =  velocity.magnitude; 
         }
 
         public void HandleMovement(Vector2 _inputService)
@@ -51,18 +50,23 @@ namespace Game.Controllers
             Rotate(_inputService.x);
             Accelerate(_inputService.y);
             Move();
+           
         }
-
+        private void ApplyFriction()
+        {
+            velocity *= 0.9999f; // Замедление скорости
+            if (velocity.magnitude < 0.01f)
+            {
+                velocity = Vector2.zero;
+            }
+        }
         private void Rotate(float rotationInput)
         {
             float rotation = -rotationInput * rotationSpeed * Time.deltaTime;
             transform.Rotate(0f, 0f, rotation);
         }
 
-        public void ApplyVelocity()
-        {
-            transform.position += (Vector3)velocity * Time.deltaTime;
-        }
+       
 
         public void AddVelocity(Vector2 direction, float force)
         {
@@ -71,8 +75,9 @@ namespace Game.Controllers
 
         private void Accelerate(float accelerationInput)
         {
+            
             velocity += (Vector2)transform.up * accelerationInput * acceleration;
-
+            
             if (velocity.magnitude > speed)
             {
                 velocity = velocity.normalized * speed;

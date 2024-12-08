@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Core.Factory;
 using Core.Intrerfaces;
 using UnityEngine;
-using Zenject;
 
-namespace Core
+namespace Game.Controllers
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPlayerController
     {
-       
-
         private IPlayerDataModel playerDataModel;
-
+        private HeroMove _heroMove;
 
         public void Construct(IPlayerDataModel playerDataModel)
         {
             this.playerDataModel = playerDataModel;
+            _heroMove = GetComponent<HeroMove>();
         }
 
 
@@ -22,6 +20,9 @@ namespace Core
         {
             playerDataModel.Position.Value = transform.position;
             playerDataModel.RotationAngle.Value = transform.eulerAngles.z;
+            Debug.Log("PlayerController"+_heroMove.velocity.magnitude);
+            playerDataModel.Speed.Value = _heroMove.velocity.magnitude;
+            
         }
     }
 }

@@ -14,14 +14,15 @@ namespace Game.Controllers
         [SerializeField] private int maxHealth = 5;
         [SerializeField] private ParticleSystem invincibilityEffect;
         [SerializeField] private float invincibilityDuration = 3;
-        [SerializeField] private DamageHandler damageHandler;
+        [SerializeField] private float lockDuration = 2;
+        [SerializeField] private bool isHandlingCollision;
 
+        private DamageHandler damageHandler;
         private bool isInvincible;
         private int health = 5;
         private Vector2 velocity;
         private bool canControl;
         private HeroMove movementController;
-        [SerializeField] private bool isHandlingCollision;
         public event Action<float> OnControlLockRequested;
 
         public int Health
@@ -71,6 +72,7 @@ namespace Game.Controllers
                 Debug.Log("Take dmg COUNT");
 
                damageHandler.TakeDamage(damage);
+               OnControlLockRequested?.Invoke(lockDuration);
             }
 
             Vector2 collisionDirection =
