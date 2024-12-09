@@ -53,7 +53,6 @@ namespace Infrastructure.States
             _services.RegisterService<IRandomService>(new RandomService());
             _services.RegisterService(RegisterInputServices());
             _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
-            _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
             _services.RegisterService<IPlayerViewModel>(new PlayerViewModel());
 
             _services.RegisterService<IGameFactory>(new GameFactory

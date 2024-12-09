@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Core.Intrerfaces;
 using Core.Models;
 using Game.Models;
+using Infrastructure.Ref.Services;
 using ModestTree;
 using TMPro;
 using UniRx;
@@ -24,26 +25,13 @@ namespace UI.MVVM.View
         private IPlayerViewModel _viewModelPlayer;
         private List<GameObject> hearts = new List<GameObject>();
 
-        public void Construct(IPlayerViewModel viewModelPlayer)
-        {
-            this._viewModelPlayer = viewModelPlayer;
-        }
+      
 
-        // [Inject]
-        // public void Construct(PlayerViewModel viewModelPlayer)
-        // {
-        //     this._viewModelPlayer = viewModelPlayer;
-        // }
-        // [Inject]
-        // public void Construct(LaserViewModel viewModelLaser)
-        // {
-        //     _viewModelLaser = viewModelLaser;
-        // }
+       
         private void Start()
 
         {
-            if (_viewModelPlayer == null)
-                Debug.Log(_viewModelPlayer + "viewModel is null");
+            _viewModelPlayer = AllServices.Container.GetService<IPlayerViewModel>();
 
             _viewModelPlayer.PositionText.Subscribe(text => positionText.text = text).AddTo(this);
             _viewModelPlayer.SpeedText.Subscribe(text => speedText.text = text).AddTo(this);
@@ -52,20 +40,10 @@ namespace UI.MVVM.View
 
             _viewModelPlayer.HealthInt.Subscribe(UpdateHearts).AddTo(this);
             _viewModelPlayer.Score.Subscribe(text => score.text = text).AddTo(this);
-            _viewModelLaser.LaserCount.Subscribe(count => { laserCountText.text = $"Lasers: {count}"; })
-                .AddTo(this);
-
-            _viewModelLaser.ReloadProgress.Subscribe(progress =>
-            {
-                reloadProgressText.text = $"Reload: {progress * 100:0}%";
-            }).AddTo(this);
+            
         }
 
-        [SerializeField] private TextMeshProUGUI laserCountText; // UI-элемент для отображения количества лазеров
-        [SerializeField] private TextMeshProUGUI reloadProgressText;
-
-
-        private LaserViewModel _viewModelLaser;
+       
 
 
         private void UpdateHearts(int health)

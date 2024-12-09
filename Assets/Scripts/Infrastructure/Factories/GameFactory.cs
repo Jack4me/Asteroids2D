@@ -49,7 +49,7 @@ namespace Infrastructure.Factories
         public GameObject CreateHud()
         {
             var hud = InstantiateRegister(AssetPath.HUD_PATH);
-            hud.GetComponent<IPlayerUIView>().Construct(_viewModelPlayer);
+            //hud.GetComponent<IPlayerUIView>().Construct(_viewModelPlayer);
             return hud;
         }
 

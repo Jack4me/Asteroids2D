@@ -42,7 +42,7 @@ namespace CodeBase.Infrastructure.States {
             InitSpawners();
             //_gameFactory.CreateUnit();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
-            InitHud(hero);
+           // InitHud(hero);
         }
 
         private void InitSpawners(){
@@ -57,7 +57,6 @@ namespace CodeBase.Infrastructure.States {
         }
 
         private void InitHud(GameObject hero){
-            Debug.Log("ALLO");
             var hud = _gameFactory.CreateHud();
         }
     }

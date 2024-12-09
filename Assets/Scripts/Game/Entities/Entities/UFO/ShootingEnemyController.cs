@@ -80,7 +80,6 @@ namespace Game.Entities.Entities.UFO
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
                 Vector2 shootDirection = (playerTransform.position - firePoint.position).normalized;
                 bullet.GetComponent<BulletController>()?.Initialize(shootDirection);
-                Debug.Log("Enemy fired at player!");
             }
         }
     }

@@ -4,7 +4,7 @@ namespace Game.Configs
 {
     
     [System.Serializable]
-    public class PlayerConfig : MonoBehaviour
+    public class PlayerConfig 
     {
         public int health;
         public float speed;

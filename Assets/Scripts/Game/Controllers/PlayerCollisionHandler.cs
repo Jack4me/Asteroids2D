@@ -69,7 +69,6 @@ namespace Game.Controllers
             if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
             {
                 int damage = enemy.Damage;
-                Debug.Log("Take dmg COUNT");
 
                damageHandler.TakeDamage(damage);
                OnControlLockRequested?.Invoke(lockDuration);
@@ -84,7 +83,6 @@ namespace Game.Controllers
 
             if (asteroidCollider.TryGetComponent<BounceController>(out var bounce))
             {
-                Debug.Log("COLLISION COUNT");
 
                 bounce.ApplyBounce(-collisionDirection * asteroidBounceForce);
             }
