@@ -8,15 +8,12 @@ namespace Game.Controllers
     public class PlayerController : MonoBehaviour, IPlayerController
     {
         private IPlayerDataModel playerDataModel;
-        private IConfigLoader _configLoader;
         private HeroMove _heroMove;
 
-        public void Construct(IPlayerDataModel playerDataModel, IConfigLoader configLoader)
+        public void Construct(IPlayerDataModel playerDataModel)
         {
             this.playerDataModel = playerDataModel;
-            _configLoader = configLoader;
             _heroMove = GetComponent<HeroMove>();
-            GetComponent<PlayerStats>().Constarct(_configLoader);
         }
 
 

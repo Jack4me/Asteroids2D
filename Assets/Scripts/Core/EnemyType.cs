@@ -1,4 +1,4 @@
-﻿namespace Game.Entities.Entities
+﻿namespace Core
 {
     public enum EnemyType
     {

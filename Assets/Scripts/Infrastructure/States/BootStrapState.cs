@@ -54,12 +54,11 @@ namespace Infrastructure.States
             _services.RegisterService(RegisterInputServices());
             _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
             _services.RegisterService<IPlayerViewModel>(new PlayerViewModel());
-            _services.RegisterService<IConfigLoader>(new ConfigLoader());
 
             _services.RegisterService<IGameFactory>(new GameFactory
             (_services.GetService<IInstantiateProvider>(), _services.GetService<IStaticDataService>(),
                 _services.GetService<IRandomService>(), _services.GetService<IPlayerDataModel>(),
-                _services.GetService<IPlayerViewModel>(), _services.GetService<IConfigLoader>()));
+                _services.GetService<IPlayerViewModel>()));
         }
 
         private void RegisterStaticData()

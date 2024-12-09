@@ -1,7 +1,6 @@
 using System;
 using Core;
 using Core.Intrerfaces;
-using Game.Entities.Entities;
 using UnityEngine;
 using IObjectFactory = Core.Intrerfaces.IObjectFactory;
 using Object = UnityEngine.Object;

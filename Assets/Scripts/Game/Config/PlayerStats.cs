@@ -22,6 +22,7 @@ namespace Game.Config
             
             _heroMove = GetComponent<HeroMove>();
             Debug.Log($"Игрок: здоровье={health}, скорость={speed}, оружие={weaponName}");
+            
             _heroMove.SetSpeed(speed);
         }
 

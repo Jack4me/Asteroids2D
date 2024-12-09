@@ -1,6 +1,5 @@
 using System;
 using Core.Intrerfaces;
-using Game.Entities.Entities;
 using UnityEngine;
 using Zenject;
 

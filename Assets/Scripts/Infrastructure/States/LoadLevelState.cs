@@ -39,13 +39,14 @@ namespace Infrastructure.States {
 
         private void InitGameWorld(){
             InitSpawners();
-            //_gameFactory.CreateUnit();
             _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
            // InitHud(hero);
         }
 
         private void InitSpawners(){
+            
+
             // foreach (GameObject spawnerObj in GameObject.FindGameObjectsWithTag(ENEMYSPAWNER)){
             //     var spawner = spawnerObj.GetComponent<EnemySpawner>();
             //     _gameFactory.Register(spawner);

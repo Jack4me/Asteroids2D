@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using CodeBase.Infrastructure.AssetsManagement;
+using Core;
 using Core.AssetsManagement;
 using Core.Factory;
 using Core.Intrerfaces;
@@ -21,57 +22,45 @@ namespace Infrastructure.Factories
         private GameConfigs _configs;
 
         public GameFactory(IInstantiateProvider instantiate, IStaticDataService staticData, IRandomService random
-            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer, IConfigLoader configLoader)
+            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer)
         {
             _instantiate = instantiate;
             _staticData = staticData;
             _random = random;
             _playerDataModel = playerDataModel;
             _viewModelPlayer = viewModelPlayer;
-            _configLoader = configLoader;
         }
 
         public GameObject HeroGameObject { get; set; }
 
-        public void CreateUnit()
+        public void CreateAsteriod(EnemyType enemyType)
         {
-            _instantiate.Instantiate(_staticData.GetUnitConfig().Prefab);
+
         }
 
-        public void LoadConfigs()
-        {
-            string filePath = Path.Combine(Application.dataPath, "Configs.json");
-            if (File.Exists(filePath))
-            {
-                string json = File.ReadAllText(filePath);
-                  _configs = JsonUtility.FromJson<GameConfigs>(json);
-            }
-            else
-            {
-                Debug.LogError($"JSON файл не найден по пути: {filePath}");
-            }
-        }
+
         public GameObject CreateHero(GameObject at)
         {
             HeroGameObject = InstantiateRegister(AssetPath.HERO_PATH, at.transform.position);
-          
-            HeroGameObject.GetComponent<IPlayerController>().Construct(_playerDataModel, _configLoader);
+
+            HeroGameObject.GetComponent<IPlayerController>().Construct(_playerDataModel);
             _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
-            
+
             // Используем интерфейс для настройки параметров
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
             {
-                stats.health = _configs.player.health;
                 stats.speed = _configs.player.speed;
+                stats.health = _configs.player.health;
                 stats.weaponName = _configs.player.weaponName;
             }
+
             return HeroGameObject;
         }
 
         public GameObject CreateHud()
         {
             var hud = InstantiateRegister(AssetPath.HUD_PATH);
-            //hud.GetComponent<IPlayerUIView>().Construct(_viewModelPlayer);
+
             return hud;
         }
 
@@ -90,5 +79,21 @@ namespace Infrastructure.Factories
             var gameObject = _instantiate.Instantiate(path);
             return gameObject;
         }
+
+        public void LoadConfigs()
+        {
+            string filePath = Path.Combine(Application.dataPath, "Configs.json");
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                _configs = JsonUtility.FromJson<GameConfigs>(json);
+            }
+            else
+            {
+                Debug.LogError($"JSON файл не найден по пути: {filePath}");
+            }
+        }
+
+
     }
 }

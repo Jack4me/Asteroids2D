@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Game.Handlers.Health
 {
-    public class DamageHandler : MonoBehaviour
+    public class HealthHandler : MonoBehaviour
     {
       [SerializeField]  private  int maxHealth;
         private readonly int health;

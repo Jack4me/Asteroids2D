@@ -17,7 +17,7 @@ namespace Game.Controllers
         [SerializeField] private float lockDuration = 2;
         [SerializeField] private bool isHandlingCollision;
 
-        private DamageHandler damageHandler;
+        private HealthHandler _healthHandler;
         private bool isInvincible;
         private int health = 5;
         private Vector2 velocity;
@@ -40,7 +40,7 @@ namespace Game.Controllers
 
         private void Awake()
         {
-            this.damageHandler = GetComponent<DamageHandler>();
+            this._healthHandler = GetComponent<HealthHandler>();
 
             movementController = GetComponent<HeroMove>();
         }
@@ -70,7 +70,7 @@ namespace Game.Controllers
             {
                 int damage = enemy.Damage;
 
-               damageHandler.TakeDamage(damage);
+               _healthHandler.TakeDamage(damage);
                OnControlLockRequested?.Invoke(lockDuration);
             }
 
