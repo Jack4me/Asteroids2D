@@ -4,6 +4,6 @@ namespace Core.Factory
 {
     public interface IPlayerController
     {
-     public   void Construct(IPlayerDataModel dataModel);
+     public   void Construct(IPlayerDataModel dataModel, IConfigLoader configLoader);
     }
 }

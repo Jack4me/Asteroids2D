@@ -1,4 +1,4 @@
-﻿using Core.States;
+﻿using Infrastructure.States;
 
 namespace CodeBase.Infrastructure.States {
     public class GameLoopState : IState {

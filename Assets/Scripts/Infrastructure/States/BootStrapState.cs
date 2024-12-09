@@ -8,8 +8,8 @@ using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
 using Core.Models;
 using Core.Services.Randomizer;
-using Core.States;
 using Core.StaticData;
+using Game.Config;
 using Infrastructure.Factories;
 using Infrastructure.Ref.Services;
 using UnityEngine;
@@ -54,11 +54,12 @@ namespace Infrastructure.States
             _services.RegisterService(RegisterInputServices());
             _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
             _services.RegisterService<IPlayerViewModel>(new PlayerViewModel());
+            _services.RegisterService<IConfigLoader>(new ConfigLoader());
 
             _services.RegisterService<IGameFactory>(new GameFactory
             (_services.GetService<IInstantiateProvider>(), _services.GetService<IStaticDataService>(),
                 _services.GetService<IRandomService>(), _services.GetService<IPlayerDataModel>(),
-                _services.GetService<IPlayerViewModel>()));
+                _services.GetService<IPlayerViewModel>(), _services.GetService<IConfigLoader>()));
         }
 
         private void RegisterStaticData()

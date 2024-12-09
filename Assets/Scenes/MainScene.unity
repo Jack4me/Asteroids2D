@@ -424,7 +424,6 @@ GameObject:
   - component: {fileID: 546331980}
   - component: {fileID: 546331981}
   - component: {fileID: 546331982}
-  - component: {fileID: 546331984}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -510,20 +509,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLasers: 3
   reloadTime: 2
---- !u!114 &546331984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546331977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 982166c58cf530b4a969c6be991301f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
-  enemyObject: {fileID: 0}
 --- !u!114 &574409786 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7571907005408153323, guid: 2fa57467e83079f4eb748d57a7a686d7, type: 3}

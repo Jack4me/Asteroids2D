@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.States;
-using CodeBase.Infrastructure.StaticData;
+using Core;
 using Core.Factory;
 using Core.StaticData;
 using Infrastructure.Ref.Services;
-using Infrastructure.States;
 
-namespace Core.States {
+namespace Infrastructure.States {
     public class GameStateMachine {
         private readonly Dictionary<Type, IExitableState> _state;
         private IExitableState _activeState;
@@ -44,6 +42,5 @@ namespace Core.States {
         private TState GetState<TState>() where TState : class, IExitableState{
             return _state[typeof(TState)] as TState;
         }
-        //структура не может наследовать другую структуру
     }
 }

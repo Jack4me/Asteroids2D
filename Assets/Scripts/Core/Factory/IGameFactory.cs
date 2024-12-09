@@ -7,7 +7,7 @@ namespace Core.Factory {
 
         GameObject CreateHud();
         void CleanUp();
-
+        void LoadConfigs();
         void CreateUnit();
     }
 }

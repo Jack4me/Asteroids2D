@@ -1,12 +1,11 @@
-﻿using CodeBase.Infrastructure.StaticData;
+﻿using CodeBase.Infrastructure.States;
 using Core;
 using Core.Factory;
-using Core.States;
 using Core.StaticData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace CodeBase.Infrastructure.States {
+namespace Infrastructure.States {
     public class LoadLevelState : ILoadLvlState<string> {
         private const string INITIAL_POINT = "InitialPoint";
         private const string ENEMYSPAWNER = "EnemySpawner";
@@ -41,6 +40,7 @@ namespace CodeBase.Infrastructure.States {
         private void InitGameWorld(){
             InitSpawners();
             //_gameFactory.CreateUnit();
+            _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
            // InitHud(hero);
         }

@@ -1,7 +1,7 @@
 using CodeBase.Infrastructure;
 using Core.Intrerfaces;
-using Core.States;
 using Infrastructure.Ref.Services;
+using Infrastructure.States;
 using UnityEngine;
 using Zenject;
 
