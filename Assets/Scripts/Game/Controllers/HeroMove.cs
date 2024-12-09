@@ -8,7 +8,7 @@ namespace Game.Controllers
 {
     public class HeroMove : MonoBehaviour
     {
-        public float speed = 5f;
+        private float _speed = 5f;
         private IInputService _inputService;
         public Vector2 velocity;
         private bool canControl = true;
@@ -28,7 +28,6 @@ namespace Game.Controllers
 
         private void Update()
         {
-          
             if (canControl)
             {
                 HandleMovement(_inputService.Axis);
@@ -40,7 +39,7 @@ namespace Game.Controllers
             }
 
             ApplyFriction();
-            CurrentSpeed =  velocity.magnitude; 
+            CurrentSpeed = velocity.magnitude;
         }
 
         public void HandleMovement(Vector2 _inputService)
@@ -48,23 +47,23 @@ namespace Game.Controllers
             Rotate(_inputService.x);
             Accelerate(_inputService.y);
             Move();
-           
         }
+
         private void ApplyFriction()
         {
-            velocity *= 0.9999f; // Замедление скорости
+            velocity *= 0.9999f;
             if (velocity.magnitude < 0.01f)
             {
                 velocity = Vector2.zero;
             }
         }
+
         private void Rotate(float rotationInput)
         {
             float rotation = -rotationInput * rotationSpeed * Time.deltaTime;
             transform.Rotate(0f, 0f, rotation);
         }
 
-       
 
         public void AddVelocity(Vector2 direction, float force)
         {
@@ -73,12 +72,11 @@ namespace Game.Controllers
 
         private void Accelerate(float accelerationInput)
         {
-            
             velocity += (Vector2)transform.up * accelerationInput * acceleration;
-            
-            if (velocity.magnitude > speed)
+
+            if (velocity.magnitude > _speed)
             {
-                velocity = velocity.normalized * speed;
+                velocity = velocity.normalized * _speed;
             }
         }
 
@@ -97,6 +95,11 @@ namespace Game.Controllers
             canControl = false;
             await UniTask.Delay((int)(duration * 1000));
             canControl = true;
+        }
+
+        public void SetSpeed(float speed)
+        {
+            _speed = speed;
         }
     }
 }

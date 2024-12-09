@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 731178172648077588}
   - component: {fileID: -8315362413760857782}
   - component: {fileID: -5590438673617938453}
+  - component: {fileID: -1485990479102885354}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -112,9 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391d06ee5eb025f48978ee8472dd7508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  velocity: {x: 0, y: 0}
   rotationSpeed: 180
   acceleration: 3
+  CurrentSpeed: 0
 --- !u!114 &7340978737006129551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +153,8 @@ MonoBehaviour:
   maxHealth: 5
   invincibilityEffect: {fileID: 0}
   invincibilityDuration: 3
-  damageHandler: {fileID: 0}
+  lockDuration: 2
+  isHandlingCollision: 0
 --- !u!114 &-8315362413760857782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,16 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0eb5b5376840b4bbe56d6e08464e98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidBounceForce: 5
-  laserPrefab: {fileID: 0}
-  bulletPrefab: {fileID: 0}
-  firePoint: {fileID: 0}
-  laserCooldown: 0.5
-  bulletCooldown: 0.25
-  invincibilityEffect: {fileID: 0}
-  invincibilityDuration: 3
-  playerBounceForce: 20
-  health: 0
 --- !u!114 &-5590438673617938453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +180,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+--- !u!114 &-1485990479102885354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822465019992695988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d01a7c65c363694d9941529ad2cb951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  speed: 0
+  weaponName: 
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0
