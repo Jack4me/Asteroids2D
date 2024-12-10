@@ -43,7 +43,7 @@ namespace Game.Entities.Entities.Asteroids
             for (int i = 0; i < 2; i++)
             {
                 if (smallerAsteroidPrefab == null) return;
-                var smallerAsteroid = _pool.GetFromPool(smallerAsteroidPrefab);
+                var smallerAsteroid = _pool.GetFromPool(EnemyType.Medium);
                 
                 smallerAsteroid.SetActive(true);
                 smallerAsteroid.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;

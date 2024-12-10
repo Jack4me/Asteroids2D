@@ -8,6 +8,6 @@ namespace Core.Factory {
         GameObject CreateHud();
         void CleanUp();
         void LoadConfigs();
-        void CreateAsteriod(EnemyType enemyType);
+        GameObject CreateEnemy(EnemyType enemyType, Transform pool);
     }
 }

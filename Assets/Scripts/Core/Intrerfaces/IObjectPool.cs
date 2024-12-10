@@ -4,7 +4,7 @@ namespace Core.Intrerfaces
 {
     public interface IObjectPool
     {
-        GameObject GetFromPool(GameObject obj);
+        GameObject GetFromPool(EnemyType enemyType);
         void ReturnToPool(Enemy obj);
     }
 }

@@ -36,11 +36,11 @@ namespace Main
             Container.Bind<Transform>().FromInstance(poolParent);
 
             // Фабрика объектов
-            Container.Bind<IObjectFactory>().To<ObjectFactory>().AsSingle()
-                .WithArguments(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
+            // Container.Bind<IObjectFactory>().To<ObjectFactory>().AsSingle()
+            //     .WithArguments(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
 
             // Пул объектов
-            Container.Bind<IObjectPool>().To<ObjectPoolAstro>().AsSingle().WithArguments(poolParent, Container.Resolve<IObjectFactory>());
+            Container.Bind<IObjectPool>().To<ObjectPoolAstro>().AsSingle().WithArguments(poolParent);
 
             // Создание GameManager через Zenject
             Container.Bind<GameManager>().FromNewComponentOnNewGameObject().AsSingle();

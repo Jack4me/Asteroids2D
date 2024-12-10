@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using CodeBase.Infrastructure.AssetsManagement;
 using Core;
 using Core.AssetsManagement;
 using Core.Factory;
@@ -33,10 +32,7 @@ namespace Infrastructure.Factories
 
         public GameObject HeroGameObject { get; set; }
 
-        public void CreateAsteriod(EnemyType enemyType)
-        {
-
-        }
+       
 
 
         public GameObject CreateHero(GameObject at)
@@ -82,6 +78,8 @@ namespace Infrastructure.Factories
 
         public void LoadConfigs()
         {
+            _staticData.LoadStaticData();
+
             string filePath = Path.Combine(Application.dataPath, "Configs.json");
             if (File.Exists(filePath))
             {
@@ -92,8 +90,29 @@ namespace Infrastructure.Factories
             {
                 Debug.LogError($"JSON файл не найден по пути: {filePath}");
             }
+
         }
 
+        public GameObject CreateEnemy(EnemyType enemyType, Transform parent)
+        {
+            var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
+            if (enemyPrefab == null)
+            {
+                Debug.LogError($"No prefab found for enemy type: {enemyType}");
+                return null;
+            }
 
+            var instance = _instantiate.InstantiateToPool(enemyPrefab, parent);
+           // var instance = _instantiate.Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, parent);
+            var enemyComponent = instance.GetComponent<Enemy>();
+            // if (enemyComponent != null)
+            // {
+            //     enemyComponent.Initialize(enemyType, _random, _playerDataModel, this, _viewModelPlayer);
+            // }
+
+            return instance;
+        }
+
+       
     }
 }

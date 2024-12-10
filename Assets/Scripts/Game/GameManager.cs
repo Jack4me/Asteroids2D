@@ -12,9 +12,9 @@ namespace Game
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private GameObject asteroidPrefab;
-       
+
         [SerializeField] private GameObject ufoPrefab;
-      
+
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private int maxAsteroids = 10;
         [SerializeField] private int maxUFOs = 3;
@@ -31,6 +31,8 @@ namespace Game
 
         private async UniTaskVoid StartAsteroidSpawning()
         {
+            await UniTask.Delay(5000); // Ждём 10 секунд
+
             while (true)
             {
                 if (activeAsteroids.Count < maxAsteroids)
@@ -44,7 +46,7 @@ namespace Game
 
         private async UniTaskVoid StartUFOSpawning()
         {
-                await UniTask.Delay(10000); // Ждём 10 секунд
+            await UniTask.Delay(10000); // Ждём 10 секунд
             while (true)
             {
                 if (activeUFOs.Count < maxUFOs)
@@ -58,7 +60,7 @@ namespace Game
 
         private void SpawnAsteroid()
         {
-            GameObject asteroid = poolAstro.GetFromPool(asteroidPrefab);
+            GameObject asteroid = poolAstro.GetFromPool(EnemyType.Large);
             Transform spawnPoint = GetRandomSpawnPoint();
             asteroid.transform.position = spawnPoint.position;
 
@@ -69,7 +71,7 @@ namespace Game
 
         private void SpawnUfo()
         {
-            GameObject ufo = poolAstro.GetFromPool(ufoPrefab);
+            GameObject ufo = poolAstro.GetFromPool(EnemyType.Ufo);
             Transform spawnPoint = GetRandomSpawnPoint();
 
             ufo.transform.position = spawnPoint.position;

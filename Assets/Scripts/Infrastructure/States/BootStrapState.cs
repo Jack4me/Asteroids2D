@@ -1,8 +1,8 @@
-﻿using CodeBase.Infrastructure.AssetsManagement;
-using CodeBase.Infrastructure.Services.Randomizer;
+﻿using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.States;
 using CodeBase.Services.Input;
 using Core;
+using Core.AssetsManagement;
 using Core.Factory;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
