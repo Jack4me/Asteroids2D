@@ -6,6 +6,7 @@ using Core.Intrerfaces;
 using Core.Services.Randomizer;
 using Core.StaticData;
 using Game.Config;
+using ModestTree;
 using UnityEngine;
 
 namespace Infrastructure.Factories
@@ -44,7 +45,6 @@ namespace Infrastructure.Factories
             HeroGameObject.GetComponent<IPlayerController>().Construct(_playerDataModel);
             _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
 
-            // Используем интерфейс для настройки параметров
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
             {
                 stats.speed = _configs.player.speed;
@@ -95,25 +95,7 @@ namespace Infrastructure.Factories
 
         }
 
-        public GameObject CreateEnemy(EnemyType enemyType, Transform parent)
-        {
-            var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
-            if (enemyPrefab == null)
-            {
-                Debug.LogError($"No prefab found for enemy type: {enemyType}");
-                return null;
-            }
-
-            var instance = _instantiate.InstantiateToPool(enemyPrefab, parent);
-           // var instance = _instantiate.Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, parent);
-            var enemyComponent = instance.GetComponent<Enemy>();
-            // if (enemyComponent != null)
-            // {
-            //     enemyComponent.Initialize(enemyType, _random, _playerDataModel, this, _viewModelPlayer);
-            // }
-
-            return instance;
-        }
+       
 
         public GameObject CreateEnemy(EnemyType enemyType, Transform poolParent, IObjectPool objectPoolAstro)
         {
@@ -128,6 +110,13 @@ namespace Infrastructure.Factories
             // var instance = _instantiate.Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, parent);
             Enemy enemyComponent = instance.GetComponent<Enemy>();
              enemyComponent.Initialize(objectPoolAstro, _scoreManager);
+             if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
+             {
+                 stats.Damage = _configs.enemy.damage;
+                 stats.Health = _configs.enemy.health;
+                 stats.Speed = _configs.enemy.speed;
+             
+             }
             return instance;
 
         }

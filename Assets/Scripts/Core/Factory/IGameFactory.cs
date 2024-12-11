@@ -9,7 +9,6 @@ namespace Core.Factory {
         GameObject CreateHud();
         void CleanUp();
         void LoadConfigs();
-        GameObject CreateEnemy(EnemyType enemyType, Transform pool);
         GameObject CreateEnemy(EnemyType enemyType, Transform poolParent, IObjectPool objectPoolAstro);
     }
 }

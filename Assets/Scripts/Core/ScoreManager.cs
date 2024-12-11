@@ -26,11 +26,7 @@ namespace Core
         {
             _playerDataModel = playerDataModel;
         }
-
-        public void Initialize()
-        {
-            
-        }
+       
         public int totalScore { get; set; }
         
         

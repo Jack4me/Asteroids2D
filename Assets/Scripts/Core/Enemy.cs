@@ -5,36 +5,39 @@ using Zenject;
 
 namespace Core
 {
-    public class Enemy : MonoBehaviour, IDamageable, IHit
+    public class Enemy : MonoBehaviour, IDamageable, IHit, IStatsEnemy
     {
         [field: SerializeField] public int Damage { get; set; }
-        [SerializeField] private int score = 10;
-        [SerializeField] protected int health = 1;
+        [SerializeField] public int score { get; set; }
+        [SerializeField] public int Health { get; set; }
+        [SerializeField] public float Speed { get; set; }
         public IObjectPool _pool;
         private IScorable _score;
         public EnemyType enemyType;
         public ScoreManager ScoreManager;
         public event Action<GameObject> OnDestroyed;
 
-       
         
-       
+
+
         public void Initialize(IObjectPool objectPool, IScorable score)
         {
+       
             _pool = objectPool;
             _score = score;
         }
 
         public virtual void TakeDamage(int damage)
         {
-            health -= damage;
+            Health -= damage;
 
-            if (health <= 0)
+            if (Health <= 0)
             {
                 DestroyEntity();
             }
         }
 
+        
 
         public virtual void DestroyEntity()
         {
