@@ -1,5 +1,7 @@
+using System;
 using Core.Intrerfaces;
 using Game.Controllers;
+using Game.Handlers.Health;
 using UnityEngine;
 
 namespace Game.Config
@@ -11,18 +13,20 @@ namespace Game.Config
         public string weaponName { get; set; }
 
         private HeroMove _heroMove;
-        private IConfigLoader _configLoader;
+        private HealthHandler _healthHandler;
 
-        public void Constarct(IConfigLoader configLoader)
+        private void Awake()
         {
-            _configLoader = configLoader;
+            _heroMove = GetComponent<HeroMove>();
+            _healthHandler = GetComponent<HealthHandler>();
+            
         }
+
         private void Start()
         {
             
-            _heroMove = GetComponent<HeroMove>();
             Debug.Log($"Игрок: здоровье={health}, скорость={speed}, оружие={weaponName}");
-            
+            _healthHandler.SetStartHealth(health);
             _heroMove.SetSpeed(speed);
         }
 

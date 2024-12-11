@@ -1,8 +1,8 @@
 {
     "player": {
-        "health": 7,
-        "speed": 6.0,
-        "weaponName": "Sword"
+        "health": 5,
+        "speed": 5.0
+        
     },
     "enemy": {
         "health": 1,

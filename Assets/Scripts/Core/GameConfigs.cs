@@ -1,6 +1,6 @@
-using Core;
+using Game.Config;
 
-namespace Game.Config
+namespace Core
 {
     [System.Serializable]
     public class GameConfigs

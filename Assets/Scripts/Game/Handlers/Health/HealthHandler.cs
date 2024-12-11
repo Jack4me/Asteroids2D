@@ -10,10 +10,10 @@ namespace Game.Handlers.Health
 {
     public class HealthHandler : MonoBehaviour
     {
-      [SerializeField]  private  int maxHealth;
+        [SerializeField] private int maxHealth;
         private readonly int health;
         private readonly ReactiveProperty<int> currentHealth;
-        private  IPlayerDataModel playerDataModel;
+        private IPlayerDataModel playerDataModel;
 
 
         public event Action OnDeath; // Событие смерти
@@ -22,7 +22,6 @@ namespace Game.Handlers.Health
         private void Awake()
         {
             playerDataModel = AllServices.Container.GetService<IPlayerDataModel>();
-            playerDataModel.Health.Value = maxHealth;
         }
 
         public void TakeDamage(int damage)
@@ -47,6 +46,11 @@ namespace Game.Handlers.Health
 
             playerDataModel.Health.Value = Math.Min(playerDataModel.Health.Value + amount, maxHealth);
         }
-        
+
+        public void SetStartHealth(int hp)
+        {
+            maxHealth = hp;
+            playerDataModel.Health.Value = maxHealth;
+        }
     }
 }
