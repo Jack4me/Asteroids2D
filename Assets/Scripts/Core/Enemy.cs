@@ -12,15 +12,20 @@ namespace Core
         [SerializeField] protected int health = 1;
         public IObjectPool _pool;
         public EnemyType enemyType;
-        public ScoreManager scoreManager;
+        public ScoreManager ScoreManager;
         public event Action<GameObject> OnDestroyed;
+
         public Enemy(IObjectPool objectPool)
         {
             _pool = objectPool;
+            
         }
-
-
         
+       
+        public void Initialize(IObjectPool objectPool)
+        {
+            _pool = objectPool;
+        }
 
         public virtual void TakeDamage(int damage)
         {
@@ -35,11 +40,9 @@ namespace Core
 
         public virtual void DestroyEntity()
         {
-            
             ReturnToPool();
-            scoreManager.NotifyEnemyDestroyed(enemyType);
+//            ScoreManager.NotifyEnemyDestroyed(enemyType);
             OnDestroyed?.Invoke(gameObject);
-
         }
 
         public virtual void ReturnToPool()
@@ -55,9 +58,16 @@ namespace Core
             }
         }
 
+        public EnemyType GetNextAsteroidType(EnemyType currentType)
+        {
+            return currentType switch
+            {
+                EnemyType.Large => EnemyType.Medium,
+                EnemyType.Medium => EnemyType.Small,
+                _ => EnemyType.None, // Если нет следующего размера
+            };
+        }
 
         public int GetScore() => score;
-
-        
     }
 }

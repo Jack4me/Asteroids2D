@@ -83,6 +83,7 @@
 //         }
 //     }
 // }
+
 using System.Collections.Generic;
 using Core;
 using Core.Factory;
@@ -93,31 +94,32 @@ using Zenject;
 
 namespace Infrastructure
 {
-    public class ObjectPoolAstro : IObjectPool
+    public class ObjectPoolEnemy : IObjectPool
     {
         private List<GameObject> _pool = new List<GameObject>();
         private Transform _poolParent;
         private readonly IGameFactory _gameFactory;
-        private ScoreManager _scoreManager;
+      //  private ScoreManager _scoreManager;
 
-        public ObjectPoolAstro(Transform poolParent)
+        public ObjectPoolEnemy(Transform poolParent)
         {
             _poolParent = poolParent;
             _gameFactory = AllServices.Container.GetService<IGameFactory>();
-            
         }
 
-        [Inject]
-        public void Construct(ScoreManager scoreManager)
-        {
-            _scoreManager = scoreManager;
-
-           
-           
-        }
+        // [Inject]
+        // public void Construct(ScoreManager scoreManager)
+        // {
+        //     _scoreManager = scoreManager;
+        // }
 
         public GameObject GetFromPool(EnemyType enemyType)
         {
+            // if (_scoreManager == null)
+            // {
+            //     Debug.Log("_scoreManager" + _scoreManager);
+            // }
+
             foreach (GameObject obj in _pool)
             {
                 if (!obj.activeInHierarchy && obj.GetComponent<Enemy>()?.enemyType == enemyType)
@@ -140,15 +142,15 @@ namespace Infrastructure
 
         private GameObject Create(EnemyType enemyType)
         {
-            GameObject newObj = _gameFactory.CreateEnemy(enemyType, _poolParent);
+            GameObject newObj = _gameFactory.CreateEnemy(enemyType, _poolParent, this);
             if (newObj == null)
             {
                 Debug.LogError($"Factory could not create object of type {enemyType}");
             }
+
             return newObj;
         }
 
-       
 
         public void ReturnToPool(Enemy obj)
         {

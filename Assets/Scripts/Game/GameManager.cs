@@ -31,7 +31,7 @@ namespace Game
 
         private async UniTaskVoid StartAsteroidSpawning()
         {
-            await UniTask.Delay(5000); // Ждём 10 секунд
+            await UniTask.Delay(5000); 
 
             while (true)
             {

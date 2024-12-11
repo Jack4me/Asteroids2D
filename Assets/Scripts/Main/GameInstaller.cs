@@ -17,10 +17,6 @@ namespace Main
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private LaserManager laserManager;
-        [SerializeField] private GameObject asteroidPrefab;
-        [SerializeField] private GameObject mediumAsteroid;
-        [SerializeField] private GameObject smallAsteroid;
-        [SerializeField] private GameObject ufoPrefab;
         [SerializeField] private Transform poolParent;
         public override void InstallBindings()
         {
@@ -35,12 +31,9 @@ namespace Main
             // Привязываем PoolParent
             Container.Bind<Transform>().FromInstance(poolParent);
 
-            // Фабрика объектов
-            // Container.Bind<IObjectFactory>().To<ObjectFactory>().AsSingle()
-            //     .WithArguments(asteroidPrefab, ufoPrefab, mediumAsteroid, smallAsteroid);
-
+            
             // Пул объектов
-            Container.Bind<IObjectPool>().To<ObjectPoolAstro>().AsSingle().WithArguments(poolParent);
+            Container.Bind<IObjectPool>().To<ObjectPoolEnemy>().AsSingle().WithArguments(poolParent);
 
             // Создание GameManager через Zenject
             Container.Bind<GameManager>().FromNewComponentOnNewGameObject().AsSingle();
@@ -51,11 +44,10 @@ namespace Main
             // Container.Bind<IPlayerDataModel>().To<PlayerDataModel>().AsSingle();
             // Container.Bind<PlayerViewModel>().AsSingle().WithArguments(Container.Resolve<IPlayerDataModel>());
             
+           // Container.Bind<IScorable>().To<ScoreManager>().AsSingle();
             Container.Bind<PlayerViewModel>().AsSingle();
 
-            Container.Bind<ScoreManager>()
-                .FromComponentInHierarchy() // Находит ScoreManager в сцене
-                .AsSingle();
+            
 
             
         }

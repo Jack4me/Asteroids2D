@@ -1,4 +1,5 @@
 ﻿using CodeBase.Infrastructure.Services;
+using Core.Intrerfaces;
 using UnityEngine;
 
 namespace Core.Factory {
@@ -9,5 +10,6 @@ namespace Core.Factory {
         void CleanUp();
         void LoadConfigs();
         GameObject CreateEnemy(EnemyType enemyType, Transform pool);
+        GameObject CreateEnemy(EnemyType enemyType, Transform poolParent, IObjectPool objectPoolAstro);
     }
 }

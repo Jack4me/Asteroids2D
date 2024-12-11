@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Core
 {
   
-    public class ScoreManager : MonoBehaviour
+    public class ScoreManager : IScorable
     {
        
 
@@ -52,5 +52,8 @@ namespace Core
         {
             return totalScore;
         }
+
+
+        
     }
 }

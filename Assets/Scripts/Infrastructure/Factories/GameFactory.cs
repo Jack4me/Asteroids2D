@@ -113,6 +113,21 @@ namespace Infrastructure.Factories
             return instance;
         }
 
-       
+        public GameObject CreateEnemy(EnemyType enemyType, Transform poolParent, IObjectPool objectPoolAstro)
+        {
+            var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
+            if (enemyPrefab == null)
+            {
+                Debug.LogError($"No prefab found for enemy type: {enemyType}");
+                return null;
+            }
+
+            var instance = _instantiate.InstantiateToPool(enemyPrefab, poolParent);
+            // var instance = _instantiate.Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, parent);
+            Enemy enemyComponent = instance.GetComponent<Enemy>();
+             enemyComponent.Initialize(objectPoolAstro);
+            return instance;
+
+        }
     }
 }

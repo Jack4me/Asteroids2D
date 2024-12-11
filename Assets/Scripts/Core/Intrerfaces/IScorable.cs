@@ -2,7 +2,7 @@ namespace Core.Intrerfaces
 {
     public interface IScorable
     {
-        int GetScore();
+        int GetTotalScore();
     }
 }
 

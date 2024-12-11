@@ -5,6 +5,7 @@
         Small,
         Medium,
         Large, 
-        Ufo
+        Ufo,
+        None
     }
 }

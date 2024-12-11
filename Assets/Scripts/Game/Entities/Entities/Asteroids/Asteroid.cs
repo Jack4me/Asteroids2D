@@ -40,10 +40,16 @@ namespace Game.Entities.Entities.Asteroids
                 Debug.LogError("_pool is not assigned!", this);
                 return; // Прерывает выполнение метода, если префаб не назначен
             }
+            var nextType = GetNextAsteroidType(size);
+            if (nextType == EnemyType.None)
+            {
+                Debug.Log("No smaller asteroid type available.");
+                return; // Если астероид не может быть уменьшен
+            }
             for (int i = 0; i < 2; i++)
             {
                 if (smallerAsteroidPrefab == null) return;
-                var smallerAsteroid = _pool.GetFromPool(EnemyType.Medium);
+                var smallerAsteroid = _pool.GetFromPool(nextType);
                 
                 smallerAsteroid.SetActive(true);
                 smallerAsteroid.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
