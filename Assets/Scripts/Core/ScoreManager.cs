@@ -9,7 +9,7 @@ namespace Core
   
     public class ScoreManager : IScorable
     {
-       
+        private readonly IPlayerDataModel _playerDataModel;
 
         public event Action<int> OnScoreUpdated;
         private Dictionary<EnemyType, int> scoreTable = new Dictionary<EnemyType, int>
@@ -20,16 +20,26 @@ namespace Core
             { EnemyType.Ufo, 100 }
         };
 
-        private IPlayerDataModel playerDataModel;
-        private void Awake()
+      //  private IPlayerDataModel playerDataModel;
+
+       public ScoreManager(IPlayerDataModel playerDataModel)
         {
-            playerDataModel = AllServices.Container.GetService<IPlayerDataModel>();
+            _playerDataModel = playerDataModel;
+        }
+
+        public void Initialize()
+        {
+            
         }
         public int totalScore { get; set; }
         
         
         public void NotifyEnemyDestroyed(EnemyType enemyType)
         {
+            // if (playerDataModel == null)
+            // {
+            //     playerDataModel = AllServices.Container.GetService<IPlayerDataModel>();
+            // }
             if (scoreTable.TryGetValue(enemyType, out int score))
             {
                 totalScore += score;
@@ -40,13 +50,9 @@ namespace Core
             {
                 Debug.LogWarning($"No score defined for enemy type: {enemyType}");
             }
+            _playerDataModel.Score.Value = GetTotalScore();
         }
-
-        private void Update()
-        {
-            playerDataModel.Score.Value = GetTotalScore();
-
-        }
+        
 
         public int GetTotalScore()
         {

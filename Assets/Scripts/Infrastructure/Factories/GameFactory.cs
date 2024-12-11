@@ -17,17 +17,19 @@ namespace Infrastructure.Factories
         private readonly IPlayerDataModel _playerDataModel;
         private readonly IStaticDataService _staticData;
         private readonly IPlayerViewModel _viewModelPlayer;
+        private readonly IScorable _scoreManager;
         private readonly IConfigLoader _configLoader;
         private GameConfigs _configs;
 
         public GameFactory(IInstantiateProvider instantiate, IStaticDataService staticData, IRandomService random
-            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer)
+            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer, IScorable scoreManager)
         {
             _instantiate = instantiate;
             _staticData = staticData;
             _random = random;
             _playerDataModel = playerDataModel;
             _viewModelPlayer = viewModelPlayer;
+            _scoreManager = scoreManager;
         }
 
         public GameObject HeroGameObject { get; set; }
@@ -125,7 +127,7 @@ namespace Infrastructure.Factories
             var instance = _instantiate.InstantiateToPool(enemyPrefab, poolParent);
             // var instance = _instantiate.Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, parent);
             Enemy enemyComponent = instance.GetComponent<Enemy>();
-             enemyComponent.Initialize(objectPoolAstro);
+             enemyComponent.Initialize(objectPoolAstro, _scoreManager);
             return instance;
 
         }

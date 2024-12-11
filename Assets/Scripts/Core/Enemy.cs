@@ -11,6 +11,7 @@ namespace Core
         [SerializeField] private int score = 10;
         [SerializeField] protected int health = 1;
         public IObjectPool _pool;
+        private IScorable _score;
         public EnemyType enemyType;
         public ScoreManager ScoreManager;
         public event Action<GameObject> OnDestroyed;
@@ -18,9 +19,10 @@ namespace Core
        
         
        
-        public void Initialize(IObjectPool objectPool)
+        public void Initialize(IObjectPool objectPool, IScorable score)
         {
             _pool = objectPool;
+            _score = score;
         }
 
         public virtual void TakeDamage(int damage)
@@ -37,7 +39,7 @@ namespace Core
         public virtual void DestroyEntity()
         {
             ReturnToPool();
-//            ScoreManager.NotifyEnemyDestroyed(enemyType);
+            _score.NotifyEnemyDestroyed(enemyType);
             OnDestroyed?.Invoke(gameObject);
         }
 
