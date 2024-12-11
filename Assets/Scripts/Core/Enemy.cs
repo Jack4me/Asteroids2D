@@ -15,11 +15,7 @@ namespace Core
         public ScoreManager ScoreManager;
         public event Action<GameObject> OnDestroyed;
 
-        public Enemy(IObjectPool objectPool)
-        {
-            _pool = objectPool;
-            
-        }
+       
         
        
         public void Initialize(IObjectPool objectPool)

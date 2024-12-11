@@ -13,9 +13,7 @@ namespace Game.Entities.Entities.Asteroids
         private Vector2 direction;
         [SerializeField] private EnemyType size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
-        public Asteroid(IObjectPool objectPool) : base(objectPool)
-        {
-        }
+     
 
         public override void TakeDamage(int damage)
         {
