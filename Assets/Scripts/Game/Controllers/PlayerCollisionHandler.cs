@@ -2,6 +2,8 @@ using System;
 using Core;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
+using Game.Entities.Entities.Enemies;
+using Game.Entities.Entities.UFO;
 using Game.Handlers.Health;
 using UnityEngine;
 
@@ -47,9 +49,15 @@ namespace Game.Controllers
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var (direction, force) = CalculateBounce(other);
-            movementController.AddVelocity(direction, force);
+            var enemyBullet = other.GetComponent<EnemyBullet>();
 
+            if (enemyBullet == null) // Если это не пуля
+            {
+                var (direction, force) = CalculateBounce(other);
+                movementController.AddVelocity(direction, force);
+            }
+
+          
             HandleCollision(other);
         }
 
@@ -70,8 +78,8 @@ namespace Game.Controllers
             {
                 int damage = enemy.Damage;
 
-               _healthHandler.TakeDamage(damage);
-               OnControlLockRequested?.Invoke(lockDuration);
+                _healthHandler.TakeDamage(damage);
+                OnControlLockRequested?.Invoke(lockDuration);
             }
 
             Vector2 collisionDirection =
@@ -83,9 +91,9 @@ namespace Game.Controllers
 
             if (asteroidCollider.TryGetComponent<BounceController>(out var bounce))
             {
-
                 bounce.ApplyBounce(-collisionDirection * asteroidBounceForce);
             }
+
             EnableInvincibility().Forget();
             ShowInvincibilityEffect();
         }

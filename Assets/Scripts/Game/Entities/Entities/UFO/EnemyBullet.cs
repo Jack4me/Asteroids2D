@@ -1,4 +1,6 @@
+using System;
 using Core;
+using Game.Controllers;
 using UnityEngine;
 
 namespace Game.Entities.Entities.UFO
@@ -17,5 +19,12 @@ namespace Game.Entities.Entities.UFO
             transform.Translate(Vector2.up * speed * Time.deltaTime);
         }
 
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.TryGetComponent(out HeroMove heroMove))
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

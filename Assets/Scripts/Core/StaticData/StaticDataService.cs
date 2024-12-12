@@ -21,7 +21,6 @@ namespace Core.StaticData {
         }
         public GameObject GetEnemyPrefab(EnemyType enemyType)
         {
-          Debug.Log("_enemyPrefabs" + _enemyPrefabs);
             if (_enemyPrefabs.TryGetValue(enemyType, out var prefab))
             {
                 return prefab;

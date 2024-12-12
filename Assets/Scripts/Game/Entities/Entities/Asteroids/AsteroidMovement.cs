@@ -24,7 +24,6 @@ namespace Game.Entities.Entities.Asteroids {
        {
            
            _speed = speed;
-           Debug.Log(_speed + "_speed");
        }
     }
 }

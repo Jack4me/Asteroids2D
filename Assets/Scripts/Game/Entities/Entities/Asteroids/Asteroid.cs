@@ -14,7 +14,6 @@ namespace Game.Entities.Entities.Asteroids
         private void Awake()
         {
          asteroid = GetComponent<AsteroidMovement>();
-        Debug.Log("speed ASTR" + Speed);
         }
 
         private void Start()

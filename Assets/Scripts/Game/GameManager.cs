@@ -1,11 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Core;
+using Core.Ads_Plugin;
 using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
 using Infrastructure;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using Zenject;
 using Enemy = Core.Enemy;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -23,8 +27,14 @@ namespace Game
         private List<GameObject> activeAsteroids = new List<GameObject>();
         private List<GameObject> activeUFOs = new List<GameObject>();
 
+        private void Awake()
+        {
+
+        }
+
         private void Start()
         {
+
             StartAsteroidSpawning().Forget();
             StartUFOSpawning().Forget();
         }
@@ -32,6 +42,8 @@ namespace Game
         private async UniTaskVoid StartAsteroidSpawning()
         {
             await UniTask.Delay(1000); 
+            AdsManager.Instance.bannerAds.ShowBannerAd();
+            AdsManager.Instance.interstitialAds.ShowInterstitialAd();
 
             while (true)
             {
@@ -41,6 +53,7 @@ namespace Game
                 }
 
                 await UniTask.Delay(15000); // Ждём 15 секунд
+
             }
         }
 
