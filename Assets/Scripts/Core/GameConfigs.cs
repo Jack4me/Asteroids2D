@@ -1,5 +1,3 @@
-using Game.Config;
-
 namespace Core
 {
     [System.Serializable]

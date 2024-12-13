@@ -1,6 +1,5 @@
 using System.IO;
 using Core.Intrerfaces;
-using Game.Config;
 using UnityEngine;
 
 namespace Core

@@ -1,5 +1,4 @@
 using CodeBase.Infrastructure.Services;
-using Game.Config;
 using UnityEngine;
 
 namespace Core.Intrerfaces

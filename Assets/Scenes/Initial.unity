@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameRunner
       objectReference: {fileID: 0}
+    - target: {fileID: 2154964409929023302, guid: dabea32a9c8e27645bf95e2f5a488522, type: 3}
+      propertyPath: bootstrapper
+      value: 
+      objectReference: {fileID: 350977329977228777, guid: 1880ac4ca6794ec183c325e6314c70dc, type: 3}
     - target: {fileID: 2540094430680933394, guid: dabea32a9c8e27645bf95e2f5a488522, type: 3}
       propertyPath: m_RootOrder
       value: 1

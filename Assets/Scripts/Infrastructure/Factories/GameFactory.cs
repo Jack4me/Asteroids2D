@@ -5,7 +5,6 @@ using Core.Factory;
 using Core.Intrerfaces;
 using Core.Services.Randomizer;
 using Core.StaticData;
-using Game.Config;
 using ModestTree;
 using UnityEngine;
 

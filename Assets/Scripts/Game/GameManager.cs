@@ -29,21 +29,18 @@ namespace Game
 
         private void Awake()
         {
-
         }
 
         private void Start()
         {
-
             StartAsteroidSpawning().Forget();
             StartUFOSpawning().Forget();
         }
 
         private async UniTaskVoid StartAsteroidSpawning()
         {
-            await UniTask.Delay(1000); 
+            await UniTask.Delay(1000);
             AdsManager.Instance.bannerAds.ShowBannerAd();
-            AdsManager.Instance.interstitialAds.ShowInterstitialAd();
 
             while (true)
             {
@@ -53,13 +50,13 @@ namespace Game
                 }
 
                 await UniTask.Delay(15000); // Ждём 15 секунд
-
             }
         }
 
         private async UniTaskVoid StartUFOSpawning()
         {
             await UniTask.Delay(10000); // Ждём 10 секунд
+            AdsManager.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 if (activeUFOs.Count < maxUFOs)

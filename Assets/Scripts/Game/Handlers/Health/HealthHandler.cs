@@ -1,5 +1,6 @@
 using System;
 using Core;
+using Core.Ads_Plugin;
 using Core.Intrerfaces;
 using Infrastructure.Ref.Services;
 using UniRx;
@@ -37,6 +38,8 @@ namespace Game.Handlers.Health
 
         private void DeathPlayer()
         {
+            AdsManager.Instance.interstitialAds.ShowInterstitialAd();
+
             Destroy(gameObject);
         }
 

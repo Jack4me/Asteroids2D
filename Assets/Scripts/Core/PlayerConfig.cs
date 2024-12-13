@@ -1,4 +1,4 @@
-namespace Game.Config
+namespace Core
 {
     [System.Serializable]
     public class PlayerConfig

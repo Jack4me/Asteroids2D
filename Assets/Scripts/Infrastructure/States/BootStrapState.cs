@@ -9,7 +9,6 @@ using Core.Intrerfaces.Services.Input;
 using Core.Models;
 using Core.Services.Randomizer;
 using Core.StaticData;
-using Game.Config;
 using Infrastructure.Factories;
 using Infrastructure.Ref.Services;
 using UnityEngine;
