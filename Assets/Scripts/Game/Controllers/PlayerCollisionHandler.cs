@@ -2,25 +2,29 @@ using System;
 using Core;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
+using Game.Entities.Entities.Enemies;
+using Game.Entities.Entities.UFO;
 using Game.Handlers.Health;
 using UnityEngine;
 
 namespace Game.Controllers
 {
-    public class PlayerCollisionHandler
+    public class PlayerCollisionHandler : MonoBehaviour
     {
-        private readonly Transform playerTransform;
-        private readonly float playerBounceForce;
-        private readonly float asteroidBounceForce;
-        private readonly int maxHealth;
-        private readonly ParticleSystem invincibilityEffect;
-        private readonly float invincibilityDuration;
-        private readonly DamageHandler damageHandler;
+        [SerializeField] private float playerBounceForce = 30;
+        [SerializeField] private float asteroidBounceForce = 30;
+        [SerializeField] private int maxHealth = 5;
+        [SerializeField] private ParticleSystem invincibilityEffect;
+        [SerializeField] private float invincibilityDuration = 3;
+        [SerializeField] private float lockDuration = 2;
+        [SerializeField] private bool isHandlingCollision;
 
+        private HealthHandler _healthHandler;
         private bool isInvincible;
-        private int health;
+        private int health = 5;
         private Vector2 velocity;
         private bool canControl;
+        private HeroMove movementController;
         public event Action<float> OnControlLockRequested;
 
         public int Health
@@ -31,50 +35,58 @@ namespace Game.Controllers
 
         public Vector2 Velocity => velocity;
 
-        public PlayerCollisionHandler(Transform playerTransform,
-            int initialHealth,
-            int maxHealth,
-            float playerBounceForce,
-            float asteroidBounceForce,
-            ParticleSystem invincibilityEffect,
-            float invincibilityDuration, DamageHandler damageHandler)
+        public PlayerCollisionHandler()
         {
-            this.playerTransform = playerTransform;
-            this.health = initialHealth;
-            this.maxHealth = maxHealth;
-            this.playerBounceForce = playerBounceForce;
-            this.asteroidBounceForce = asteroidBounceForce;
-            this.invincibilityEffect = invincibilityEffect;
-            this.invincibilityDuration = invincibilityDuration;
-            this.damageHandler = damageHandler;
             isInvincible = false;
+        }
+
+        private void Awake()
+        {
+            this._healthHandler = GetComponent<HealthHandler>();
+
+            movementController = GetComponent<HeroMove>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            var enemyBullet = other.GetComponent<EnemyBullet>();
+
+            if (enemyBullet == null) // Если это не пуля
+            {
+                var (direction, force) = CalculateBounce(other);
+                movementController.AddVelocity(direction, force);
+            }
+
+          
+            HandleCollision(other);
         }
 
         public (Vector2 direction, float force) CalculateBounce(Collider2D asteroidCollider)
         {
             Vector2 collisionDirection =
-                (Vector2)playerTransform.position - (Vector2)asteroidCollider.transform.position;
+                (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
             collisionDirection.Normalize();
 
             return (collisionDirection, playerBounceForce);
         }
 
-        public async UniTask HandleCollision(Collider2D asteroidCollider, float controlLockDuration)
+        public void HandleCollision(Collider2D asteroidCollider)
         {
-            if (isInvincible) return;
-            ShowInvincibilityEffect();
+            if (isInvincible || isHandlingCollision) return;
+            isInvincible = true;
             if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
             {
                 int damage = enemy.Damage;
-                damageHandler.TakeDamage(damage);
+
+                _healthHandler.TakeDamage(damage);
+                OnControlLockRequested?.Invoke(lockDuration);
             }
 
             Vector2 collisionDirection =
-                (Vector2)playerTransform.position - (Vector2)asteroidCollider.transform.position;
+                (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
             collisionDirection.Normalize();
 
             velocity += collisionDirection * playerBounceForce;
-            OnControlLockRequested?.Invoke(controlLockDuration);
 
 
             if (asteroidCollider.TryGetComponent<BounceController>(out var bounce))
@@ -83,6 +95,7 @@ namespace Game.Controllers
             }
 
             EnableInvincibility().Forget();
+            ShowInvincibilityEffect();
         }
 
         private async UniTask EnableInvincibility()

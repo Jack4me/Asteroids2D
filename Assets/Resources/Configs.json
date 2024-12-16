@@ -1,0 +1,12 @@
+{
+    "player": {
+        "health": 5,
+        "speed": 5.0
+        
+    },
+    "enemy": {
+        "health": 1,
+        "speed": 2,
+        "damage": 1
+    }
+}

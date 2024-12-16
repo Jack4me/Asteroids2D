@@ -46,18 +46,22 @@ namespace Game.Controllers
         {
             playerTransform.position += (Vector3)velocity * Time.deltaTime;
         }
+
         public float GetSpeed()
         {
             return velocity.magnitude;
         }
+
         public void ApplyVelocity()
         {
             playerTransform.position += (Vector3)velocity * Time.deltaTime;
         }
+
         public void AddVelocity(Vector2 direction, float force)
         {
             velocity += direction * force;
         }
+
         public void SetVelocity(Vector2 newVelocity)
         {
             velocity = newVelocity;

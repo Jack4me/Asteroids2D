@@ -1,5 +1,9 @@
 using System.Collections.Generic;
+using Core.Intrerfaces;
+using Core.Models;
 using Game.Models;
+using Infrastructure.Ref.Services;
+using ModestTree;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -8,7 +12,7 @@ using Zenject;
 
 namespace UI.MVVM.View
 {
-    public class PlayerUIView : MonoBehaviour
+    public class PlayerUIView : MonoBehaviour, IPlayerUIView
     {
         [SerializeField] private TextMeshProUGUI positionText;
         [SerializeField] private TextMeshProUGUI speedText;
@@ -18,33 +22,35 @@ namespace UI.MVVM.View
         [SerializeField] private Transform heartsContainer; // Контейнер для сердечек
         [SerializeField] private GameObject heartPrefab; // Префаб сердечка
 
-        private PlayerViewModel viewModel;
+        private IPlayerViewModel _viewModelPlayer;
         private List<GameObject> hearts = new List<GameObject>();
 
-        [Inject]
-        public void Construct(PlayerViewModel viewModel)
-        {
-            this.viewModel = viewModel;
-        }
+      
 
+       
         private void Start()
-        {
 
-            viewModel.PositionText.Subscribe(text => positionText.text = text).AddTo(this);
-            viewModel.SpeedText.Subscribe(text => speedText.text = text).AddTo(this);
-            viewModel.RotationText.Subscribe(text => rotationText.text = text).AddTo(this);
-            viewModel.Health.Subscribe(text => health.text = text).AddTo(this);
-          
-            viewModel.HealthInt.Subscribe(UpdateHearts).AddTo(this);
-            viewModel.Score.Subscribe(text => score.text = text).AddTo(this);
-         
+        {
+            _viewModelPlayer = AllServices.Container.GetService<IPlayerViewModel>();
+
+            _viewModelPlayer.PositionText.Subscribe(text => positionText.text = text).AddTo(this);
+            _viewModelPlayer.SpeedText.Subscribe(text => speedText.text = text).AddTo(this);
+            _viewModelPlayer.RotationText.Subscribe(text => rotationText.text = text).AddTo(this);
+            _viewModelPlayer.Health.Subscribe(text => health.text = text).AddTo(this);
+
+            _viewModelPlayer.HealthInt.Subscribe(UpdateHearts).AddTo(this);
+            _viewModelPlayer.Score.Subscribe(text => score.text = text).AddTo(this);
+            
         }
+
+       
+
 
         private void UpdateHearts(int health)
         {
             while (hearts.Count > health)
             {
-                Destroy(hearts[0]); 
+                Destroy(hearts[0]);
                 hearts.RemoveAt(0);
             }
 
@@ -54,8 +60,8 @@ namespace UI.MVVM.View
                 GameObject newHeart = Instantiate(heartPrefab, heartsContainer);
                 hearts.Add(newHeart);
             }
-
-            
         }
+
+        
     }
 }

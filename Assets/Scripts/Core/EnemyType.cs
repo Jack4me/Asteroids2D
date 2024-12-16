@@ -1,10 +1,11 @@
-﻿namespace Game.Entities.Entities
+﻿namespace Core
 {
     public enum EnemyType
     {
         Small,
         Medium,
         Large, 
-        Ufo
+        Ufo,
+        None
     }
 }

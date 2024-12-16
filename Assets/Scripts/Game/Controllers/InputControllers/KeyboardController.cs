@@ -1,7 +1,7 @@
 using Core.Intrerfaces;
 using UnityEngine;
 
-namespace Game.InputControllers {
+namespace Game.Controllers.InputControllers {
     public class KeyboardController : IControlStrategy
     {
        

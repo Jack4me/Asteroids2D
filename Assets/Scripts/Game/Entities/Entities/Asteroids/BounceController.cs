@@ -14,6 +14,7 @@ namespace Game.Entities.Entities.Asteroids
 
         public void ApplyBounce(Vector2 bounceForce)
         {
+
             velocity += bounceForce;
         }
 

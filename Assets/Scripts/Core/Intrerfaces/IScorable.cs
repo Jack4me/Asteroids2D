@@ -1,8 +1,11 @@
+using CodeBase.Infrastructure.Services;
+
 namespace Core.Intrerfaces
 {
-    public interface IScorable
+    public interface IScorable : IService
     {
-        int GetScore();
+        int GetTotalScore();
+        void NotifyEnemyDestroyed(EnemyType enemyType);
     }
 }
 

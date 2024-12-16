@@ -1,7 +1,6 @@
 using System;
 using Core;
 using Core.Intrerfaces;
-using Game.Entities.Entities;
 using UnityEngine;
 using IObjectFactory = Core.Intrerfaces.IObjectFactory;
 using Object = UnityEngine.Object;
@@ -29,10 +28,11 @@ namespace Infrastructure.Factories
         {
             var asteroid = Object.Instantiate(asteroidPrefab, position, Quaternion.identity, parent);
             var entity = asteroid.GetComponent<Enemy>();
-            entity.scoreManager = scoreManager;
+            entity.ScoreManager = scoreManager;
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность
+                
             }
             return asteroid;
         }
@@ -42,7 +42,7 @@ namespace Infrastructure.Factories
         {
             var asteroid = Object.Instantiate(mediumAsteroid, position, Quaternion.identity, parent);
             var entity = asteroid.GetComponent<Enemy>();
-            entity.scoreManager = scoreManager;
+            entity.ScoreManager = scoreManager;
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность
@@ -55,7 +55,7 @@ namespace Infrastructure.Factories
         {
             var asteroid = Object.Instantiate(smallAsteroid, position, Quaternion.identity, parent);
             var entity = asteroid.GetComponent<Enemy>();
-            entity.scoreManager = scoreManager;
+            entity.ScoreManager = scoreManager;
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность
@@ -68,7 +68,7 @@ namespace Infrastructure.Factories
         {
             var ufo = Object.Instantiate(ufoPrefab, position, Quaternion.identity, parent);
             var entity = ufo.GetComponent<Enemy>();
-            entity.scoreManager = scoreManager;
+            entity.ScoreManager = scoreManager;
             if (entity != null)
             {
                 entity._pool = pool; // Передаём пул в сущность

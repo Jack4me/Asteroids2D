@@ -1,37 +1,67 @@
+using System;
 using System.Collections.Generic;
 using Core;
+using Core.Ads_Plugin;
+using Core.Analytics;
+using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
+using Firebase;
+using Firebase.Analytics;
 using Infrastructure;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using Zenject;
 using Enemy = Core.Enemy;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private GameObject asteroidPrefab;
-        [SerializeField] private GameObject mediumAsteroid;
-        [SerializeField] private GameObject smallAsteroid;
+
         [SerializeField] private GameObject ufoPrefab;
-        [SerializeField] private Transform poolParent;
-        [SerializeField] private int initialAsteroidCount = 5;
+
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private int maxAsteroids = 10;
         [SerializeField] private int maxUFOs = 3;
-        [Inject] private ObjectPoolAstro poolAstro;
+        [Inject] private IObjectPool poolAstro;
 
         private List<GameObject> activeAsteroids = new List<GameObject>();
         private List<GameObject> activeUFOs = new List<GameObject>();
 
+        private void Awake()
+        {
+        }
+
         private void Start()
         {
+            FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+            GameAnalytics.gameAnalytics.InterstitialAd();
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+            {
+                if (task.Result == DependencyStatus.Available)
+                {
+                    Debug.Log("Firebase initialized successfully.");
+
+                    // Логирование тестового события
+                    FirebaseAnalytics.LogEvent("test_event");
+                    Debug.Log("Test event sent.");
+                }
+                else
+                {
+                    Debug.LogError($"Could not resolve Firebase dependencies: {task.Result}");
+                }
+            });
             StartAsteroidSpawning().Forget();
             StartUFOSpawning().Forget();
         }
 
-        private async UniTaskVoid StartAsteroidSpawning()
+        private async UniTask StartAsteroidSpawning()
         {
+            await UniTask.Delay(1000);
+            AdsManager.Instance.bannerAds.ShowBannerAd();
+
             while (true)
             {
                 if (activeAsteroids.Count < maxAsteroids)
@@ -43,8 +73,10 @@ namespace Game
             }
         }
 
-        private async UniTaskVoid StartUFOSpawning()
+        private async UniTask StartUFOSpawning()
         {
+            await UniTask.Delay(10000); // Ждём 10 секунд
+            AdsManager.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 if (activeUFOs.Count < maxUFOs)
@@ -58,7 +90,7 @@ namespace Game
 
         private void SpawnAsteroid()
         {
-            GameObject asteroid = poolAstro.GetFromPool(asteroidPrefab);
+            GameObject asteroid = poolAstro.GetFromPool(EnemyType.Large);
             Transform spawnPoint = GetRandomSpawnPoint();
             asteroid.transform.position = spawnPoint.position;
 
@@ -69,7 +101,7 @@ namespace Game
 
         private void SpawnUfo()
         {
-            GameObject ufo = poolAstro.GetFromPool(ufoPrefab);
+            GameObject ufo = poolAstro.GetFromPool(EnemyType.Ufo);
             Transform spawnPoint = GetRandomSpawnPoint();
 
             ufo.transform.position = spawnPoint.position;

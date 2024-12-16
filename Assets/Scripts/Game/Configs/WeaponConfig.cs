@@ -4,7 +4,7 @@ namespace Game.Configs
 {
     [System.Serializable]
 
-    public class WeaponConfig : MonoBehaviour
+    public class WeaponConfig 
     {
         
         public int damage;
