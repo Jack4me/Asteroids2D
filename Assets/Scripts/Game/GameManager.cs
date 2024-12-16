@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core;
 using Core.Ads_Plugin;
 using Core.Analytics;
@@ -30,12 +31,10 @@ namespace Game
         private List<GameObject> activeAsteroids = new List<GameObject>();
         private List<GameObject> activeUFOs = new List<GameObject>();
 
-        private void Awake()
-        {
-        }
-
+     
         private void Start()
         {
+
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
             GameAnalytics.gameAnalytics.InterstitialAd();
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -53,14 +52,25 @@ namespace Game
                     Debug.LogError($"Could not resolve Firebase dependencies: {task.Result}");
                 }
             });
-            StartAsteroidSpawning().Forget();
-            StartUFOSpawning().Forget();
+            RunAsyncMethods();
+
         }
 
-        private async UniTask StartAsteroidSpawning()
+
+        private async void RunAsyncMethods()
         {
-            await UniTask.Delay(1000);
-            AdsManager.Instance.bannerAds.ShowBannerAd();
+            await StartUFOSpawning();
+            await StartAsteroidSpawning();
+        }
+
+        private async Task StartAsteroidSpawning()
+        {
+          
+                AdsManager.Instance.bannerAds.ShowBannerAd();
+
+            
+
+            await Task.Delay(1000);
 
             while (true)
             {
@@ -69,13 +79,13 @@ namespace Game
                     SpawnAsteroid();
                 }
 
-                await UniTask.Delay(15000); // Ждём 15 секунд
+                await Task.Delay(5000); 
             }
         }
 
         private async UniTask StartUFOSpawning()
         {
-            await UniTask.Delay(10000); // Ждём 10 секунд
+            await UniTask.Delay(3000); 
             AdsManager.Instance.bannerAds.HideBannerAd();
             while (true)
             {
@@ -84,7 +94,7 @@ namespace Game
                     SpawnUfo();
                 }
 
-                await UniTask.Delay(10000); // Ждём 10 секунд
+                await UniTask.Delay(5000); 
             }
         }
 
