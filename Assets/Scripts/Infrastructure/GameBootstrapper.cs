@@ -1,12 +1,15 @@
 ﻿using CodeBase.Infrastructure;
+using Core;
 using Infrastructure.States;
 using UnityEngine;
 
-namespace Core {
+namespace Infrastructure {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner {
         private Game _game;
 
-        private void Awake(){
+        private void Awake()
+        {
+            
             _game = new Game(this);
             _game.StateMachine.EnterGeneric<BootStrapState>();
             DontDestroyOnLoad(this);

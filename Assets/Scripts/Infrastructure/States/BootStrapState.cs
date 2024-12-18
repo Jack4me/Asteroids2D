@@ -5,6 +5,7 @@ using Core.Factory;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
 using Core.Models;
+using Core.Services;
 using Core.Services.Randomizer;
 using Core.StaticData;
 using Infrastructure.Factories;
@@ -15,23 +16,26 @@ namespace Infrastructure.States
 {
     internal class BootStrapState : IState
     {
-        private const string INITIAL = "Initial";
+        private const string INITIAL_LEVEL = "Initial";
         private readonly SceneLoader _sceneLoader;
         private readonly GameStateMachine _stateMachine;
         private readonly AllServices _services;
+        private readonly Transform _transform;
 
-        public BootStrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, AllServices services)
+        public BootStrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, AllServices services
+           )
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _services = services;
+           
 
             RegisterServices();
         }
 
         public void Enter()
         {
-            _sceneLoader.Load(INITIAL, EnterLoadLevel);
+            _sceneLoader.Load(INITIAL_LEVEL, EnterLoadLevel);
         }
 
         public void Exit()
@@ -57,6 +61,8 @@ namespace Infrastructure.States
             (_services.GetService<IInstantiateProvider>(), _services.GetService<IStaticDataService>(),
                 _services.GetService<IRandomService>(), _services.GetService<IPlayerDataModel>(),
                 _services.GetService<IPlayerViewModel>(), _services.GetService<IScorable>()));
+            _services.RegisterService<IObjectPool>(new ObjectPoolEnemy());
+            _services.RegisterService<ISpawnService>(new EnemySpawner(_services.GetService<IObjectPool>()));
         }
 
         private void RegisterStaticData()

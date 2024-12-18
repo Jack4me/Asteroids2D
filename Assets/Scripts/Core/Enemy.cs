@@ -7,7 +7,6 @@ namespace Core
 {
     public class Enemy : MonoBehaviour, IDamageable, IHit, IStatsEnemy
     {
-        public event Action<GameObject> OnDestroyed;
         public IObjectPool _pool;
         private IScorable _score;
         public EnemyType enemyType;
@@ -19,9 +18,10 @@ namespace Core
         public int Health { get; set; }
         public float Speed { get; set; }
 
+        public event Action<GameObject> OnDestroyed;
+
         public void Initialize(IObjectPool objectPool, IScorable score)
         {
-       
             _pool = objectPool;
             _score = score;
         }
@@ -36,7 +36,6 @@ namespace Core
             }
         }
 
-        
 
         public virtual void DestroyEntity()
         {

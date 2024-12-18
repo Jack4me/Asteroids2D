@@ -1,5 +1,4 @@
-
-using Game.Models;
+using Core.Models;
 using TMPro;
 using UniRx;
 using UnityEngine;

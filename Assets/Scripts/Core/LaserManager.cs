@@ -2,25 +2,27 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Game
+namespace Core
 {
     public class LaserManager : MonoBehaviour
     {
-        [SerializeField] private int maxLasers = 3;
+        [SerializeField] public int maxLasers = 3;
         [SerializeField] private float reloadTime = 2f;
         private float reloadStartTime;
-        private int currentLasers;
-        private bool isReloading = false;
+        public int currentLasers { get; private set; }
 
         public int CurrentLasers => currentLasers;
         public bool IsReloading => isReloading;
 
+        private bool isReloading = false;
         public event Action<float> OnReloadProgress;
 
-        private void Start()
+        private void Awake()
         {
             currentLasers = maxLasers;
         }
+
+        
 
         public bool CanFireLaser()
         {
@@ -39,7 +41,6 @@ namespace Game
             }
         }
 
-      
 
         private async UniTask ReloadLasers()
         {
@@ -49,13 +50,13 @@ namespace Game
             while (Time.time - reloadStartTime < reloadTime)
             {
                 float progress = (Time.time - reloadStartTime) / reloadTime;
-                OnReloadProgress?.Invoke(progress); // Передаем прогресс перезарядки
+                OnReloadProgress?.Invoke(progress);
                 await UniTask.Yield();
             }
 
             currentLasers = maxLasers;
             isReloading = false;
-            OnReloadProgress?.Invoke(1.0f); // Завершаем прогресс
+            OnReloadProgress?.Invoke(1.0f);
         }
     }
 }

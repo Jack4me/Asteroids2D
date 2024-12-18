@@ -3,26 +3,32 @@ using Core;
 using Core.AssetsManagement;
 using Core.Factory;
 using Core.Intrerfaces;
+using Core.Models;
 using Core.Services.Randomizer;
 using Core.StaticData;
 using ModestTree;
 using UnityEngine;
-
+using Zenject;
 namespace Infrastructure.Factories
 {
     public class GameFactory : IGameFactory
     {
+        public GameObject HeroGameObject { get; set; }
+        private const string ENEMYSPAWNER = "EnemySpawner";
+
         private readonly IInstantiateProvider _instantiate;
         private readonly IRandomService _random;
         private readonly IPlayerDataModel _playerDataModel;
         private readonly IStaticDataService _staticData;
         private readonly IPlayerViewModel _viewModelPlayer;
         private readonly IScorable _scoreManager;
+        private readonly DiContainer _container;
         private readonly IConfigLoader _configLoader;
         private GameConfigs _configs;
 
+
         public GameFactory(IInstantiateProvider instantiate, IStaticDataService staticData, IRandomService random
-            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer, IScorable scoreManager)
+            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer, IScorable scoreManager, DiContainer container = null)
         {
             _instantiate = instantiate;
             _staticData = staticData;
@@ -30,20 +36,26 @@ namespace Infrastructure.Factories
             _playerDataModel = playerDataModel;
             _viewModelPlayer = viewModelPlayer;
             _scoreManager = scoreManager;
+            _container = container;
         }
-
-        public GameObject HeroGameObject { get; set; }
-
-       
-
+        public Transform CreatePoolParent()
+        {
+            GameObject pool =  _instantiate.Instantiate(AssetPath.POOL_PATH);
+            return pool.transform;
+        }
 
         public GameObject CreateHero(GameObject at)
         {
             HeroGameObject = InstantiateRegister(AssetPath.HERO_PATH, at.transform.position);
-
+            
             HeroGameObject.GetComponent<IPlayerController>().Construct(_playerDataModel);
             _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
-
+            LaserManager laserManager =      HeroGameObject.GetComponent<LaserManager>();
+            var laserViewModel = new LaserViewModel(laserManager);
+                       
+            if (_container != null) _container.BindInstance(laserViewModel).AsSingle();
+            Debug.Log(_container + "_container null");
+            //remove and move to right place
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
             {
                 stats.speed = _configs.player.speed;
@@ -52,6 +64,22 @@ namespace Infrastructure.Factories
             }
 
             return HeroGameObject;
+        }
+
+        public void LoadConfigs()
+        {
+            _staticData.LoadStaticData();
+
+            TextAsset jsonFile = Resources.Load<TextAsset>("Configs");
+            if (jsonFile != null)
+            {
+                _configs = JsonUtility.FromJson<GameConfigs>(jsonFile.text);
+            }
+            else
+            {
+                Debug.LogError("JSON файл не найден в папке Resources");
+            }
+
         }
 
         public GameObject CreateHud()
@@ -77,25 +105,8 @@ namespace Infrastructure.Factories
             return gameObject;
         }
 
-        public void LoadConfigs()
-        {
-            _staticData.LoadStaticData();
 
-            TextAsset jsonFile = Resources.Load<TextAsset>("Configs");
-            if (jsonFile != null)
-            {
-                _configs = JsonUtility.FromJson<GameConfigs>(jsonFile.text);
-            }
-            else
-            {
-                Debug.LogError("JSON файл не найден в папке Resources");
-            }
-
-        }
-
-       
-
-        public GameObject CreateEnemy(EnemyType enemyType, Transform poolParent, IObjectPool objectPoolAstro)
+        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro)
         {
             var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
             if (enemyPrefab == null)
@@ -103,9 +114,9 @@ namespace Infrastructure.Factories
                 Debug.LogError($"No prefab found for enemy type: {enemyType}");
                 return null;
             }
-
-            var instance = _instantiate.InstantiateToPool(enemyPrefab, poolParent);
-            // var instance = _instantiate.Instantiate(enemyPrefab, Vector2.zero, Quaternion.identity, parent);
+        
+            var instance = _instantiate.InstantiateToPool(enemyPrefab, poolContainer);
+       
             Enemy enemyComponent = instance.GetComponent<Enemy>();
              enemyComponent.Initialize(objectPoolAstro, _scoreManager);
              if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
@@ -118,5 +129,7 @@ namespace Infrastructure.Factories
             return instance;
 
         }
+
+       
     }
 }

@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using Core;
 using Core.Factory;
+using Core.Intrerfaces;
 using Core.StaticData;
 using Infrastructure.Ref.Services;
+using UnityEngine;
 
 namespace Infrastructure.States {
     public class GameStateMachine {
+        private readonly Transform _transform;
         private readonly Dictionary<Type, IExitableState> _state;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, AllServices services){
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services)
+        {
             _state = new Dictionary<Type, IExitableState>{
                 [typeof(BootStrapState)] = new BootStrapState(this, sceneLoader, services),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
-                    services.GetService<IGameFactory>(), services.GetService<IStaticDataService>()),
+                    services.GetService<IGameFactory>(), services.GetService<IStaticDataService>(), services.GetService<ISpawnService>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this),
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };

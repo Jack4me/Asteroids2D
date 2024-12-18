@@ -1,7 +1,6 @@
-﻿using CodeBase.Infrastructure;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Core.Services {
+namespace Infrastructure {
     public class GameRunner : MonoBehaviour {
         public GameBootstrapper bootstrapper;
 

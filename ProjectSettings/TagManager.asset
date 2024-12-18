@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Laser
   - InitialPoint
+  - EnemySpawner
+  - PoolParent
   layers:
   - Default
   - TransparentFX

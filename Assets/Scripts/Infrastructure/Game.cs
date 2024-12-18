@@ -1,11 +1,10 @@
 using CodeBase.Infrastructure;
-using Core.Intrerfaces;
+using Core;
 using Infrastructure.Ref.Services;
 using Infrastructure.States;
 using UnityEngine;
-using Zenject;
 
-namespace Core {
+namespace Infrastructure {
     public class Game {
         // public static IInputService InputService;
         public GameStateMachine StateMachine;

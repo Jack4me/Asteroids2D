@@ -26,7 +26,8 @@ namespace Game
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private int maxAsteroids = 10;
         [SerializeField] private int maxUFOs = 3;
-        [Inject] private IObjectPool poolAstro;
+      // [Inject]
+       private IObjectPool poolAstro;
 
         private List<GameObject> activeAsteroids = new List<GameObject>();
         private List<GameObject> activeUFOs = new List<GameObject>();

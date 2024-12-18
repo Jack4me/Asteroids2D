@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.Factory;
+using Core.Intrerfaces;
 using Core.StaticData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,19 +8,20 @@ using UnityEngine.SceneManagement;
 namespace Infrastructure.States {
     public class LoadLevelState : ILoadLvlState<string> {
         private const string INITIAL_POINT = "InitialPoint";
-        private const string ENEMYSPAWNER = "EnemySpawner";
-        private readonly IGameFactory _gameFactory;
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
+        private readonly IGameFactory _gameFactory;
         private readonly IStaticDataService _staticDataService;
+        private readonly ISpawnService _spawnService;
 
         public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader,
             IGameFactory gameFactory,
-            IStaticDataService staticDataService){
+            IStaticDataService staticDataService, ISpawnService spawnService){
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
             _staticDataService = staticDataService;
+            _spawnService = spawnService;
         }
 
         public void Enter(string sceneName){
@@ -32,7 +34,7 @@ namespace Infrastructure.States {
 
         private void OnLoaded(){
             InitGameWorld();
-            InformProgressReaders();
+            
             _gameStateMachine.EnterGeneric<GameLoopState>();
         }
 
@@ -40,7 +42,15 @@ namespace Infrastructure.States {
             InitSpawners();
             _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
-           // InitHud(hero);
+           var obj = _gameFactory.CreatePoolParent();
+           InitEnemy(obj);
+           _spawnService.SpawnAsteroid();
+
+        }
+
+        private void InitEnemy(Transform transform)
+        {
+            
         }
 
         private void InitSpawners(){
@@ -53,11 +63,10 @@ namespace Infrastructure.States {
             var sceneNameKey = SceneManager.GetActiveScene().name;
         }
 
-        private void InformProgressReaders(){
-        }
+       
 
-        private void InitHud(GameObject hero){
-            var hud = _gameFactory.CreateHud();
-        }
+        // private void InitHud(GameObject hero){
+        //     var hud = _gameFactory.CreateHud();
+        // }
     }
 }

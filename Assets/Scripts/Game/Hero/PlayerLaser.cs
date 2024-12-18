@@ -1,7 +1,7 @@
 using Core.Intrerfaces;
 using UnityEngine;
 
-namespace Game.Entities.Entities
+namespace Game.Hero
 {
     public class PlayerLaser : MonoBehaviour
     {
@@ -23,7 +23,7 @@ namespace Game.Entities.Entities
         {
             if (other.TryGetComponent<IDamageable>(out var target))
             {
-                target.DestroyEntity(); // Возвращаем объект в пул через DestroyEntity
+                target.DestroyEntity(); 
                 
             }
         }
