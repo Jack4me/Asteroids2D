@@ -59,8 +59,8 @@ namespace Game
 
         private async void RunAsyncMethods()
         {
-            await StartUFOSpawning();
             await StartAsteroidSpawning();
+            await StartUFOSpawning();
         }
 
         private async Task StartAsteroidSpawning()

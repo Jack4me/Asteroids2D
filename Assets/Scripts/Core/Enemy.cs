@@ -7,18 +7,17 @@ namespace Core
 {
     public class Enemy : MonoBehaviour, IDamageable, IHit, IStatsEnemy
     {
-        [field: SerializeField] public int Damage { get; set; }
-        [SerializeField] public int score { get; set; }
-        [SerializeField] public int Health { get; set; }
-        [SerializeField] public float Speed { get; set; }
+        public event Action<GameObject> OnDestroyed;
         public IObjectPool _pool;
         private IScorable _score;
         public EnemyType enemyType;
         public ScoreManager ScoreManager;
-        public event Action<GameObject> OnDestroyed;
 
-        
 
+        [field: SerializeField] public int Damage { get; set; }
+        public int score { get; set; }
+        public int Health { get; set; }
+        public float Speed { get; set; }
 
         public void Initialize(IObjectPool objectPool, IScorable score)
         {

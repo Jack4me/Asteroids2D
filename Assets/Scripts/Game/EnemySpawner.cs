@@ -1,5 +1,5 @@
 ﻿namespace Game {
-    public class EnemySpawner {
+    public class EnemySpawner : ISpawnService {
         
     }
 }

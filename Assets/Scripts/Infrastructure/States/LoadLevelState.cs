@@ -1,5 +1,4 @@
-﻿using CodeBase.Infrastructure.States;
-using Core;
+﻿using Core;
 using Core.Factory;
 using Core.StaticData;
 using UnityEngine;

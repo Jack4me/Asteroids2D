@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4021646494231945483}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5645155356237875037}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8642368231972507729
 SpriteRenderer:
@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 6680390817538243449}
   - component: {fileID: 1510681685}
   - component: {fileID: 1151192817693000822}
-  - component: {fileID: -3383602224516801999}
   m_Layer: 0
   m_Name: AsteroidSmall
   m_TagString: Untagged
@@ -114,6 +113,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7694535948184488637}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -121,7 +121,6 @@ Transform:
   m_Children:
   - {fileID: 4481608236230291270}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2703543694583680743
 Rigidbody2D:
@@ -140,6 +139,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -154,6 +159,25 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -184,7 +208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdbf631e0d85174e898950396b499a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 6
 --- !u!114 &1510681685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,8 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a65b8c581b857449e85598a9739098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
   <Damage>k__BackingField: 1
+  enemyType: 0
   size: 0
   smallerAsteroidPrefab: {fileID: 7694535948184488637}
 --- !u!114 &1151192817693000822
@@ -211,17 +234,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 696d30543a508b24ea6aac2475cf14f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-3383602224516801999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7694535948184488637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209a89c437e8c194f8bfbfa1b7a50d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
