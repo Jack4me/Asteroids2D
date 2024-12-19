@@ -1,5 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Core.Ads_Plugin;
 using Core.Intrerfaces;
+using Cysharp.Threading.Tasks;
+using Game;
 using UnityEngine;
 
 namespace Core.Services
@@ -7,6 +10,7 @@ namespace Core.Services
     public class EnemySpawner : ISpawnService
     {
         private readonly IObjectPool _pool;
+        Vector3 spawnPosition;
 
         public EnemySpawner(IObjectPool pool)
         {
@@ -14,36 +18,66 @@ namespace Core.Services
         }
 
 
-        private async void RunAsyncMethods()
+        public async void RunAsyncMethods(SpawnPointsData spawnPointsData)
         {
-            await StartAsteroidSpawning();
+            await UniTask.WhenAll(
+                StartAsyncUFOSpawning(spawnPointsData),
+                StartAsyncAsteroidSpawning(spawnPointsData));
         }
 
-        private async Task StartAsteroidSpawning()
+        private async UniTask StartAsyncUFOSpawning(SpawnPointsData spawnPointsData)
         {
-            await Task.Delay(1000);
-
+            await UniTask.Delay(3000);
+            AdsManager.Instance.bannerAds.HideBannerAd();
             while (true)
             {
-                SpawnAsteroid();
+                SpawnUfo(spawnPointsData);
 
-                await Task.Delay(5000);
+                await UniTask.Delay(5000);
             }
         }
 
-        public void SpawnAsteroid()
+        private void SpawnUfo(SpawnPointsData spawnPointsData)
         {
-           GameObject asteroid = _pool.GetFromPool(EnemyType.Large);
-            // Transform spawnPoint = GetRandomSpawnPoint();
-            // asteroid.transform.position = spawnPoint.position;
+            AdsManager.Instance.bannerAds.ShowBannerAd();
 
-           
+            GameObject ufo = _pool.GetFromPool(EnemyType.Ufo);
+            Vector3 spawnPoint = GetRandomSpawnPoint(spawnPointsData);
+
+            ufo.transform.position = spawnPoint;
         }
 
-        // private Transform GetRandomSpawnPoint()
-        // {
-        //     int randomIndex = Random.Range(0, spawnPoints.Length);
-        //     return spawnPoints[randomIndex];
-        // }
+        private async UniTask StartAsyncAsteroidSpawning(SpawnPointsData spawnPointsData)
+        {
+            await UniTask.Delay(1000);
+
+            while (true)
+            {
+                SpawnAsteroid(spawnPointsData);
+
+                await UniTask.Delay(5000);
+            }
+        }
+
+        public void SpawnAsteroid(SpawnPointsData spawnPointsData)
+        {
+            GameObject asteroid = _pool.GetFromPool(EnemyType.Large);
+            Vector3 spawnPoint = GetRandomSpawnPoint(spawnPointsData);
+            asteroid.transform.position = spawnPoint;
+        }
+
+        private Vector3 GetRandomSpawnPoint(SpawnPointsData spawnPointsData)
+        {
+            if (spawnPointsData != null && spawnPointsData.spawnPositions.Length > 0)
+            {
+                spawnPosition = spawnPointsData.spawnPositions[Random.Range(0, spawnPointsData.spawnPositions.Length)];
+            }
+            else
+            {
+                Debug.LogError("Точки спавна отсутствуют или данные не загружены!");
+            }
+
+            return spawnPosition;
+        }
     }
 }

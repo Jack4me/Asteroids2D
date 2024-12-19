@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure;
 using Core;
 using Infrastructure.States;
+using Main.States;
 using UnityEngine;
 
 namespace Infrastructure {

@@ -1,9 +1,11 @@
 ﻿using CodeBase.Infrastructure.Services;
+using Game;
 
 namespace Core.Intrerfaces
 {
     public interface ISpawnService : IService
     {
-        public void SpawnAsteroid();
+       
+        public void RunAsyncMethods(SpawnPointsData spawnPointsData);
     }
 }

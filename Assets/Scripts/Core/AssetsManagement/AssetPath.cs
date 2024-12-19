@@ -5,5 +5,6 @@
         public const string SPAWNER_PATH = "Enemies/MonsterPointSpawner";
         public const string LOOT_PATH = "Loot/Loot";
         public const string POOL_PATH = "Pool/PoolParent";
+        public const string SPAWNERS_ENEMY = "StaticData/SpawnPointsData";
     }
 }

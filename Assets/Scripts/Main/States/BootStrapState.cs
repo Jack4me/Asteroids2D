@@ -8,11 +8,13 @@ using Core.Models;
 using Core.Services;
 using Core.Services.Randomizer;
 using Core.StaticData;
+using Infrastructure;
 using Infrastructure.Factories;
 using Infrastructure.Ref.Services;
+using Infrastructure.States;
 using UnityEngine;
 
-namespace Infrastructure.States
+namespace Main.States
 {
     internal class BootStrapState : IState
     {

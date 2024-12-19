@@ -1,9 +1,11 @@
 ﻿
-namespace Infrastructure.States {
+using Infrastructure.States;
+
+namespace Main.States {
     public class GameLoopState : IState {
         public GameLoopState(GameStateMachine gameStateMachine){
         }
-
+        
         public void Exit(){
         }
 
