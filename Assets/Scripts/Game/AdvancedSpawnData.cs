@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "AdvancedSpawnConfig", menuName = "Configs/AdvancedSpawnConfig")]
-    public class AdvancedSpawnConfig : ScriptableObject
+    public class AdvancedSpawnData : ScriptableObject
     {
         [Header("Prefab to Spawn")]
         public GameObject prefab; // Префаб объекта

@@ -8,7 +8,6 @@ using Core.Services.Randomizer;
 using Core.StaticData;
 using Infrastructure.UI_MVVM.View;
 using ModestTree;
-using UI.MVVM.View;
 using UnityEngine;
 using Zenject;
 namespace Infrastructure.Factories

@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using Core.Intrerfaces;
-using Core.Models;
 using Infrastructure.Ref.Services;
-using ModestTree;
 using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
-namespace UI.MVVM.View
+namespace Infrastructure.UI_MVVM.View
 {
     public class PlayerUIView : MonoBehaviour, IPlayerUIView
     {
