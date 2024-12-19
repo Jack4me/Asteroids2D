@@ -8,8 +8,8 @@ using Core.Models;
 using Core.Services;
 using Core.Services.Randomizer;
 using Core.StaticData;
+using Game;
 using Infrastructure;
-using Infrastructure.Factories;
 using Infrastructure.Ref.Services;
 using Infrastructure.States;
 using UnityEngine;
@@ -58,11 +58,12 @@ namespace Main.States
             _services.RegisterService<IPlayerDataModel>(new PlayerDataModel());
             _services.RegisterService<IPlayerViewModel>(new PlayerViewModel());
             _services.RegisterService<IScorable>(new ScoreManager(_services.GetService<IPlayerDataModel>()));
+            _services.RegisterService<IBounceService>(new BounceService());
 
             _services.RegisterService<IGameFactory>(new GameFactory
             (_services.GetService<IInstantiateProvider>(), _services.GetService<IStaticDataService>(),
                 _services.GetService<IRandomService>(), _services.GetService<IPlayerDataModel>(),
-                _services.GetService<IPlayerViewModel>(), _services.GetService<IScorable>()));
+                _services.GetService<IPlayerViewModel>(), _services.GetService<IScorable>(), _services.GetService<IBounceService>()));
             _services.RegisterService<IObjectPool>(new ObjectPoolEnemy());
             _services.RegisterService<ISpawnService>(new EnemySpawner(_services.GetService<IObjectPool>()));
         }

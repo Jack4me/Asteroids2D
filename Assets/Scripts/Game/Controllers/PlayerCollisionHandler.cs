@@ -1,8 +1,8 @@
 using System;
 using Core;
+using Core.Services;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
-using Game.Entities.Entities.Enemies;
 using Game.Entities.Entities.UFO;
 using Game.Handlers.Health;
 using UnityEngine;
@@ -16,7 +16,7 @@ namespace Game.Controllers
         [SerializeField] private int maxHealth = 5;
         [SerializeField] private ParticleSystem invincibilityEffect;
         [SerializeField] private float invincibilityDuration = 3;
-        [SerializeField] private float lockDuration = 2;
+        [SerializeField] private float lockDuration = 1;
         [SerializeField] private bool isHandlingCollision;
 
         private HealthHandler _healthHandler;
@@ -25,7 +25,8 @@ namespace Game.Controllers
         private Vector2 velocity;
         private bool canControl;
         private HeroMove movementController;
-        public event Action<float> OnControlLockRequested;
+        private IBounceService _bounceService;
+        public Vector2 Velocity => velocity;
 
         public int Health
         {
@@ -33,31 +34,40 @@ namespace Game.Controllers
             private set => health = Mathf.Clamp(value, 0, maxHealth);
         }
 
-        public Vector2 Velocity => velocity;
+        public event Action<float> OnControlLockRequested;
+
 
         public PlayerCollisionHandler()
         {
             isInvincible = false;
         }
 
+        public void Construct(IBounceService bounceService)
+        {
+            _bounceService = bounceService;
+        }
+
         private void Awake()
         {
-            this._healthHandler = GetComponent<HealthHandler>();
+            _healthHandler = GetComponent<HealthHandler>();
 
             movementController = GetComponent<HeroMove>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var enemyBullet = other.GetComponent<EnemyBullet>();
+            if (isInvincible) return;
+
+            EnemyBullet enemyBullet = other.GetComponent<EnemyBullet>();
 
             if (enemyBullet == null) // Если это не пуля
             {
-                var (direction, force) = CalculateBounce(other);
-                movementController.AddVelocity(direction, force);
+                //var (direction, force) = CalculateBounce(other);
+                _bounceService.ApplyBounce(transform, other, 5);
+                //movementController.AddVelocity(direction, force);
             }
 
-          
+
             HandleCollision(other);
         }
 
@@ -72,7 +82,7 @@ namespace Game.Controllers
 
         public void HandleCollision(Collider2D asteroidCollider)
         {
-            if (isInvincible || isHandlingCollision) return;
+            // if (isInvincible || isHandlingCollision) return;
             isInvincible = true;
             if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
             {

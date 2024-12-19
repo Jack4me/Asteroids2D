@@ -65,10 +65,7 @@ namespace Game.Controllers
         }
 
 
-        public void AddVelocity(Vector2 direction, float force)
-        {
-            velocity += direction * force;
-        }
+        
 
         private void Accelerate(float accelerationInput)
         {

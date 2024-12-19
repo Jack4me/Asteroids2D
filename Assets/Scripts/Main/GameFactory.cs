@@ -1,16 +1,16 @@
-﻿using System.IO;
-using Core;
+﻿using Core;
 using Core.AssetsManagement;
 using Core.Factory;
 using Core.Intrerfaces;
 using Core.Models;
+using Core.Services;
 using Core.Services.Randomizer;
 using Core.StaticData;
+using Game.Controllers;
 using Infrastructure.UI_MVVM.View;
-using ModestTree;
 using UnityEngine;
-using Zenject;
-namespace Infrastructure.Factories
+
+namespace Main
 {
     public class GameFactory : IGameFactory
     {
@@ -23,13 +23,14 @@ namespace Infrastructure.Factories
         private readonly IStaticDataService _staticData;
         private readonly IPlayerViewModel _viewModelPlayer;
         private readonly IScorable _scoreManager;
-        private readonly DiContainer _container;
+        private readonly IBounceService _bounceService;
         private readonly IConfigLoader _configLoader;
         private GameConfigs _configs;
 
 
         public GameFactory(IInstantiateProvider instantiate, IStaticDataService staticData, IRandomService random
-            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer, IScorable scoreManager, DiContainer container = null)
+            , IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer, IScorable scoreManager,
+            IBounceService bounceService)
         {
             _instantiate = instantiate;
             _staticData = staticData;
@@ -37,7 +38,7 @@ namespace Infrastructure.Factories
             _playerDataModel = playerDataModel;
             _viewModelPlayer = viewModelPlayer;
             _scoreManager = scoreManager;
-            _container = container;
+            _bounceService = bounceService;
         }
         public Transform CreatePoolParent()
         {
@@ -53,8 +54,9 @@ namespace Infrastructure.Factories
             playerController.Construct(_playerDataModel);
             _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
             LaserManager laserManager =      HeroGameObject.GetComponent<LaserManager>();
-            var laserViewModel = new LaserViewModel(laserManager);
+            LaserViewModel laserViewModel = new LaserViewModel(laserManager);
             HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel ; 
+            HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
                        
      
             //remove and move to right place

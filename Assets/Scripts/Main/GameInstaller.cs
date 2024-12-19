@@ -7,7 +7,6 @@ using Game.Controllers;
 using Game.Controllers.InputControllers;
 using Game.InputControllers;
 using Infrastructure;
-using Infrastructure.Factories;
 using Infrastructure.UI_MVVM.View;
 using UnityEngine;
 using Zenject;

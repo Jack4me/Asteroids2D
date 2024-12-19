@@ -179,7 +179,7 @@ MonoBehaviour:
   maxHealth: 5
   invincibilityEffect: {fileID: 0}
   invincibilityDuration: 3
-  lockDuration: 2
+  lockDuration: 1
   isHandlingCollision: 0
 --- !u!114 &-8315362413760857782
 MonoBehaviour:
