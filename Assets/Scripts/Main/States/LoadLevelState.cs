@@ -4,6 +4,8 @@ using Core.Intrerfaces;
 using Core.StaticData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Core.Models;
+using Main;
 
 namespace Infrastructure.States {
     public class LoadLevelState : ILoadLvlState<string> {
@@ -42,10 +44,16 @@ namespace Infrastructure.States {
             InitSpawners();
             _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
-           var obj = _gameFactory.CreatePoolParent();
+           Transform obj = _gameFactory.CreatePoolParent();
+          LaserViewModel laserViewModel =  hero.GetComponent<PlayerController>().LaserViewModel;
+           InitHud(laserViewModel);
            InitEnemy(obj);
            _spawnService.SpawnAsteroid();
 
+        }
+
+        private void InitHud(LaserViewModel laserViewModel){
+            var hud = _gameFactory.CreateHud(laserViewModel);
         }
 
         private void InitEnemy(Transform transform)
@@ -62,11 +70,5 @@ namespace Infrastructure.States {
             // }
             var sceneNameKey = SceneManager.GetActiveScene().name;
         }
-
-       
-
-        // private void InitHud(GameObject hero){
-        //     var hud = _gameFactory.CreateHud();
-        // }
     }
 }

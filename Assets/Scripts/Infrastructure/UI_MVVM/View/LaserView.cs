@@ -2,19 +2,18 @@ using Core.Models;
 using TMPro;
 using UniRx;
 using UnityEngine;
-using Zenject;
 
-namespace UI.MVVM.View
+namespace Infrastructure.UI_MVVM.View
 {
     public class LaserView : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI laserCountText; // UI-элемент для отображения количества лазеров
+        [SerializeField] private TextMeshProUGUI laserCountText; 
         [SerializeField] private TextMeshProUGUI reloadProgressText;
         
         
         private LaserViewModel _viewModel;
         
-        [Inject]
+       
         public void Construct(LaserViewModel viewModel)
         {
             _viewModel = viewModel;

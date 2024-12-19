@@ -2,13 +2,11 @@
     "name": "GameLogic",
     "rootNamespace": "",
     "references": [
-        "Packages/com.cysharp.unitask/Runtime",
-        "UnityEngine",
-        "UnityEditor",
         "UniTask",
         "Zenject",
         "SimpleInput.Runtime",
-        "Core"
+        "Core",
+        "UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

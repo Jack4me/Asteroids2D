@@ -13,9 +13,9 @@ namespace Core.Models
         private LaserManager _laserManager;
 
         private readonly DiContainer _container;
-        public LaserViewModel(LaserManager laserManager, DiContainer container = null)
+        public LaserViewModel(LaserManager laserManager)
         {
-            _container = container;
+            
 
             if (laserManager == null)
             {

@@ -1,14 +1,17 @@
 ﻿using Core.Factory;
 using Core.Intrerfaces;
-using Game.Config;
+using Core.Models;
+using Game.Controllers;
 using UnityEngine;
 
-namespace Game.Controllers
+namespace Main
 {
     public class PlayerController : MonoBehaviour, IPlayerController
     {
         private IPlayerDataModel playerDataModel;
         private HeroMove _heroMove;
+
+        public LaserViewModel LaserViewModel { get; set; }
 
         public void Construct(IPlayerDataModel playerDataModel)
         {

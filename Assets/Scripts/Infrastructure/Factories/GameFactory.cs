@@ -6,7 +6,9 @@ using Core.Intrerfaces;
 using Core.Models;
 using Core.Services.Randomizer;
 using Core.StaticData;
+using Infrastructure.UI_MVVM.View;
 using ModestTree;
+using UI.MVVM.View;
 using UnityEngine;
 using Zenject;
 namespace Infrastructure.Factories
@@ -47,14 +49,15 @@ namespace Infrastructure.Factories
         public GameObject CreateHero(GameObject at)
         {
             HeroGameObject = InstantiateRegister(AssetPath.HERO_PATH, at.transform.position);
-            
-            HeroGameObject.GetComponent<IPlayerController>().Construct(_playerDataModel);
+
+            IPlayerController playerController = HeroGameObject.GetComponent<IPlayerController>();
+            playerController.Construct(_playerDataModel);
             _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
             LaserManager laserManager =      HeroGameObject.GetComponent<LaserManager>();
             var laserViewModel = new LaserViewModel(laserManager);
+            HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel ; 
                        
-            if (_container != null) _container.BindInstance(laserViewModel).AsSingle();
-            Debug.Log(_container + "_container null");
+     
             //remove and move to right place
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
             {
@@ -82,10 +85,10 @@ namespace Infrastructure.Factories
 
         }
 
-        public GameObject CreateHud()
+        public GameObject CreateHud(LaserViewModel laserViewModel)
         {
             var hud = InstantiateRegister(AssetPath.HUD_PATH);
-
+            hud.GetComponent<LaserView>().Construct(laserViewModel);
             return hud;
         }
 
