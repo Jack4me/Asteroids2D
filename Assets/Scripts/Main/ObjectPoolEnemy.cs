@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using Core;
 using Core.Factory;
 using Core.Intrerfaces;
+using Game;
 using Infrastructure.Ref.Services;
 using UnityEngine;
-using Zenject;
 
-namespace Infrastructure
+namespace Main
 {
     public class ObjectPoolEnemy : IObjectPool
     {
@@ -51,6 +51,14 @@ namespace Infrastructure
             return newObj;
         }
 
+       
+
+        public void ReturnToPool(Enemy obj)
+        {
+            obj.gameObject.SetActive(false);
+            obj.transform.SetParent(_poolContainer);
+        }
+
         private GameObject Create(EnemyType enemyType)
         {
             GameObject newObj = _gameFactory.CreateEnemy(enemyType, _poolContainer, this);
@@ -63,10 +71,6 @@ namespace Infrastructure
         }
 
 
-        public void ReturnToPool(Enemy obj)
-        {
-            obj.gameObject.SetActive(false);
-            obj.transform.SetParent(_poolContainer);
-        }
+       
     }
 }

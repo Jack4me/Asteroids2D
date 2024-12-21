@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 4393259349335477127}
   - component: {fileID: 4063371863726616888}
   - component: {fileID: 5886297587990906155}
-  - component: {fileID: -1437616769286299174}
   - component: {fileID: -8897752937215668642}
   - component: {fileID: 791358088}
   - component: {fileID: -8116273059174688401}
@@ -194,18 +193,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8815839, y: 0.8059286}
   m_EdgeRadius: 0
---- !u!114 &-1437616769286299174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4767596974026481223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03c853c162b8fb34e8de633132e74b92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8897752937215668642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,8 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a65b8c581b857449e85598a9739098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 1
   enemyType: 1
+  <Damage>k__BackingField: 1
   size: 1
   smallerAsteroidPrefab: {fileID: 7694535948184488637, guid: 723cc74e5ff53c7449961a8e2c1ac8ae, type: 3}
 --- !u!114 &-8116273059174688401

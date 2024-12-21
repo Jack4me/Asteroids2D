@@ -12,7 +12,6 @@ using Infrastructure;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using Zenject;
-using Enemy = Core.Enemy;
 using Random = UnityEngine.Random;
 
 namespace Game

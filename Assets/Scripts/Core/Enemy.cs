@@ -1,18 +1,19 @@
 using System;
 using Core.Intrerfaces;
+using Core.Services;
 using UnityEngine;
-using Zenject;
 
 namespace Core
 {
     public class Enemy : MonoBehaviour, IDamageable, IHit, IStatsEnemy
     {
         public IObjectPool _pool;
-        private IScorable _score;
         public EnemyType enemyType;
         public ScoreManager ScoreManager;
 
 
+        private IScorable _score;
+        private IBounceService _bounceService;
         [field: SerializeField] public int Damage { get; set; }
         public int score { get; set; }
         public int Health { get; set; }
@@ -20,10 +21,20 @@ namespace Core
 
         public event Action<GameObject> OnDestroyed;
 
-        public void Initialize(IObjectPool objectPool, IScorable score)
+        public void Initialize(IObjectPool objectPool, IScorable score, IBounceService bounceService)
         {
             _pool = objectPool;
             _score = score;
+            _bounceService = bounceService;
+        }
+
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out LaserManager heroMove))
+            {
+                _bounceService.ApplyBounce(transform, other, 5);
+            }
         }
 
         public virtual void TakeDamage(int damage)

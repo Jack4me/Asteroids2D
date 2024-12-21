@@ -1,5 +1,7 @@
 using CodeBase.Infrastructure.Services;
+using UniRx.Examples;
 using UnityEngine;
+using Enemy = Core.Enemy;
 
 namespace Core.Intrerfaces
 {

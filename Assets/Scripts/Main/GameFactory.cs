@@ -6,6 +6,7 @@ using Core.Models;
 using Core.Services;
 using Core.Services.Randomizer;
 using Core.StaticData;
+using Game;
 using Game.Controllers;
 using Infrastructure.UI_MVVM.View;
 using UnityEngine;
@@ -70,6 +71,30 @@ namespace Main
             return HeroGameObject;
         }
 
+        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro)
+        {
+            var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
+            if (enemyPrefab == null)
+            {
+                Debug.LogError($"No prefab found for enemy type: {enemyType}");
+                return null;
+            }
+        
+            var instance = _instantiate.InstantiateToPool(enemyPrefab, poolContainer);
+       
+            Enemy enemyComponent = instance.GetComponent<Enemy>();
+            enemyComponent.Initialize(objectPoolAstro, _scoreManager, _bounceService);
+            if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
+            {
+                stats.Damage = _configs.enemy.damage;
+                stats.Health = _configs.enemy.health;
+                stats.Speed = _configs.enemy.speed;
+             
+            }
+            return instance;
+
+        }
+
         public void LoadConfigs()
         {
             _staticData.LoadStaticData();
@@ -108,32 +133,5 @@ namespace Main
             var gameObject = _instantiate.Instantiate(path);
             return gameObject;
         }
-
-
-        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro)
-        {
-            var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
-            if (enemyPrefab == null)
-            {
-                Debug.LogError($"No prefab found for enemy type: {enemyType}");
-                return null;
-            }
-        
-            var instance = _instantiate.InstantiateToPool(enemyPrefab, poolContainer);
-       
-            Enemy enemyComponent = instance.GetComponent<Enemy>();
-             enemyComponent.Initialize(objectPoolAstro, _scoreManager);
-             if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
-             {
-                 stats.Damage = _configs.enemy.damage;
-                 stats.Health = _configs.enemy.health;
-                 stats.Speed = _configs.enemy.speed;
-             
-             }
-            return instance;
-
-        }
-
-       
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using CodeBase.Infrastructure;
 using UnityEngine.SceneManagement;
 
 namespace Core

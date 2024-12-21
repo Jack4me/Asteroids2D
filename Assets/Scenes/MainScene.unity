@@ -256,7 +256,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 546331979}
-  - component: {fileID: 546331978}
   - component: {fileID: 546331982}
   - component: {fileID: 546331983}
   m_Layer: 0
@@ -266,27 +265,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &546331978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546331977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5b6a7e39a7cba24997f698204fd5a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  asteroidPrefab: {fileID: 1633222264296180790, guid: 08a4ba295b3ee7d40a2b748a5d946fe8, type: 3}
-  ufoPrefab: {fileID: 5911811416346187989, guid: ff29eeb61cd7fec4ea83ef52cd85e516, type: 3}
-  spawnPoints:
-  - {fileID: 1025919996}
-  - {fileID: 536225386}
-  - {fileID: 55541825}
-  - {fileID: 96353447}
-  maxAsteroids: 10
-  maxUFOs: 3
 --- !u!4 &546331979
 Transform:
   m_ObjectHideFlags: 0
