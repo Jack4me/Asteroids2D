@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Core.Ads_Plugin;
 using Core.Intrerfaces;
+using Core.Intrerfaces.Services;
 using Cysharp.Threading.Tasks;
 using Game;
 using UnityEngine;

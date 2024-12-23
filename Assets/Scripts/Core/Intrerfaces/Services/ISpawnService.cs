@@ -1,7 +1,7 @@
 ﻿using CodeBase.Infrastructure.Services;
 using Game;
 
-namespace Core.Intrerfaces
+namespace Core.Intrerfaces.Services
 {
     public interface ISpawnService : IService
     {

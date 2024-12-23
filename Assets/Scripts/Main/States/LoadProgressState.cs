@@ -1,6 +1,6 @@
-﻿using Main.States;
+﻿using Infrastructure.States;
 
-namespace Infrastructure.States {
+namespace Main.States {
     public class LoadProgressState : IState {
         private readonly GameStateMachine _gameStateMachine;
 

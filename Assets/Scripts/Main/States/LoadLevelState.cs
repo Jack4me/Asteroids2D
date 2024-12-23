@@ -4,6 +4,7 @@ using Core.Analytics;
 using Core.AssetsManagement;
 using Core.Factory;
 using Core.Intrerfaces;
+using Core.Intrerfaces.Services;
 using Core.Models;
 using Core.StaticData;
 using Firebase;
@@ -22,12 +23,15 @@ namespace Main.States {
         private readonly IStaticDataService _staticDataService;
         private readonly ISpawnService _spawnService;
        private SpawnPointsData spawnPointsData;
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader){
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,ISpawnService spawnService){
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            // _gameFactory = gameFactory;
+            
+            Debug.Log("LoadLevelState");
+
+           _gameFactory = gameFactory;
             // _staticDataService = staticDataService;
-            // _spawnService = spawnService;
+            _spawnService = spawnService;
             spawnPointsData = Resources.Load<SpawnPointsData>(AssetPath.SPAWNERS_ENEMY);
 
         }

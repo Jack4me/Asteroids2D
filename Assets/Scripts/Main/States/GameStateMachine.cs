@@ -7,20 +7,30 @@ using Core.StaticData;
 using Infrastructure.Ref.Services;
 using Main.States;
 using UnityEngine;
+using Zenject;
 
 namespace Infrastructure.States {
     public class GameStateMachine {
         private readonly Transform _transform;
-        private readonly Dictionary<Type, IExitableState> _state;
+        private  Dictionary<Type, IExitableState> _state;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader)
+
+        [Inject] private BootStrapState bootStrapState;
+        [Inject]  private LoadLevelState loadLevelState;
+        [Inject]  private LoadProgressState loadProgressState;
+        [Inject]  private GameLoopState gameLoopState;
+        
+        
+        [Inject]
+        public void Initialize()
         {
+            Debug.Log("GameStateMachine");
             _state = new Dictionary<Type, IExitableState>{
-                [typeof(BootStrapState)] = new BootStrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader),
-                [typeof(LoadProgressState)] = new LoadProgressState(this),
-                [typeof(GameLoopState)] = new GameLoopState(this)
+                [typeof(BootStrapState)] = bootStrapState,
+                [typeof(LoadLevelState)] = loadLevelState,
+                [typeof(LoadProgressState)] = loadProgressState,
+                [typeof(GameLoopState)] = gameLoopState
             };
         }
 

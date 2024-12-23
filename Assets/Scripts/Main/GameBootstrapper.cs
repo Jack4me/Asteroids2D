@@ -1,4 +1,5 @@
 ﻿using Core;
+using Infrastructure.States;
 using Main;
 using Main.States;
 using UnityEngine;
@@ -24,7 +25,15 @@ namespace Infrastructure
             {
                 Debug.Log("NULL _gameInit");
             }
-            _gameInit.StateMachine.EnterGeneric<BootStrapState>();
+            GameStateMachine stateMachine =  _gameInit.StateMachine;
+            
+            if (stateMachine == null)
+            {
+                Debug.LogError("StateMachine is not initialized!");
+                return;
+            }
+
+            stateMachine.EnterGeneric<BootStrapState>();
             DontDestroyOnLoad(this);
         }
     }

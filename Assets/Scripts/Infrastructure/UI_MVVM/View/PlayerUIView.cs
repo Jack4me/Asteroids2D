@@ -20,13 +20,16 @@ namespace Infrastructure.UI_MVVM.View
         private IPlayerViewModel _viewModelPlayer;
         private List<GameObject> hearts = new List<GameObject>();
 
-      
 
+        public void Construct(IPlayerViewModel playerViewModel)
+        {
+            _viewModelPlayer  = playerViewModel;
+
+        }
        
         private void Start()
 
         {
-            _viewModelPlayer = AllServices.Container.GetService<IPlayerViewModel>();
 
             _viewModelPlayer.PositionText.Subscribe(text => positionText.text = text).AddTo(this);
             _viewModelPlayer.SpeedText.Subscribe(text => speedText.text = text).AddTo(this);

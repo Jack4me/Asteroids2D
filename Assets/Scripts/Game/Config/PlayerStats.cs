@@ -24,7 +24,11 @@ namespace Game.Config
 
         private void Start()
         {
-            
+            if (_healthHandler == null)
+            {
+                Debug.LogError("HealthHandler is not assigned!");
+                return;
+            }
             Debug.Log($"Игрок: здоровье={health}, скорость={speed}, оружие={weaponName}");
             _healthHandler.SetStartHealth(health);
             _heroMove.SetSpeed(speed);

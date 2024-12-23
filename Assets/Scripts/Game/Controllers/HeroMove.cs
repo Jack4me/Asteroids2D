@@ -18,9 +18,14 @@ namespace Game.Controllers
 
         public float CurrentSpeed;
 
+
+        public void Construct(IInputService inputService )
+        {
+            _inputService =  inputService;
+
+        }
         private void Awake()
         {
-            _inputService = AllServices.Container.GetService<IInputService>();
             playerCollision = GetComponent<PlayerCollisionHandler>();
 
             playerCollision.OnControlLockRequested += LockControlDuration;

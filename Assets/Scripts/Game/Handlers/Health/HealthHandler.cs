@@ -1,8 +1,6 @@
 using System;
-using Core;
 using Core.Ads_Plugin;
 using Core.Intrerfaces;
-using Infrastructure.Ref.Services;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -14,22 +12,27 @@ namespace Game.Handlers.Health
         [SerializeField] private int maxHealth;
         private readonly int health;
         private readonly ReactiveProperty<int> currentHealth;
-        private IPlayerDataModel playerDataModel;
+        private IPlayerDataModel _playerDataModel;
 
 
-        public event Action OnDeath; // Событие смерти
+        public event Action OnDeath; 
 
-
-        private void Awake()
+        public void Construct(IPlayerDataModel playerDataModel)
         {
-            playerDataModel = AllServices.Container.GetService<IPlayerDataModel>();
+            _playerDataModel = playerDataModel;
+            if (_playerDataModel == null)
+            {
+            Debug.LogError("_playerDataModel");
+                
+            }
         }
+        
 
         public void TakeDamage(int damage)
         {
-            playerDataModel.Health.Value = Mathf.Max(0, playerDataModel.Health.Value - damage);
+            _playerDataModel.Health.Value = Mathf.Max(0, _playerDataModel.Health.Value - damage);
 
-            if (playerDataModel.Health.Value <= 0)
+            if (_playerDataModel.Health.Value <= 0)
             {
                 DeathPlayer();
                 OnDeath?.Invoke();
@@ -42,18 +45,13 @@ namespace Game.Handlers.Health
 
             Destroy(gameObject);
         }
-
-        public void Heal(int amount)
-        {
-            if (amount <= 0) return;
-
-            playerDataModel.Health.Value = Math.Min(playerDataModel.Health.Value + amount, maxHealth);
-        }
+        
 
         public void SetStartHealth(int hp)
         {
             maxHealth = hp;
-            playerDataModel.Health.Value = maxHealth;
+            
+            _playerDataModel.Health.Value = maxHealth;
         }
     }
 }

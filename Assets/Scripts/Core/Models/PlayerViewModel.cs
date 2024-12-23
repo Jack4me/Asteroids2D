@@ -13,10 +13,10 @@ namespace Core.Models
         public IReadOnlyReactiveProperty<int> HealthInt { get; }
         public IReadOnlyReactiveProperty<string> Score { get; }
         private IPlayerDataModel model;
-        public PlayerViewModel()
+        public PlayerViewModel(IPlayerDataModel playerDataModel)
         {
-          
-           model = AllServices.Container.GetService<IPlayerDataModel>();
+
+            model = playerDataModel;
             
            
             PositionText = model.Position.Select(pos => $"Position: {pos.x:F2}, {pos.y:F2}").ToReactiveProperty();

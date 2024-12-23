@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Core
@@ -16,6 +17,7 @@ namespace Core
         public void Load(string name, Action onLoaded = null)
         {
             _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+            Debug.Log("INITIAL SCENE" + name);
         }
 
         private IEnumerator LoadScene(string nextScene, Action onLoaded = null)

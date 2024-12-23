@@ -15,17 +15,18 @@ using UnityEngine;
 
 namespace Main.States
 {
-    internal class BootStrapState : IState
+    public class BootStrapState : IState
     {
         private const string INITIAL_LEVEL = "Initial";
         private readonly SceneLoader _sceneLoader;
         private readonly GameStateMachine _stateMachine;
-        private readonly AllServices _services;
+            // private readonly AllServices _services;
         private readonly Transform _transform;
 
         public BootStrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader
            )
         {
+            Debug.Log("BootStrapState");
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
 
@@ -69,7 +70,7 @@ namespace Main.States
         {
             IStaticDataService staticData = new StaticDataService();
             //  staticData.Load();
-            _services.RegisterService(staticData);
+           // _services.RegisterService(staticData);
         }
 
         private static IInputService RegisterInputServices()
