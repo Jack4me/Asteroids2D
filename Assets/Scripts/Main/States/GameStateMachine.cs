@@ -14,12 +14,11 @@ namespace Infrastructure.States {
         private readonly Dictionary<Type, IExitableState> _state;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, AllServices services)
+        public GameStateMachine(SceneLoader sceneLoader)
         {
             _state = new Dictionary<Type, IExitableState>{
-                [typeof(BootStrapState)] = new BootStrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
-                    services.GetService<IGameFactory>(), services.GetService<IStaticDataService>(), services.GetService<ISpawnService>()),
+                [typeof(BootStrapState)] = new BootStrapState(this, sceneLoader),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader),
                 [typeof(LoadProgressState)] = new LoadProgressState(this),
                 [typeof(GameLoopState)] = new GameLoopState(this)
             };

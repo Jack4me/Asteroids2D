@@ -46,7 +46,7 @@ namespace Main
            // Container.Bind<IScorable>().To<ScoreManager>().AsSingle();
            // Container.Bind<PlayerViewModel>().AsSingle();
            
-           Container.Bind<IGameFactory>().FromInstance(_gameFactory).AsSingle();
+           Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
             
         }
     }

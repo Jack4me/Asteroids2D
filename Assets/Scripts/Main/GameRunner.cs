@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Infrastructure;
+using UnityEngine;
 
-namespace Infrastructure {
+namespace Main {
     public class GameRunner : MonoBehaviour {
         public GameBootstrapper bootstrapper;
 

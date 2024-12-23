@@ -22,20 +22,18 @@ namespace Main.States {
         private readonly IStaticDataService _staticDataService;
         private readonly ISpawnService _spawnService;
        private SpawnPointsData spawnPointsData;
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader,
-            IGameFactory gameFactory,
-            IStaticDataService staticDataService, ISpawnService spawnService){
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader){
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            _gameFactory = gameFactory;
-            _staticDataService = staticDataService;
-            _spawnService = spawnService;
+            // _gameFactory = gameFactory;
+            // _staticDataService = staticDataService;
+            // _spawnService = spawnService;
             spawnPointsData = Resources.Load<SpawnPointsData>(AssetPath.SPAWNERS_ENEMY);
 
         }
 
         public void Enter(string sceneName){
-            _gameFactory.CleanUp();
+           // _gameFactory.CleanUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
