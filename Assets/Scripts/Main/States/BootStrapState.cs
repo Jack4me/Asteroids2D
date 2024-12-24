@@ -1,21 +1,9 @@
-﻿using System.IO;
-using CodeBase.Infrastructure.Services.Randomizer;
-using Core;
-using Core.Analytics;
-using Core.AssetsManagement;
-using Core.Factory;
-using Core.Intrerfaces;
-using Core.Intrerfaces.Services.Input;
-using Core.Models;
-using Core.Services;
-using Core.Services.Randomizer;
-using Core.StaticData;
+﻿using Core;
 using Firebase;
 using Firebase.Analytics;
-using Game;
-using Infrastructure.Ref.Services;
 using Infrastructure.States;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Main.States
 {
@@ -30,8 +18,8 @@ namespace Main.States
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
+
             InitAnalytics();
-            
         }
 
         public void Enter()

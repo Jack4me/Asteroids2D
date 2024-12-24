@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game
+namespace Core.StaticData
 {
     [CreateAssetMenu(fileName = "SpawnPointsData", menuName = "SpawnPoints")]
     public class SpawnPointsData : ScriptableObject

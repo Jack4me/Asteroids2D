@@ -1,5 +1,5 @@
 ﻿using Core.Services;
-using Game;
+using Core.StaticData;
 
 namespace Core.Intrerfaces.Services
 {

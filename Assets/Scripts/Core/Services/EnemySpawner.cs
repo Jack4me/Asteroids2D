@@ -3,8 +3,8 @@ using Core.Ads_Plugin;
 using Core.Analytics;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services;
+using Core.StaticData;
 using Cysharp.Threading.Tasks;
-using Game;
 using UnityEngine;
 
 namespace Core.Services
