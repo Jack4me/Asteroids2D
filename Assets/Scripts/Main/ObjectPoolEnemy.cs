@@ -19,17 +19,14 @@ namespace Main
         public ObjectPoolEnemy(IGameFactory gameFactory)
         {
             _gameFactory = gameFactory;
-              _poolContainer = _gameFactory.CreatePoolParent();
+            _poolContainer = _gameFactory.CreatePoolParent();
         }
 
 
         public GameObject GetFromPool(EnemyType enemyType)
         {
-            if (_poolContainer == null)
-            {
-                _poolContainer = GameObject.FindWithTag(POOL_PARENT).transform;
-                Debug.Log("POOL NULL");
-            }
+            _poolContainer = GameObject.FindWithTag(POOL_PARENT).transform;
+
 
             foreach (GameObject obj in _pool)
             {
@@ -51,7 +48,6 @@ namespace Main
             return newObj;
         }
 
-       
 
         public void ReturnToPool(Enemy obj)
         {
@@ -69,8 +65,5 @@ namespace Main
 
             return newObj;
         }
-
-
-       
     }
 }

@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core;
-using Core.Factory;
-using Core.Intrerfaces;
-using Core.StaticData;
-using Infrastructure.Ref.Services;
-using Main.States;
+using Infrastructure.States;
 using UnityEngine;
 using Zenject;
 
-namespace Infrastructure.States {
+namespace Main.States {
     public class GameStateMachine {
         private readonly Transform _transform;
         private  Dictionary<Type, IExitableState> _state;
@@ -25,7 +20,6 @@ namespace Infrastructure.States {
         [Inject]
         public void Initialize()
         {
-            Debug.Log("GameStateMachine");
             _state = new Dictionary<Type, IExitableState>{
                 [typeof(BootStrapState)] = bootStrapState,
                 [typeof(LoadLevelState)] = loadLevelState,

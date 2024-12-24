@@ -32,7 +32,6 @@ namespace Game
                 await UniTask.Yield();
             }
 
-            Debug.Log($"Bounce completed for {target.name}.");
         }
     }
 }

@@ -1,5 +1,6 @@
 using Core;
 using Infrastructure.States;
+using Main.States;
 using UnityEngine;
 
 namespace Main {
@@ -8,7 +9,6 @@ namespace Main {
    
         public GameInit(GameStateMachine gameStateMachine)
         {
-            Debug.Log("GAME INIT");
             StateMachine = gameStateMachine; 
         }
     }

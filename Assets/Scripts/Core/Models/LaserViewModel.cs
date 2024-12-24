@@ -21,7 +21,6 @@ namespace Core.Models
                 Debug.Log("PALUNDRA LASERMAN NULL");
             }
             _laserManager = laserManager;
-            Debug.Log(laserManager.CurrentLasers + "_laserManager");
             UpdateProgressData();
         }
 

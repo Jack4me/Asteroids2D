@@ -18,8 +18,6 @@ namespace Core
             { EnemyType.Ufo, 100 }
         };
 
-
-
         public ScoreManager(IPlayerDataModel playerDataModel)
         {
             _playerDataModel = playerDataModel;
@@ -33,13 +31,7 @@ namespace Core
             if (scoreTable.TryGetValue(enemyType, out int score))
             {
                 totalScore += score;
-                Debug.Log($"Enemy of type {enemyType} destroyed. Added {score} points. Total Score: {totalScore}");
             }
-            else
-            {
-                Debug.LogWarning($"No score defined for enemy type: {enemyType}");
-            }
-
             _playerDataModel.Score.Value = GetTotalScore();
         }
 

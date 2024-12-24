@@ -27,17 +27,14 @@ namespace Main.States {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             
-            Debug.Log("LoadLevelState");
 
            _gameFactory = gameFactory;
-            // _staticDataService = staticDataService;
             _spawnService = spawnService;
             spawnPointsData = Resources.Load<SpawnPointsData>(AssetPath.SPAWNERS_ENEMY);
 
         }
 
         public void Enter(string sceneName){
-           // _gameFactory.CleanUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
@@ -51,15 +48,15 @@ namespace Main.States {
         }
 
         private void InitGameWorld(){
-            InitSpawners();
+            InitAnalytics();
             _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
           LaserViewModel laserViewModel =  hero.GetComponent<PlayerController>().LaserViewModel;
            InitHud(laserViewModel);
-           
-          _gameFactory.CreatePoolParent();
+           _gameFactory.CreatePoolParent();
            InitEnemy(spawnPointsData);
 
+           
         }
 
         private void InitHud(LaserViewModel laserViewModel){
@@ -71,20 +68,11 @@ namespace Main.States {
             _spawnService.RunAsyncMethods(pointsData);
         }
 
-        private void InitSpawners(){
-            
-                        
-            // foreach (GameObject spawnerObj in GameObject.FindGameObjectsWithTag(ENEMYSPAWNER)){
-            //     var spawner = spawnerObj.GetComponent<EnemySpawner>();
-            //     _gameFactory.Register(spawner);
-            // }
-            var sceneNameKey = SceneManager.GetActiveScene().name;
-        }
+        
 
         public void InitAnalytics()
         {
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-            GameAnalytics.gameAnalytics.InterstitialAd();
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
                 if (task.Result == DependencyStatus.Available)
