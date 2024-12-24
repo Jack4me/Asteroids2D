@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using Core;
 using Core.Factory;
 using Core.Intrerfaces;
-using Game;
-using Infrastructure.Ref.Services;
 using UnityEngine;
 
 namespace Main

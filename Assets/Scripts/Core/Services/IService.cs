@@ -1,4 +1,4 @@
-﻿namespace CodeBase.Infrastructure.Services {
+﻿namespace Core.Services {
     public interface IService {
     }
 }

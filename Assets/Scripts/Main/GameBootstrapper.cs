@@ -10,7 +10,7 @@ namespace Infrastructure
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
         private GameInit _gameInit;
-        
+
 
         [Inject]
         public void Construct(GameInit gameInit)
@@ -20,13 +20,13 @@ namespace Infrastructure
 
         private void Awake()
         {
-
             if (_gameInit == null)
             {
                 Debug.Log("NULL _gameInit");
             }
-            GameStateMachine stateMachine =  _gameInit.StateMachine;
-            
+
+            GameStateMachine stateMachine = _gameInit.StateMachine;
+
             if (stateMachine == null)
             {
                 Debug.LogError("StateMachine is not initialized!");

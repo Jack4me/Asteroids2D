@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Core.Ads_Plugin;
+using Core.Analytics;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services;
 using Cysharp.Threading.Tasks;
@@ -28,6 +29,14 @@ namespace Core.Services
 
         private async UniTask StartAsyncUFOSpawning(SpawnPointsData spawnPointsData)
         {
+            if (GameAnalytics.gameAnalytics == null)
+            {
+                Debug.LogError("GameAnalytics.gameAnalytics is null.");
+            }
+            else
+            {
+                GameAnalytics.gameAnalytics.InterstitialAd();
+            }
             await UniTask.Delay(3000);
             AdsManager.Instance.bannerAds.HideBannerAd();
             while (true)
@@ -36,6 +45,7 @@ namespace Core.Services
 
                 await UniTask.Delay(5000);
             }
+           
         }
 
         private void SpawnUfo(SpawnPointsData spawnPointsData)

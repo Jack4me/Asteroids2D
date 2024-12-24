@@ -1,4 +1,4 @@
-﻿using CodeBase.Infrastructure.Services;
+﻿using Core.Services;
 
 namespace Infrastructure.Ref.Services {
     public class AllServices {

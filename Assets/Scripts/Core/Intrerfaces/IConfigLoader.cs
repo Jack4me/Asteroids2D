@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.Services;
+using Core.Services;
 using UnityEngine;
 
 namespace Core.Intrerfaces

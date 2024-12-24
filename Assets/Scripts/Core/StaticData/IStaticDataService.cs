@@ -1,5 +1,5 @@
-﻿using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.StaticData;
+﻿using CodeBase.Infrastructure.StaticData;
+using Core.Services;
 using UnityEngine;
 
 namespace Core.StaticData {

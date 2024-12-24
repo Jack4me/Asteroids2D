@@ -1,6 +1,6 @@
-﻿using CodeBase.Infrastructure.Services;
-using Core.Intrerfaces;
+﻿using Core.Intrerfaces;
 using Core.Models;
+using Core.Services;
 using UnityEngine;
 
 namespace Core.Factory {

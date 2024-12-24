@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.Services;
+using Core.Services;
 using UniRx;
 
 namespace Core.Intrerfaces

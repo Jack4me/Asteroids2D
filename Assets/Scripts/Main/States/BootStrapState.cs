@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.Services.Randomizer;
+﻿using System.IO;
+using CodeBase.Infrastructure.Services.Randomizer;
 using Core;
 using Core.Analytics;
 using Core.AssetsManagement;
@@ -9,6 +10,8 @@ using Core.Models;
 using Core.Services;
 using Core.Services.Randomizer;
 using Core.StaticData;
+using Firebase;
+using Firebase.Analytics;
 using Game;
 using Infrastructure.Ref.Services;
 using Infrastructure.States;
@@ -23,19 +26,12 @@ namespace Main.States
         private readonly GameStateMachine _stateMachine;
         private readonly Transform _transform;
 
-        public BootStrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader
-           )
+        public BootStrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader)
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            if (GameAnalytics.gameAnalytics == null)
-            {
-                Debug.LogError("GameAnalytics.gameAnalytics is null.");
-            }
-            else
-            {
-                GameAnalytics.gameAnalytics.InterstitialAd();
-            }
+            InitAnalytics();
+            
         }
 
         public void Enter()
@@ -52,6 +48,24 @@ namespace Main.States
             _stateMachine.EnterGeneric<LoadProgressState>();
         }
 
-        
+        public void InitAnalytics()
+        {
+            FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+            {
+                if (task.Result == DependencyStatus.Available)
+                {
+                    Debug.Log("Firebase initialized successfully.");
+
+                    // Логирование тестового события
+                    FirebaseAnalytics.LogEvent("test_event");
+                    Debug.Log("Test event sent.");
+                }
+                else
+                {
+                    Debug.LogError($"Could not resolve Firebase dependencies: {task.Result}");
+                }
+            });
+        }
     }
 }
