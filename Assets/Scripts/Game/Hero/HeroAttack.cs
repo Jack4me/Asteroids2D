@@ -21,9 +21,12 @@ namespace Game.Hero
 
          private LaserManager _laserManager;
 
-        private void Start()
-        {
-        }
+         public void Construct(IInputService inputService )
+         {
+             _inputService =  inputService;
+             
+
+         }
 
         private void Awake()
         {

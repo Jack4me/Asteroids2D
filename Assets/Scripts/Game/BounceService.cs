@@ -18,7 +18,7 @@ namespace Game
             Vector2 startPosition = target.position;
             Vector2 targetPosition = startPosition + collisionDirection * bounceForce;
 
-            float duration = 1f; // Длительность отскока
+            float duration = 1f; 
             float elapsed = 0f;
 
             while (elapsed < duration)
@@ -26,7 +26,7 @@ namespace Game
                 elapsed += Time.deltaTime;
                 float progress = elapsed / duration;
 
-                // Плавное перемещение
+               
                 target.position = Vector2.Lerp(startPosition, targetPosition, progress);
 
                 await UniTask.Yield();

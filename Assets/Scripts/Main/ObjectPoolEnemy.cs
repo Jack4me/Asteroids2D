@@ -16,10 +16,10 @@ namespace Main
         private Transform _poolContainer;
         private readonly IGameFactory _gameFactory;
 
-        public ObjectPoolEnemy()
+        public ObjectPoolEnemy(IGameFactory gameFactory)
         {
-            _gameFactory = AllServices.Container.GetService<IGameFactory>();
-            //  _poolContainer = _gameFactory.CreatePoolParent();
+            _gameFactory = gameFactory;
+              _poolContainer = _gameFactory.CreatePoolParent();
         }
 
 

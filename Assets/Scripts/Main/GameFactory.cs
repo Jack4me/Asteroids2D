@@ -10,6 +10,7 @@ using Core.StaticData;
 using Game;
 using Game.Controllers;
 using Game.Handlers.Health;
+using Game.Hero;
 using Infrastructure.UI_MVVM.View;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ namespace Main
         public GameFactory(
             IInstantiateProvider instantiate, IStaticDataService staticData, 
             IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer,
-            IScorable scoreManager, IBounceService bounceService)
+            IScorable scoreManager, IBounceService bounceService, IInputService inputService)
         {
             _instantiate = instantiate;
             _staticData = staticData;
@@ -43,7 +44,7 @@ namespace Main
             _viewModelPlayer = viewModelPlayer;
             _scoreManager = scoreManager;
             _bounceService = bounceService;
-           // _inputService = inputService;
+            _inputService = inputService;
         }
         public Transform CreatePoolParent()
         {
@@ -64,6 +65,7 @@ namespace Main
             HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel ; 
             HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
             HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);
+            HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService);
                        
      
             //remove and move to right place

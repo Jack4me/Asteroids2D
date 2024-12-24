@@ -3,6 +3,7 @@ using Core.Intrerfaces.Services.Input;
 using Cysharp.Threading.Tasks;
 using Infrastructure.Ref.Services;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Controllers
 {
@@ -17,11 +18,13 @@ namespace Game.Controllers
         private PlayerCollisionHandler playerCollision;
 
         public float CurrentSpeed;
-
-
+        
+        
+        
         public void Construct(IInputService inputService )
         {
             _inputService =  inputService;
+          
 
         }
         private void Awake()

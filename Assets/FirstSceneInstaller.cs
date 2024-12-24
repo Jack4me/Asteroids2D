@@ -18,13 +18,21 @@ using Main.States;
 using UnityEngine;
 using Zenject;
 
-public class FirstSceneInstaller : MonoInstaller{
-   
-        [SerializeField] private MonoBehaviour coroutineRunner; // GameObject с MonoBehaviour для ICoroutineRunner
+public class FirstSceneInstaller : MonoInstaller
+{
+    [SerializeField] private MonoBehaviour coroutineRunner; // GameObject с MonoBehaviour для ICoroutineRunner
 
-    public override void InstallBindings() {
-            Debug.Log("ALOOOOO");
-        // Бинд ICoroutineRunner
+    public override void InstallBindings()
+    {
+        if (Application.isEditor)
+        {
+            Container.Bind<IInputService>().To<StandaloneInputService>().AsSingle();
+        }
+        else
+        {
+            Container.Bind<IInputService>().To<MobileInputService>().AsSingle();
+        }
+
         Container.Bind<ICoroutineRunner>()
             .To<CoroutineRunnerWrapper>()
             .AsSingle()
@@ -32,22 +40,20 @@ public class FirstSceneInstaller : MonoInstaller{
 
         Container.Bind<SceneLoader>()
             .AsSingle();
-       
-        
-        
-        
+
+
         Container.Bind<BootStrapState>().AsSingle();
         Container.Bind<LoadLevelState>().AsSingle();
         Container.Bind<LoadProgressState>().AsSingle();
         Container.Bind<GameLoopState>().AsSingle();
-        
+
         Container.Bind<GameStateMachine>()
             .AsSingle();
 
         Container.Bind<GameInit>()
             .AsSingle();
-        
-        
+
+
         Container.Bind<IInstantiateProvider>().To<InstantiateProvider>().AsSingle();
         Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
         Container.Bind<IPlayerDataModel>().To<PlayerDataModel>().AsSingle();
@@ -56,12 +62,9 @@ public class FirstSceneInstaller : MonoInstaller{
         Container.Bind<IBounceService>().To<BounceService>().AsSingle();
         Container.Bind<ISpawnService>().To<EnemySpawner>().AsSingle();
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
-        
+
         Container.Bind<HealthHandler>().FromComponentInHierarchy().AsSingle();
         Container.Bind<IObjectPool>().To<ObjectPoolEnemy>().AsSingle();
-        Container.Bind<IInputService>().To<InputService>().AsSingle();
         
-        
-
     }
 }
