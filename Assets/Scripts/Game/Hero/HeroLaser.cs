@@ -7,7 +7,6 @@ namespace Game.Hero
     {
         public float Speed = 20f;
         public float LifeTime = 3f;
-        [SerializeField] private int dmg = 3;
 
         private void Start()
         {
