@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Hero
 {
-    public class PlayerLaser : MonoBehaviour
+    public class HeroLaser : MonoBehaviour
     {
         public float Speed = 20f;
         public float LifeTime = 3f;

@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
 using Game.Entities.Entities.UFO;
 using Game.Handlers.Health;
+using Game.Hero;
 using UnityEngine;
 
 namespace Game.Controllers
@@ -30,7 +31,7 @@ namespace Game.Controllers
 
 
         public event Action<float> OnControlLockRequested;
-
+        
         public void Construct(IBounceService bounceService)
         {
             _bounceService = bounceService;
@@ -38,6 +39,7 @@ namespace Game.Controllers
 
         private void Awake()
         {
+            HideInvincibilityEffect();
             _healthHandler = GetComponent<HealthHandler>();
             movementController = GetComponent<HeroMove>();
             _playerCollider = GetComponent<Collider2D>();
@@ -58,6 +60,7 @@ namespace Game.Controllers
 
         public void HandleCollision(Collider2D asteroidCollider)
         {
+
             if (isInvincible) return;
             isInvincible = true;
             if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
@@ -82,14 +85,16 @@ namespace Game.Controllers
             }
 
             EnableInvincibility().Forget();
-            ShowInvincibilityEffect();
+           
         }
 
 
         private async UniTask EnableInvincibility()
         {
-            isInvincible = true;
             ShowInvincibilityEffect();
+            await GetComponent<HeroBlink>().StartBlinking();
+
+            isInvincible = true;
 
             await UniTask.Delay((int)(invincibilityDuration * 1000));
             isInvincible = false;
@@ -100,12 +105,20 @@ namespace Game.Controllers
 
         private void ShowInvincibilityEffect()
         {
-            if (invincibilityEffect != null) invincibilityEffect.Play();
+            if (invincibilityEffect != null)
+            {
+                invincibilityEffect.gameObject.SetActive(true);
+                invincibilityEffect.Play();
+            }
         }
 
         private void HideInvincibilityEffect()
         {
-            if (invincibilityEffect != null) invincibilityEffect.Stop();
+            if (invincibilityEffect != null)
+            {
+                invincibilityEffect.Stop();
+                invincibilityEffect.gameObject.SetActive(false);
+            }
         }
     }
 }

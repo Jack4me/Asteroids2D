@@ -1,8 +1,8 @@
 using Core.Intrerfaces;
 using UnityEngine;
 
-namespace Game.Entities.Entities {
-    public class PlayerBullet : MonoBehaviour {
+namespace Game.Hero {
+    public class HeroBullet : MonoBehaviour {
         private readonly float speed = 15f;
         private readonly float lifeTime = 3f;
 
