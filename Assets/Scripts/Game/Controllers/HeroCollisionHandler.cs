@@ -17,7 +17,6 @@ namespace Game.Controllers
         [SerializeField] private ParticleSystem invincibilityEffect;
         [SerializeField] private float invincibilityDuration = 3;
         [SerializeField] private float lockDuration = 1;
-        [SerializeField] private bool isHandlingCollision;
 
         private HealthHandler _healthHandler;
         private bool isInvincible;
@@ -27,21 +26,10 @@ namespace Game.Controllers
         private HeroMove movementController;
         private IBounceService _bounceService;
         public Vector2 Velocity => velocity;
-
-        public int Health
-        {
-            get => health;
-            private set => health = Mathf.Clamp(value, 0, maxHealth);
-        }
+        
 
         public event Action<float> OnControlLockRequested;
-
-
-        public PlayerCollisionHandler()
-        {
-            isInvincible = false;
-        }
-
+        
         public void Construct(IBounceService bounceService)
         {
             _bounceService = bounceService;
@@ -50,8 +38,8 @@ namespace Game.Controllers
         private void Awake()
         {
             _healthHandler = GetComponent<HealthHandler>();
-
             movementController = GetComponent<HeroMove>();
+            
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -60,13 +48,10 @@ namespace Game.Controllers
 
             EnemyBullet enemyBullet = other.GetComponent<EnemyBullet>();
 
-            if (enemyBullet == null) // Если это не пуля
+            if (enemyBullet == null) 
             {
-                //var (direction, force) = CalculateBounce(other);
                 _bounceService.ApplyBounce(transform, other, 5);
-                //movementController.AddVelocity(direction, force);
             }
-
 
             HandleCollision(other);
         }
@@ -82,7 +67,7 @@ namespace Game.Controllers
 
         public void HandleCollision(Collider2D asteroidCollider)
         {
-            // if (isInvincible || isHandlingCollision) return;
+             if (isInvincible) return;
             isInvincible = true;
             if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
             {

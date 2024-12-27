@@ -25,16 +25,15 @@ namespace Game
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private int maxAsteroids = 10;
         [SerializeField] private int maxUFOs = 3;
-      // [Inject]
-       private IObjectPool poolAstro;
+
+        private IObjectPool poolAstro;
 
         private List<GameObject> activeAsteroids = new List<GameObject>();
         private List<GameObject> activeUFOs = new List<GameObject>();
 
-     
+
         private void Start()
         {
-
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
             GameAnalytics.gameAnalytics.InterstitialAd();
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -42,8 +41,6 @@ namespace Game
                 if (task.Result == DependencyStatus.Available)
                 {
                     Debug.Log("Firebase initialized successfully.");
-
-                    // Логирование тестового события
                     FirebaseAnalytics.LogEvent("test_event");
                     Debug.Log("Test event sent.");
                 }
@@ -53,7 +50,6 @@ namespace Game
                 }
             });
             RunAsyncMethods();
-
         }
 
 
@@ -65,11 +61,7 @@ namespace Game
 
         private async Task StartAsteroidSpawning()
         {
-          
-                AdsManager.Instance.bannerAds.ShowBannerAd();
-
-            
-
+            AdsManager.Instance.bannerAds.ShowBannerAd();
             await Task.Delay(1000);
 
             while (true)
@@ -79,13 +71,13 @@ namespace Game
                     SpawnAsteroid();
                 }
 
-                await Task.Delay(5000); 
+                await Task.Delay(5000);
             }
         }
 
         private async UniTask StartUFOSpawning()
         {
-            await UniTask.Delay(3000); 
+            await UniTask.Delay(3000);
             AdsManager.Instance.bannerAds.HideBannerAd();
             while (true)
             {
@@ -94,7 +86,7 @@ namespace Game
                     SpawnUfo();
                 }
 
-                await UniTask.Delay(5000); 
+                await UniTask.Delay(5000);
             }
         }
 
