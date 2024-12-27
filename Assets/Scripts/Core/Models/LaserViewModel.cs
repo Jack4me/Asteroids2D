@@ -14,12 +14,6 @@ namespace Core.Models
         private readonly DiContainer _container;
         public LaserViewModel(LaserManager laserManager)
         {
-            
-
-            if (laserManager == null)
-            {
-                Debug.Log("PALUNDRA LASERMAN NULL");
-            }
             _laserManager = laserManager;
             UpdateProgressData();
         }
