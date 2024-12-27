@@ -12,6 +12,7 @@ using Game.Controllers;
 using Game.Handlers.Health;
 using Game.Hero;
 using Infrastructure.UI_MVVM.View;
+using Infrastructure.UI.View;
 using UnityEngine;
 
 namespace Main
@@ -66,7 +67,7 @@ namespace Main
             HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
             HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);
             HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService);
-                       
+            HeroGameObject.GetComponentInChildren<LaserUIController>().Initialize(laserViewModel); 
      
             //remove and move to right place
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
