@@ -37,13 +37,13 @@ namespace Core.Services
             {
                 GameAnalytics.gameAnalytics.InterstitialAd();
             }
-            await UniTask.Delay(3000);
+            await UniTask.Delay(7000);
             AdsManager.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 SpawnUfo(spawnPointsData);
 
-                await UniTask.Delay(5000);
+                await UniTask.Delay(13000);
             }
            
         }
