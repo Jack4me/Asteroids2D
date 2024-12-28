@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.990566, g: 0.8201261, b: 0.126157, a: 0.3882353}
+  m_Color: {r: 0.42212582, g: 1, b: 0, a: 0.77254903}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7822465019992695988
@@ -451,8 +451,6 @@ MonoBehaviour:
   firePoint: {fileID: 5075289586232242357}
   laserCooldown: 0.3
   bulletCooldown: 0.1
-  lastLaserFireTime: 0
-  lastBulletFireTime: 0
 --- !u!114 &731178172648077588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,12 +463,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32078c5366ea11478dd3496cac966ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBounceForce: 10
-  asteroidBounceForce: 15
-  maxHealth: 5
-  invincibilityEffect: {fileID: 2143038422618585753}
-  invincibilityDuration: 1
-  lockDuration: 1
+  _playerBounceForce: 30
+  _asteroidBounceForce: 30
+  _invincibilityEffect: {fileID: 8838989599158506714}
+  _invincibilityDuration: 0.5
+  _lockDuration: 1
 --- !u!114 &-8315362413760857782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,6 +576,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 836407988941011157}
     m_Modifications:
+    - target: {fileID: 1190420508257855600, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1432503776327017652, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
       propertyPath: looping
       value: 0
@@ -652,13 +653,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1190420508257855600, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
---- !u!198 &2143038422618585753 stripped
+--- !u!198 &8838989599158506714 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1432503776327017652, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8428129062985534199, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
   m_PrefabInstance: {fileID: 1034944521517997613}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8877254767720353018 stripped
