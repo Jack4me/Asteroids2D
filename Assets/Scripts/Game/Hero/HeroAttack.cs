@@ -15,27 +15,21 @@ namespace Game.Hero
         [SerializeField] private float laserCooldown;
         [SerializeField] private float bulletCooldown;
 
-        [SerializeField] private float lastLaserFireTime;
-        [SerializeField] private float lastBulletFireTime;
+        private float lastLaserFireTime;
+        private float lastBulletFireTime;
         private IInputService _inputService;
 
-         private LaserManager _laserManager;
+        private LaserManager _laserManager;
 
-         public void Construct(IInputService inputService )
-         {
-             _inputService =  inputService;
-             
-
-         }
+        public void Construct(IInputService inputService)
+        {
+            _inputService = inputService;
+        }
 
         private void Awake()
         {
             _inputService = AllServices.Container.GetService<IInputService>();
             laserManager = FindObjectOfType<LaserManager>();
-            if (_laserManager != null)
-            {
-                Debug.Log("LaserManager успешно инжектирован!");
-            }
         }
 
         private void Update()
@@ -56,7 +50,7 @@ namespace Game.Hero
         {
             if (Time.time - lastLaserFireTime < laserCooldown) return;
 
-            Object.Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
+            Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
             lastLaserFireTime = Time.time;
         }
 
