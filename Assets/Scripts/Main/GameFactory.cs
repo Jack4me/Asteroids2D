@@ -30,7 +30,6 @@ namespace Main
         private readonly IScorable _scoreManager;
         private readonly IBounceService _bounceService;
         private readonly IInputService _inputService;
-        private readonly IConfigLoader _configLoader;
         private GameConfigs _configs;
 
 
