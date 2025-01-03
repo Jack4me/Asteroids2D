@@ -48,7 +48,7 @@ namespace Main.States {
         }
 
         private void InitGameWorld(){
-           // InitAnalytics();
+            InitAnalytics();
             _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
           LaserViewModel laserViewModel =  hero.GetComponent<PlayerController>().LaserViewModel;

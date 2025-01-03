@@ -13,12 +13,10 @@ namespace Core
         {
             _coroutineRunner = coroutineRunner;
         }
-
         public void Load(string name, Action onLoaded = null)
         {
             _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
         }
-
         private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
         {
             if (SceneManager.GetActiveScene().name == nextScene)
@@ -26,7 +24,6 @@ namespace Core
                 onLoaded?.Invoke();
                 yield break;
             }
-
             var waitAsync = SceneManager.LoadSceneAsync(nextScene);
             while (!waitAsync.isDone) yield return null;
             onLoaded?.Invoke();

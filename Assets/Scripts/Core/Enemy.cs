@@ -28,7 +28,6 @@ namespace Core
             _bounceService = bounceService;
         }
 
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out LaserManager heroMove))
@@ -64,7 +63,7 @@ namespace Core
             else
             {
                 Debug.LogError("Object pool is not assigned for this entity!");
-                Destroy(gameObject); // Если пула нет, удаляем объект
+                Destroy(gameObject);
             }
         }
 
@@ -74,10 +73,8 @@ namespace Core
             {
                 EnemyType.Large => EnemyType.Medium,
                 EnemyType.Medium => EnemyType.Small,
-                _ => EnemyType.None, // Если нет следующего размера
+                _ => EnemyType.None,
             };
         }
-
-        public int GetScore() => score;
     }
 }
