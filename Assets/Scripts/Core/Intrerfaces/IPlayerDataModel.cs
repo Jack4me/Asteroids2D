@@ -1,10 +1,9 @@
-using Core.Services;
 using UniRx;
 using UnityEngine;
 
 namespace Core.Intrerfaces
 {
-    public interface IPlayerDataModel : IService
+    public interface IPlayerDataModel
     {
         public ReactiveProperty<Vector2> Position { get; }
         public ReactiveProperty<float> Speed { get;  }

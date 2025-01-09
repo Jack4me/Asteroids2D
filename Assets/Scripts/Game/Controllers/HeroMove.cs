@@ -1,8 +1,6 @@
 using Core.Intrerfaces.Services.Input;
 using Cysharp.Threading.Tasks;
-using Infrastructure.Ref.Services;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Controllers
 {
@@ -16,7 +14,6 @@ namespace Game.Controllers
         [SerializeField] private float acceleration;
         private PlayerCollisionHandler playerCollision;
 
-        public float CurrentSpeed;
         
         
         
@@ -46,7 +43,6 @@ namespace Game.Controllers
             }
 
             ApplyFriction();
-            CurrentSpeed = velocity.magnitude;
         }
 
         public void HandleMovement(Vector2 _inputService)
@@ -58,7 +54,7 @@ namespace Game.Controllers
 
         private void ApplyFriction()
         {
-            velocity *= 0.9999f;
+            velocity *= 0.9990f;
             if (velocity.magnitude < 0.01f)
             {
                 velocity = Vector2.zero;

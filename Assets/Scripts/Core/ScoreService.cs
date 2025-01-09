@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using Core.Intrerfaces;
-using Infrastructure.Ref.Services;
-using UnityEngine;
 
 namespace Core
 {
-    public class ScoreManager : IScorable
+    public class ScoreService : IScorable
     {
         private readonly IPlayerDataModel _playerDataModel;
 
@@ -18,7 +15,7 @@ namespace Core
             { EnemyType.Ufo, 100 }
         };
 
-        public ScoreManager(IPlayerDataModel playerDataModel)
+        public ScoreService(IPlayerDataModel playerDataModel)
         {
             _playerDataModel = playerDataModel;
         }

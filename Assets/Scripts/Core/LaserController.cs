@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public class LaserManager : MonoBehaviour
+    public class LaserController : MonoBehaviour
     {
         [SerializeField] public int maxLasers = 3;
         [SerializeField] private float reloadTime = 2f;

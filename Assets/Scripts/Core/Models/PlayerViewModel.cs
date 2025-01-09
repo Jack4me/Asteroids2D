@@ -1,5 +1,4 @@
 using Core.Intrerfaces;
-using Infrastructure.Ref.Services;
 using UniRx;
 
 namespace Core.Models
@@ -13,12 +12,10 @@ namespace Core.Models
         public IReadOnlyReactiveProperty<int> HealthInt { get; }
         public IReadOnlyReactiveProperty<string> Score { get; }
         private IPlayerDataModel model;
+
         public PlayerViewModel(IPlayerDataModel playerDataModel)
         {
-
             model = playerDataModel;
-            
-           
             PositionText = model.Position.Select(pos => $"Position: {pos.x:F2}, {pos.y:F2}").ToReactiveProperty();
             SpeedText = model.Speed.Select(speed => $"Speed: {speed:F2}").ToReactiveProperty();
             RotationText = model.RotationAngle.Select(angle => $"Rotation: {angle:F0}°").ToReactiveProperty();

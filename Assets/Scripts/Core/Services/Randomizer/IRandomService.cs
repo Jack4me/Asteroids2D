@@ -1,5 +1,6 @@
 ﻿namespace Core.Services.Randomizer {
-    public interface IRandomService : IService {
+    public interface IRandomService
+    {
         int Next(int minValue, int maxValue);
     }
 }

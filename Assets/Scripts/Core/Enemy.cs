@@ -9,7 +9,7 @@ namespace Core
     {
         public IObjectPool _pool;
         public EnemyType enemyType;
-        public ScoreManager ScoreManager;
+        public ScoreService ScoreService;
 
 
         private IScorable _score;
@@ -30,7 +30,7 @@ namespace Core
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out LaserManager heroMove))
+            if (other.TryGetComponent(out LaserController heroMove))
             {
                 _bounceService.ApplyBounce(transform, other, 5);
             }

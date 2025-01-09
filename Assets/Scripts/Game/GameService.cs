@@ -16,7 +16,7 @@ using Random = UnityEngine.Random;
 
 namespace Game
 {
-    public class GameManager : MonoBehaviour
+    public class GameService : MonoBehaviour
     {
         [SerializeField] private GameObject asteroidPrefab;
 
@@ -61,7 +61,7 @@ namespace Game
 
         private async Task StartAsteroidSpawning()
         {
-            AdsManager.Instance.bannerAds.ShowBannerAd();
+            AdsService.Instance.bannerAds.ShowBannerAd();
             await Task.Delay(1000);
 
             while (true)
@@ -78,7 +78,7 @@ namespace Game
         private async UniTask StartUFOSpawning()
         {
             await UniTask.Delay(3000);
-            AdsManager.Instance.bannerAds.HideBannerAd();
+            AdsService.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 if (activeUFOs.Count < maxUFOs)

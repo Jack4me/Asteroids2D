@@ -59,9 +59,9 @@ namespace Main
             IPlayerController playerController = HeroGameObject.GetComponent<IPlayerController>();
             playerController.Construct(_playerDataModel);
             _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
-            LaserManager laserManager = HeroGameObject.GetComponent<LaserManager>();
+            LaserController laserController = HeroGameObject.GetComponent<LaserController>();
            HeroGameObject.GetComponent<HealthHandler>().Construct(_playerDataModel);
-            LaserViewModel laserViewModel = new LaserViewModel(laserManager);
+            LaserViewModel laserViewModel = new LaserViewModel(laserController);
             HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel ; 
             HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
             HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);

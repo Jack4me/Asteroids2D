@@ -1,11 +1,10 @@
-﻿using CodeBase.Infrastructure.StaticData;
-using Core.Services;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Core.StaticData {
-    public interface IStaticDataService : IService {
+namespace Core.StaticData
+{
+    public interface IStaticDataService
+    {
         void LoadStaticData();
-        UnitConfig GetUnitConfig();
         GameObject GetEnemyPrefab(EnemyType enemyType);
     }
 }

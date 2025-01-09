@@ -1,8 +1,6 @@
-using Core.Services;
-
 namespace Core.Intrerfaces
 {
-    public interface IScorable : IService
+    public interface IScorable
     {
         int GetTotalScore();
         void NotifyEnemyDestroyed(EnemyType enemyType);

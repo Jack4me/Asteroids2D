@@ -1,9 +1,8 @@
-using Core.Services;
 using UniRx;
 
 namespace Core.Intrerfaces
 {
-    public interface IPlayerViewModel : IService
+    public interface IPlayerViewModel
     {
         public IReadOnlyReactiveProperty<string> PositionText { get; }
         public IReadOnlyReactiveProperty<string> SpeedText { get; }

@@ -6,10 +6,7 @@ namespace Core.StaticData {
     public class StaticDataService : IStaticDataService {
         private UnitConfig _unitConfig;
         private Dictionary<EnemyType, GameObject> _enemyPrefabs;
-        public UnitConfig GetUnitConfig(){
-            return _unitConfig;
-        }
-
+       
         public void LoadStaticData(){
             _enemyPrefabs = new Dictionary<EnemyType, GameObject>
             {

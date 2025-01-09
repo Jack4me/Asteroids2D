@@ -1,11 +1,9 @@
-﻿using Core.Services;
-using Core.StaticData;
+﻿using Core.StaticData;
 
 namespace Core.Intrerfaces.Services
 {
-    public interface ISpawnService : IService
+    public interface ISpawnService
     {
-       
         public void RunAsyncMethods(SpawnPointsData spawnPointsData);
     }
 }

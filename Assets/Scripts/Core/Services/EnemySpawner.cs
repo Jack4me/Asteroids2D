@@ -38,7 +38,7 @@ namespace Core.Services
                 GameAnalytics.gameAnalytics.InterstitialAd();
             }
             await UniTask.Delay(7000);
-            AdsManager.Instance.bannerAds.HideBannerAd();
+            AdsService.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 SpawnUfo(spawnPointsData);
@@ -50,7 +50,7 @@ namespace Core.Services
 
         private void SpawnUfo(SpawnPointsData spawnPointsData)
         {
-            AdsManager.Instance.bannerAds.ShowBannerAd();
+            AdsService.Instance.bannerAds.ShowBannerAd();
 
             GameObject ufo = _pool.GetFromPool(EnemyType.Ufo);
             Vector3 spawnPoint = GetRandomSpawnPoint(spawnPointsData);

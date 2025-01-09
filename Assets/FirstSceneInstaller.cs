@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Core;
 using Core.AssetsManagement;
 using Core.Factory;
@@ -8,11 +6,9 @@ using Core.Intrerfaces.Services;
 using Core.Intrerfaces.Services.Input;
 using Core.Models;
 using Core.Services;
-using Core.Services.Randomizer;
 using Core.StaticData;
 using Game;
 using Game.Handlers.Health;
-using Infrastructure.States;
 using Main;
 using Main.States;
 using UnityEngine;
@@ -20,7 +16,7 @@ using Zenject;
 
 public class FirstSceneInstaller : MonoInstaller
 {
-    [SerializeField] private MonoBehaviour coroutineRunner; // GameObject с MonoBehaviour для ICoroutineRunner
+    [SerializeField] private MonoBehaviour coroutineRunner; 
 
     public override void InstallBindings()
     {
@@ -58,7 +54,7 @@ public class FirstSceneInstaller : MonoInstaller
         Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
         Container.Bind<IPlayerDataModel>().To<PlayerDataModel>().AsSingle();
         Container.Bind<IPlayerViewModel>().To<PlayerViewModel>().AsSingle();
-        Container.Bind<IScorable>().To<ScoreManager>().AsSingle();
+        Container.Bind<IScorable>().To<ScoreService>().AsSingle();
         Container.Bind<IBounceService>().To<BounceService>().AsSingle();
         Container.Bind<ISpawnService>().To<EnemySpawner>().AsSingle();
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();

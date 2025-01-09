@@ -1,10 +1,10 @@
 ﻿using Core.Intrerfaces;
 using Core.Models;
-using Core.Services;
 using UnityEngine;
 
 namespace Core.Factory {
-    public interface IGameFactory : IService {
+    public interface IGameFactory
+    {
         GameObject CreateHero(GameObject at);
 
         GameObject CreateHud(LaserViewModel laserViewModel);

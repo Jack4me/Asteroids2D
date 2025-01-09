@@ -1,5 +1,4 @@
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace Core.Models
@@ -7,29 +6,24 @@ namespace Core.Models
     public class LaserViewModel
     {
         public ReactiveProperty<int> LaserCount { get; set; }
-        public ReactiveProperty<float> ReloadProgress { get; set;}
-
-        private LaserManager _laserManager;
-
+        public ReactiveProperty<float> ReloadProgress { get; set; }
+        private LaserController _laserController;
         private readonly DiContainer _container;
-        public LaserViewModel(LaserManager laserManager)
+
+        public LaserViewModel(LaserController laserController)
         {
-            _laserManager = laserManager;
+            _laserController = laserController;
             UpdateProgressData();
         }
 
-    
-
-       public void UpdateProgressData()
+        public void UpdateProgressData()
         {
-            LaserCount = new ReactiveProperty<int>(_laserManager.CurrentLasers);
+            LaserCount = new ReactiveProperty<int>(_laserController.CurrentLasers);
             ReloadProgress = new ReactiveProperty<float>(1.0f);
-            _laserManager.OnReloadProgress += UpdateReloadProgress;
-
-
+            _laserController.OnReloadProgress += UpdateReloadProgress;
             Observable.EveryUpdate()
-                .Subscribe(_ => LaserCount.Value = _laserManager.CurrentLasers)
-                .AddTo(_laserManager);
+                .Subscribe(_ => LaserCount.Value = _laserController.CurrentLasers)
+                .AddTo(_laserController);
         }
 
         private void UpdateReloadProgress(float progress)

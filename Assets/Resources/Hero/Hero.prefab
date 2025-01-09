@@ -433,7 +433,6 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   rotationSpeed: 180
   acceleration: 3
-  CurrentSpeed: 0
 --- !u!114 &7340978737006129551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9652fb6d06cbec4458cf4aeef2d9418b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserController: {fileID: 2687041527879297894}
   laserPrefab: {fileID: 5462292197805791010, guid: fa8e1ca7aa36c0948ade8c2f2fc8ce26, type: 3}
   bulletPrefab: {fileID: 8961894113111443705, guid: ef3c225efc576c84e93c0738717e2283, type: 3}
   firePoint: {fileID: 5075289586232242357}

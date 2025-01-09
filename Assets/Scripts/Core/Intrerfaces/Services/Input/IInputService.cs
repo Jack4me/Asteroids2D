@@ -1,8 +1,8 @@
-using Core.Services;
 using UnityEngine;
 
 namespace Core.Intrerfaces.Services.Input {
-    public interface IInputService : IService {
+    public interface IInputService
+    {
         Vector2 Axis{ get; }
 
         bool IsAttackBulletButton();
