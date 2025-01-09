@@ -10,7 +10,6 @@ using Core.StaticData;
 using Game.Controllers;
 using Game.Handlers.Health;
 using Game.Hero;
-using Infrastructure.UI_MVVM.View;
 using Infrastructure.UI.View;
 using UnityEngine;
 

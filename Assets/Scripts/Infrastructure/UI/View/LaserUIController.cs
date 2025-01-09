@@ -1,4 +1,3 @@
-using System;
 using Core.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,13 +10,11 @@ namespace Infrastructure.UI.View
         [SerializeField] private Transform missileIconContainer;
         [SerializeField] private GameObject missileIconPrefab;
         [SerializeField] private Image reloadCircle;
-
         private LaserViewModel _viewModel;
 
         private void Start()
         {
             reloadCircle.gameObject.SetActive(false);
-
             _viewModel.ReloadProgress
                 .Subscribe(progress =>
                 {
@@ -37,11 +34,9 @@ namespace Infrastructure.UI.View
         public void Initialize(LaserViewModel viewModel)
         {
             _viewModel = viewModel;
-
             _viewModel.LaserCount
                 .Subscribe(UpdateMissileIcons)
                 .AddTo(this);
-
             _viewModel.ReloadProgress
                 .Subscribe(UpdateReloadCircle)
                 .AddTo(this);

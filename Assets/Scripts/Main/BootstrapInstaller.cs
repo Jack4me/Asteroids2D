@@ -1,5 +1,3 @@
-using Core;
-using Infrastructure;
 using Zenject;
 
 namespace Main

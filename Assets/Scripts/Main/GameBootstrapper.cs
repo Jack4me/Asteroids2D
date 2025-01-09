@@ -1,16 +1,13 @@
 ﻿using Core;
-using Infrastructure.States;
-using Main;
 using Main.States;
 using UnityEngine;
 using Zenject;
 
-namespace Infrastructure
+namespace Main
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
         private GameInit _gameInit;
-
 
         [Inject]
         public void Construct(GameInit gameInit)
@@ -26,7 +23,6 @@ namespace Infrastructure
             }
 
             GameStateMachine stateMachine = _gameInit.StateMachine;
-
             if (stateMachine == null)
             {
                 Debug.LogError("StateMachine is not initialized!");

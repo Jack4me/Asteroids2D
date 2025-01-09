@@ -15,33 +15,23 @@ namespace Infrastructure.UI.View
         [SerializeField] private TextMeshProUGUI score;
         [SerializeField] private Transform heartsContainer; // Контейнер для сердечек
         [SerializeField] private GameObject heartPrefab; // Префаб сердечка
-
         private IPlayerViewModel _viewModelPlayer;
         private List<GameObject> hearts = new List<GameObject>();
 
-
         public void Construct(IPlayerViewModel playerViewModel)
         {
-            _viewModelPlayer  = playerViewModel;
-
+            _viewModelPlayer = playerViewModel;
         }
-       
+
         private void Start()
-
         {
-
             _viewModelPlayer.PositionText.Subscribe(text => positionText.text = text).AddTo(this);
             _viewModelPlayer.SpeedText.Subscribe(text => speedText.text = text).AddTo(this);
             _viewModelPlayer.RotationText.Subscribe(text => rotationText.text = text).AddTo(this);
             _viewModelPlayer.Health.Subscribe(text => health.text = text).AddTo(this);
-
             _viewModelPlayer.HealthInt.Subscribe(UpdateHearts).AddTo(this);
             _viewModelPlayer.Score.Subscribe(text => score.text = text).AddTo(this);
-            
         }
-
-       
-
 
         private void UpdateHearts(int health)
         {
@@ -51,14 +41,11 @@ namespace Infrastructure.UI.View
                 hearts.RemoveAt(0);
             }
 
-            // Добавляем недостающие сердечки (справа налево)
             while (hearts.Count < health)
             {
                 GameObject newHeart = Instantiate(heartPrefab, heartsContainer);
                 hearts.Add(newHeart);
             }
         }
-
-        
     }
 }

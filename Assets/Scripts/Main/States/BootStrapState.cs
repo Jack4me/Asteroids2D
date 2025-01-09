@@ -3,7 +3,6 @@ using Firebase;
 using Firebase.Analytics;
 using Infrastructure.States;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Main.States
 {
@@ -18,7 +17,6 @@ namespace Main.States
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-
             InitAnalytics();
         }
 

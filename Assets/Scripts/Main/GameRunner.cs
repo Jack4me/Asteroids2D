@@ -1,5 +1,4 @@
-﻿using Infrastructure;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Main {
     public class GameRunner : MonoBehaviour {

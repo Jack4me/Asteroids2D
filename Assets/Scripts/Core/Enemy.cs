@@ -10,15 +10,11 @@ namespace Core
         public IObjectPool _pool;
         public EnemyType enemyType;
         public ScoreService ScoreService;
-
-
         private IScorable _score;
         private IBounceService _bounceService;
-        [field: SerializeField] public int Damage { get; set; }
-        public int score { get; set; }
+        public int Damage { get; set; }
         public int Health { get; set; }
         public float Speed { get; set; }
-
         public event Action<GameObject> OnDestroyed;
 
         public void Initialize(IObjectPool objectPool, IScorable score, IBounceService bounceService)
@@ -28,24 +24,14 @@ namespace Core
             _bounceService = bounceService;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out LaserController heroMove))
-            {
-                _bounceService.ApplyBounce(transform, other, 5);
-            }
-        }
-
         public virtual void TakeDamage(int damage)
         {
             Health -= damage;
-
             if (Health <= 0)
             {
                 DestroyEntity();
             }
         }
-
 
         public virtual void DestroyEntity()
         {
@@ -75,6 +61,14 @@ namespace Core
                 EnemyType.Medium => EnemyType.Small,
                 _ => EnemyType.None,
             };
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out LaserController heroMove))
+            {
+                _bounceService.ApplyBounce(transform, other, 5);
+            }
         }
     }
 }
