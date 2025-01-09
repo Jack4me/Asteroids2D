@@ -5,8 +5,7 @@ namespace Core.Factory
 {
     public interface IPlayerController
     {
-        public LaserViewModel LaserViewModel {get; set; }
-        public   void Construct(IPlayerDataModel dataModel);
-     
+        public LaserViewModel LaserViewModel { get; set; }
+        public void Construct(IPlayerDataModel dataModel);
     }
 }

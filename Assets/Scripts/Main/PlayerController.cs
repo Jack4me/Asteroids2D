@@ -10,7 +10,6 @@ namespace Main
     {
         private IPlayerDataModel playerDataModel;
         private HeroMove _heroMove;
-
         public LaserViewModel LaserViewModel { get; set; }
 
         public void Construct(IPlayerDataModel playerDataModel)
@@ -19,13 +18,11 @@ namespace Main
             _heroMove = GetComponent<HeroMove>();
         }
 
-
         private void Update()
         {
             playerDataModel.Position.Value = transform.position;
             playerDataModel.RotationAngle.Value = transform.eulerAngles.z;
             playerDataModel.Speed.Value = _heroMove.velocity.magnitude;
-            
         }
     }
 }
