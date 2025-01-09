@@ -6,23 +6,21 @@ namespace Game.Entities.Entities.UFO
     public class ShootingEnemyController : MonoBehaviour
     {
         [Header("Movement Settings")] [SerializeField]
-        private float speed = 3f; 
-        [SerializeField] private float stopDistance = 1.5f; 
+        private float speed = 3f;
+
+        [SerializeField] private float stopDistance = 1.5f;
+
         [Header("Shooting Settings")] [SerializeField]
-        private GameObject bulletPrefab; 
+        private GameObject bulletPrefab;
 
-        [SerializeField] private Transform firePoint; 
-        [SerializeField] private float shootCooldown = 5f; 
-
-        private Transform playerTransform; 
-        private Vector2 velocity; 
-        private float lastShootTime; 
+        [SerializeField] private Transform firePoint;
+        [SerializeField] private float shootCooldown = 5f;
+        private Transform playerTransform;
+        private Vector2 velocity;
+        private float lastShootTime;
 
         private void Awake()
         {
-            // 
-            // ПРОКИНУТЬ ИГРОКА ЧЕРЕЗ ЗЕНЖЕКТ
-            // 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {
@@ -47,25 +45,21 @@ namespace Game.Entities.Entities.UFO
         {
             Vector2 directionToPlayer = (playerTransform.position - transform.position).normalized;
             float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-            // Если враг находится дальше, чем расстояние остановки, он продолжает двигаться
             if (distanceToPlayer > stopDistance)
             {
                 velocity = directionToPlayer * speed;
                 transform.position += (Vector3)velocity * Time.deltaTime;
-                // Поворот врага в сторону игрока
                 float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, angle - 90);
             }
             else
             {
-                // Если враг близко к игроку, он останавливается
                 velocity = Vector2.zero;
             }
         }
 
         private void HandleShooting()
         {
-            // Если прошло достаточно времени с момента последнего выстрела
             if (Time.time - lastShootTime >= shootCooldown)
             {
                 ShootAtPlayer();

@@ -1,5 +1,4 @@
 using Core;
-using Core.Intrerfaces;
 using UnityEngine;
 
 namespace Game.Entities.Entities.UFO {

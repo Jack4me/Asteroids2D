@@ -1,4 +1,3 @@
-using System;
 using Core;
 using Game.Controllers;
 using UnityEngine;
@@ -9,13 +8,15 @@ namespace Game.Entities.Entities.UFO
     {
         private readonly float speed = 15f;
         private readonly float lifeTime = 3f;
-        [field: SerializeField]  public int Damage { get; set; }
+         public int Damage { get; set; }
 
-        private void Start() {
+        private void Start()
+        {
             Destroy(gameObject, lifeTime);
         }
 
-        private void Update() {
+        private void Update()
+        {
             transform.Translate(Vector2.up * speed * Time.deltaTime);
         }
 
