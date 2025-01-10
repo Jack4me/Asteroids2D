@@ -1,4 +1,3 @@
-using Game.Entities.Entities.Enemies;
 using UnityEngine;
 
 namespace Game.Entities.Entities.UFO

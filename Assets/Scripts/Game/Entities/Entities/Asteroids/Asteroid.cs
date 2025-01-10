@@ -1,4 +1,3 @@
-using System;
 using Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,15 +10,15 @@ namespace Game.Entities.Entities.Asteroids
         [SerializeField] private EnemyType size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
         private AsteroidMovement asteroid;
+
         private void Awake()
         {
-         asteroid = GetComponent<AsteroidMovement>();
+            asteroid = GetComponent<AsteroidMovement>();
         }
 
         private void Start()
         {
             asteroid.SetSpeed(Speed);
-
         }
 
         public override void TakeDamage(int damage)
@@ -34,7 +33,7 @@ namespace Game.Entities.Entities.Asteroids
                 ReturnToPool();
             }
 
-            base.TakeDamage(damage); // Вызываем базовую логику получения урона
+            base.TakeDamage(damage);
         }
 
         private void SpawnSmallerAsteroids()
@@ -42,21 +41,20 @@ namespace Game.Entities.Entities.Asteroids
             if (_pool == null)
             {
                 Debug.LogError("_pool is not assigned!", this);
-                return; // Прерывает выполнение метода, если префаб не назначен
+                return;
             }
 
             var nextType = GetNextAsteroidType(size);
             if (nextType == EnemyType.None)
             {
                 Debug.Log("No smaller asteroid type available.");
-                return; // Если астероид не может быть уменьшен
+                return;
             }
 
             for (int i = 0; i < 2; i++)
             {
                 if (smallerAsteroidPrefab == null) return;
                 var smallerAsteroid = _pool.GetFromPool(nextType);
-
                 smallerAsteroid.SetActive(true);
                 smallerAsteroid.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
             }

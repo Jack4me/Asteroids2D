@@ -6,11 +6,7 @@ namespace Game
 {
     public class BounceService : IBounceService
     {
-        public (Vector2 direction, float force) CalculateBounce(Vector2 objectPosition, Vector2 colliderPosition,
-            float bounceForce)
-        {
-            throw new System.NotImplementedException();
-        }
+     
 
         public async void ApplyBounce(Transform target, Collider2D collider, float bounceForce)
         {

@@ -1,9 +1,7 @@
 ﻿using System;
-using UnityEngine;
 
-namespace CodeBase.Infrastructure.StaticData {
+namespace Core.StaticData {
     [Serializable]
     public class UnitConfig {
-        public GameObject Prefab;
     }
 }

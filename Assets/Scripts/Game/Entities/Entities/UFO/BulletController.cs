@@ -1,26 +1,28 @@
 using UnityEngine;
 
-namespace Game.Entities.Entities.Enemies {
+namespace Game.Entities.Entities.UFO
+{
     public class BulletController : MonoBehaviour
     {
-        [SerializeField] private float speed = 10f; // Скорость полета пули
-        [SerializeField] private float lifetime = 5f; // Время жизни пули
+        [SerializeField] private float speed = 10f;
+        [SerializeField] private float lifetime = 5f;
+        private Vector2 direction;
 
-        private Vector2 direction; // Направление движения пули
-
-        public void Initialize(Vector2 shootDirection) {
+        public void Initialize(Vector2 shootDirection)
+        {
             direction = shootDirection.normalized;
-            Destroy(gameObject, lifetime); // Уничтожаем пулю через заданное время
+            Destroy(gameObject, lifetime);
         }
 
-        private void Update() {
-            // Перемещаем пулю
+        private void Update()
+        {
             transform.position += (Vector3)(direction * speed * Time.deltaTime);
         }
 
-        private void OnTriggerEnter(Collider other) {
-            // Реакция на столкновение (например, уничтожение объекта)
-            if (other.CompareTag("Player")) {
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
                 Debug.Log("Bullet hit the player!");
                 Destroy(gameObject);
             }

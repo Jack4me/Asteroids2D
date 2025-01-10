@@ -8,7 +8,7 @@ namespace Game.Entities.Entities.UFO
     {
         private readonly float speed = 15f;
         private readonly float lifeTime = 3f;
-         public int Damage { get; set; }
+        public int Damage { get; set; }
 
         private void Start()
         {

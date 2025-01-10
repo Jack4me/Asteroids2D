@@ -18,7 +18,7 @@ namespace Game.Controllers
         [SerializeField] private ParticleSystem _invincibilityEffect;
         [SerializeField] private float _invincibilityDuration;
         [SerializeField] private float _lockDuration;
-
+        [SerializeField] private int _bounceForce = 5;
         private HealthHandler _healthHandler;
         private bool _isInvincible;
         private int _health = 5;
@@ -26,10 +26,8 @@ namespace Game.Controllers
         private bool _canControl;
         private IBounceService _bounceService;
         private Collider2D _playerCollider;
-
-
         public event Action<float> OnControlLockRequested;
-        
+
         public void Construct(IBounceService bounceService)
         {
             _bounceService = bounceService;
@@ -46,10 +44,9 @@ namespace Game.Controllers
         {
             if (_isInvincible) return;
             EnemyBullet enemyBullet = other.GetComponent<EnemyBullet>();
-
             if (enemyBullet == null)
             {
-                _bounceService.ApplyBounce(transform, other, 5);
+                _bounceService.ApplyBounce(transform, other, _bounceForce);
             }
 
             HandleCollision(other);
@@ -57,13 +54,11 @@ namespace Game.Controllers
 
         public async void HandleCollision(Collider2D asteroidCollider)
         {
-
             if (_isInvincible) return;
             _isInvincible = true;
             if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
             {
                 int damage = enemy.Damage;
-
                 _healthHandler.TakeDamage(damage);
                 OnControlLockRequested?.Invoke(_lockDuration);
             }
@@ -72,35 +67,25 @@ namespace Game.Controllers
             Vector2 collisionDirection =
                 (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
             collisionDirection.Normalize();
-
             _velocity += collisionDirection * _playerBounceForce;
-
-
             if (asteroidCollider.TryGetComponent<BounceController>(out var bounce))
             {
                 bounce.ApplyBounce(-collisionDirection * _asteroidBounceForce);
             }
 
-          await  EnableInvincibility();
+            await EnableInvincibility();
             HideInvincibilityEffect();
-
-           
         }
-
 
         private async UniTask EnableInvincibility()
         {
             ShowInvincibilityEffect();
-
             await GetComponent<HeroBlink>().StartBlinking();
-
             _isInvincible = true;
-
             await UniTask.Delay((int)(_invincibilityDuration * 1000));
             HideInvincibilityEffect();
             _isInvincible = false;
             _playerCollider.enabled = true;
-
         }
 
         private void ShowInvincibilityEffect()
@@ -114,9 +99,8 @@ namespace Game.Controllers
 
         private void HideInvincibilityEffect()
         {
-            
-                _invincibilityEffect.Stop();
-                _invincibilityEffect.gameObject.SetActive(false);
+            _invincibilityEffect.Stop();
+            _invincibilityEffect.gameObject.SetActive(false);
         }
     }
 }

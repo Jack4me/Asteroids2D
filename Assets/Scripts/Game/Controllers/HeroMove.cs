@@ -6,27 +6,22 @@ namespace Game.Controllers
 {
     public class HeroMove : MonoBehaviour
     {
+        public Vector2 velocity;
         private float _speed = 5f;
         private IInputService _inputService;
-        public Vector2 velocity;
         private bool canControl = true;
         [SerializeField] private float rotationSpeed = 20f;
         [SerializeField] private float acceleration;
         private PlayerCollisionHandler playerCollision;
 
-        
-        
-        
-        public void Construct(IInputService inputService )
+        public void Construct(IInputService inputService)
         {
-            _inputService =  inputService;
-          
-
+            _inputService = inputService;
         }
+
         private void Awake()
         {
             playerCollision = GetComponent<PlayerCollisionHandler>();
-
             playerCollision.OnControlLockRequested += LockControlDuration;
         }
 
@@ -36,7 +31,6 @@ namespace Game.Controllers
             {
                 HandleMovement(_inputService.Axis);
             }
-
             else
             {
                 Move();
@@ -45,11 +39,21 @@ namespace Game.Controllers
             ApplyFriction();
         }
 
+        public void SetSpeed(float speed)
+        {
+            _speed = speed;
+        }
+
         public void HandleMovement(Vector2 _inputService)
         {
             Rotate(_inputService.x);
             Accelerate(_inputService.y);
             Move();
+        }
+
+        public void LockControlDuration(float duration)
+        {
+            LockControlForSeconds(duration);
         }
 
         private void ApplyFriction()
@@ -67,13 +71,9 @@ namespace Game.Controllers
             transform.Rotate(0f, 0f, rotation);
         }
 
-
-        
-
         private void Accelerate(float accelerationInput)
         {
             velocity += (Vector2)transform.up * accelerationInput * acceleration;
-
             if (velocity.magnitude > _speed)
             {
                 velocity = velocity.normalized * _speed;
@@ -85,21 +85,11 @@ namespace Game.Controllers
             transform.position += (Vector3)velocity * Time.deltaTime;
         }
 
-        public void LockControlDuration(float duration)
-        {
-            LockControlForSeconds(duration);
-        }
-
         private async UniTask LockControlForSeconds(float duration)
         {
             canControl = false;
             await UniTask.Delay((int)(duration * 1000));
             canControl = true;
-        }
-
-        public void SetSpeed(float speed)
-        {
-            _speed = speed;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Infrastructure.StaticData;
 using UnityEngine;
 
 namespace Core.StaticData {
