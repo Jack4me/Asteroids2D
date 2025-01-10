@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Core.Ads_Plugin;
+﻿using Core.Ads_Plugin;
 using Core.Analytics;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services;
@@ -12,19 +11,29 @@ namespace Core.Services
     public class EnemySpawner : ISpawnService
     {
         private readonly IObjectPool _pool;
-        Vector3 spawnPosition;
+        private Vector3 spawnPosition;
+        private int _delayBetweenAsteroidsSpawn = 5000;
+        private int _delayAsteroid = 7000;
+        private int _delayBetweenUfoSpawn = 7000;
+        private int _delayUFO = 13000;
 
         public EnemySpawner(IObjectPool pool)
         {
             _pool = pool;
         }
 
-
         public async void RunAsyncMethods(SpawnPointsData spawnPointsData)
         {
             await UniTask.WhenAll(
                 StartAsyncUFOSpawning(spawnPointsData),
                 StartAsyncAsteroidSpawning(spawnPointsData));
+        }
+
+        public void SpawnAsteroid(SpawnPointsData spawnPointsData)
+        {
+            GameObject asteroid = _pool.GetFromPool(EnemyType.Large);
+            Vector3 spawnPoint = GetRandomSpawnPoint(spawnPointsData);
+            asteroid.transform.position = spawnPoint;
         }
 
         private async UniTask StartAsyncUFOSpawning(SpawnPointsData spawnPointsData)
@@ -37,44 +46,32 @@ namespace Core.Services
             {
                 GameAnalytics.gameAnalytics.InterstitialAd();
             }
-            await UniTask.Delay(7000);
+            
+            await UniTask.Delay(_delayBetweenUfoSpawn);
             AdsService.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 SpawnUfo(spawnPointsData);
-
-                await UniTask.Delay(13000);
+                await UniTask.Delay(_delayUFO);
             }
-           
         }
 
         private void SpawnUfo(SpawnPointsData spawnPointsData)
         {
             AdsService.Instance.bannerAds.ShowBannerAd();
-
             GameObject ufo = _pool.GetFromPool(EnemyType.Ufo);
             Vector3 spawnPoint = GetRandomSpawnPoint(spawnPointsData);
-
             ufo.transform.position = spawnPoint;
         }
 
         private async UniTask StartAsyncAsteroidSpawning(SpawnPointsData spawnPointsData)
         {
-            await UniTask.Delay(1000);
-
+            await UniTask.Delay(_delayBetweenAsteroidsSpawn);
             while (true)
             {
                 SpawnAsteroid(spawnPointsData);
-
-                await UniTask.Delay(5000);
+                await UniTask.Delay(_delayAsteroid);
             }
-        }
-
-        public void SpawnAsteroid(SpawnPointsData spawnPointsData)
-        {
-            GameObject asteroid = _pool.GetFromPool(EnemyType.Large);
-            Vector3 spawnPoint = GetRandomSpawnPoint(spawnPointsData);
-            asteroid.transform.position = spawnPoint;
         }
 
         private Vector3 GetRandomSpawnPoint(SpawnPointsData spawnPointsData)
