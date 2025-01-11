@@ -18,7 +18,8 @@ namespace Main
         private readonly IInputService _inputService;
         private readonly IPlayerDataModel _playerDataModel;
         private readonly IInstantiateProvider _instantiate;
-        private IBounceService _bounceService;
+        private readonly IBounceService _bounceService;
+
         public HeroFactory(IInputService inputService, IPlayerDataModel playerDataModel, IInstantiateProvider instantiate, IBounceService bounceService)
         {
             _inputService = inputService;

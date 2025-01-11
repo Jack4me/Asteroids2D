@@ -60,6 +60,8 @@ public class FirstSceneInstaller : MonoInstaller
         Container.Bind<IHeroFactory>().To<HeroFactory>().AsSingle();
         Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
+        Container.Bind<IHudFactory>().To<HudFactory>().AsSingle();
+        Container.Bind<IJsonConfigLoader>().To<JsonConfigLoader>().AsSingle();
 
         Container.Bind<HealthHandler>().FromComponentInHierarchy().AsSingle();
         Container.Bind<IObjectPool>().To<ObjectPoolEnemy>().AsSingle();
