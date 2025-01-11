@@ -12,10 +12,10 @@ namespace Core.Services
     {
         private readonly IObjectPool _pool;
         private Vector3 spawnPosition;
-        private int _delayBetweenAsteroidsSpawn = 5000;
+        private int _delayBetweenAsteroidsSpawn = 3000;
         private int _delayAsteroid = 7000;
-        private int _delayBetweenUfoSpawn = 7000;
-        private int _delayUFO = 13000;
+        private int _delayUFOFirstSpawn = 4000;
+        private int _delayBetweenUfoSpawn = 8000;
 
         public EnemySpawner(IObjectPool pool)
         {
@@ -47,12 +47,12 @@ namespace Core.Services
                 GameAnalytics.gameAnalytics.InterstitialAd();
             }
             
-            await UniTask.Delay(_delayBetweenUfoSpawn);
+            await UniTask.Delay(_delayUFOFirstSpawn);
             AdsService.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 SpawnUfo(spawnPointsData);
-                await UniTask.Delay(_delayUFO);
+                await UniTask.Delay(_delayBetweenUfoSpawn);
             }
         }
 

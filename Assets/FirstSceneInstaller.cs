@@ -57,6 +57,7 @@ public class FirstSceneInstaller : MonoInstaller
         Container.Bind<IScorable>().To<ScoreService>().AsSingle();
         Container.Bind<IBounceService>().To<BounceService>().AsSingle();
         Container.Bind<ISpawnService>().To<EnemySpawner>().AsSingle();
+        Container.Bind<IHeroFactory>().To<HeroFactory>().AsSingle();
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
 
         Container.Bind<HealthHandler>().FromComponentInHierarchy().AsSingle();

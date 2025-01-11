@@ -28,11 +28,12 @@ namespace Main
         private readonly IBounceService _bounceService;
         private readonly IInputService _inputService;
         private GameConfigs _configs;
+        private readonly IHeroFactory _heroFactory;
 
         public GameFactory(
             IInstantiateProvider instantiate, IStaticDataService staticData,
             IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer,
-            IScorable scoreManager, IBounceService bounceService, IInputService inputService)
+            IScorable scoreManager, IBounceService bounceService, IInputService inputService, IHeroFactory heroFactory)
         {
             _instantiate = instantiate;
             _staticData = staticData;
@@ -41,6 +42,7 @@ namespace Main
             _scoreManager = scoreManager;
             _bounceService = bounceService;
             _inputService = inputService;
+            _heroFactory = heroFactory;
         }
 
         public Transform CreatePoolParent()
@@ -51,28 +53,30 @@ namespace Main
 
         public GameObject CreateHero(GameObject at)
         {
-            HeroGameObject = InstantiateRegister(AssetPath.HERO_PATH, at.transform.position);
-            IPlayerController playerController = HeroGameObject.GetComponent<IPlayerController>();
-            playerController.Construct(_playerDataModel);
-            _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
-            LaserController laserController = HeroGameObject.GetComponent<LaserController>();
-            HeroGameObject.GetComponent<HealthHandler>().Construct(_playerDataModel);
-            LaserViewModel laserViewModel = new LaserViewModel(laserController);
-            HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel;
-            HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
-            HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);
-            HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService);
-            HeroGameObject.GetComponentInChildren<LaserUIController>().Initialize(laserViewModel);
-
-            //remove and move to right place
-            if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
-            {
-                stats.speed = _configs.player.speed;
-                stats.health = _configs.player.health;
-                stats.weaponName = _configs.player.weaponName;
-            }
-
-            return HeroGameObject;
+            return _heroFactory.CreateHero(at, _configs);
+            // HeroGameObject = InstantiateRegister(AssetPath.HERO_PATH, at.transform.position);
+            // IPlayerController playerController = HeroGameObject.GetComponent<IPlayerController>();
+            // playerController.Construct(_playerDataModel);
+            // _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
+            // LaserController laserController = HeroGameObject.GetComponent<LaserController>();
+            // HeroGameObject.GetComponent<HealthHandler>().Construct(_playerDataModel);
+            // LaserViewModel laserViewModel = new LaserViewModel(laserController);
+            // HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel;
+            // HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
+            // HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);
+            // HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService);
+            // HeroGameObject.GetComponentInChildren<LaserUIController>().Initialize(laserViewModel);
+            //
+            // //remove and move to right place
+            // if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
+            // {
+            //     stats.speed = _configs.player.speed;
+            //     stats.health = _configs.player.health;
+            //     stats.weaponName = _configs.player.weaponName;
+            // }
+            //
+            // return HeroGameObject;
+            
         }
 
         public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro)

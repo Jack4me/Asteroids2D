@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.StaticData {
-    public class StaticDataService : IStaticDataService {
+namespace Core.StaticData
+{
+    public class StaticDataService : IStaticDataService
+    {
         private UnitConfig _unitConfig;
         private Dictionary<EnemyType, GameObject> _enemyPrefabs;
-       
-        public void LoadStaticData(){
+
+        public void LoadStaticData()
+        {
             _enemyPrefabs = new Dictionary<EnemyType, GameObject>
             {
                 { EnemyType.Large, Resources.Load<GameObject>("Prefabs/Enemy/Asteroids/AsteroidBig") },
@@ -15,6 +18,7 @@ namespace Core.StaticData {
                 { EnemyType.Ufo, Resources.Load<GameObject>("Prefabs/Enemy/UFO/UFO") }
             };
         }
+
         public GameObject GetEnemyPrefab(EnemyType enemyType)
         {
             if (_enemyPrefabs.TryGetValue(enemyType, out var prefab))
