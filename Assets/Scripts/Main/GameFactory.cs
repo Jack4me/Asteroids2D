@@ -29,11 +29,13 @@ namespace Main
         private readonly IInputService _inputService;
         private GameConfigs _configs;
         private readonly IHeroFactory _heroFactory;
+        private readonly IEnemyFactory _enemyFactory;
 
         public GameFactory(
             IInstantiateProvider instantiate, IStaticDataService staticData,
             IPlayerDataModel playerDataModel, IPlayerViewModel viewModelPlayer,
-            IScorable scoreManager, IBounceService bounceService, IInputService inputService, IHeroFactory heroFactory)
+            IScorable scoreManager, IBounceService bounceService, IInputService inputService, IHeroFactory heroFactory,
+            IEnemyFactory enemyFactory)
         {
             _instantiate = instantiate;
             _staticData = staticData;
@@ -43,6 +45,7 @@ namespace Main
             _bounceService = bounceService;
             _inputService = inputService;
             _heroFactory = heroFactory;
+            _enemyFactory = enemyFactory;
         }
 
         public Transform CreatePoolParent()
@@ -54,51 +57,30 @@ namespace Main
         public GameObject CreateHero(GameObject at)
         {
             return _heroFactory.CreateHero(at, _configs);
-            // HeroGameObject = InstantiateRegister(AssetPath.HERO_PATH, at.transform.position);
-            // IPlayerController playerController = HeroGameObject.GetComponent<IPlayerController>();
-            // playerController.Construct(_playerDataModel);
-            // _playerDataModel.Position.Value = HeroGameObject.gameObject.transform.position;
-            // LaserController laserController = HeroGameObject.GetComponent<LaserController>();
-            // HeroGameObject.GetComponent<HealthHandler>().Construct(_playerDataModel);
-            // LaserViewModel laserViewModel = new LaserViewModel(laserController);
-            // HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel;
-            // HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
-            // HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);
-            // HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService);
-            // HeroGameObject.GetComponentInChildren<LaserUIController>().Initialize(laserViewModel);
-            //
-            // //remove and move to right place
-            // if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
-            // {
-            //     stats.speed = _configs.player.speed;
-            //     stats.health = _configs.player.health;
-            //     stats.weaponName = _configs.player.weaponName;
-            // }
-            //
-            // return HeroGameObject;
-            
         }
 
         public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro)
         {
-            var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
-            if (enemyPrefab == null)
-            {
-                Debug.LogError($"No prefab found for enemy type: {enemyType}");
-                return null;
-            }
-
-            var instance = _instantiate.InstantiateToPool(enemyPrefab, poolContainer);
-            Enemy enemyComponent = instance.GetComponent<Enemy>();
-            enemyComponent.Initialize(objectPoolAstro, _scoreManager, _bounceService);
-            if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
-            {
-                stats.Damage = _configs.enemy.damage;
-                stats.Health = _configs.enemy.health;
-                stats.Speed = _configs.enemy.speed;
-            }
-
-            return instance;
+            return _enemyFactory.CreateEnemy(enemyType, poolContainer, objectPoolAstro, _staticData, _configs,
+                _scoreManager);
+            // var enemyPrefab = _staticData.GetEnemyPrefab(enemyType);
+            // if (enemyPrefab == null)
+            // {
+            //     Debug.LogError($"No prefab found for enemy type: {enemyType}");
+            //     return null;
+            // }
+            //
+            // var instance = _instantiate.InstantiateToPool(enemyPrefab, poolContainer);
+            // Enemy enemyComponent = instance.GetComponent<Enemy>();
+            // enemyComponent.Initialize(objectPoolAstro, _scoreManager, _bounceService);
+            // if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
+            // {
+            //     stats.Damage = _configs.enemy.damage;
+            //     stats.Health = _configs.enemy.health;
+            //     stats.Speed = _configs.enemy.speed;
+            // }
+            //
+            // return instance;
         }
 
         public void LoadConfigs()
