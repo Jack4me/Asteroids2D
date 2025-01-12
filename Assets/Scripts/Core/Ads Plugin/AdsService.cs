@@ -3,41 +3,31 @@ using UnityEngine.Advertisements;
 
 namespace Core.Ads_Plugin
 {
-    public class AdsService : MonoBehaviour
+    public class AdsService : IAdsService
     {
-        public BannerAds bannerAds;
-        public InterstitialAds interstitialAds;
-        public RewardedAds rewardedAds;
+        public IBannerAds _bannerAds { get; }
+        public IInterstitialAds _interstitialAds { get; }
+        public IRewardedAds _rewardedAds { get; }
 
-        public static AdsService Instance { get; private set; }
-
-        private void Awake()
+        public AdsService(IBannerAds bannerAds, IInterstitialAds interstitialAds, IRewardedAds rewardedAds)
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            InitializeAds();
+            _bannerAds = bannerAds;
+            _interstitialAds = interstitialAds;
+            _rewardedAds = rewardedAds;
         }
 
-        private void InitializeAds()
+        public void InitializeAds()
         {
-            string gameId = "6b52f7c5-0989-4039-9e5e-89f6b1c3169e";
-
+            string gameId = "5749687"; // Вставь свой Game ID из Unity Dashboard.
             Advertisement.Initialize(gameId, true, new InitializationListener(this));
         }
     }
 
     public class InitializationListener : IUnityAdsInitializationListener
     {
-        private AdsService _adsService;
+        private IAdsService _adsService;
 
-        public InitializationListener(AdsService adsService)
+        public InitializationListener(IAdsService adsService)
         {
             _adsService = adsService;
         }
@@ -45,9 +35,9 @@ namespace Core.Ads_Plugin
         public void OnInitializationComplete()
         {
             Debug.Log("Unity Ads Initialization Complete.");
-            _adsService.bannerAds.LoadBannerAd();
-            _adsService.interstitialAds.LoadInterstitialAd();
-            _adsService.rewardedAds.LoadRewardedAd();
+            _adsService._bannerAds.LoadBannerAd();
+            _adsService._interstitialAds.LoadInterstitialAd();
+            _adsService._rewardedAds.LoadRewardedAd();
         }
 
         public void OnInitializationFailed(UnityAdsInitializationError error, string message)

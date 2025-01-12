@@ -3,63 +3,78 @@ using Core.Ads_Plugin;
 using Core.Analytics;
 using Core.AssetsManagement;
 using Core.Factory;
-using Core.Intrerfaces;
 using Core.Intrerfaces.Services;
 using Core.Models;
 using Core.StaticData;
 using Firebase;
 using Firebase.Analytics;
-using Game;
 using Infrastructure.States;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
-namespace Main.States {
-    public class LoadLevelState : ILoadLvlState<string> {
+namespace Main.States
+{
+    public class LoadLevelState : ILoadLvlState<string>
+    {
         private const string INITIAL_POINT = "InitialPoint";
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly IStaticDataService _staticDataService;
         private readonly ISpawnService _spawnService;
-       private SpawnPointsData spawnPointsData;
-        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,ISpawnService spawnService){
+        private readonly IGameAnalytics _gameAnalytics;
+        private readonly IAdsService _adsService;
+        private readonly IBannerAds _bannerAds;
+        private SpawnPointsData spawnPointsData;
+
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, IGameFactory gameFactory,
+            ISpawnService spawnService, IGameAnalytics gameAnalytics, IAdsService adsService, IBannerAds bannerAds)
+        {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            
-
-           _gameFactory = gameFactory;
+            _gameFactory = gameFactory;
             _spawnService = spawnService;
+            _gameAnalytics = gameAnalytics;
+            _adsService = adsService;
+            _bannerAds = bannerAds;
             spawnPointsData = Resources.Load<SpawnPointsData>(AssetPath.SPAWNERS_ENEMY);
-
         }
 
-        public void Enter(string sceneName){
+        public void Enter(string sceneName)
+        {
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
-        public void Exit(){
+        public void Exit()
+        {
         }
 
-        private void OnLoaded(){
+        private void OnLoaded()
+        {
             InitGameWorld();
-            
             _gameStateMachine.EnterGeneric<GameLoopState>();
         }
 
-        private void InitGameWorld(){
-            InitAnalytics();
+        private void InitGameWorld()
+        {
             _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
-          LaserViewModel laserViewModel =  hero.GetComponent<PlayerController>().LaserViewModel;
-           InitHud(laserViewModel);
-           _gameFactory.CreatePoolParent();
-           InitEnemy(spawnPointsData);
-
-           
+            LaserViewModel laserViewModel = hero.GetComponent<PlayerController>().LaserViewModel;
+            InitHud(laserViewModel);
+            _gameFactory.CreatePoolParent();
+            InitEnemy(spawnPointsData);
+            RunAnalytics();
         }
 
-        private void InitHud(LaserViewModel laserViewModel){
+        private void RunAnalytics()
+        {
+           // InitAnalytics();
+             _adsService.InitializeAds();
+              _bannerAds.ShowBannerAd();
+        }
+
+        private void InitHud(LaserViewModel laserViewModel)
+        {
             var hud = _gameFactory.CreateHud(laserViewModel);
         }
 
@@ -67,8 +82,6 @@ namespace Main.States {
         {
             _spawnService.RunAsyncMethods(pointsData);
         }
-
-        
 
         public void InitAnalytics()
         {

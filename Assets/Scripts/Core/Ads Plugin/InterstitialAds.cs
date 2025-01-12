@@ -3,24 +3,20 @@ using UnityEngine.Advertisements;
 
 namespace Core.Ads_Plugin
 {
-    public class InterstitialAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+    public class InterstitialAds : IInterstitialAds, IUnityAdsLoadListener, IUnityAdsShowListener
     {
-        [SerializeField] private string androidAdUnitId;
-        [SerializeField] private string iosAdUnitId;
-
+        [SerializeField] private string androidAdUnitId = "Interstitial_Android";
+        [SerializeField] private string iosAdUnitId = "Interstitial_iOS";
         private string adUnitId;
 
         private void Awake()
         {
 #if UNITY_IOS
-                adUnitId = iosAdUnitId;
+            adUnitId = iosAdUnitId;
 #elif UNITY_ANDROID
-                adUnitId = androidAdUnitId;
-
-
+            adUnitId = androidAdUnitId;
 #endif
             Debug.Log($"Initialized with Ad Unit ID: {adUnitId}");
-
         }
 
         public void LoadInterstitialAd()
@@ -40,7 +36,6 @@ namespace Core.Ads_Plugin
             LoadInterstitialAd();
         }
 
-
         #region LoadCallbacks
 
         public void OnUnityAdsAdLoaded(string placementId)
@@ -51,7 +46,6 @@ namespace Core.Ads_Plugin
         public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
         {
             Debug.LogError($"Failed to load ad for {placementId}. Error: {error}, Message: {message}");
-
         }
 
         #endregion
@@ -61,19 +55,16 @@ namespace Core.Ads_Plugin
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
         {
             Debug.LogError($"Ad Show Failed for {placementId}. Error: {error}, Message: {message}");
-
         }
 
         public void OnUnityAdsShowStart(string placementId)
         {
             Debug.Log($"Ad Show Started for {placementId}");
-
         }
 
         public void OnUnityAdsShowClick(string placementId)
         {
             Debug.Log($"Ad Clicked for {placementId}");
-
         }
 
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)

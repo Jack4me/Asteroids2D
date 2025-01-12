@@ -17,7 +17,6 @@ namespace Main.States
         {
             _stateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            InitAnalytics();
         }
 
         public void Enter()

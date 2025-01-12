@@ -8,9 +8,9 @@ namespace Core.Factory
     {
         GameObject CreateHero(GameObject at);
         GameObject CreateHud(LaserViewModel laserViewModel);
-        void CleanUp();
         void LoadConfigs();
         GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro);
         Transform CreatePoolParent();
+        void CleanUp();
     }
 }

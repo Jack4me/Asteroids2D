@@ -1,4 +1,6 @@
 using Core;
+using Core.Ads_Plugin;
+using Core.Analytics;
 using Core.AssetsManagement;
 using Core.Factory;
 using Core.Intrerfaces;
@@ -16,7 +18,7 @@ using Zenject;
 
 public class FirstSceneInstaller : MonoInstaller
 {
-    [SerializeField] private MonoBehaviour coroutineRunner; 
+    [SerializeField] private MonoBehaviour coroutineRunner;
 
     public override void InstallBindings()
     {
@@ -33,23 +35,21 @@ public class FirstSceneInstaller : MonoInstaller
             .To<CoroutineRunnerWrapper>()
             .AsSingle()
             .WithArguments(coroutineRunner);
-
         Container.Bind<SceneLoader>()
             .AsSingle();
-
-
         Container.Bind<BootStrapState>().AsSingle();
         Container.Bind<LoadLevelState>().AsSingle();
         Container.Bind<LoadProgressState>().AsSingle();
         Container.Bind<GameLoopState>().AsSingle();
-
         Container.Bind<GameStateMachine>()
             .AsSingle();
-
         Container.Bind<GameInit>()
             .AsSingle();
-
-
+        Container.Bind<IGameAnalytics>().To<GameAnalytics>().AsSingle();
+        Container.Bind<IBannerAds>().To<BannerAds>().AsSingle();
+        Container.Bind<IInterstitialAds>().To<InterstitialAds>().AsSingle();
+        Container.Bind<IRewardedAds>().To<RewardedAds>().AsSingle();
+        Container.Bind<IAdsService>().To<AdsService>().AsSingle();
         Container.Bind<IInstantiateProvider>().To<InstantiateProvider>().AsSingle();
         Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
         Container.Bind<IPlayerDataModel>().To<PlayerDataModel>().AsSingle();
@@ -62,9 +62,7 @@ public class FirstSceneInstaller : MonoInstaller
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
         Container.Bind<IHudFactory>().To<HudFactory>().AsSingle();
         Container.Bind<IJsonConfigLoader>().To<JsonConfigLoader>().AsSingle();
-
         Container.Bind<HealthHandler>().FromComponentInHierarchy().AsSingle();
         Container.Bind<IObjectPool>().To<ObjectPoolEnemy>().AsSingle();
-        
     }
 }

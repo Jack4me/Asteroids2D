@@ -41,7 +41,7 @@ namespace Game.Handlers.Health
 
         private void DeathPlayer()
         {
-            AdsService.Instance.interstitialAds.ShowInterstitialAd();
+           // AdsService.Instance.interstitialAds.ShowInterstitialAd();
             Destroy(gameObject);
         }
     }

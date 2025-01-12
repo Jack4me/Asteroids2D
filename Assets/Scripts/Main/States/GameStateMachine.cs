@@ -4,23 +4,23 @@ using Infrastructure.States;
 using UnityEngine;
 using Zenject;
 
-namespace Main.States {
-    public class GameStateMachine {
+namespace Main.States
+{
+    public class GameStateMachine
+    {
         private readonly Transform _transform;
-        private  Dictionary<Type, IExitableState> _state;
+        private Dictionary<Type, IExitableState> _state;
         private IExitableState _activeState;
-
-
         [Inject] private BootStrapState bootStrapState;
-        [Inject]  private LoadLevelState loadLevelState;
-        [Inject]  private LoadProgressState loadProgressState;
-        [Inject]  private GameLoopState gameLoopState;
-        
-        
+        [Inject] private LoadLevelState loadLevelState;
+        [Inject] private LoadProgressState loadProgressState;
+        [Inject] private GameLoopState gameLoopState;
+
         [Inject]
         public void Initialize()
         {
-            _state = new Dictionary<Type, IExitableState>{
+            _state = new Dictionary<Type, IExitableState>
+            {
                 [typeof(BootStrapState)] = bootStrapState,
                 [typeof(LoadLevelState)] = loadLevelState,
                 [typeof(LoadProgressState)] = loadProgressState,
@@ -28,25 +28,29 @@ namespace Main.States {
             };
         }
 
-        public void EnterGeneric<TState>() where TState : class, IState{
+        public void EnterGeneric<TState>() where TState : class, IState
+        {
             var state = ChangeState<TState>();
             state.Enter();
         }
 
         public void EnterGeneric<TState, TLoadScene>(TLoadScene loadScene)
-            where TState : class, ILoadLvlState<TLoadScene>{
+            where TState : class, ILoadLvlState<TLoadScene>
+        {
             var state = ChangeState<TState>();
             state.Enter(loadScene);
         }
 
-        private TState ChangeState<TState>() where TState : class, IExitableState{
+        private TState ChangeState<TState>() where TState : class, IExitableState
+        {
             _activeState?.Exit();
             var state = GetState<TState>();
             _activeState = state;
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState{
+        private TState GetState<TState>() where TState : class, IExitableState
+        {
             return _state[typeof(TState)] as TState;
         }
     }

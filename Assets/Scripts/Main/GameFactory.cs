@@ -54,17 +54,7 @@ namespace Main
 
         public void LoadConfigs()
         {
-          _configs =  _jsonConfigLoader.LoadConfigs();
-            // _staticData.LoadStaticData();
-            // TextAsset jsonFile = Resources.Load<TextAsset>("Configs");
-            // if (jsonFile != null)
-            // {
-            //     _configs = JsonUtility.FromJson<GameConfigs>(jsonFile.text);
-            // }
-            // else
-            // {
-            //     Debug.LogError("JSON файл не найден в папке Resources");
-            // }
+            _configs = _jsonConfigLoader.LoadConfigs();
         }
 
         public void CleanUp()

@@ -3,16 +3,16 @@ using UnityEngine.Advertisements;
 
 namespace Core.Ads_Plugin
 {
-    public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+    public class RewardedAds : IRewardedAds, IUnityAdsLoadListener, IUnityAdsShowListener
     {
-        [SerializeField] private string androidAdUnitId;
-        [SerializeField] private string iosAdUnitId;
+        [SerializeField] private string androidAdUnitId = "Rewarded_Android";
+        [SerializeField] private string iosAdUnitId = "Rewarded_iOS";
         private string adUnitId;
 
         private void Awake()
         {
 #if UNITY_IOS
-                        adUnitId = iosAdUnitId;
+            adUnitId = iosAdUnitId;
 #elif UNITY_ANDROID
             adUnitId = androidAdUnitId;
 #endif

@@ -61,7 +61,7 @@ namespace Game
 
         private async Task StartAsteroidSpawning()
         {
-            AdsService.Instance.bannerAds.ShowBannerAd();
+           // AdsService.Instance.bannerAds.ShowBannerAd();
             await Task.Delay(1000);
 
             while (true)
@@ -78,7 +78,7 @@ namespace Game
         private async UniTask StartUFOSpawning()
         {
             await UniTask.Delay(3000);
-            AdsService.Instance.bannerAds.HideBannerAd();
+          //  AdsService.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 if (activeUFOs.Count < maxUFOs)

@@ -4,23 +4,13 @@ using UnityEngine;
 
 namespace Core.Analytics
 {
-    public class GameAnalytics : MonoBehaviour
+    public class GameAnalytics : IGameAnalytics
     {
         public static GameAnalytics gameAnalytics;
-
-
         private bool _canUseAnalytics;
 
-        void Awake()
+       public void Initial()
         {
-            if (gameAnalytics == null)
-            {
-                gameAnalytics = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-                Destroy(gameObject);
-
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
                 var dependencyStatus = task.Result;
@@ -42,7 +32,6 @@ namespace Core.Analytics
             });
         }
 
-
         public void InAppPurchaseEvent()
         {
             if (!_canUseAnalytics)
@@ -50,12 +39,10 @@ namespace Core.Analytics
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventPurchase);
         }
 
-
         public void InterstitialAd()
         {
             if (!_canUseAnalytics)
                 return;
-
             FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventAdImpression,
                 new Parameter("Ad_Type", "Interstitial_Ad"));
         }

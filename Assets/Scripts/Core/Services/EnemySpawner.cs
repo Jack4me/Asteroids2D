@@ -1,5 +1,4 @@
-﻿using Core.Ads_Plugin;
-using Core.Analytics;
+﻿using Core.Analytics;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services;
 using Core.StaticData;
@@ -11,15 +10,17 @@ namespace Core.Services
     public class EnemySpawner : ISpawnService
     {
         private readonly IObjectPool _pool;
+        private readonly IGameAnalytics _gameAnalytics;
         private Vector3 spawnPosition;
         private int _delayBetweenAsteroidsSpawn = 3000;
         private int _delayAsteroid = 7000;
         private int _delayUFOFirstSpawn = 4000;
         private int _delayBetweenUfoSpawn = 8000;
 
-        public EnemySpawner(IObjectPool pool)
+        public EnemySpawner(IObjectPool pool, IGameAnalytics gameAnalytics)
         {
             _pool = pool;
+            _gameAnalytics = gameAnalytics;
         }
 
         public async void RunAsyncMethods(SpawnPointsData spawnPointsData)
@@ -38,17 +39,17 @@ namespace Core.Services
 
         private async UniTask StartAsyncUFOSpawning(SpawnPointsData spawnPointsData)
         {
-            if (GameAnalytics.gameAnalytics == null)
-            {
-                Debug.LogError("GameAnalytics.gameAnalytics is null.");
-            }
-            else
-            {
-                GameAnalytics.gameAnalytics.InterstitialAd();
-            }
-            
+            // if (_gameAnalytics == null)
+            // {
+            //     Debug.LogError("GameAnalytics.gameAnalytics is null.");
+            // }
+            // else
+            // {
+            //     _gameAnalytics.InterstitialAd();
+            // }
+
             await UniTask.Delay(_delayUFOFirstSpawn);
-            AdsService.Instance.bannerAds.HideBannerAd();
+            //AdsService.Instance.bannerAds.HideBannerAd();
             while (true)
             {
                 SpawnUfo(spawnPointsData);
@@ -58,7 +59,7 @@ namespace Core.Services
 
         private void SpawnUfo(SpawnPointsData spawnPointsData)
         {
-            AdsService.Instance.bannerAds.ShowBannerAd();
+            // AdsService.Instance.bannerAds.ShowBannerAd();
             GameObject ufo = _pool.GetFromPool(EnemyType.Ufo);
             Vector3 spawnPoint = GetRandomSpawnPoint(spawnPointsData);
             ufo.transform.position = spawnPoint;

@@ -3,37 +3,34 @@ using UnityEngine.Advertisements;
 
 namespace Core.Ads_Plugin
 {
-    public class BannerAds : MonoBehaviour
+    public class BannerAds : IBannerAds
     {
-        [SerializeField] private string androidAdUnitId;
-        [SerializeField] private string iosAdUnitId;
-
+        private string androidAdUnitId = "Banner_Android";
+        private string iosAdUnitId = "Banner_iOS";
         private string adUnitId;
 
         private void Awake()
         {
 #if UNITY_IOS
-                adUnitId = iosAdUnitId;
+            adUnitId = iosAdUnitId;
 #elif UNITY_ANDROID
-                adUnitId = androidAdUnitId;
+            adUnitId = androidAdUnitId;
 #elif UNITY_EDITOR
-            adUnitId = "test"; // Укажи тестовое значение, если тестируешь в редакторе
+            adUnitId = "test";
 #else
-    Debug.LogWarning("Unsupported platform for Unity Ads");
-    adUnitId = null;
+            Debug.LogWarning("Unsupported platform for Unity Ads");
+            adUnitId = null;
 #endif
-        
-            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
         }
 
         public void LoadBannerAd()
         {
+            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
             BannerLoadOptions options = new BannerLoadOptions
             {
                 loadCallback = BannerLoaded,
                 errorCallback = BannerLoadedError
             };
-
             Advertisement.Banner.Load(adUnitId, options);
         }
 
@@ -46,7 +43,6 @@ namespace Core.Ads_Plugin
                 hideCallback = BannerHidden
             };
             Advertisement.Banner.Show(adUnitId, options);
-    
         }
 
         public void HideBannerAd()
@@ -54,25 +50,33 @@ namespace Core.Ads_Plugin
             Advertisement.Banner.Hide();
         }
 
-
         #region Show Callbacks
-        private void BannerHidden()   {    }
 
-        private void BannerClicked()   {    }
+        private void BannerHidden()
+        {
+        }
 
-        private void BannerShown()    {    }
+        private void BannerClicked()
+        {
+        }
+
+        private void BannerShown()
+        {
+        }
+
         #endregion
 
         #region Load Callbacks
-        private void BannerLoadedError(string message)    {    }
+
+        private void BannerLoadedError(string message)
+        {
+        }
 
         private void BannerLoaded()
         {
             Debug.Log("Banner Ad Loaded");
         }
+
         #endregion
-
-
-
     }
 }
