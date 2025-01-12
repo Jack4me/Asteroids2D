@@ -7,42 +7,30 @@ namespace Core.Ads_Plugin
     {
         private string androidAdUnitId = "Banner_Android";
         private string iosAdUnitId = "Banner_iOS";
-        private string adUnitId;
 
-        private void Awake()
-        {
-#if UNITY_IOS
-            adUnitId = iosAdUnitId;
-#elif UNITY_ANDROID
-            adUnitId = androidAdUnitId;
-#elif UNITY_EDITOR
-            adUnitId = "test";
-#else
-            Debug.LogWarning("Unsupported platform for Unity Ads");
-            adUnitId = null;
-#endif
-        }
 
         public void LoadBannerAd()
         {
             Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+
             BannerLoadOptions options = new BannerLoadOptions
             {
                 loadCallback = BannerLoaded,
                 errorCallback = BannerLoadedError
             };
-            Advertisement.Banner.Load(adUnitId, options);
+            Advertisement.Banner.Load(androidAdUnitId, options);
         }
 
         public void ShowBannerAd()
         {
+
             BannerOptions options = new BannerOptions
             {
                 showCallback = BannerShown,
                 clickCallback = BannerClicked,
                 hideCallback = BannerHidden
             };
-            Advertisement.Banner.Show(adUnitId, options);
+            Advertisement.Banner.Show(androidAdUnitId, options);
         }
 
         public void HideBannerAd()
@@ -62,6 +50,7 @@ namespace Core.Ads_Plugin
 
         private void BannerShown()
         {
+
         }
 
         #endregion
@@ -75,6 +64,7 @@ namespace Core.Ads_Plugin
         private void BannerLoaded()
         {
             Debug.Log("Banner Ad Loaded");
+
         }
 
         #endregion

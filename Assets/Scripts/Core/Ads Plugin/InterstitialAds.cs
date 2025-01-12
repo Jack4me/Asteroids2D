@@ -5,34 +5,25 @@ namespace Core.Ads_Plugin
 {
     public class InterstitialAds : IInterstitialAds, IUnityAdsLoadListener, IUnityAdsShowListener
     {
-        [SerializeField] private string androidAdUnitId = "Interstitial_Android";
-        [SerializeField] private string iosAdUnitId = "Interstitial_iOS";
-        private string adUnitId;
+        private string androidAdUnitId = "Interstitial_Android";
+        private string iosAdUnitId = "Interstitial_iOS";
 
-        private void Awake()
-        {
-#if UNITY_IOS
-            adUnitId = iosAdUnitId;
-#elif UNITY_ANDROID
-            adUnitId = androidAdUnitId;
-#endif
-            Debug.Log($"Initialized with Ad Unit ID: {adUnitId}");
-        }
+       
 
         public void LoadInterstitialAd()
         {
-            if (string.IsNullOrEmpty(adUnitId))
+            if (string.IsNullOrEmpty(androidAdUnitId))
             {
                 Debug.LogError("Ad Unit ID is null or empty. Cannot load ad.");
                 return;
             }
 
-            Advertisement.Load(adUnitId, this);
+            Advertisement.Load(androidAdUnitId, this);
         }
 
         public void ShowInterstitialAd()
         {
-            Advertisement.Show(adUnitId, this);
+            Advertisement.Show(androidAdUnitId, this);
             LoadInterstitialAd();
         }
 

@@ -6,11 +6,11 @@ using Core.Factory;
 using Core.Intrerfaces.Services;
 using Core.Models;
 using Core.StaticData;
+using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
 using Infrastructure.States;
 using UnityEngine;
-using UnityEngine.Advertisements;
 
 namespace Main.States
 {
@@ -66,11 +66,20 @@ namespace Main.States
             RunAnalytics();
         }
 
-        private void RunAnalytics()
+        private async void RunAnalytics()
         {
-           // InitAnalytics();
-             _adsService.InitializeAds();
-              _bannerAds.ShowBannerAd();
+            
+            _adsService.InitializeAds();
+            await WaitForSecondsAsync(3f);
+        }
+
+        public async UniTask WaitForSecondsAsync(float delayTime)
+        {
+            Debug.Log("Delay started.");
+            await UniTask.Delay((int)(delayTime * 1000));
+            InitAnalytics();
+            _bannerAds.ShowBannerAd();
+            Debug.Log("Delay ended.");
         }
 
         private void InitHud(LaserViewModel laserViewModel)

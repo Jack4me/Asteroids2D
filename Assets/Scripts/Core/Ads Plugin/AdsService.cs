@@ -18,7 +18,7 @@ namespace Core.Ads_Plugin
 
         public void InitializeAds()
         {
-            string gameId = "5749687"; // Вставь свой Game ID из Unity Dashboard.
+            string gameId = "5749687"; 
             Advertisement.Initialize(gameId, true, new InitializationListener(this));
         }
     }

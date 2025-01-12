@@ -5,18 +5,8 @@ namespace Core.Ads_Plugin
 {
     public class RewardedAds : IRewardedAds, IUnityAdsLoadListener, IUnityAdsShowListener
     {
-        [SerializeField] private string androidAdUnitId = "Rewarded_Android";
-        [SerializeField] private string iosAdUnitId = "Rewarded_iOS";
-        private string adUnitId;
-
-        private void Awake()
-        {
-#if UNITY_IOS
-            adUnitId = iosAdUnitId;
-#elif UNITY_ANDROID
-            adUnitId = androidAdUnitId;
-#endif
-        }
+        private string androidAdUnitId = "Rewarded_Android";
+        private string iosAdUnitId = "Rewarded_iOS";
 
         public void LoadRewardedAd()
         {
@@ -26,12 +16,12 @@ namespace Core.Ads_Plugin
                 return;
             }
 
-            Advertisement.Load(adUnitId, this);
+            Advertisement.Load(androidAdUnitId, this);
         }
 
         public void ShowRewardedAd()
         {
-            Advertisement.Show(adUnitId, this);
+            Advertisement.Show(androidAdUnitId, this);
             LoadRewardedAd();
         }
 
@@ -64,7 +54,7 @@ namespace Core.Ads_Plugin
 
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
-            if (placementId == adUnitId && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
+            if (placementId == androidAdUnitId && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
             {
                 Debug.Log("Ads Fully Watched .....");
             }
