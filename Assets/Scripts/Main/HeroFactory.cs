@@ -20,7 +20,8 @@ namespace Main
         private readonly IInstantiateProvider _instantiate;
         private readonly IBounceService _bounceService;
 
-        public HeroFactory(IInputService inputService, IPlayerDataModel playerDataModel, IInstantiateProvider instantiate, IBounceService bounceService)
+        public HeroFactory(IInputService inputService, IPlayerDataModel playerDataModel,
+            IInstantiateProvider instantiate, IBounceService bounceService)
         {
             _inputService = inputService;
             _playerDataModel = playerDataModel;
@@ -42,17 +43,14 @@ namespace Main
             HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);
             HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService);
             HeroGameObject.GetComponentInChildren<LaserUIController>().Initialize(laserViewModel);
-            
-            //remove and move to right place
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
             {
                 stats.speed = configs.player.speed;
                 stats.health = configs.player.health;
                 stats.weaponName = configs.player.weaponName;
             }
-            
+
             return HeroGameObject;
-            return null;
         }
     }
 }

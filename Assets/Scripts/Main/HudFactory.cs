@@ -1,7 +1,6 @@
 using Core.AssetsManagement;
 using Core.Intrerfaces;
 using Core.Models;
-using Core.Services;
 using Infrastructure.UI.View;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ namespace Main
     {
         private IInstantiateProvider _instantiate;
         private readonly IPlayerViewModel _viewModelPlayer;
+
         public HudFactory(IInstantiateProvider instantiate, IPlayerViewModel viewModelPlayer)
         {
             _instantiate = instantiate;

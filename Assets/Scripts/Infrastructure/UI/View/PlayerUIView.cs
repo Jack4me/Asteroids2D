@@ -13,8 +13,8 @@ namespace Infrastructure.UI.View
         [SerializeField] private TextMeshProUGUI rotationText;
         [SerializeField] private TextMeshProUGUI health;
         [SerializeField] private TextMeshProUGUI score;
-        [SerializeField] private Transform heartsContainer; // Контейнер для сердечек
-        [SerializeField] private GameObject heartPrefab; // Префаб сердечка
+        [SerializeField] private Transform heartsContainer; 
+        [SerializeField] private GameObject heartPrefab; 
         private IPlayerViewModel _viewModelPlayer;
         private List<GameObject> hearts = new List<GameObject>();
 

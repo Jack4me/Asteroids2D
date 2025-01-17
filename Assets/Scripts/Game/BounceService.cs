@@ -6,8 +6,6 @@ namespace Game
 {
     public class BounceService : IBounceService
     {
-     
-
         public async void ApplyBounce(Transform target, Collider2D collider, float bounceForce)
         {
             Vector2 collisionDirection = (Vector2)(target.position - collider.transform.position).normalized;

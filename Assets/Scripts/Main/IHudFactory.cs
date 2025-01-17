@@ -1,5 +1,4 @@
-﻿using Core.Intrerfaces;
-using Core.Models;
+﻿using Core.Models;
 using UnityEngine;
 
 namespace Main

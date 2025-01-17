@@ -22,8 +22,7 @@ namespace Game.Hero
         {
             if (other.TryGetComponent<IDamageable>(out var target))
             {
-                target.DestroyEntity(); 
-                
+                target.DestroyEntity();
             }
         }
     }

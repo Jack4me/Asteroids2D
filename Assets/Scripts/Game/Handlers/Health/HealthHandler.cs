@@ -1,5 +1,4 @@
 using System;
-using Core.Ads_Plugin;
 using Core.Intrerfaces;
 using UniRx;
 using UnityEngine;
@@ -8,7 +7,6 @@ namespace Game.Handlers.Health
 {
     public class HealthHandler : MonoBehaviour
     {
-        public event Action OnDeath;
         [SerializeField] private int maxHealth;
         private readonly int health;
         private readonly ReactiveProperty<int> currentHealth;
@@ -35,13 +33,11 @@ namespace Game.Handlers.Health
             if (_playerDataModel.Health.Value <= 0)
             {
                 DeathPlayer();
-                OnDeath?.Invoke();
             }
         }
 
         private void DeathPlayer()
         {
-           // AdsService.Instance.interstitialAds.ShowInterstitialAd();
             Destroy(gameObject);
         }
     }

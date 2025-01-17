@@ -9,13 +9,13 @@ namespace Core
     {
         public IObjectPool _pool;
         public EnemyType enemyType;
-        public ScoreService ScoreService;
+        [SerializeField] private int _bounceForce = 5;
         private IScorable _score;
         private IBounceService _bounceService;
+        private int _force;
         public int Damage { get; set; }
         public int Health { get; set; }
         public float Speed { get; set; }
-        public event Action<GameObject> OnDestroyed;
 
         public void Initialize(IObjectPool objectPool, IScorable score, IBounceService bounceService)
         {
@@ -37,7 +37,6 @@ namespace Core
         {
             ReturnToPool();
             _score.NotifyEnemyDestroyed(enemyType);
-            OnDestroyed?.Invoke(gameObject);
         }
 
         public virtual void ReturnToPool()
@@ -65,9 +64,9 @@ namespace Core
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out LaserController heroMove))
+            if (other.TryGetComponent(out LaserController _heroMove))
             {
-                _bounceService.ApplyBounce(transform, other, 5);
+                _bounceService.ApplyBounce(transform, other, _bounceForce);
             }
         }
     }

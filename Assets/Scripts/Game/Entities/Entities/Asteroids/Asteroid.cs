@@ -6,9 +6,9 @@ namespace Game.Entities.Entities.Asteroids
 {
     public class Asteroid : Enemy
     {
-        private Vector2 direction;
         [SerializeField] private EnemyType size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
+        private Vector2 direction;
         private AsteroidMovement asteroid;
 
         private void Awake()
