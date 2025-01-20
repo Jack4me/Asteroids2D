@@ -10,10 +10,8 @@ namespace Core
         [SerializeField] private float reloadTime = 2f;
         private float reloadStartTime;
         public int currentLasers { get; private set; }
-
         public int CurrentLasers => currentLasers;
         public bool IsReloading => isReloading;
-
         private bool isReloading = false;
         public event Action<float> OnReloadProgress;
 
@@ -21,8 +19,6 @@ namespace Core
         {
             currentLasers = maxLasers;
         }
-
-        
 
         public bool CanFireLaser()
         {
@@ -41,12 +37,10 @@ namespace Core
             }
         }
 
-
         private async UniTask ReloadLasers()
         {
             isReloading = true;
             reloadStartTime = Time.time;
-
             while (Time.time - reloadStartTime < reloadTime)
             {
                 float progress = (Time.time - reloadStartTime) / reloadTime;

@@ -30,7 +30,7 @@ public class FirstSceneInstaller : MonoInstaller
         {
             Container.Bind<IInputService>().To<MobileInputService>().AsSingle();
         }
-
+      
         Container.Bind<ICoroutineRunner>()
             .To<CoroutineRunnerWrapper>()
             .AsSingle()
@@ -56,7 +56,7 @@ public class FirstSceneInstaller : MonoInstaller
         Container.Bind<IPlayerViewModel>().To<PlayerViewModel>().AsSingle();
         Container.Bind<IScorable>().To<ScoreService>().AsSingle();
         Container.Bind<IBounceService>().To<BounceService>().AsSingle();
-        Container.Bind<ISpawnService>().To<EnemySpawner>().AsSingle();
+        Container.Bind<ISpawnService>().To<EnemySpawnController>().AsSingle();
         Container.Bind<IHeroFactory>().To<HeroFactory>().AsSingle();
         Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
         Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
