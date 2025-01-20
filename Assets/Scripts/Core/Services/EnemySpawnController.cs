@@ -5,7 +5,6 @@ using Core.Intrerfaces.Services;
 using Core.StaticData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Core.Services
 {
@@ -13,32 +12,22 @@ namespace Core.Services
     {
         public readonly IObjectPool _pool;
         private Vector3 spawnPosition;
-        
-      
-        private  AsteroidSpawner _asteroidSpawner;
-        private  UfoSpawner _ufoSpawner;
+        private AsteroidSpawner _asteroidSpawner;
+        private UfoSpawner _ufoSpawner;
+
         public EnemySpawnController(IObjectPool pool)
         {
             _pool = pool;
-           
         }
 
-       public void Initialization( IObjectPool _pool)
-        {
-          
-        }
         public async void RunAsyncMethods(SpawnPointsData spawnPointsData)
         {
-            _asteroidSpawner =  new AsteroidSpawner(_pool);
+            _asteroidSpawner = new AsteroidSpawner(_pool);
             _ufoSpawner = new UfoSpawner(_pool);
             await UniTask.WhenAll(
                 _ufoSpawner.StartAsyncUFOSpawning(spawnPointsData),
-              _asteroidSpawner.StartAsyncAsteroidSpawning(spawnPointsData));
+                _asteroidSpawner.StartAsyncAsteroidSpawning(spawnPointsData));
         }
-    
-       
-    
-        
 
         public Vector3 GetRandomSpawnPoint(SpawnPointsData spawnPointsData)
         {
@@ -50,9 +39,8 @@ namespace Core.Services
             {
                 Debug.LogError("Dont have SpawnPoints");
             }
-    
+
             return spawnPosition;
         }
     }
-    
 }

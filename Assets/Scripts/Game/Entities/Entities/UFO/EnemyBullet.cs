@@ -1,13 +1,16 @@
 using Core;
 using Game.Controllers;
+using Game.Handlers.Health;
 using UnityEngine;
 
 namespace Game.Entities.Entities.UFO
 {
     public class EnemyBullet : MonoBehaviour, IHit
     {
+        [SerializeField] private int damage = 1;
         private readonly float speed = 15f;
         private readonly float lifeTime = 3f;
+        
         public int Damage { get; set; }
 
         private void Start()
@@ -22,8 +25,9 @@ namespace Game.Entities.Entities.UFO
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.TryGetComponent(out HeroMove heroMove))
+            if (col.TryGetComponent(out HeroMove hero))
             {
+                hero.GetComponent<HealthHandler>().TakeDamage(damage);
                 Destroy(gameObject);
             }
         }

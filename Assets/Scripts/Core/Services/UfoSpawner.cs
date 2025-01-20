@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core.Services
 {
-    public  class UfoSpawner : EnemySpawnController
+    public class UfoSpawner : EnemySpawnController
     {
         private int _delayUFOFirstSpawn = 4000;
         private int _delayBetweenUfoSpawn = 8000;
@@ -13,13 +13,6 @@ namespace Core.Services
         public UfoSpawner(IObjectPool pool) : base(pool)
         {
         }
-
-       
-
-        // public void Init(IObjectPool pool) 
-        // {
-        //     _pool = pool;
-        // }
 
         public async UniTask StartAsyncUFOSpawning(SpawnPointsData spawnPointsData)
         {
