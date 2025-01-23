@@ -12,12 +12,12 @@ namespace Game.Config
         public float speed { get; set; }
         public string weaponName { get; set; }
 
-        private HeroMove _heroMove;
+        private HeroInput _heroInput;
         private HealthHandler _healthHandler;
 
         private void Awake()
         {
-            _heroMove = GetComponent<HeroMove>();
+            _heroInput = GetComponent<HeroInput>();
             _healthHandler = GetComponent<HealthHandler>();
             
         }
@@ -31,7 +31,7 @@ namespace Game.Config
             }
             Debug.Log($"Игрок: здоровье={health}, скорость={speed}, оружие={weaponName}");
             _healthHandler.SetStartHealth(health);
-            _heroMove.SetSpeed(speed);
+            _heroInput.SetSpeed(speed);
         }
 
         

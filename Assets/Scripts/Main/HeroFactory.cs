@@ -39,8 +39,8 @@ namespace Main
             HeroGameObject.GetComponent<HealthHandler>().Construct(_playerDataModel);
             LaserViewModel laserViewModel = new LaserViewModel(laserController);
             HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = laserViewModel;
-            HeroGameObject.GetComponent<PlayerCollisionHandler>().Construct(_bounceService);
-            HeroGameObject.GetComponent<HeroMove>().Construct(_inputService);
+            HeroGameObject.GetComponent<HeroCollisionHandler>().Construct(_bounceService);
+            HeroGameObject.GetComponent<HeroInput>().Construct(_inputService);
             HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService);
             HeroGameObject.GetComponentInChildren<LaserUIController>().Initialize(laserViewModel);
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))

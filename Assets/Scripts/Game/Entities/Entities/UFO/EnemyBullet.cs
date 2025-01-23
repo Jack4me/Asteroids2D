@@ -25,7 +25,7 @@ namespace Game.Entities.Entities.UFO
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.TryGetComponent(out HeroMove hero))
+            if (col.TryGetComponent(out HeroInput hero))
             {
                 hero.GetComponent<HealthHandler>().TakeDamage(damage);
                 Destroy(gameObject);

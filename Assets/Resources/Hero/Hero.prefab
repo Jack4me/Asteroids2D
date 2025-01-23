@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: -1485990479102885354}
   - component: {fileID: 2687041527879297894}
   - component: {fileID: 1549001695847102917}
+  - component: {fileID: 4302692769704085833}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -465,9 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerBounceForce: 30
   _asteroidBounceForce: 30
-  _invincibilityEffect: {fileID: 8838989599158506714}
-  _invincibilityDuration: 0.5
   _lockDuration: 1
+  _bounceForce: 5
 --- !u!114 &-8315362413760857782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +537,20 @@ MonoBehaviour:
   blinkDuration: 1
   blinkInterval: 0.2
   blinkFlaveInterval: 0.05
+--- !u!114 &4302692769704085833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822465019992695988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad795398fe07a548b65b8b312a3e474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _invincibilityEffect: {fileID: 2143038422618585753}
+  _invincibilityDuration: 0.5
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,9 +672,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
---- !u!198 &8838989599158506714 stripped
+--- !u!198 &2143038422618585753 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8428129062985534199, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1432503776327017652, guid: a428a541dd160b748a2bcb6009cde19a, type: 3}
   m_PrefabInstance: {fileID: 1034944521517997613}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8877254767720353018 stripped

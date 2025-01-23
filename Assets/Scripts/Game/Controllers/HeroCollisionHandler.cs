@@ -4,45 +4,45 @@ using Core.Services;
 using Cysharp.Threading.Tasks;
 using Game.Entities.Entities.Asteroids;
 using Game.Entities.Entities.UFO;
+using Game.Handlers;
 using Game.Handlers.Health;
 using Game.Hero;
 using UnityEngine;
-
 namespace Game.Controllers
 {
-    public class PlayerCollisionHandler : MonoBehaviour
+    public class HeroCollisionHandler : MonoBehaviour
     {
         public Vector2 Velocity => _velocity;
         [SerializeField] private float _playerBounceForce;
         [SerializeField] private float _asteroidBounceForce;
-        [SerializeField] private ParticleSystem _invincibilityEffect;
-        [SerializeField] private float _invincibilityDuration;
+       
         [SerializeField] private float _lockDuration;
         [SerializeField] private int _bounceForce = 5;
         private HealthHandler _healthHandler;
-        private bool _isInvincible;
         private int _health = 5;
         private Vector2 _velocity;
         private bool _canControl;
         private IBounceService _bounceService;
         private Collider2D _playerCollider;
+        private InvincibilityHandler _invincibilityHandler;
         public event Action<float> OnControlLockRequested;
 
         public void Construct(IBounceService bounceService)
         {
             _bounceService = bounceService;
+            
         }
 
         private void Awake()
         {
-            HideInvincibilityEffect();
             _healthHandler = GetComponent<HealthHandler>();
             _playerCollider = GetComponent<Collider2D>();
+            _invincibilityHandler = GetComponent<InvincibilityHandler>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (_isInvincible) return;
+            if (_invincibilityHandler._isInvincible) return;
             EnemyBullet enemyBullet = other.GetComponent<EnemyBullet>();
             if (enemyBullet == null)
             {
@@ -54,8 +54,8 @@ namespace Game.Controllers
 
         public async void HandleCollision(Collider2D asteroidCollider)
         {
-            if (_isInvincible) return;
-            _isInvincible = true;
+            if (_invincibilityHandler._isInvincible) return;
+            _invincibilityHandler.SetInvincibileTrue();
             if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
             {
                 int damage = enemy.Damage;
@@ -73,34 +73,10 @@ namespace Game.Controllers
                 bounce.ApplyBounce(-collisionDirection * _asteroidBounceForce);
             }
 
-            await EnableInvincibility();
-            HideInvincibilityEffect();
+            await _invincibilityHandler.EnableInvincibility();
+            _invincibilityHandler.HideInvincibilityEffect();
         }
 
-        private async UniTask EnableInvincibility()
-        {
-            ShowInvincibilityEffect();
-            await GetComponent<HeroBlink>().StartBlinking();
-            _isInvincible = true;
-            await UniTask.Delay((int)(_invincibilityDuration * 1000));
-            HideInvincibilityEffect();
-            _isInvincible = false;
-            _playerCollider.enabled = true;
-        }
-
-        private void ShowInvincibilityEffect()
-        {
-            if (_invincibilityEffect != null)
-            {
-                _invincibilityEffect.gameObject.SetActive(true);
-                _invincibilityEffect.Play();
-            }
-        }
-
-        private void HideInvincibilityEffect()
-        {
-            _invincibilityEffect.Stop();
-            _invincibilityEffect.gameObject.SetActive(false);
-        }
+       
     }
 }

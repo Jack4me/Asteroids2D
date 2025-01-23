@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Controllers
 {
-    public class HeroMove : MonoBehaviour
+    public class HeroInput : MonoBehaviour
     {
         public Vector2 velocity;
         private float _speed = 5f;
@@ -12,7 +12,7 @@ namespace Game.Controllers
         private bool canControl = true;
         [SerializeField] private float rotationSpeed = 20f;
         [SerializeField] private float acceleration;
-        private PlayerCollisionHandler playerCollision;
+        private HeroCollisionHandler _heroCollisionHandler;
 
         public void Construct(IInputService inputService)
         {
@@ -21,8 +21,8 @@ namespace Game.Controllers
 
         private void Awake()
         {
-            playerCollision = GetComponent<PlayerCollisionHandler>();
-            playerCollision.OnControlLockRequested += LockControlDuration;
+            _heroCollisionHandler = GetComponent<HeroCollisionHandler>();
+            _heroCollisionHandler.OnControlLockRequested += LockControlDuration;
         }
 
         private void Update()
