@@ -10,7 +10,7 @@ namespace Game.Handlers
     {
         [SerializeField] private ParticleSystem _invincibilityEffect;
         [SerializeField] private float _invincibilityDuration;
-        public bool _isInvincible { get; private set; }
+        public bool IsInvincible { get; private set; }
         private Collider2D _playerCollider;
 
         private void Awake()
@@ -24,10 +24,10 @@ namespace Game.Handlers
        {
            ShowInvincibilityEffect();
            await GetComponent<HeroBlink>().StartBlinking();
-           _isInvincible = true;
+           IsInvincible = true;
            await UniTask.Delay((int)(_invincibilityDuration * 1000));
            HideInvincibilityEffect();
-           _isInvincible = false;
+           IsInvincible = false;
            
            _playerCollider.enabled = true;
        }
@@ -47,9 +47,9 @@ namespace Game.Handlers
            _invincibilityEffect.gameObject.SetActive(false);
        }
 
-       public void SetInvincibileTrue()
+       public void SetInvincibile(bool set)
        {
-           _isInvincible = true;
+           IsInvincible = set;
        }
     }
 }

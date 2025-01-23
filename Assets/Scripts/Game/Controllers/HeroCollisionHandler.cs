@@ -12,25 +12,26 @@ namespace Game.Controllers
 {
     public class HeroCollisionHandler : MonoBehaviour
     {
-        public Vector2 Velocity => _velocity;
+         public Vector2 Velocity => _velocity;
+
         [SerializeField] private float _playerBounceForce;
         [SerializeField] private float _asteroidBounceForce;
-       
         [SerializeField] private float _lockDuration;
         [SerializeField] private int _bounceForce = 5;
+
         private HealthHandler _healthHandler;
-        private int _health = 5;
+        private InvincibilityHandler _invincibilityHandler;
+        private Collider2D _playerCollider;
+        private IBounceService _bounceService;
+
         private Vector2 _velocity;
         private bool _canControl;
-        private IBounceService _bounceService;
-        private Collider2D _playerCollider;
-        private InvincibilityHandler _invincibilityHandler;
+
         public event Action<float> OnControlLockRequested;
 
         public void Construct(IBounceService bounceService)
         {
             _bounceService = bounceService;
-            
         }
 
         private void Awake()
@@ -42,39 +43,59 @@ namespace Game.Controllers
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (_invincibilityHandler._isInvincible) return;
-            EnemyBullet enemyBullet = other.GetComponent<EnemyBullet>();
-            if (enemyBullet == null)
-            {
-                _bounceService.ApplyBounce(transform, other, _bounceForce);
-            }
+            if (_invincibilityHandler.IsInvincible) return;
 
-            HandleCollision(other);
+            if (other.TryGetComponent<EnemyBullet>(out var bullet))
+            {
+                HandleBulletCollision(bullet);
+            }
+            else if (other.TryGetComponent<IHit>(out var enemy))
+            {
+                HandleEnemyCollision(other, enemy);
+                HandleBounce(other);
+            }
+            else
+            {
+                HandleBounce(other);
+            }
         }
 
-        public async void HandleCollision(Collider2D asteroidCollider)
+        private void HandleBulletCollision(EnemyBullet bullet)
         {
-            if (_invincibilityHandler._isInvincible) return;
-            _invincibilityHandler.SetInvincibileTrue();
-            if (asteroidCollider.TryGetComponent<IHit>(out var enemy))
-            {
-                int damage = enemy.Damage;
-                _healthHandler.TakeDamage(damage);
-                OnControlLockRequested?.Invoke(_lockDuration);
-            }
+            _healthHandler.TakeDamage(bullet.Damage);
+        }
 
+        private async void HandleEnemyCollision(Collider2D collider, IHit enemy)
+        {
+            _invincibilityHandler.SetInvincibile(true);
+            _healthHandler.TakeDamage(enemy.Damage);
+            OnControlLockRequested?.Invoke(_lockDuration);
+
+            DisablePlayerCollider();
+            ApplyBounceFromCollision(collider);
+            await _invincibilityHandler.EnableInvincibility();
+            _invincibilityHandler.HideInvincibilityEffect();
+        }
+
+        private void HandleBounce(Collider2D collider)
+        {
+            _bounceService.ApplyBounce(transform, collider, _bounceForce);
+        }
+
+        private void DisablePlayerCollider()
+        {
             _playerCollider.enabled = false;
-            Vector2 collisionDirection =
-                (Vector2)transform.position - (Vector2)asteroidCollider.transform.position;
-            collisionDirection.Normalize();
+        }
+
+        private void ApplyBounceFromCollision(Collider2D collider)
+        {
+            Vector2 collisionDirection = ((Vector2)transform.position - (Vector2)collider.transform.position).normalized;
             _velocity += collisionDirection * _playerBounceForce;
-            if (asteroidCollider.TryGetComponent<BounceController>(out var bounce))
+
+            if (collider.TryGetComponent<BounceController>(out var bounce))
             {
                 bounce.ApplyBounce(-collisionDirection * _asteroidBounceForce);
             }
-
-            await _invincibilityHandler.EnableInvincibility();
-            _invincibilityHandler.HideInvincibilityEffect();
         }
 
        
