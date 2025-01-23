@@ -31,7 +31,7 @@ namespace Game.Config
             }
             Debug.Log($"Игрок: здоровье={health}, скорость={speed}, оружие={weaponName}");
             _healthHandler.SetStartHealth(health);
-            _heroInput.SetSpeed(speed);
+            _heroInput.heroMove.SetSpeed(speed);
         }
 
         

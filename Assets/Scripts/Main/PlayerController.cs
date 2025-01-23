@@ -22,7 +22,7 @@ namespace Main
         {
             playerDataModel.Position.Value = transform.position;
             playerDataModel.RotationAngle.Value = transform.eulerAngles.z;
-            playerDataModel.Speed.Value = _heroInput.velocity.magnitude;
+            playerDataModel.Speed.Value = _heroInput.heroMove.velocity.magnitude;
         }
     }
 }

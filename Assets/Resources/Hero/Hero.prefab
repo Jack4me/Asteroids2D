@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 2687041527879297894}
   - component: {fileID: 1549001695847102917}
   - component: {fileID: 4302692769704085833}
+  - component: {fileID: 6072463574399043636}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -431,9 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391d06ee5eb025f48978ee8472dd7508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0}
-  rotationSpeed: 180
-  acceleration: 3
+  heroMove: {fileID: 0}
 --- !u!114 &7340978737006129551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +550,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _invincibilityEffect: {fileID: 2143038422618585753}
   _invincibilityDuration: 0.5
+--- !u!114 &6072463574399043636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7822465019992695988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2414b2948fc3c3849920922b92a6047a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
+  rotationSpeed: 150
+  acceleration: 20
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0
