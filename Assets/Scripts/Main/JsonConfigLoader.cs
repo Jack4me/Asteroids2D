@@ -15,7 +15,7 @@ namespace Main
         }
         public GameConfigs LoadConfigs()
         {
-            _staticData.LoadStaticData();
+            //_staticData.LoadStaticData();
             TextAsset jsonFile = Resources.Load<TextAsset>("Configs");
             if (jsonFile != null)
             {

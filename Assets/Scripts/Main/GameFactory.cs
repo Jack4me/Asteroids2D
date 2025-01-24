@@ -54,6 +54,7 @@ namespace Main
 
         public void LoadConfigs()
         {
+            _staticData.LoadStaticData();
             _configs = _jsonConfigLoader.LoadConfigs();
         }
 
