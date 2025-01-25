@@ -26,7 +26,7 @@ namespace Game.Controllers
         {
             _iJsonConfigLoader = iJsonConfigLoader;
            _config = _iJsonConfigLoader.LoadConfigLaser();
-           maxLasers = _config.maxLasers;
+           currentLasers = _config.maxLasers;
            reloadTime = _config.reloadTime;
         }
         
