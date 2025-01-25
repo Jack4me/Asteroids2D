@@ -11,7 +11,8 @@ namespace Main
 {
     public class GameFactory : IGameFactory
     {
-        private GameConfigs _configs;
+        private HeroMoveConfig _configsHero;
+        private UFOConfig _configsEnemy;
         private readonly IInstantiateProvider _instantiate;
         private readonly IRandomService _random;
         private readonly IStaticDataService _staticData;
@@ -39,15 +40,17 @@ namespace Main
 
         public GameObject CreateHero(GameObject at)
         {
-            return _heroFactory.CreateHero(at, _configs);
+            return _heroFactory.CreateHero(at, _configsHero);
         }
+
+        
 
         public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro)
         {
-            return _enemyFactory.CreateEnemy(enemyType, poolContainer, objectPoolAstro, _staticData, _configs);
+            return _enemyFactory.CreateEnemy(enemyType, poolContainer, objectPoolAstro, _staticData, _configsEnemy);
         }
 
-        public GameObject CreateHud(LaserViewModel laserViewModel)
+        public GameObject CreateHud(ILaserViewModel laserViewModel)
         {
             return _hudFactory.CreateHud(laserViewModel);
         }
@@ -55,7 +58,8 @@ namespace Main
         public void LoadConfigs()
         {
             _staticData.LoadStaticData();
-            _configs = _jsonConfigLoader.LoadConfigs();
+            _configsHero = _jsonConfigLoader.LoadConfigsHero();
+            _configsEnemy = _jsonConfigLoader.LoadConfigsEnemy();
         }
 
         public void CleanUp()

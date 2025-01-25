@@ -59,7 +59,7 @@ namespace Main.States
         {
             _gameFactory.LoadConfigs();
             GameObject hero = _gameFactory.CreateHero(at: GameObject.FindWithTag(INITIAL_POINT));
-            LaserViewModel laserViewModel = hero.GetComponent<PlayerController>().LaserViewModel;
+            ILaserViewModel laserViewModel = hero.GetComponent<PlayerController>().LaserViewModel;
             InitHud(laserViewModel);
             _gameFactory.CreatePoolParent();
             InitEnemy(spawnPointsData);
@@ -82,7 +82,7 @@ namespace Main.States
             Debug.Log("Delay ended.");
         }
 
-        private void InitHud(LaserViewModel laserViewModel)
+        private void InitHud(ILaserViewModel laserViewModel)
         {
             var hud = _gameFactory.CreateHud(laserViewModel);
         }

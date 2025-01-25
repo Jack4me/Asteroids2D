@@ -21,7 +21,7 @@ namespace Main
         }
 
         public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro,
-            IStaticDataService staticData, GameConfigs configs)
+            IStaticDataService staticData, UFOConfig configs)
         {
             var enemyPrefab = staticData.GetEnemyPrefab(enemyType);
             if (enemyPrefab == null)
@@ -35,12 +35,18 @@ namespace Main
             enemyComponent.Initialize(objectPoolAstro, _scoreManager, _bounceService);
             if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
             {
-                stats.Damage = configs.enemy.damage;
-                stats.Health = configs.enemy.health;
-                stats.Speed = configs.enemy.speed;
+                stats.Damage = configs.damage;
+                stats.Health = configs.health;
+                stats.Speed = configs.speed;
             }
 
             return instance;
+        }
+
+        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro,
+            IStaticDataService staticDataService, HeroMoveConfig heroMoveConfig)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

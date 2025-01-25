@@ -1,12 +1,13 @@
 using Core;
+using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
+using Game.Controllers;
 using UnityEngine;
 
 namespace Game.Hero
 {
     public class HeroAttack : MonoBehaviour
     {
-        [SerializeField] private LaserController laserController;
         [SerializeField] private GameObject laserPrefab;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private Transform firePoint;
@@ -15,11 +16,12 @@ namespace Game.Hero
         private float lastLaserFireTime;
         private float lastBulletFireTime;
         private IInputService _inputService;
-        private LaserController _laserController;
+        private ILaserController _laserController;
 
-        public void Construct(IInputService inputService)
+        public void Construct(IInputService inputService, ILaserController laserController)
         {
             _inputService = inputService;
+            _laserController = laserController;
         }
 
         private void Update()
@@ -29,10 +31,10 @@ namespace Game.Hero
                 FireBullet();
             }
 
-            if (_inputService.IsAttackLaserButton() && laserController.CanFireLaser())
+            if (_inputService.IsAttackLaserButton() && _laserController.CanFireLaser())
             {
                 FireLaser();
-                laserController.UseLaser();
+                _laserController.UseLaser();
             }
         }
 

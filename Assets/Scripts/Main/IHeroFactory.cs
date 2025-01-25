@@ -5,6 +5,6 @@ namespace Main
 {
     public interface IHeroFactory
     {
-        GameObject CreateHero(GameObject at, GameConfigs gameConfigs);
+        GameObject CreateHero(GameObject at, HeroMoveConfig heroMoveConfig);
     }
 }

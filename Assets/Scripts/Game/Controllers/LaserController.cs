@@ -1,10 +1,13 @@
 ﻿using System;
+using Core;
+using Core.Intrerfaces;
 using Cysharp.Threading.Tasks;
+using Main;
 using UnityEngine;
 
-namespace Core
+namespace Game.Controllers
 {
-    public class LaserController : MonoBehaviour
+    public class LaserController  : ILaserController
     {
         [SerializeField] public int maxLasers = 3;
         [SerializeField] private float reloadTime = 2f;
@@ -14,11 +17,20 @@ namespace Core
         public bool IsReloading => isReloading;
         private bool isReloading = false;
         public event Action<float> OnReloadProgress;
+        private IJsonConfigLoader _iJsonConfigLoader;
+        private readonly LaserControllerConfig _config;
 
-        private void Awake()
+        
+        
+        public LaserController(IJsonConfigLoader iJsonConfigLoader)
         {
-            currentLasers = maxLasers;
+            _iJsonConfigLoader = iJsonConfigLoader;
+           _config = _iJsonConfigLoader.LoadConfigLaser();
+           maxLasers = _config.maxLasers;
+           reloadTime = _config.reloadTime;
         }
+        
+       
 
         public bool CanFireLaser()
         {
@@ -52,5 +64,7 @@ namespace Core
             isReloading = false;
             OnReloadProgress?.Invoke(1.0f);
         }
+
+       
     }
 }

@@ -63,7 +63,7 @@ namespace Core
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out LaserController _heroMove))
+            if (other.TryGetComponent(out ILaserController _heroMove))
             {
                 _bounceService.ApplyBounce(transform, other, _bounceForce);
             }

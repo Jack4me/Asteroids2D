@@ -1,16 +1,18 @@
+using Core.Intrerfaces;
 using UniRx;
 using Zenject;
 
 namespace Core.Models
 {
-    public class LaserViewModel
+    public class LaserViewModel : ILaserViewModel
     {
         public ReactiveProperty<int> LaserCount { get; set; }
         public ReactiveProperty<float> ReloadProgress { get; set; }
-        private LaserController _laserController;
+        private ILaserController _laserController;
         private readonly DiContainer _container;
 
-        public LaserViewModel(LaserController laserController)
+        private CompositeDisposable _disposables = new CompositeDisposable();
+        public LaserViewModel(ILaserController laserController)
         {
             _laserController = laserController;
             UpdateProgressData();
@@ -23,12 +25,17 @@ namespace Core.Models
             _laserController.OnReloadProgress += UpdateReloadProgress;
             Observable.EveryUpdate()
                 .Subscribe(_ => LaserCount.Value = _laserController.CurrentLasers)
-                .AddTo(_laserController);
+                .AddTo(_disposables);
         }
 
         private void UpdateReloadProgress(float progress)
         {
             ReloadProgress.Value = progress;
+        }
+        public void Dispose()
+        {
+            _disposables.Dispose();
+            _laserController.OnReloadProgress -= UpdateReloadProgress;
         }
     }
 }

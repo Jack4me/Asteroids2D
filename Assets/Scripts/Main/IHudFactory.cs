@@ -5,6 +5,6 @@ namespace Main
 {
     public interface IHudFactory
     {
-        GameObject CreateHud(LaserViewModel laserViewModel);
+        GameObject CreateHud(ILaserViewModel laserViewModel);
     }
 }

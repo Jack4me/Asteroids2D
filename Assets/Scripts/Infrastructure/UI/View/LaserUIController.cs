@@ -10,7 +10,7 @@ namespace Infrastructure.UI.View
         [SerializeField] private Transform missileIconContainer;
         [SerializeField] private GameObject missileIconPrefab;
         [SerializeField] private Image reloadCircle;
-        private LaserViewModel _viewModel;
+        private ILaserViewModel _viewModel;
 
         private void Start()
         {
@@ -31,7 +31,7 @@ namespace Infrastructure.UI.View
                 .AddTo(this);
         }
 
-        public void Initialize(LaserViewModel viewModel)
+        public void Initialize(ILaserViewModel viewModel)
         {
             _viewModel = viewModel;
             _viewModel.LaserCount

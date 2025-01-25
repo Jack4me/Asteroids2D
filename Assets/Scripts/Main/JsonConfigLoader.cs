@@ -6,20 +6,42 @@ namespace Main
 {
     public class JsonConfigLoader : IJsonConfigLoader
     {
-        private GameConfigs _configs;
-        private readonly IStaticDataService _staticData;
+        private HeroMoveConfig _configs;
 
-        JsonConfigLoader(IStaticDataService staticData)
-        {
-            _staticData = staticData;
-        }
-        public GameConfigs LoadConfigs()
+       
+        public HeroMoveConfig LoadConfigsHero()
         {
             //_staticData.LoadStaticData();
-            TextAsset jsonFile = Resources.Load<TextAsset>("Configs");
+            TextAsset jsonFile = Resources.Load<TextAsset>("HeroMoveConfig");
             if (jsonFile != null)
             {
-             return  JsonUtility.FromJson<GameConfigs>(jsonFile.text);
+             return  JsonUtility.FromJson<HeroMoveConfig>(jsonFile.text);
+            }
+            else
+            {
+                Debug.LogError("JSON файл не найден в папке Resources");
+            }
+            return null;
+        }
+        public UFOConfig LoadConfigsEnemy()
+        {
+            TextAsset jsonFile = Resources.Load<TextAsset>("UFOConfig");
+            if (jsonFile != null)
+            {
+                return  JsonUtility.FromJson<UFOConfig>(jsonFile.text);
+            }
+            else
+            {
+                Debug.LogError("JSON файл не найден в папке Resources");
+            }
+            return null;
+        }
+        public LaserControllerConfig LoadConfigLaser()
+        {
+            TextAsset jsonFile = Resources.Load<TextAsset>("LaserControllerConfig");
+            if (jsonFile != null)
+            {
+                return  JsonUtility.FromJson<LaserControllerConfig>(jsonFile.text);
             }
             else
             {

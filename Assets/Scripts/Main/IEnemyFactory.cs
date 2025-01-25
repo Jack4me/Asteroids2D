@@ -8,6 +8,6 @@ namespace Main
     public interface IEnemyFactory
     {
         GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro,
-            IStaticDataService staticDataService, GameConfigs gameConfigs);
+            IStaticDataService staticDataService, UFOConfig heroMoveConfig);
     }
 }

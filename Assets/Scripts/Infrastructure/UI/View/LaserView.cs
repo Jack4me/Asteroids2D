@@ -9,9 +9,9 @@ namespace Infrastructure.UI.View
     {
         [SerializeField] private TextMeshProUGUI laserCountText;
         [SerializeField] private TextMeshProUGUI reloadProgressText;
-        private LaserViewModel _viewModel;
+        private ILaserViewModel _viewModel;
 
-        public void Construct(LaserViewModel viewModel)
+        public void Construct(ILaserViewModel viewModel)
         {
             _viewModel = viewModel;
         }

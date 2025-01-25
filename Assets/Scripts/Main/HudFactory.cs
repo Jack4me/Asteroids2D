@@ -17,7 +17,7 @@ namespace Main
             _viewModelPlayer = viewModelPlayer;
         }
 
-        public GameObject CreateHud(LaserViewModel laserViewModel)
+        public GameObject CreateHud(ILaserViewModel laserViewModel)
         {
             var hud = _instantiate.Instantiate(AssetPath.HUD_PATH);
             hud.GetComponent<PlayerUIView>().Construct(_viewModelPlayer);

@@ -10,7 +10,7 @@ namespace Game.Controllers
         private IInputService _inputService;
         private bool canControl = true;
         private HeroCollisionHandler _heroCollisionHandler;
-        public HeroMove heroMove;
+        public HeroMove heroMove { get; set; }
 
         public void Construct(IInputService inputService)
         {

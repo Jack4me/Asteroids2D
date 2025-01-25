@@ -10,7 +10,7 @@ namespace Main
     {
         private IPlayerDataModel playerDataModel;
         private HeroInput _heroInput;
-        public LaserViewModel LaserViewModel { get; set; }
+        public ILaserViewModel LaserViewModel { get; set; }
 
         public void Construct(IPlayerDataModel playerDataModel)
         {

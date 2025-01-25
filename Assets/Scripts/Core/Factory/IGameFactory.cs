@@ -7,7 +7,7 @@ namespace Core.Factory
     public interface IGameFactory
     {
         GameObject CreateHero(GameObject at);
-        GameObject CreateHud(LaserViewModel laserViewModel);
+        GameObject CreateHud(ILaserViewModel laserViewModel);
         void LoadConfigs();
         GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro);
         Transform CreatePoolParent();
