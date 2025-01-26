@@ -13,7 +13,7 @@ namespace Game.Hero
         private LaserStatsConfig _laserConfig;
 
         [Inject] 
-        private void Construct(IJsonConfigLoader jsonConfigLoader)
+        public void Construct(IJsonConfigLoader jsonConfigLoader)
         {
             _laserConfig = jsonConfigLoader.LoadStatsConfigLaser();
         }

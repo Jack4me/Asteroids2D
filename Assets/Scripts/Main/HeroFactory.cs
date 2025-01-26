@@ -13,6 +13,8 @@ using UnityEngine;
 
 namespace Main
 {
+    using Zenject;
+
     public class HeroFactory : IHeroFactory
     {
         private readonly IInputService _inputService;
@@ -21,10 +23,11 @@ namespace Main
         private readonly IBounceService _bounceService;
         private readonly ILaserController _laserController;
         private readonly ILaserViewModel _laserViewModel;
+        private readonly DiContainer _container;
 
         public HeroFactory(IInputService inputService, IPlayerDataModel playerDataModel,
             IInstantiateProvider instantiate, IBounceService bounceService, ILaserController laserController,
-            ILaserViewModel laserViewModel)
+            ILaserViewModel laserViewModel, DiContainer container)
         {
             _inputService = inputService;
             _playerDataModel = playerDataModel;
@@ -32,6 +35,7 @@ namespace Main
             _bounceService = bounceService;
             _laserController = laserController;
             _laserViewModel = laserViewModel;
+            _container = container;
         }
 
         public GameObject CreateHero(GameObject at, HeroMoveConfig configs)
@@ -44,7 +48,7 @@ namespace Main
             HeroGameObject.GetComponent<IPlayerController>().LaserViewModel = _laserViewModel;
             HeroGameObject.GetComponent<HeroCollisionHandler>().Construct(_bounceService);
             HeroGameObject.GetComponent<HeroInput>().Construct(_inputService);
-            HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService, _laserController);
+            HeroGameObject.GetComponent<HeroAttack>().Construct(_inputService, _laserController, _container);
             HeroGameObject.GetComponentInChildren<LaserUIController>().Initialize(_laserViewModel);
             if (HeroGameObject.TryGetComponent<IPlayerStats>(out var stats))
             {

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Game.Hero
 {
+    using Main;
+    using Zenject;
+
     public class HeroAttack : MonoBehaviour
     {
         [SerializeField] private GameObject laserPrefab;
@@ -17,11 +20,15 @@ namespace Game.Hero
         private float lastBulletFireTime;
         private IInputService _inputService;
         private ILaserController _laserController;
+        private DiContainer _container;
+        private IJsonConfigLoader _jsonConfigLoader;
 
-        public void Construct(IInputService inputService, ILaserController laserController)
+        public void Construct(IInputService inputService, ILaserController laserController, DiContainer container)
         {
             _inputService = inputService;
             _laserController = laserController;
+            _container = container;
+            //_jsonConfigLoader = jsonConfigLoader;
         }
 
         private void Update()
@@ -41,7 +48,8 @@ namespace Game.Hero
         public void FireLaser()
         {
             if (Time.time - lastLaserFireTime < laserCooldown) return;
-            Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
+            //Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
+            _container.InstantiatePrefab(laserPrefab, firePoint.position, firePoint.rotation, transform);
             lastLaserFireTime = Time.time;
         }
 

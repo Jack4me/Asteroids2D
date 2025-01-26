@@ -510,12 +510,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7822465019992695988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2414b2948fc3c3849920922b92a6047a, type: 3}
+  m_Script: {fileID: 11500000, guid: aecf2ab522a3f28439e637b936334d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
-  rotationSpeed: 150
-  acceleration: 20
+  rotationSpeed: 20
+  acceleration: 0
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0
