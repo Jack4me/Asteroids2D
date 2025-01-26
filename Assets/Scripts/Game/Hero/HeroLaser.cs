@@ -1,5 +1,8 @@
+using Core;
 using Core.Intrerfaces;
+using Main;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Hero
 {
@@ -7,9 +10,24 @@ namespace Game.Hero
     {
         public float Speed = 20f;
         public float LifeTime = 3f;
+        private LaserStatsConfig _laserConfig;
 
+        [Inject] 
+        private void Construct(IJsonConfigLoader jsonConfigLoader)
+        {
+            _laserConfig = jsonConfigLoader.LoadStatsConfigLaser();
+        }
         private void Start()
         {
+            if (_laserConfig != null)
+            {
+                Speed = _laserConfig.Speed;
+                LifeTime = _laserConfig.Lifetime;
+            }
+            else
+            {
+                Debug.LogError("LaserConfig не загружен!");
+            }
             Destroy(gameObject, LifeTime);
         }
 
@@ -25,5 +43,6 @@ namespace Game.Hero
                 target.DestroyEntity();
             }
         }
+        
     }
 }

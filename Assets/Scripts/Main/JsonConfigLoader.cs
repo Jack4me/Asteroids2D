@@ -49,5 +49,18 @@ namespace Main
             }
             return null;
         }
+        public LaserStatsConfig LoadStatsConfigLaser()
+        {
+            TextAsset jsonFile = Resources.Load<TextAsset>("LaserStatsConfig");
+            if (jsonFile != null)
+            {
+                return  JsonUtility.FromJson<LaserStatsConfig>(jsonFile.text);
+            }
+            else
+            {
+                Debug.LogError("JSON файл не найден в папке Resources");
+            }
+            return null;
+        }
     }
 }

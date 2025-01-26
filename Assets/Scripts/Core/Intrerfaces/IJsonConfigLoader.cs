@@ -7,5 +7,6 @@ namespace Main
         public HeroMoveConfig LoadConfigsHero();
         public UFOConfig LoadConfigsEnemy();
         public LaserControllerConfig LoadConfigLaser();
+        public LaserStatsConfig LoadStatsConfigLaser();
     }
 }
