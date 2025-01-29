@@ -514,8 +514,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
-  rotationSpeed: 20
-  acceleration: 0
+  rotationSpeed: 150
+  acceleration: 5
 --- !u!1 &9205080213591939760
 GameObject:
   m_ObjectHideFlags: 0
