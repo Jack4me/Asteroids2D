@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using Core;
 using Core.Factory;
-using Core.Intrerfaces;
+using Core.Game.Entities.Enemies;
 using UnityEngine;
 
 namespace Main
 {
-    public class ObjectPoolEnemy : IObjectPool
+    public class ObjectPoolAsteroidGameEnemy : IObjectPoolAsteroidGame
     {
         private const string POOL_PARENT = "PoolParent";
 
         private List<GameObject> _pool = new List<GameObject>();
         private Transform _poolContainer;
         private readonly IGameFactory _gameFactory;
+        private IObjectPoolAsteroidGame _objectPoolAsteroidGameImplementation;
 
-        public ObjectPoolEnemy(IGameFactory gameFactory)
+        public ObjectPoolAsteroidGameEnemy(IGameFactory gameFactory)
         {
             _gameFactory = gameFactory;
             _poolContainer = _gameFactory.CreatePoolParent();
@@ -46,12 +47,15 @@ namespace Main
             return newObj;
         }
 
+       
 
         public void ReturnToPool(Enemy obj)
         {
             obj.gameObject.SetActive(false);
             obj.transform.SetParent(_poolContainer);
         }
+
+       
 
         private GameObject Create(EnemyType enemyType)
         {

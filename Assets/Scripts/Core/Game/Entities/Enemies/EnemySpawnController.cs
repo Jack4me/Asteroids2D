@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
-using Core.Analytics;
-using Core.Intrerfaces;
-using Core.Intrerfaces.Services;
+﻿using Core.Intrerfaces.Services;
+using Core.Services;
 using Core.StaticData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Core.Services
+namespace Core.Game.Entities.Enemies
 {
     public class EnemySpawnController : ISpawnService
     {
-        public readonly IObjectPool _pool;
+        public readonly IObjectPoolAsteroidGame _pool;
         private Vector3 spawnPosition;
         private AsteroidSpawner _asteroidSpawner;
         private UfoSpawner _ufoSpawner;
 
-        public EnemySpawnController(IObjectPool pool)
+        public EnemySpawnController(IObjectPoolAsteroidGame pool)
         {
             _pool = pool;
         }

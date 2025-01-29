@@ -1,6 +1,7 @@
+using Game.Entities.Entities.UFO;
 using UnityEngine;
 
-namespace Game.Entities.Entities.UFO
+namespace Core.Game.Entities.UFO
 {
     public class ShootingEnemyController : MonoBehaviour
     {

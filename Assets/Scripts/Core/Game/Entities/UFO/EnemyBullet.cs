@@ -1,9 +1,9 @@
-using Core;
-using Game.Controllers;
-using Game.Handlers.Health;
+using Core.Else;
+using Core.Game.Controllers;
+using Core.Game.Handlers;
 using UnityEngine;
 
-namespace Game.Entities.Entities.UFO
+namespace Core.Game.Entities.UFO
 {
     public class EnemyBullet : MonoBehaviour, IHit
     {

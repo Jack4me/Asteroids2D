@@ -1,3 +1,5 @@
+using Core.Else;
+using Core.Game.Entities.Enemies;
 using Core.Intrerfaces;
 using Core.Services;
 using UnityEngine;
@@ -6,7 +8,7 @@ namespace Core
 {
     public class Enemy : MonoBehaviour, IDamageable, IHit, IStatsEnemy
     {
-        public IObjectPool _pool;
+        public IObjectPoolAsteroidGame PoolAsteroidGame;
         public EnemyType enemyType;
         [SerializeField] private int _bounceForce = 5;
         private IScorable _score;
@@ -16,9 +18,9 @@ namespace Core
         public int Health { get; set; }
         public float Speed { get; set; }
 
-        public void Initialize(IObjectPool objectPool, IScorable score, IBounceService bounceService)
+        public void Initialize(IObjectPoolAsteroidGame objectPoolAsteroidGame, IScorable score, IBounceService bounceService)
         {
-            _pool = objectPool;
+            PoolAsteroidGame = objectPoolAsteroidGame;
             _score = score;
             _bounceService = bounceService;
         }
@@ -40,9 +42,9 @@ namespace Core
 
         public virtual void ReturnToPool()
         {
-            if (_pool != null)
+            if (PoolAsteroidGame != null)
             {
-                _pool.ReturnToPool(this);
+                PoolAsteroidGame.ReturnToPool(this);
             }
             else
             {

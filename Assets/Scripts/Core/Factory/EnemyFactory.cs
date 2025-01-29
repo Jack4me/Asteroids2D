@@ -1,11 +1,11 @@
-using Core;
 using Core.AssetsManagement;
-using Core.Intrerfaces;
+using Core.Game.Entities.Enemies;
 using Core.Services;
 using Core.StaticData;
+using Main;
 using UnityEngine;
 
-namespace Main
+namespace Core.Factory
 {
     public class EnemyFactory : IEnemyFactory
     {
@@ -20,7 +20,7 @@ namespace Main
             _scoreManager = scoreManager;
         }
 
-        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro,
+        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPoolAsteroidGame objectPoolAsteroidGameAstro,
             IStaticDataService staticData, UFOConfig configs)
         {
             var enemyPrefab = staticData.GetEnemyPrefab(enemyType);
@@ -32,7 +32,7 @@ namespace Main
 
             var instance = _instantiate.InstantiateToPool(enemyPrefab, poolContainer);
             Enemy enemyComponent = instance.GetComponent<Enemy>();
-            enemyComponent.Initialize(objectPoolAstro, _scoreManager, _bounceService);
+            enemyComponent.Initialize(objectPoolAsteroidGameAstro, _scoreManager, _bounceService);
             if (enemyComponent.TryGetComponent<IStatsEnemy>(out var stats))
             {
                 stats.Damage = configs.damage;
@@ -43,7 +43,7 @@ namespace Main
             return instance;
         }
 
-        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro,
+        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPoolAsteroidGame objectPoolAsteroidGameAstro,
             IStaticDataService staticDataService, HeroMoveConfig heroMoveConfig)
         {
             throw new System.NotImplementedException();
