@@ -1,0 +1,4 @@
+{
+	"name": "Asteroid.Entities",
+	"references":[ "GUID:ce8dd529d572a2c4786052ca98ced7ee", "GUID:ef1faf2018490c945836124fe7bf795a" ]
+}

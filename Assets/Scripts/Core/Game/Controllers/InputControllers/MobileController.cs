@@ -1,7 +1,7 @@
 using Core.Intrerfaces;
 using UnityEngine;
 
-namespace Game.InputControllers {
+namespace Core.Game.Controllers.InputControllers {
     public class MobileController : IControlStrategy
     {
         public Vector2 GetInput()

@@ -1,16 +1,15 @@
 {
-    "name": "Infrastructure",
+    "name": "Asteroid.Hero",
     "rootNamespace": "",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:16a35b22bcb3d68408bec3de04e2d6ca",
-        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
         "GUID:ef1faf2018490c945836124fe7bf795a",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:71799519d12379b49b6b53aea974bea5",
-        "GUID:daddd72a89516a34a87a70aea4c81143",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
         "GUID:f2ba8da3e91a77b43bacccd5a867c633",
-        "GUID:ce8dd529d572a2c4786052ca98ced7ee"
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:61e7199cdf84c774b83d6bf66b4d7420",
+        "GUID:34735522037ffa9498af5ef8ac2f6edb",
+        "GUID:01750af1172ca0544b3c079f1695bb79",
+        "GUID:a2078ca7bfaf48645963996794df3181"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

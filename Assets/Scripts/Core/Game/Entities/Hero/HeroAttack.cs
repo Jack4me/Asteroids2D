@@ -1,14 +1,11 @@
-using Core;
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
-using Game.Controllers;
+using Main;
 using UnityEngine;
+using Zenject;
 
-namespace Game.Hero
+namespace Core.Game.Entities.Hero
 {
-    using Main;
-    using Zenject;
-
     public class HeroAttack : MonoBehaviour
     {
         [SerializeField] private GameObject laserPrefab;

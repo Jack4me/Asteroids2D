@@ -1,16 +1,11 @@
 {
-    "name": "Infrastructure",
+    "name": "Handlers",
     "rootNamespace": "",
     "references": [
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:16a35b22bcb3d68408bec3de04e2d6ca",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
         "GUID:ef1faf2018490c945836124fe7bf795a",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:71799519d12379b49b6b53aea974bea5",
-        "GUID:daddd72a89516a34a87a70aea4c81143",
-        "GUID:f2ba8da3e91a77b43bacccd5a867c633",
-        "GUID:ce8dd529d572a2c4786052ca98ced7ee"
+        "GUID:77edc54270265ff4ea8607269ac89a78",
+        "GUID:daddd72a89516a34a87a70aea4c81143"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

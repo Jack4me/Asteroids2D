@@ -1,7 +1,7 @@
-using Core.Models;
+using Core.Game.Entities.Hero.Laser;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using UniRx;
 
 namespace Infrastructure.UI.View
 {

@@ -1,10 +1,9 @@
-using System;
+using Core.Game.Controllers;
+using Core.Game.Handlers;
 using Core.Intrerfaces;
-using Game.Controllers;
-using Game.Handlers.Health;
 using UnityEngine;
 
-namespace Game.Config
+namespace Core.Game.Config
 {
     public class PlayerStats : MonoBehaviour, IPlayerStats
     {

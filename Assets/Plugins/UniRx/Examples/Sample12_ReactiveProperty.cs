@@ -19,13 +19,13 @@ namespace UniRx.Examples
         // You can monitor/modifie in inspector by SpecializedReactiveProperty
         public IntReactiveProperty IntRxProp = new IntReactiveProperty();
 
-        Enemy enemy = new Enemy(1000);
+        Enemydsad _enemydsad = new Enemydsad(1000);
 
         void Start()
         {
             // UnityEvent as Observable
             // (shortcut, MyButton.OnClickAsObservable())
-            MyButton.onClick.AsObservable().Subscribe(_ => enemy.CurrentHp.Value -= 99);
+            MyButton.onClick.AsObservable().Subscribe(_ => _enemydsad.CurrentHp.Value -= 99);
 
             // Toggle, Input etc as Observable(OnValueChangedAsObservable is helper for provide isOn value on subscribe)
             // SubscribeToInteractable is UniRx.UI Extension Method, same as .interactable = x)
@@ -46,8 +46,8 @@ namespace UniRx.Examples
                 .SubscribeToText(MyText, x => Math.Round(x, 2).ToString());
 
             // from RxProp, CurrentHp changing(Button Click) is observable
-            enemy.CurrentHp.SubscribeToText(MyText);
-            enemy.IsDead.Where(isDead => isDead == true)
+            _enemydsad.CurrentHp.SubscribeToText(MyText);
+            _enemydsad.IsDead.Where(isDead => isDead == true)
                 .Subscribe(_ =>
                 {
                     MyToggle.interactable = MyButton.interactable = false;
@@ -59,13 +59,13 @@ namespace UniRx.Examples
     }
 
     // Reactive Notification Model
-    public class Enemy
+    public class Enemydsad
     {
         public IReactiveProperty<long> CurrentHp { get; private set; }
 
         public IReadOnlyReactiveProperty<bool> IsDead { get; private set; }
 
-        public Enemy(int initialHp)
+        public Enemydsad(int initialHp)
         {
             // Declarative Property
             CurrentHp = new ReactiveProperty<long>(initialHp);

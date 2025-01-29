@@ -3,6 +3,8 @@ using Core.Ads_Plugin;
 using Core.Analytics;
 using Core.AssetsManagement;
 using Core.Factory;
+using Core.Game.Entities.Hero;
+using Core.Game.Entities.Hero.Laser;
 using Core.Intrerfaces.Services;
 using Core.Models;
 using Core.StaticData;

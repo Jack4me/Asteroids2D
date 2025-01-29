@@ -1,0 +1,4 @@
+{
+	"name": "Asteroid.UI",
+	"references":[ "GUID:ef1faf2018490c945836124fe7bf795a", "GUID:560b04d1a97f54a4e82edc0cbbb69285", "GUID:daddd72a89516a34a87a70aea4c81143" ]
+}
