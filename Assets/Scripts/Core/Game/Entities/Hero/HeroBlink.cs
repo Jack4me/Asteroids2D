@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Hero
+namespace Core.Game.Entities.Hero
 {
     public class HeroBlink : MonoBehaviour
     {

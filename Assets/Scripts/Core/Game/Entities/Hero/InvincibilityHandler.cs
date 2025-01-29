@@ -1,4 +1,5 @@
 using System;
+using Core.Game.Entities.Hero;
 using Cysharp.Threading.Tasks;
 using Game.Hero;
 using UnityEngine;
