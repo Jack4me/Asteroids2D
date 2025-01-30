@@ -1,9 +1,9 @@
 using System;
 using Core.Else;
+using Core.Game.Entities.Asteroids;
 using Core.Game.Entities.UFO;
 using Core.Game.Handlers;
 using Core.Services;
-using Game.Entities.Entities.Asteroids;
 using Game.Handlers;
 using UnityEngine;
 

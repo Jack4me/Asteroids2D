@@ -4,6 +4,7 @@ using Core.Analytics;
 using Core.AssetsManagement;
 using Core.Else;
 using Core.Factory;
+using Core.Game;
 using Core.Game.Entities.Enemies;
 using Core.Game.Entities.Hero;
 using Core.Game.Entities.Hero.Laser;

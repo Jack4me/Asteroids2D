@@ -1,5 +1,4 @@
 ﻿using Core.AssetsManagement;
-using Core.Game.Controllers;
 using Core.Game.Entities.Hero;
 using Core.Game.Entities.Hero.Laser;
 using Core.Game.Handlers;

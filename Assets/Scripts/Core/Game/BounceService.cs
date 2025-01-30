@@ -1,8 +1,7 @@
 using Core.Services;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Game
+namespace Core.Game
 {
     public class BounceService : IBounceService
     {

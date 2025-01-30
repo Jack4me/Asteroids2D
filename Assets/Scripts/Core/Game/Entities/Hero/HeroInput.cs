@@ -1,10 +1,8 @@
-using Core.Game.Entities.Hero;
 using Core.Intrerfaces.Services.Input;
-using Cysharp.Threading.Tasks;
 using Game.Controllers;
 using UnityEngine;
 
-namespace Core.Game.Controllers
+namespace Core.Game.Entities.Hero
 {
     public class HeroInput : MonoBehaviour
     {

@@ -1,5 +1,4 @@
-﻿using Core.Game.Controllers;
-using Core.Game.Entities.Hero.Laser;
+﻿using Core.Game.Entities.Hero.Laser;
 using Core.Intrerfaces;
 using UnityEngine;
 
