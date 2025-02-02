@@ -179,9 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3e465a3a383644eba46782de297495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missileIconContainer: {fileID: 8465927826553597492}
-  missileIconPrefab: {fileID: 4362612460867904346, guid: 0c99e411867ec8e478853b1f334bc39c, type: 3}
-  reloadCircle: {fileID: 1440427420376649769}
+  missileIconContainer: {fileID: 0}
+  missileIconPrefab: {fileID: 0}
+  reloadCircle: {fileID: 0}
 --- !u!1 &7117226383234218447
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,9 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32078c5366ea11478dd3496cac966ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerBounceForce: 30
-  _asteroidBounceForce: 30
-  _lockDuration: 1
+  _playerBounceForce: 5
+  _asteroidBounceForce: 5
+  _lockDuration: 2
   _bounceForce: 5
 --- !u!114 &-8315362413760857782
 MonoBehaviour:
@@ -481,12 +481,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcf4bd2729391c4b863f117cd49739b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRendererShip: {fileID: 4846116004886934097}
-  spriteRendererShipWings: {fileID: 4845997643559126339}
-  spriteRendererShipTail: {fileID: 4848046061490202205}
-  blinkDuration: 1
+  spriteRendererShip: {fileID: 0}
+  spriteRendererShipWings: {fileID: 0}
+  spriteRendererShipTail: {fileID: 0}
+  blinkDuration: 3
   blinkInterval: 0.2
-  blinkFlaveInterval: 0.05
+  blinkFlaveInterval: 0.1
 --- !u!114 &4302692769704085833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad795398fe07a548b65b8b312a3e474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _invincibilityEffect: {fileID: 1762532208672871765}
+  _invincibilityEffect: {fileID: 6998944335187281337, guid: c986915bb39737e429a17b2974b510bc, type: 3}
   _invincibilityDuration: 0.5
 --- !u!114 &6072463574399043636
 MonoBehaviour:
@@ -922,28 +922,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
---- !u!198 &1762532208672871765 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6467514854030955656, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
-  m_PrefabInstance: {fileID: 4734690354898551261}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4736126271059143019 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4193583667243190, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
-  m_PrefabInstance: {fileID: 4734690354898551261}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4845997643559126339 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212952195174925470, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
-  m_PrefabInstance: {fileID: 4734690354898551261}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4846116004886934097 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212833696140276620, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
-  m_PrefabInstance: {fileID: 4734690354898551261}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4848046061490202205 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212592764215928704, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
   m_PrefabInstance: {fileID: 4734690354898551261}
   m_PrefabAsset: {fileID: 0}

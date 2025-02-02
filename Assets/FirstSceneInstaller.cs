@@ -1,22 +1,23 @@
+using Asteroid.UI;
 using Core;
 using Core.Ads_Plugin;
 using Core.Analytics;
 using Core.AssetsManagement;
-using Core.Else;
 using Core.Factory;
 using Core.Game;
-using Core.Game.Entities.Enemies;
 using Core.Game.Entities.Hero;
-using Core.Game.Entities.Hero.Laser;
-using Core.Game.Handlers;
+using Core.Game.Handlers.Health;
 using Core.Intrerfaces;
-using Core.Intrerfaces.Services;
 using Core.Intrerfaces.Services.Input;
 using Core.Models;
 using Core.Services;
+using Core.Services.Intrerfaces;
+using Core.Services.Pool;
 using Core.StaticData;
-using Game;
-using Game.Controllers;
+using Infrastructure.Bootstrap;
+using Infrastructure.Factory;
+using Infrastructure.Init;
+using Infrastructure.States;
 using Main;
 using Main.States;
 using UnityEngine;
@@ -71,7 +72,7 @@ public class FirstSceneInstaller : MonoInstaller
         Container.Bind<IHudFactory>().To<HudFactory>().AsSingle();
         Container.Bind<IJsonConfigLoader>().To<JsonConfigLoader>().AsSingle();
         Container.Bind<HealthHandler>().FromComponentInHierarchy().AsSingle();
-        Container.Bind<IObjectPoolAsteroidGame>().To<ObjectPoolAsteroidGameEnemy>().AsSingle();
+        Container.Bind<IObjectPool>().To<ObjectPoolEnemy>().AsSingle();
         
       
         
