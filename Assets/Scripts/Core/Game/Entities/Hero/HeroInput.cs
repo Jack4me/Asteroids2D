@@ -1,8 +1,10 @@
+using Core.Game.Entities.Hero.Invincibility;
 using Core.Intrerfaces.Services.Input;
+using Cysharp.Threading.Tasks;
 using Game.Controllers;
 using UnityEngine;
 
-namespace Core.Game.Entities.Hero
+namespace Core.Game.Entities
 {
     public class HeroInput : MonoBehaviour
     {

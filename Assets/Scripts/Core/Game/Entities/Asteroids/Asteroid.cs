@@ -1,9 +1,10 @@
+using Core.Services;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Core.Game.Entities.Asteroids
 {
-    public class Asteroid : Enemy
+    public class Asteroid : Enemies
     {
         [SerializeField] private EnemyType size;
         [SerializeField] private GameObject smallerAsteroidPrefab;
@@ -37,7 +38,7 @@ namespace Core.Game.Entities.Asteroids
 
         private void SpawnSmallerAsteroids()
         {
-            if (PoolAsteroidGame == null)
+            if (_pool == null)
             {
                 Debug.LogError("_pool is not assigned!", this);
                 return;
@@ -53,7 +54,7 @@ namespace Core.Game.Entities.Asteroids
             for (int i = 0; i < 2; i++)
             {
                 if (smallerAsteroidPrefab == null) return;
-                var smallerAsteroid = PoolAsteroidGame.GetFromPool(nextType);
+                var smallerAsteroid = _pool.GetFromPool(nextType);
                 smallerAsteroid.SetActive(true);
                 smallerAsteroid.transform.position = transform.position + (Vector3)Random.insideUnitCircle * 0.5f;
             }

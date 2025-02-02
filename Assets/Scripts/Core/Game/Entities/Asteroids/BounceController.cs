@@ -1,6 +1,7 @@
+using Core.Game.Entities.Asteroids;
 using UnityEngine;
 
-namespace Core.Game.Entities.Asteroids
+namespace Game.Entities.Entities.Asteroids
 {
     public class BounceController : MonoBehaviour
     {

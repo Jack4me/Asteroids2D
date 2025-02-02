@@ -1,7 +1,7 @@
 using Core;
-using Core.Else;
 using Core.Intrerfaces;
-using Main;
+using Core.Services.Intrerfaces;
+using Core.StaticData;
 using UnityEngine;
 using Zenject;
 

@@ -1,3 +1,4 @@
+using Core.Services;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,7 +8,7 @@ namespace Core.Game.Entities.Asteroids
     {
         private float _speed;
         private Vector2 direction;
-        private Enemy _enemy;
+        private Enemies _enemies;
 
         private void Start()
         {

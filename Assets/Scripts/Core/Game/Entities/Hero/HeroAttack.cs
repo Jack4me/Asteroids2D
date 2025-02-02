@@ -1,6 +1,6 @@
 using Core.Intrerfaces;
 using Core.Intrerfaces.Services.Input;
-using Main;
+using Core.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -25,7 +25,6 @@ namespace Core.Game.Entities.Hero
             _inputService = inputService;
             _laserController = laserController;
             _container = container;
-            //_jsonConfigLoader = jsonConfigLoader;
         }
 
         private void Update()

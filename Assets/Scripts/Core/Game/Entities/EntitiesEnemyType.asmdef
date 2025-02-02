@@ -1,0 +1,23 @@
+{
+    "name": "EntitiesType",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ef1faf2018490c945836124fe7bf795a",
+        "GUID:7b0bb0718ef0934489d25277b23020c9",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:1d1b7c4a7df1c4c439d7d756c2db907b",
+        "GUID:b9e03009a64e4754eb58152296bfb56c",
+        "GUID:83b8c6cdae4c19340989d1265c892657",
+        "GUID:d4f4cd36d24c01546afe9ed1dd8fe240",
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

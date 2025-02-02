@@ -1,11 +1,11 @@
 ﻿using System;
-using Core;
 using Core.Intrerfaces;
+using Core.Services.Intrerfaces;
+using Core.StaticData;
 using Cysharp.Threading.Tasks;
-using Main;
 using UnityEngine;
 
-namespace Game.Controllers
+namespace Core.Game.Entities.Hero
 {
     public class LaserController  : ILaserController
     {
