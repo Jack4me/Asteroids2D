@@ -1,6 +1,6 @@
 using UniRx;
 
-namespace Core.Services
+namespace Asteroid.UI
 {
     public interface IPlayerViewModel
     {
