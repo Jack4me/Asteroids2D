@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Game.Entities.Entities
+namespace Core.Game.Entities.Hero.Invincibility
 {
     public class HeroBlink : MonoBehaviour
     {
