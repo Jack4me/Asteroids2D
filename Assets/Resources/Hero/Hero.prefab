@@ -428,9 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32078c5366ea11478dd3496cac966ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerBounceForce: 30
-  _asteroidBounceForce: 30
-  _lockDuration: 1
+  _playerBounceForce: 5
+  _asteroidBounceForce: 5
+  _lockDuration: 2
   _bounceForce: 5
 --- !u!114 &-8315362413760857782
 MonoBehaviour:
@@ -484,9 +484,9 @@ MonoBehaviour:
   spriteRendererShip: {fileID: 4846116004886934097}
   spriteRendererShipWings: {fileID: 4845997643559126339}
   spriteRendererShipTail: {fileID: 4848046061490202205}
-  blinkDuration: 1
+  blinkDuration: 3
   blinkInterval: 0.2
-  blinkFlaveInterval: 0.05
+  blinkFlaveInterval: 0.1
 --- !u!114 &4302692769704085833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -916,6 +916,14 @@ PrefabInstance:
     - target: {fileID: 4193583667243190, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2386631533002550631, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432332061238197705, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
