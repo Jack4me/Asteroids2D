@@ -165,7 +165,7 @@ MonoBehaviour:
   health: {fileID: 8374107585491369061}
   score: {fileID: 1180403066273879646}
   heartsContainer: {fileID: 1642879689549116427}
-  heartPrefab: {fileID: 617371977634936710, guid: 581ac9af152dafc4f9d2e2fa0f890bd6, type: 3}
+  heartPrefab: {fileID: 617371977634936710, guid: e37dd300b6ffb914c8f23773a02fd15c, type: 3}
 --- !u!114 &6808870441092863765
 MonoBehaviour:
   m_ObjectHideFlags: 0
