@@ -1,8 +1,7 @@
-﻿using Core;
-using Core.StaticData;
+﻿using Core.StaticData;
 using UnityEngine;
 
-namespace Main
+namespace Infrastructure.Factory
 {
     public interface IHeroFactory
     {

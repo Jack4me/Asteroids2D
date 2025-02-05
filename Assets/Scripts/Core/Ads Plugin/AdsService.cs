@@ -5,6 +5,7 @@ namespace Core.Ads_Plugin
 {
     public class AdsService : IAdsService
     {
+        private const string GAME_ID = "5749687";
         public IBannerAds _bannerAds { get; }
         public IInterstitialAds _interstitialAds { get; }
         public IRewardedAds _rewardedAds { get; }
@@ -18,7 +19,7 @@ namespace Core.Ads_Plugin
 
         public void InitializeAds()
         {
-            string gameId = "5749687"; 
+            string gameId = GAME_ID; 
             Advertisement.Initialize(gameId, true, new InitializationListener(this));
         }
     }

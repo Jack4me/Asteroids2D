@@ -1,11 +1,9 @@
 ﻿using Core;
 using Core.AssetsManagement;
-using Core.Factory;
-using Core.Intrerfaces;
 using Core.Models;
-using Core.Services;
 using Core.Services.Pool;
 using Core.StaticData;
+using Core.StaticData.Configs;
 using Main;
 using UnityEngine;
 

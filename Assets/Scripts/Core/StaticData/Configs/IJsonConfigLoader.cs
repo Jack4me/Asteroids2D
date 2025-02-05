@@ -1,4 +1,6 @@
-﻿namespace Core.StaticData
+﻿using Core.StaticData.Configs;
+
+namespace Core.StaticData
 {
     public interface IJsonConfigLoader
     {

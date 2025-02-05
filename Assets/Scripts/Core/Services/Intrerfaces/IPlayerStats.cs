@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Core.Intrerfaces
+namespace Core.Services.Intrerfaces
 {
     public interface IPlayerStats 
     {

@@ -3,6 +3,7 @@ using Core.AssetsManagement;
 using Core.Services;
 using Core.Services.Pool;
 using Core.StaticData;
+using Core.StaticData.Configs;
 using UnityEngine;
 
 namespace Infrastructure.Factory
@@ -41,12 +42,6 @@ namespace Infrastructure.Factory
             }
 
             return instance;
-        }
-
-        public GameObject CreateEnemy(EnemyType enemyType, Transform poolContainer, IObjectPool objectPoolAstro,
-            IStaticDataService staticDataService, HeroMoveConfig heroMoveConfig)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

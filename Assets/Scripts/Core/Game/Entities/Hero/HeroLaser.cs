@@ -1,11 +1,10 @@
-using Core;
 using Core.Intrerfaces;
-using Core.Services.Intrerfaces;
 using Core.StaticData;
+using Core.StaticData.Configs;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Hero
+namespace Core.Game.Entities.Hero
 {
     public class HeroLaser : MonoBehaviour
     {

@@ -1,10 +1,10 @@
 ﻿using Core;
 using Firebase;
 using Firebase.Analytics;
-using Unity.VisualScripting;
+using Main.States;
 using UnityEngine;
 
-namespace Main.States
+namespace Infrastructure.States
 {
     public class BootStrapState : IState
     {

@@ -1,7 +1,5 @@
-﻿using Core.Intrerfaces;
-using Core.Models;
+﻿using Core.Models;
 using Core.Services.Intrerfaces;
-using Game.Entities.Entities;
 using UnityEngine;
 
 namespace Core.Game.Entities.Hero

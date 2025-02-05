@@ -7,8 +7,8 @@ namespace Core.Services.Spawners
 {
     public class UfoSpawner : EnemySpawnController
     {
-        private int _delayUFOFirstSpawn = 4000;
-        private int _delayBetweenUfoSpawn = 8000;
+        private const int DelayUFOFirstSpawn = 4000;
+        private const int DelayBetweenUfoSpawn = 8000;
 
         public UfoSpawner(IObjectPool pool) : base(pool)
         {
@@ -16,11 +16,11 @@ namespace Core.Services.Spawners
 
         public async UniTask StartAsyncUFOSpawning(SpawnPointsData spawnPointsData)
         {
-            await UniTask.Delay(_delayUFOFirstSpawn);
+            await UniTask.Delay(DelayUFOFirstSpawn);
             while (true)
             {
                 SpawnUfo(spawnPointsData);
-                await UniTask.Delay(_delayBetweenUfoSpawn);
+                await UniTask.Delay(DelayBetweenUfoSpawn);
             }
         }
 

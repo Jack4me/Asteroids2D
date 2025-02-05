@@ -6,9 +6,9 @@ namespace Core.Services
 {
     public class Enemies : MonoBehaviour, IDamageable, IHit, IStatsEnemy
     {
+        [SerializeField] private int _bounceForce = 5;
         public IObjectPool _pool;
         public EnemyType enemyType;
-        [SerializeField] private int _bounceForce = 5;
         private IScorable _score;
         private IBounceService _bounceService;
         private int _force;
@@ -63,7 +63,7 @@ namespace Core.Services
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out ILaserController _heroMove))
+            if (other.TryGetComponent(out ILaserController _))
             {
                 _bounceService.ApplyBounce(transform, other, _bounceForce);
             }

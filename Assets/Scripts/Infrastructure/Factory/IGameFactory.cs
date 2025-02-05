@@ -1,10 +1,9 @@
-﻿using Core.Intrerfaces;
+﻿using Core;
 using Core.Models;
-using Core.Services;
 using Core.Services.Pool;
 using UnityEngine;
 
-namespace Core.Factory
+namespace Infrastructure.Factory
 {
     public interface IGameFactory
     {

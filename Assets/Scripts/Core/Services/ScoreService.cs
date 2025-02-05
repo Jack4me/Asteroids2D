@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Core.Intrerfaces;
 using Core.Services.Intrerfaces;
 
 namespace Core.Services
@@ -23,16 +22,15 @@ namespace Core.Services
 
         public int totalScore { get; set; }
 
-
         public void NotifyEnemyDestroyed(EnemyType enemyType)
         {
             if (scoreTable.TryGetValue(enemyType, out int score))
             {
                 totalScore += score;
             }
+
             _playerDataModel.Score.Value = GetTotalScore();
         }
-
 
         public int GetTotalScore()
         {

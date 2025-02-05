@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Core;
+﻿using Core;
 using Main;
 using Main.States;
 using UnityEngine;
@@ -21,10 +18,9 @@ namespace Infrastructure.States
 
         private void Awake()
         {
-            FIle();
             if (_gameInit == null)
             {
-                Debug.Log("NULL _gameInit");
+                Debug.LogError("Null GameInit");
             }
 
             GameStateMachine stateMachine = _gameInit.StateMachine;
@@ -36,32 +32,6 @@ namespace Infrastructure.States
 
             stateMachine.EnterGeneric<BootStrapState>();
             DontDestroyOnLoad(this);
-        }
-
-        public void FIle()
-        {
-            string directoryPath = @"D:\GIT\2DAsteroids\Assets\Scripts"; 
-            var files = Directory.GetFiles(directoryPath, "*.cs", SearchOption.AllDirectories);
-            var classes = files.SelectMany(file => File.ReadLines(file)
-                    .Where(line => line.TrimStart().StartsWith("class "))
-                    .Select(line => Path.GetFileNameWithoutExtension(file) + ": " + line.Trim()))
-                .ToList();
-        
-            string outputFilePath = @"D:\00_Main\Games\2.txt"; 
-
-            try
-            {
-                File.WriteAllLines(outputFilePath, classes);
-                Console.WriteLine($"Классы записаны в файл: {outputFilePath}");
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                Console.WriteLine($"Ошибка доступа: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Произошла ошибка: {ex.Message}");
-            }
         }
     }
 }

@@ -2,7 +2,6 @@
 using Core.Ads_Plugin;
 using Core.Analytics;
 using Core.AssetsManagement;
-using Core.Factory;
 using Core.Game.Entities.Hero;
 using Core.Models;
 using Core.Services;
@@ -10,6 +9,7 @@ using Core.StaticData;
 using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
+using Infrastructure.Factory;
 using Main.States;
 using UnityEngine;
 

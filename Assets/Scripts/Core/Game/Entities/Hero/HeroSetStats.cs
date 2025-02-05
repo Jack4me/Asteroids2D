@@ -1,10 +1,9 @@
-using Core.Game.Entities;
 using Core.Game.Handlers.Health;
 using Core.Intrerfaces;
-using Game.Entities.Entities;
+using Core.Services.Intrerfaces;
 using UnityEngine;
 
-namespace Game.Entities.Hero
+namespace Core.Game.Entities.Hero
 {
     public class HeroSetStats : MonoBehaviour, IPlayerStats
     {

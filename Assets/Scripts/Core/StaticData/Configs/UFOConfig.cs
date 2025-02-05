@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Core
+namespace Core.StaticData.Configs
 {
     [System.Serializable]
     public class UFOConfig 

@@ -1,36 +1,30 @@
 ﻿using System;
 using Core.Intrerfaces;
-using Core.Services.Intrerfaces;
 using Core.StaticData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Core.Game.Entities.Hero
 {
-    public class LaserController  : ILaserController
+    public class LaserController : ILaserController
     {
-        [SerializeField] public int maxLasers = 3;
-        [SerializeField] private float reloadTime = 2f;
-        private float reloadStartTime;
-        public int currentLasers { get; private set; }
         public int CurrentLasers => currentLasers;
-        public bool IsReloading => isReloading;
+        private int maxLasers = 3;
+        private float reloadTime = 2f;
+        private float reloadStartTime;
         private bool isReloading = false;
-        public event Action<float> OnReloadProgress;
         private IJsonConfigLoader _iJsonConfigLoader;
         private readonly LaserControllerConfig _config;
+        public int currentLasers { get; private set; }
+        public event Action<float> OnReloadProgress;
 
-        
-        
         public LaserController(IJsonConfigLoader iJsonConfigLoader)
         {
             _iJsonConfigLoader = iJsonConfigLoader;
-           _config = _iJsonConfigLoader.LoadConfigLaser();
-           currentLasers = _config.maxLasers;
-           reloadTime = _config.reloadTime;
+            _config = _iJsonConfigLoader.LoadConfigLaser();
+            currentLasers = _config.maxLasers;
+            reloadTime = _config.reloadTime;
         }
-        
-       
 
         public bool CanFireLaser()
         {
@@ -64,7 +58,5 @@ namespace Core.Game.Entities.Hero
             isReloading = false;
             OnReloadProgress?.Invoke(1.0f);
         }
-
-       
     }
 }
