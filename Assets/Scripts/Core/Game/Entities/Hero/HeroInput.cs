@@ -1,4 +1,5 @@
 using Core.Game.Entities.Hero.Invincibility;
+using Core.Game.Entities.Invincibility;
 using Core.Intrerfaces.Services.Input;
 using Cysharp.Threading.Tasks;
 using Game.Controllers;
