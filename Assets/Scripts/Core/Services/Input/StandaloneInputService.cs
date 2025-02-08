@@ -1,7 +1,6 @@
-using Core.Services.Input;
 using UnityEngine;
 
-namespace Core.Intrerfaces.Services.Input
+namespace Core.Services.Input
 {
     public class StandaloneInputService : InputService
     {
